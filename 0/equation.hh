@@ -9,7 +9,8 @@ namespace oct::nums::v0
     template<number T,decimal V> class first<T,1,V> : public equation<T,1,V>
     {
     public:
-        first(T c, T a)
+        first() = default;
+        first(const T& c, const T& a)
         {
             equation<T,1,V>::data[0] = c;
             equation<T,1,V>::data[1] = a;
@@ -35,12 +36,13 @@ namespace oct::nums::v0
     template<number T,decimal V> class first<T,2,V> : public equation<T,2,V>
     {
     public:
-        first(T c, T a)
+        first() = default;
+        first(const T& c, const T& a)
         {
             equation<T,2,V>::data[0] = c;
             equation<T,2,V>::data[1] = a;
         }
-        first(T c, T a,T b)
+        first(const T& c, const T& a,const T& b)
         {
             equation<T,2,V>::data[0] = c;
             equation<T,2,V>::data[1] = a;

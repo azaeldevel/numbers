@@ -3,6 +3,7 @@
 
 #include "v0.hh"
 #include <0/equation.hh>
+#include <0/vector.hh>
 
 
 namespace numbers_here = oct::nums::v0;
@@ -47,6 +48,17 @@ void v0_developing()
     CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
     CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
     CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
+
+
+    numbers_here::vector<int,2,float> vect1(4,-3);
+    CU_ASSERT(vect1.x() == 4);
+    CU_ASSERT(vect1.y() == -3);
+
+
+    numbers_here::vector<int,3,float> vect2(4,-3,5);
+    CU_ASSERT(vect2.x() == 4);
+    CU_ASSERT(vect2.y() == -3);
+    CU_ASSERT(vect2.z() == 5);
 }
 
 
