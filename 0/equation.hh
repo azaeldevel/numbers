@@ -1,41 +1,11 @@
-#ifndef OCTETOS_NUMBERS_MATH_HH
-#define OCTETOS_NUMBERS_MATH_HH
+#ifndef OCTETOS_NUMBERS_EQUATION_HH
+#define OCTETOS_NUMBERS_EQUATION_HH
 
-#include <concepts>
-
-
-#include <core/3/Exception.hh>
+#include "common.hh"
 
 namespace oct::nums::v0
 {
-    namespace core_here = oct::core::v3;
 
-    template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
-    template<typename T> concept decimal = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
-
-    template<number T,unsigned char D,decimal V> struct vector
-    {
-    };
-
-    template<number T,unsigned char D,decimal V> struct function
-    {
-    };
-
-
-
-    template<number T,unsigned char D,decimal V> class equation
-    {
-
-    protected:
-        T data[D + 1];
-    };
-
-    /**
-    *\brief c + a1x1 + a2x2 + ... + anxn = 0
-    **/
-    template<number T,unsigned char D,decimal V = float> class first : public equation<T,D,V>
-    {
-    };
     template<number T,decimal V> class first<T,1,V> : public equation<T,1,V>
     {
     public:
