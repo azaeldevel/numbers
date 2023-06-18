@@ -59,6 +59,11 @@ void v0_developing()
     CU_ASSERT(vect2.x() == 4);
     CU_ASSERT(vect2.y() == -3);
     CU_ASSERT(vect2.z() == 5);
+
+    numbers_here::vector<int,3,float> vect3 {4,-3,5};
+    CU_ASSERT(vect3.x() == 4);
+    CU_ASSERT(vect3.y() == -3);
+    CU_ASSERT(vect3.z() == 5);
 }
 
 

@@ -69,11 +69,11 @@ namespace oct::nums::v0
 
         T& a(size_t i)
         {
-            return equation<T,2,V>::data[i];
+            return equation<T,D,V>::data[i];
         }
         T a(size_t i) const
         {
-            return equation<T,2,V>::data[i];
+            return equation<T,D,V>::data[i];
         }
     };
 
