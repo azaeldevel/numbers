@@ -16,8 +16,18 @@ namespace oct::nums::v0
     template<number T,unsigned char L,decimal V> class secuence
     {
 
+    public:
+        T& operator [](size_t i)
+        {
+            return data[i];
+        }
+        T& operator [](size_t i) const
+        {
+            return data[i];
+        }
+
     protected:
-        T data[L + 1];
+        T data[L];
     };
 
     template<number T,unsigned char D,decimal V> class vector : public secuence<T,D,V>
@@ -30,7 +40,7 @@ namespace oct::nums::v0
 
 
 
-    template<number T,unsigned char D,decimal V> class equation : public secuence<T,D,V>
+    template<number T,unsigned char D,decimal V> class equation : public secuence<T,D + 1,V>
     {
 
     protected:
