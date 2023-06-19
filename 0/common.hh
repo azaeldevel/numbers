@@ -15,6 +15,8 @@ namespace oct::nums::v0
 
     template<number T,unsigned char L,decimal V> class secuence
     {
+    protected:
+        T data[L];
 
     public:
         secuence() = default;
@@ -24,7 +26,8 @@ namespace oct::nums::v0
         }
         secuence(std::initializer_list<T>& l)
         {
-            if(l.size() <= L) throw core_here::exception("La cantidad de datos indicados excede la capacidad del objetos");
+            if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
 
             unsigned char i = 0;
             for(const T& c : l)
@@ -36,15 +39,17 @@ namespace oct::nums::v0
 
         T& operator [](size_t i)
         {
-            return data[i];
+            if(i < L) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
         const T& operator [](size_t i) const
         {
-            return data[i];
+            if(i < L) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
 
-    protected:
-        T data[L];
     };
 
     template<number T,unsigned char D,decimal V> class vector : public secuence<T,D,V>
@@ -65,14 +70,14 @@ namespace oct::nums::v0
 
 
 
-    template<number T,unsigned char D,decimal V> class equation : public secuence<T,D,V>
+    template<number T,unsigned char L,decimal V> class equation : public secuence<T,L,V>
     {
     protected:
         T _c_;
 
     public:
         equation() = default;
-        equation(const T& v) : secuence<T,D,V>(v)
+        equation(const T& v) : secuence<T,L,V>(v)
         {
         }
         equation(std::initializer_list<T>& l);
@@ -80,11 +85,15 @@ namespace oct::nums::v0
 
         T& a(size_t i)
         {
-            return equation<T,D,V>::data[i];
+            if(i < L) return secuence<T,L,V>::data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
         T a(size_t i) const
         {
-            return equation<T,D,V>::data[i];
+            if(i < L) return secuence<T,L,V>::data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
     };
 
