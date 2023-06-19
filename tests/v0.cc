@@ -25,11 +25,21 @@ int v0_clean(void)
 
 void v0_developing()
 {
+    numbers_here::secuence<int,1,float> sec1(1);
+    CU_ASSERT(sizeof(sec1) == sizeof(int));
+
+    numbers_here::secuence<int,2,float> sec2(1);
+    CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
+
+    numbers_here::secuence<int,3,float> sec3(1);
+    CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
+
     numbers_here::first<int,1,float> eq1(50,2);
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
     CU_ASSERT(eq1.c() == 50);
     CU_ASSERT(eq1.a() == 2);
+    //std::cout << "eq1.x() : " << eq1.x() << "\n";
     CU_ASSERT(eq1.x() == 25);
 
 

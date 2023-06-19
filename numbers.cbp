@@ -48,10 +48,13 @@
 			<Add option="--std=c++20" />
 			<Add directory="../../octetos" />
 		</Compiler>
-		<Unit filename="0/numbers.cc">
+		<Unit filename="0/common.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
-		<Unit filename="0/numbers.hh">
+		<Unit filename="0/equation.hh">
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
 		<Unit filename="tests/main.cc">

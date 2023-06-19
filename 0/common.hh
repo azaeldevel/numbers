@@ -18,6 +18,10 @@ namespace oct::nums::v0
 
     public:
         secuence() = default;
+        secuence(const T& v)
+        {
+            for(size_t i = 0; i < L; i++) data[i] = v;
+        }
         secuence(std::initializer_list<T>& l)
         {
             if(l.size() <= L) throw core_here::exception("La cantidad de datos indicados excede la capacidad del objetos");
@@ -47,6 +51,12 @@ namespace oct::nums::v0
     {
     public:
         vector() = default;
+        vector(const T& v) : secuence<T,D,V>(v)
+        {
+        }
+        vector(std::initializer_list<T>& l) : secuence<T,D,V>(l)
+        {
+        }
     };
 
     template<number T,unsigned char D,decimal V> struct function
@@ -55,16 +65,17 @@ namespace oct::nums::v0
 
 
 
-    template<number T,unsigned char D,decimal V> class equation : public secuence<T,D + 1,V>
+    template<number T,unsigned char D,decimal V> class equation : public secuence<T,D,V>
     {
-
     protected:
+        T _c_;
 
     public:
         equation() = default;
-        equation(std::initializer_list<T>& l) : secuence<T,D + 1,V>(l)
+        equation(const T& v) : secuence<T,D,V>(v)
         {
         }
+        equation(std::initializer_list<T>& l);
 
 
         T& a(size_t i)

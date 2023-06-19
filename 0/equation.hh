@@ -12,8 +12,8 @@ namespace oct::nums::v0
         first() = default;
         first(const T& c, const T& a)
         {
-            equation<T,1,V>::data[0] = c;
-            equation<T,1,V>::data[1] = a;
+            equation<T,1,V>::_c_ = c;
+            equation<T,1,V>::data[0] = a;
         }
 
 
@@ -21,15 +21,15 @@ namespace oct::nums::v0
 
         T& c()
         {
-            return equation<T,1,V>::data[0];
+            return equation<T,1,V>::_c_;
         }
         T& a()
         {
-            return equation<T,1,V>::data[1];
+            return equation<T,1,V>::data[0];
         }
-        T x()
+        V x()
         {
-            return equation<T,1,V>::data[0]/equation<T,1,V>::data[1];
+            return V(equation<T,1,V>::_c_)/V(equation<T,1,V>::data[0]);
         }
     private:
     };
@@ -39,14 +39,14 @@ namespace oct::nums::v0
         first() = default;
         first(const T& c, const T& a)
         {
-            equation<T,2,V>::data[0] = c;
-            equation<T,2,V>::data[1] = a;
+            equation<T,2,V>::_c_ = c;
+            equation<T,2,V>::data[0] = a;
         }
         first(const T& c, const T& a,const T& b)
         {
-            equation<T,2,V>::data[0] = c;
-            equation<T,2,V>::data[1] = a;
-            equation<T,2,V>::data[2] = b;
+            equation<T,2,V>::_c_ = c;
+            equation<T,2,V>::data[0] = a;
+            equation<T,2,V>::data[1] = b;
         }
 
 
@@ -54,23 +54,23 @@ namespace oct::nums::v0
 
         T& c()
         {
-            return equation<T,2,V>::data[0];
+            return equation<T,2,V>::_c_;
         }
         T& a()
         {
-            return equation<T,2,V>::data[1];
+            return equation<T,2,V>::data[0];
         }
         T& b()
         {
-            return equation<T,2,V>::data[2];
+            return equation<T,2,V>::data[1];
         }
         V x(T y)
         {
-            return (c() - (b() * y)) / a();
+            return (equation<T,2,V>::_c_ - (b() * y)) / a();
         }
         V y(T x)
         {
-            return V(c() - (a() * x)) / V(b());
+            return V(equation<T,2,V>::_c_ - (a() * x)) / V(b());
         }
     private:
     };
