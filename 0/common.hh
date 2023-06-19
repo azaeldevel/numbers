@@ -73,6 +73,8 @@ namespace oct::nums::v0
         secuence& operator =(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+
+            return *this;
         }
 
         /**
@@ -81,7 +83,12 @@ namespace oct::nums::v0
         void permutation(secuence<secuence<T,L>,factorial(L)>& pers) const
         {
             secuence<T,L> sec = *this;
-            permutations(sec,0,L,0,pers);
+            int index = 0;
+            permutations(sec,0,L,index,pers);
+        }
+        constexpr size_t size() const
+        {
+            return L;
         }
 
 
@@ -115,12 +122,13 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        void permutations(secuence<T,L>& sec, int i, int n, int p, secuence<secuence<T,L>,factorial(L)>& pers) const
+        void permutations(secuence<T,L>& sec, int i, int n, int& p, secuence<secuence<T,L>,factorial(L)>& pers) const
         {
             // condición base
             if (i == n - 1)
             {
-                std::cout << p << "\n";
+                //std::cout << p << "\n";
+                pers[p++] = sec;
                 //sec.printLn(std::cout);
                 return;
             }
@@ -132,7 +140,7 @@ namespace oct::nums::v0
                 std::swap(sec[i], sec[j]);        // STL `swap()` usado
 
                 // recurre para la subcadena `str[i+1, n-1]`
-                permutations(sec, i + 1, n, p + 1, pers);
+                permutations(sec, i + 1, n, p, pers);
 
                 // retroceder (restaurar la string a su estado original)
                 std::swap(sec[i], sec[j]);
@@ -205,6 +213,12 @@ namespace oct::nums::v0
             out << "\n";
         }
 #endif // OCTETOS_AVERSO_TTD
+
+
+        constexpr size_t size() const
+        {
+            return H;
+        }
     };
 
 
