@@ -6,14 +6,16 @@
 namespace oct::nums::v0
 {
 
-    template<number T,decimal V> class first<T,1,V> : public equation<T,1,V>
+    template<number T,decimal V> class equation<T,1,V> : public secuence<T,1,V>
     {
+    protected:
+        T _c_;
     public:
-        first() = default;
-        first(const T& c, const T& a)
+        equation() = default;
+        equation(const T& c, const T& a)
         {
-            equation<T,1,V>::_c_ = c;
-            equation<T,1,V>::data[0] = a;
+            _c_ = c;
+            secuence<T,1,V>::data[0] = a;
         }
 
 
@@ -21,32 +23,33 @@ namespace oct::nums::v0
 
         T& c()
         {
-            return equation<T,1,V>::_c_;
+            return _c_;
         }
         T& a()
         {
-            return equation<T,1,V>::data[0];
+            return secuence<T,1,V>::data[0];
         }
         V x()
         {
-            return V(equation<T,1,V>::_c_)/V(equation<T,1,V>::data[0]);
+            return V(_c_)/V(secuence<T,1,V>::data[0]);
         }
-    private:
     };
-    template<number T,decimal V> class first<T,2,V> : public equation<T,2,V>
+    template<number T,decimal V> class equation<T,2,V> : public secuence<T,2,V>
     {
+    protected:
+        T _c_;
     public:
-        first() = default;
-        first(const T& c, const T& a)
+        equation() = default;
+        equation(const T& c, const T& a)
         {
-            equation<T,2,V>::_c_ = c;
-            equation<T,2,V>::data[0] = a;
+            _c_ = c;
+            secuence<T,2,V>::data[0] = a;
         }
-        first(const T& c, const T& a,const T& b)
+        equation(const T& c, const T& a,const T& b)
         {
-            equation<T,2,V>::_c_ = c;
-            equation<T,2,V>::data[0] = a;
-            equation<T,2,V>::data[1] = b;
+            _c_ = c;
+            secuence<T,2,V>::data[0] = a;
+            secuence<T,2,V>::data[1] = b;
         }
 
 
@@ -72,7 +75,6 @@ namespace oct::nums::v0
         {
             return V(equation<T,2,V>::_c_ - (a() * x)) / V(b());
         }
-    private:
     };
 
 
