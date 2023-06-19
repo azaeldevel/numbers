@@ -80,6 +80,21 @@ void v0_developing()
     CU_ASSERT(vect3.x() == 4);
     CU_ASSERT(vect3.y() == -3);
     CU_ASSERT(vect3.z() == 5);
+
+    numbers_here::matrix<int,3,3,float> mx1(1);
+    CU_ASSERT(sizeof(mx1) == sizeof(int) * 3 * 3);
+    //std::cout << "Size : " << sizeof(mx1) << "\n";
+    //mx1.printLn(std::cout);
+
+    numbers_here::matrix<int,1,3,float> mx2(1);
+    CU_ASSERT(sizeof(mx2) == sizeof(int) * 1 * 3);
+    //std::cout << "Size : " << sizeof(mx2) << "\n";
+    //mx2.printLn(std::cout);
+
+    numbers_here::matrix<int,1,1,float> mx3(5);
+    CU_ASSERT(sizeof(mx3) == sizeof(int) * 1 * 1);
+    //std::cout << "Size : " << sizeof(mx3) << "\n";
+    mx3.printLn(std::cout);
 }
 
 

@@ -1,6 +1,10 @@
 #ifndef OCTETOS_NUMBERS_COMMON_HH
 #define OCTETOS_NUMBERS_COMMON_HH
 
+#ifdef OCTETOS_NUMBERS_TTD
+    #include <iostream>
+#endif // OCTETOS_NUMBERS_TTD
+
 #include <concepts>
 
 
@@ -19,7 +23,7 @@ namespace oct::nums::v0
     *\param T Tipo de dato
     *\param L La cantidad de datos
     **/
-    template<number T,unsigned char L> class secuence
+    template<typename T,unsigned char L> class secuence
     {
     protected:
         T data[L];
@@ -56,7 +60,114 @@ namespace oct::nums::v0
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
 
+
+#ifdef OCTETOS_NUMBERS_TTD
+        void print(std::ostream& out, bool delim = true) const
+        {
+            if(delim) out << "(";
+                for(size_t i = 0; i < L; i++)
+                {
+                    if(i > 0) out << ",";
+                    out << data[i];
+                }
+            if(delim) out << ")";
+        }
+        void printLn(std::ostream& out, bool delim = true) const
+        {
+            if(delim) out << "(";
+                for(size_t i = 0; i < L; i++)
+                {
+                    if(i > 0) out << ",";
+                    out << data[i];
+                }
+            if(delim) out << ")";
+            out << "\n";
+        }
+
+#endif // OCTETOS_AVERSO_TTD
+
     };
+    template<number T,unsigned char W,unsigned char H,template<number,unsigned char> typename C> class secuence<C<T,W>,H>
+    {
+    protected:
+        C<T,W> data[H];
+
+    public:
+        secuence() = default;
+        secuence(const T& v)
+        {
+            for(size_t i = 0; i < H; i++) for(size_t j = 0; j < W; j++) data[i][j] = v;
+        }
+        secuence(std::initializer_list<T>& l)
+        {
+            if(l.size() < H) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > H) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+
+            unsigned char i = 0;
+            for(const T& c : l)
+            {
+                data[i] = c;
+                i++;
+            }
+        }
+
+        C<T,W>& operator [](size_t i)
+        {
+            if(i < H) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+        const C<T,W>& operator [](size_t i) const
+        {
+            if(i < H) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+
+
+
+#ifdef OCTETOS_NUMBERS_TTD
+        void print(std::ostream& out) const
+        {
+            for(size_t i = 0; i < H; i++)
+            {
+                if(i > 0) out << "\n";
+                data[i].print(out,false);
+            }
+        }
+        void printLn(std::ostream& out) const
+        {
+            for(size_t i = 0; i < H; i++)
+            {
+                if(i > 0) out << "\n";
+                data[i].print(out,false);
+            }
+            out << "\n";
+        }
+#endif // OCTETOS_AVERSO_TTD
+    };
+
+
+
+    /**
+    *\brief Representa una matriz matematica m x n
+    *\param T Tipo de dato
+    *\param m Ancho de la matriz
+    *\param n Altos de la matriz
+    **/
+    template<number T,unsigned char n,unsigned char m,number V = T> class matrix : public secuence<secuence<T,n>,m>
+    {
+    public:
+        matrix() = default;
+        matrix(const T& v) : secuence<secuence<T,n>,m>(v)
+        {
+        }
+        matrix(std::initializer_list<std::initializer_list<T>>& l)
+        {
+        }
+
+    };
+
 
     template<number T,unsigned char D,number V = T> class vector : public secuence<T,D>
     {
