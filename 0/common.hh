@@ -17,6 +17,13 @@ namespace oct::nums::v0
     template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
 
+    template<typename T> constexpr  T factorial(const T& n)
+    {
+        T number = 1;
+        for(T i = 1; i <= n; i++) number *= i;
+
+        return number;
+    }
 
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al array
@@ -46,6 +53,10 @@ namespace oct::nums::v0
                 i++;
             }
         }
+        secuence(const secuence& s)
+        {
+            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+        }
 
         T& operator [](size_t i)
         {
@@ -59,7 +70,26 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
+        secuence& operator =(const secuence& s) const
+        {
+            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+        }
 
+        /**
+        *\brief Permita los elementos de la secuencia
+        **/
+        void permutation() const
+        {
+            //secuence<secuence<T,L>,L> sec;
+            for(size_t i = 0; i < L; i++)
+            {
+                for(size_t j = 0; j < L; j++)
+                {
+                    if(i == j) continue;
+
+                }
+            }
+        }
 
 #ifdef OCTETOS_NUMBERS_TTD
         void print(std::ostream& out, bool delim = true) const
@@ -110,6 +140,10 @@ namespace oct::nums::v0
                 i++;
             }
         }
+        secuence(const secuence& s)
+        {
+            for(size_t i = 0; i < H; i++) data[i] = s.data[i];
+        }
 
         C<T,W>& operator [](size_t i)
         {
@@ -122,6 +156,10 @@ namespace oct::nums::v0
             if(i < H) return data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+        secuence& operator =(const secuence& s) const
+        {
+            for(size_t i = 0; i < H; i++) data[i] = s.data[i];
         }
 
 
@@ -166,6 +204,15 @@ namespace oct::nums::v0
         {
         }
 
+        /**
+        *\brief Representa una matriz matematica m x n
+        *\param T Tipo de dato
+        *\param w Ancho de la matriz
+        *\param h Altos de la matriz
+        *\param i si i es 0 o mayor se elimina dicha fila
+        *\param j si j es 0 o mayor se elimina dicha columna
+        **/
+        template<number t,unsigned char w,unsigned char h,number v = t> matrix<t,w,h,v> submatrix(signed i, signed j);
     };
 
 

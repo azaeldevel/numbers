@@ -94,7 +94,9 @@ void v0_developing()
     numbers_here::matrix<int,1,1,float> mx3(5);
     CU_ASSERT(sizeof(mx3) == sizeof(int) * 1 * 1);
     //std::cout << "Size : " << sizeof(mx3) << "\n";
-    mx3.printLn(std::cout);
+    //mx3.printLn(std::cout);
+
+    CU_ASSERT(numbers_here::factorial(6) == 720);
 }
 
 
