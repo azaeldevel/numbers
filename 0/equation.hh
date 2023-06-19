@@ -6,7 +6,7 @@
 namespace oct::nums::v0
 {
 
-    template<number T,number V> class equation<T,1,V> : public secuence<T,1,V>
+    template<number T,number V> class equation<T,1,1,V> : public secuence<T,1>
     {
     protected:
         T _c_;
@@ -16,7 +16,7 @@ namespace oct::nums::v0
         equation(const T& c, const T& a)
         {
             _c_ = c;
-            secuence<T,1,V>::data[0] = a;
+            secuence<T,1>::data[0] = a;
         }
 
 
@@ -26,14 +26,14 @@ namespace oct::nums::v0
         }
         T& a()
         {
-            return secuence<T,1,V>::data[0];
+            return secuence<T,1>::data[0];
         }
         V x()
         {
-            return V(_c_)/V(secuence<T,1,V>::data[0]);
+            return V(_c_)/V(secuence<T,1>::data[0]);
         }
     };
-    template<number T,number V> class equation<T,2,V> : public secuence<T,2,V>
+    template<number T,number V> class equation<T,2,1,V> : public secuence<T,2>
     {
     protected:
         T _c_;
@@ -42,13 +42,13 @@ namespace oct::nums::v0
         equation(const T& c, const T& a)
         {
             _c_ = c;
-            secuence<T,2,V>::data[0] = a;
+            secuence<T,2>::data[0] = a;
         }
         equation(const T& c, const T& a,const T& b)
         {
             _c_ = c;
-            secuence<T,2,V>::data[0] = a;
-            secuence<T,2,V>::data[1] = b;
+            secuence<T,2>::data[0] = a;
+            secuence<T,2>::data[1] = b;
         }
 
 
@@ -60,11 +60,11 @@ namespace oct::nums::v0
         }
         T& a()
         {
-            return secuence<T,2,V>::data[0];
+            return secuence<T,2>::data[0];
         }
         T& b()
         {
-            return secuence<T,2,V>::data[1];
+            return secuence<T,2>::data[1];
         }
         V x(T y)
         {

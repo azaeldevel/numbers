@@ -13,7 +13,13 @@ namespace oct::nums::v0
     template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
 
-    template<number T,unsigned char L,number V> class secuence
+
+    /**
+    *\brief Representa una secuacion continua de datos, eqiuvalante al array
+    *\param T Tipo de dato
+    *\param L La cantidad de datos
+    **/
+    template<number T,unsigned char L> class secuence
     {
     protected:
         T data[L];
@@ -52,32 +58,39 @@ namespace oct::nums::v0
 
     };
 
-    template<number T,unsigned char D,number V> class vector : public secuence<T,D,V>
+    template<number T,unsigned char D,number V = T> class vector : public secuence<T,D>
     {
     public:
         vector() = default;
-        vector(const T& v) : secuence<T,D,V>(v)
+        vector(const T& v) : secuence<T,D>(v)
         {
         }
-        vector(std::initializer_list<T>& l) : secuence<T,D,V>(l)
+        vector(std::initializer_list<T>& l) : secuence<T,D>(l)
         {
         }
     };
 
-    template<number T,unsigned char D,number V> struct function
+    template<number T,unsigned char D,number V = T> struct function
     {
     };
 
 
 
-    template<number T,unsigned char L,number V> class equation : public secuence<T,L,V>
+    /**
+    *\brief Representa una equacion con todos los termino no constantes en el lado izq
+    *\param T Tipo de dato
+    *\param L La cantidad de variables
+    *\param G El grado de la ecuacion
+    *\param V Tipo de datos usado para calculos
+    **/
+    template<number T,unsigned char L,unsigned char G,number V = T> class equation : public secuence<T,L>
     {
     protected:
         T _c_;
 
     public:
         equation() = default;
-        equation(const T& v) : secuence<T,L,V>(v)
+        equation(const T& v) : secuence<T,L>(v)
         {
         }
         equation(std::initializer_list<T>& l);
@@ -85,29 +98,17 @@ namespace oct::nums::v0
 
         T& a(size_t i)
         {
-            if(i < L) return secuence<T,L,V>::data[i];
+            if(i < L) return secuence<T,L>::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
         T a(size_t i) const
         {
-            if(i < L) return secuence<T,L,V>::data[i];
+            if(i < L) return secuence<T,L>::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
     };
-
-    /**
-    *\brief c + a1x1 + a2x2 + ... + anxn = 0
-    **/
-    template<number T,unsigned char D,number V = float> class first : public equation<T,D,V>
-    {
-    public:
-        first() = default;
-    };
-
-
-
 
 
 }
