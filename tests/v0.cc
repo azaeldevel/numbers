@@ -34,7 +34,7 @@ void v0_developing()
     numbers_here::secuence<int,3,float> sec3(1);
     CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
 
-    numbers_here::first<int,1,float> eq1(50,2);
+    numbers_here::equation<int,1,float> eq1(50,2);
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
     CU_ASSERT(eq1.c() == 50);
@@ -43,7 +43,7 @@ void v0_developing()
     CU_ASSERT(eq1.x() == 25);
 
 
-    numbers_here::first<int,2,float> eq2(4,-3,5);
+    numbers_here::equation<int,2,float> eq2(4,-3,5);
     CU_ASSERT(eq2.c() == 4);
     CU_ASSERT(eq2.a() == -3);
     CU_ASSERT(eq2.b() == 5);
