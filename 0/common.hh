@@ -70,7 +70,7 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        secuence& operator =(const secuence& s) const
+        secuence& operator =(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
         }
@@ -78,18 +78,12 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        void permutation() const
+        void permutation(secuence<secuence<T,L>,factorial(L)>& pers) const
         {
-            //secuence<secuence<T,L>,L> sec;
-            for(size_t i = 0; i < L; i++)
-            {
-                for(size_t j = 0; j < L; j++)
-                {
-                    if(i == j) continue;
-
-                }
-            }
+            secuence<T,L> sec = *this;
+            permutations(sec,0,L,0,pers);
         }
+
 
 #ifdef OCTETOS_NUMBERS_TTD
         void print(std::ostream& out, bool delim = true) const
@@ -116,6 +110,34 @@ namespace oct::nums::v0
 
 #endif // OCTETOS_AVERSO_TTD
 
+    private:
+
+        /**
+        *\brief Permita los elementos de la secuencia
+        **/
+        void permutations(secuence<T,L>& sec, int i, int n, int p, secuence<secuence<T,L>,factorial(L)>& pers) const
+        {
+            // condición base
+            if (i == n - 1)
+            {
+                std::cout << p << "\n";
+                //sec.printLn(std::cout);
+                return;
+            }
+
+            // procesa cada caracter de la string restante
+            for (int j = i; j < n; j++)
+            {
+                // intercambiar carácter en el índice `i` con el carácter actual
+                std::swap(sec[i], sec[j]);        // STL `swap()` usado
+
+                // recurre para la subcadena `str[i+1, n-1]`
+                permutations(sec, i + 1, n, p + 1, pers);
+
+                // retroceder (restaurar la string a su estado original)
+                std::swap(sec[i], sec[j]);
+            }
+        }
     };
     template<number T,unsigned char W,unsigned char H,template<number,unsigned char> typename C> class secuence<C<T,W>,H>
     {

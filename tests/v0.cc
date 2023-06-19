@@ -96,7 +96,12 @@ void v0_developing()
     //std::cout << "Size : " << sizeof(mx3) << "\n";
     //mx3.printLn(std::cout);
 
+    CU_ASSERT(numbers_here::factorial(3) == 6);
     CU_ASSERT(numbers_here::factorial(6) == 720);
+
+    numbers_here::secuence<numbers_here::secuence<int,3>,numbers_here::factorial(3)> pers;
+    numbers_here::vector<int,3,float> vect4 {4,-3,5};
+    vect4.permutation(pers);
 }
 
 
