@@ -5,7 +5,7 @@
 
 namespace oct::nums::v0
 {
-    template<number T,decimal V> class vector<T,2,V> : public secuence<T,2,V>
+    template<number T,number V> class vector<T,2,V> : public secuence<T,2,V>
     {
     public:
         vector(const T& x, const T& y)
@@ -25,7 +25,7 @@ namespace oct::nums::v0
             return secuence<T,2,V>::data[1];
         }
     };
-    template<number T,decimal V> class vector<T,3,V> : public secuence<T,3,V>
+    template<number T,number V> class vector<T,3,V> : public secuence<T,3,V>
     {
     public:
         vector(const T& x, const T& y)

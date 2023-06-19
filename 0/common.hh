@@ -11,9 +11,9 @@ namespace oct::nums::v0
     namespace core_here = oct::core::v3;
 
     template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
-    template<typename T> concept decimal = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
+    template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
 
-    template<number T,unsigned char L,decimal V> class secuence
+    template<number T,unsigned char L,number V> class secuence
     {
     protected:
         T data[L];
@@ -52,7 +52,7 @@ namespace oct::nums::v0
 
     };
 
-    template<number T,unsigned char D,decimal V> class vector : public secuence<T,D,V>
+    template<number T,unsigned char D,number V> class vector : public secuence<T,D,V>
     {
     public:
         vector() = default;
@@ -64,13 +64,13 @@ namespace oct::nums::v0
         }
     };
 
-    template<number T,unsigned char D,decimal V> struct function
+    template<number T,unsigned char D,number V> struct function
     {
     };
 
 
 
-    template<number T,unsigned char L,decimal V> class equation : public secuence<T,L,V>
+    template<number T,unsigned char L,number V> class equation : public secuence<T,L,V>
     {
     protected:
         T _c_;
@@ -100,7 +100,7 @@ namespace oct::nums::v0
     /**
     *\brief c + a1x1 + a2x2 + ... + anxn = 0
     **/
-    template<number T,unsigned char D,decimal V = float> class first : public equation<T,D,V>
+    template<number T,unsigned char D,number V = float> class first : public equation<T,D,V>
     {
     public:
         first() = default;

@@ -27,12 +27,18 @@ void v0_developing()
 {
     numbers_here::secuence<int,1,float> sec1(1);
     CU_ASSERT(sizeof(sec1) == sizeof(int));
+    CU_ASSERT(sec1[0] == 1);
 
     numbers_here::secuence<int,2,float> sec2(1);
     CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
+    CU_ASSERT(sec2[0] == 1);
+    CU_ASSERT(sec2[1] == 1);
 
     numbers_here::secuence<int,3,float> sec3(1);
     CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
+    CU_ASSERT(sec3[0] == 1);
+    CU_ASSERT(sec3[1] == 1);
+    CU_ASSERT(sec3[2] == 1);
 
     numbers_here::equation<int,1,float> eq1(50,2);
     //std::cout << "Size : " << sizeof(eq1) << "\n";
