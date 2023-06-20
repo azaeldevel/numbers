@@ -36,6 +36,24 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
+	if ((NULL == CU_add_test(pSuite_v0, "Secuence..", v0_secuence)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
+	if ((NULL == CU_add_test(pSuite_v0, "Vector..", v0_vector)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
+	if ((NULL == CU_add_test(pSuite_v0, "Equation..", v0_equation)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
 	if ((NULL == CU_add_test(pSuite_v0, "Matrix..", v0_matrix)))
 	{
 		CU_cleanup_registry();

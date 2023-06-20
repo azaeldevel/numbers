@@ -245,21 +245,6 @@ namespace oct::nums::v0
 
             return res;
         }
-        /*constexpr matrix<T,m,n,V> operator * (const matrix<T,m,n,V>& o) const
-        {//ref : Book 1(IAL), pag 88.
-            matrix<T,m,n,V> res;
-
-            for(size_t i = 0; i < n; i++)
-            {
-                for(size_t j = 0; j < m; j++)
-                {
-                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] + o[j][i];
-                }
-            }
-
-            return res;
-        }*/
-
 
         //>>>getter and setters
         constexpr size_t columns() const

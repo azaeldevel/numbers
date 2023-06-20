@@ -9,98 +9,11 @@
 namespace numbers_here = oct::nums::v0;
 
 
-int v0_init(void)
-{
-
-
-	return 0;
-}
-int v0_clean(void)
-{
-
-
-	return 0;
-}
-
 
 void v0_developing()
 {
-    numbers_here::secuence<int,1> sec1(1);
-    CU_ASSERT(sizeof(sec1) == sizeof(int));
-    CU_ASSERT(sec1[0] == 1);
-
-    numbers_here::secuence<int,2> sec2(1);
-    CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
-    CU_ASSERT(sec2[0] == 1);
-    CU_ASSERT(sec2[1] == 1);
-
-    numbers_here::secuence<int,3> sec3(1);
-    CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
-    CU_ASSERT(sec3[0] == 1);
-    CU_ASSERT(sec3[1] == 1);
-    CU_ASSERT(sec3[2] == 1);
-
-    constexpr numbers_here::secuence<int,3> sec4(1);
-
-    numbers_here::equation<int,1,1,float> eq1(50,2);
-    //std::cout << "Size : " << sizeof(eq1) << "\n";
-    CU_ASSERT(sizeof(eq1) == 8);
-    CU_ASSERT(eq1.c() == 50);
-    CU_ASSERT(eq1.a() == 2);
-    //std::cout << "eq1.x() : " << eq1.x() << "\n";
-    CU_ASSERT(eq1.x() == 25);
-
-
-    numbers_here::equation<int,2,1,float> eq2(4,-3,5);
-    CU_ASSERT(eq2.c() == 4);
-    CU_ASSERT(eq2.a() == -3);
-    CU_ASSERT(eq2.b() == 5);
-    //std::cout << "Size : " << sizeof(eq2) << "\n";
-    CU_ASSERT(sizeof(eq2) == 12);
-    float rest1[9];
-    for(int i = -4; i < 5; i++)
-    {
-        rest1[i + 4] = eq2.y(i);
-        //std::cout << "(" << i << "," << rest1[i + 4] << ")\n";
-    }
-    CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
-    CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
-    CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
-
-
-    numbers_here::vector<int,2,float> vect1(4,-3);
-    CU_ASSERT(vect1.x() == 4);
-    CU_ASSERT(vect1.y() == -3);
-
-
-    numbers_here::vector<int,3,float> vect2(4,-3,5);
-    CU_ASSERT(vect2.x() == 4);
-    CU_ASSERT(vect2.y() == -3);
-    CU_ASSERT(vect2.z() == 5);
-
-    numbers_here::vector<int,3,float> vect3 {4,-3,5};
-    CU_ASSERT(vect3.x() == 4);
-    CU_ASSERT(vect3.y() == -3);
-    CU_ASSERT(vect3.z() == 5);
-
-    constexpr numbers_here::vector<int,3,float> vect5 {4,-3,5};
-
-    CU_ASSERT(numbers_here::factorial(3) == 6);
-    CU_ASSERT(numbers_here::factorial(6) == 720);
-
-    numbers_here::secuence<numbers_here::secuence<int,3>,numbers_here::factorial(3)> pers;
-    numbers_here::vector<int,3,float> vect4 {4,-3,5};
-    vect4.permutation(pers);
-    /*
-    for(size_t i = 0; i < pers.size(); i++)
-    {
-        pers[i].printLn(std::cout);
-    }
-    */
-    //CU_ASSERT(pers[0] == {4,-3,5});
 
 }
-
 
 void v0_matrix()
 {
@@ -171,7 +84,7 @@ void v0_matrix()
     CU_ASSERT(mx10[2][0] == 0);
     CU_ASSERT(mx10[2][1] == 4);
 
-    auto mx11 = mx9 * mx10;
+    numbers_here::matrix<int,2,2,float> mx11 = mx9 * mx10;
     //mx11.printLn(std::cout);
     //std::cout << "Columns : " << mx11.columns() << "\n";
     //std::cout << "Rows : " << mx11.rows() << "\n";
@@ -182,4 +95,103 @@ void v0_matrix()
 }
 
 
+void v0_equation()
+{
 
+    numbers_here::equation<int,1,1,float> eq1(50,2);
+    //std::cout << "Size : " << sizeof(eq1) << "\n";
+    CU_ASSERT(sizeof(eq1) == 8);
+    CU_ASSERT(eq1.c() == 50);
+    CU_ASSERT(eq1.a() == 2);
+    //std::cout << "eq1.x() : " << eq1.x() << "\n";
+    CU_ASSERT(eq1.x() == 25);
+
+
+    numbers_here::equation<int,2,1,float> eq2(4,-3,5);
+    CU_ASSERT(eq2.c() == 4);
+    CU_ASSERT(eq2.a() == -3);
+    CU_ASSERT(eq2.b() == 5);
+    //std::cout << "Size : " << sizeof(eq2) << "\n";
+    CU_ASSERT(sizeof(eq2) == 12);
+    float rest1[9];
+    for(int i = -4; i < 5; i++)
+    {
+        rest1[i + 4] = eq2.y(i);
+        //std::cout << "(" << i << "," << rest1[i + 4] << ")\n";
+    }
+    CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
+    CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
+    CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
+}
+
+
+void v0_secuence()
+{
+    numbers_here::secuence<int,1> sec1(1);
+    CU_ASSERT(sizeof(sec1) == sizeof(int));
+    CU_ASSERT(sec1[0] == 1);
+
+    numbers_here::secuence<int,2> sec2(1);
+    CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
+    CU_ASSERT(sec2[0] == 1);
+    CU_ASSERT(sec2[1] == 1);
+
+    numbers_here::secuence<int,3> sec3(1);
+    CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
+    CU_ASSERT(sec3[0] == 1);
+    CU_ASSERT(sec3[1] == 1);
+    CU_ASSERT(sec3[2] == 1);
+
+    constexpr numbers_here::secuence<int,3> sec4(1);
+}
+
+void v0_vector()
+{
+    numbers_here::vector<int,2,float> vect1(4,-3);
+    CU_ASSERT(vect1.x() == 4);
+    CU_ASSERT(vect1.y() == -3);
+
+
+    numbers_here::vector<int,3,float> vect2(4,-3,5);
+    CU_ASSERT(vect2.x() == 4);
+    CU_ASSERT(vect2.y() == -3);
+    CU_ASSERT(vect2.z() == 5);
+
+    numbers_here::vector<int,3,float> vect3 {4,-3,5};
+    CU_ASSERT(vect3.x() == 4);
+    CU_ASSERT(vect3.y() == -3);
+    CU_ASSERT(vect3.z() == 5);
+
+    constexpr numbers_here::vector<int,3,float> vect5 {4,-3,5};
+
+    numbers_here::secuence<numbers_here::secuence<int,3>,numbers_here::factorial(3)> pers;
+    numbers_here::vector<int,3,float> vect4 {4,-3,5};
+    vect4.permutation(pers);
+    /*
+    for(size_t i = 0; i < pers.size(); i++)
+    {
+        pers[i].printLn(std::cout);
+    }
+    */
+    //CU_ASSERT(pers[0] == {4,-3,5});s
+}
+
+void v0_funtions()
+{
+    CU_ASSERT(numbers_here::factorial(3) == 6);
+    CU_ASSERT(numbers_here::factorial(6) == 720);
+}
+
+
+int v0_init(void)
+{
+
+
+	return 0;
+}
+int v0_clean(void)
+{
+
+
+	return 0;
+}
