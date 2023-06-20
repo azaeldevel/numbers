@@ -6,7 +6,7 @@
 namespace oct::nums::v0
 {
 
-    template<number T,number V> class equation<T,1,1,V> : public secuence<T,1>
+    /*template<number T,number V> class equation<T,1,1,V> : public secuence<T,1>
     {
     protected:
         T _c_;
@@ -68,15 +68,27 @@ namespace oct::nums::v0
         }
         constexpr V x(T y)
         {
-            return (_c_ - (b() * y)) / V(a());
+
         }
         constexpr V y(T x)
         {
             return V(_c_ - (a() * x)) / V(b());
         }
-    };
+    };*/
 
 
+    template<number T,number V> V resolve(const equation<T,1,1,V>& eq)
+    {
+        return V(eq.c())/V(eq[0]);
+    }
+    template<number T,number V> V resolve(const equation<T,2,1,V>& eq, const T& v, size_t index)
+    {
+        if(index == 0) return (eq.c() - (eq[1] * v)) / V(eq[0]);
+        else if(index == 1) return V(eq.c() - (eq[0] * v)) / V(eq[1]);
+
+        throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        return 0;
+    }
 
 
 

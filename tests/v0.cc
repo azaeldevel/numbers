@@ -98,25 +98,25 @@ void v0_matrix()
 void v0_equation()
 {
 
-    numbers_here::equation<int,1,1,float> eq1(50,2);
+    numbers_here::equation<int,1,1,float> eq1(50,numbers_here::vector<int,1,float>(2));
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
     CU_ASSERT(eq1.c() == 50);
-    CU_ASSERT(eq1.a() == 2);
+    CU_ASSERT(eq1.a(0) == 2);
     //std::cout << "eq1.x() : " << eq1.x() << "\n";
-    CU_ASSERT(eq1.x() == 25);
+    CU_ASSERT(numbers_here::resolve(eq1) == 25);
 
 
-    numbers_here::equation<int,2,1,float> eq2(4,-3,5);
+    numbers_here::equation<int,2,1,float> eq2(4,{-3,5});
     CU_ASSERT(eq2.c() == 4);
-    CU_ASSERT(eq2.a() == -3);
-    CU_ASSERT(eq2.b() == 5);
+    CU_ASSERT(eq2[0] == -3);
+    CU_ASSERT(eq2[1] == 5);
     //std::cout << "Size : " << sizeof(eq2) << "\n";
     CU_ASSERT(sizeof(eq2) == 12);
     float rest1[9];
     for(int i = -4; i < 5; i++)
     {
-        rest1[i + 4] = eq2.y(i);
+        rest1[i + 4] = numbers_here::resolve(eq2,i,1);
         //std::cout << "(" << i << "," << rest1[i + 4] << ")\n";
     }
     CU_ASSERT(abs(rest1[0] + 1.6) < infimium);

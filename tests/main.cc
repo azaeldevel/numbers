@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
-
 #endif
 
 	/* Run all tests using the CUnit Basic interface */

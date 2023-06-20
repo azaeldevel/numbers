@@ -301,12 +301,25 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        constexpr equation(const T& v) : secuence<T,L>(v)
+        constexpr equation(const T& c, const vector<T,L,V>& v) : secuence<T,L>(v),_c_(c)
         {
         }
-        constexpr equation(std::initializer_list<T>& l);
+        constexpr equation(const T& c, std::initializer_list<T>& l) : secuence<T,L>(l),_c_(c)
+        {
+        }
+        constexpr equation(std::initializer_list<T>& l) : secuence<T,L>(l),_c_(0)
+        {
+        }
 
 
+        constexpr T& c()
+        {
+            return _c_;
+        }
+        constexpr const T& c() const
+        {
+            return _c_;
+        }
         constexpr T& a(size_t i)
         {
             if(i < L) return secuence<T,L>::data[i];
@@ -321,7 +334,7 @@ namespace oct::nums::v0
         }
     };
 
-
+    template<number T,unsigned char L,unsigned char G,number V = T> V resolve(const equation<T,L,G,V>&);
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH
