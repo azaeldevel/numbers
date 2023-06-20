@@ -13,22 +13,22 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        equation(const T& c, const T& a)
+        constexpr equation(const T& c, const T& a)
         {
             _c_ = c;
             secuence<T,1>::data[0] = a;
         }
 
 
-        T& c()
+        constexpr T& c()
         {
             return _c_;
         }
-        T& a()
+        constexpr T& a()
         {
             return secuence<T,1>::data[0];
         }
-        V x()
+        constexpr V x()
         {
             return V(_c_)/V(secuence<T,1>::data[0]);
         }
@@ -39,12 +39,12 @@ namespace oct::nums::v0
         T _c_;
     public:
         equation() = default;
-        equation(const T& c, const T& a)
+        constexpr equation(const T& c, const T& a)
         {
             _c_ = c;
             secuence<T,2>::data[0] = a;
         }
-        equation(const T& c, const T& a,const T& b)
+        constexpr equation(const T& c, const T& a,const T& b)
         {
             _c_ = c;
             secuence<T,2>::data[0] = a;
@@ -54,23 +54,23 @@ namespace oct::nums::v0
 
 
 
-        T& c()
+        constexpr T& c()
         {
             return _c_;
         }
-        T& a()
+        constexpr T& a()
         {
             return secuence<T,2>::data[0];
         }
-        T& b()
+        constexpr T& b()
         {
             return secuence<T,2>::data[1];
         }
-        V x(T y)
+        constexpr V x(T y)
         {
             return (_c_ - (b() * y)) / V(a());
         }
-        V y(T x)
+        constexpr V y(T x)
         {
             return V(_c_ - (a() * x)) / V(b());
         }

@@ -17,7 +17,7 @@ namespace oct::nums::v0
     template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
 
-    template<typename T> constexpr  T factorial(const T& n)
+    template<typename T> constexpr T factorial(const T& n)
     {
         T number = 1;
         for(T i = 1; i <= n; i++) number *= i;
@@ -37,11 +37,11 @@ namespace oct::nums::v0
 
     public:
         secuence() = default;
-        secuence(const T& v)
+        constexpr secuence(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
-        secuence(std::initializer_list<T>& l)
+        constexpr secuence(std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -53,24 +53,24 @@ namespace oct::nums::v0
                 i++;
             }
         }
-        secuence(const secuence& s)
+        constexpr secuence(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
         }
 
-        T& operator [](size_t i)
+        constexpr T& operator [](size_t i)
         {
             if(i < L) return data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        const T& operator [](size_t i) const
+        constexpr const T& operator [](size_t i) const
         {
             if(i < L) return data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        secuence& operator =(const secuence& s)
+        constexpr secuence& operator =(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
 
@@ -80,7 +80,7 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        void permutation(secuence<secuence<T,L>,factorial(L)>& pers) const
+        constexpr void permutation(secuence<secuence<T,L>,factorial(L)>& pers) const
         {
             secuence<T,L> sec = *this;
             int index = 0;
@@ -93,7 +93,7 @@ namespace oct::nums::v0
 
 
 #ifdef OCTETOS_NUMBERS_TTD
-        void print(std::ostream& out, bool delim = true) const
+        void print(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
                 for(size_t i = 0; i < L; i++)
@@ -103,7 +103,7 @@ namespace oct::nums::v0
                 }
             if(delim) out << ")";
         }
-        void printLn(std::ostream& out, bool delim = true) const
+        void printLn(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
                 for(size_t i = 0; i < L; i++)
@@ -122,7 +122,7 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        void permutations(secuence<T,L>& sec, int i, int n, int& p, secuence<secuence<T,L>,factorial(L)>& pers) const
+        constexpr void permutations(secuence<T,L>& sec, int i, int n, int& p, secuence<secuence<T,L>,factorial(L)>& pers) const
         {
             // condición base
             if (i == n - 1)
@@ -147,98 +147,130 @@ namespace oct::nums::v0
             }
         }
     };
-    template<number T,unsigned char W,unsigned char H,template<number,unsigned char> typename C> class secuence<C<T,W>,H>
-    {
-    protected:
-        C<T,W> data[H];
-
-    public:
-        secuence() = default;
-        secuence(const T& v)
-        {
-            for(size_t i = 0; i < H; i++) for(size_t j = 0; j < W; j++) data[i][j] = v;
-        }
-        secuence(std::initializer_list<T>& l)
-        {
-            if(l.size() < H) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > H) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
-
-            unsigned char i = 0;
-            for(const T& c : l)
-            {
-                data[i] = c;
-                i++;
-            }
-        }
-        secuence(const secuence& s)
-        {
-            for(size_t i = 0; i < H; i++) data[i] = s.data[i];
-        }
-
-        C<T,W>& operator [](size_t i)
-        {
-            if(i < H) return data[i];
-
-            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
-        }
-        const C<T,W>& operator [](size_t i) const
-        {
-            if(i < H) return data[i];
-
-            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
-        }
-        secuence& operator =(const secuence& s) const
-        {
-            for(size_t i = 0; i < H; i++) data[i] = s.data[i];
-        }
-
-
-
-#ifdef OCTETOS_NUMBERS_TTD
-        void print(std::ostream& out) const
-        {
-            for(size_t i = 0; i < H; i++)
-            {
-                if(i > 0) out << "\n";
-                data[i].print(out,false);
-            }
-        }
-        void printLn(std::ostream& out) const
-        {
-            for(size_t i = 0; i < H; i++)
-            {
-                if(i > 0) out << "\n";
-                data[i].print(out,false);
-            }
-            out << "\n";
-        }
-#endif // OCTETOS_AVERSO_TTD
-
-
-        constexpr size_t size() const
-        {
-            return H;
-        }
-    };
 
 
 
     /**
     *\brief Representa una matriz matematica m x n
     *\param T Tipo de dato
-    *\param m Ancho de la matriz
-    *\param n Altos de la matriz
+    *\param m Renglones
+    *\param n Columnas
     **/
     template<number T,unsigned char n,unsigned char m,number V = T> class matrix : public secuence<secuence<T,n>,m>
     {
     public:
         matrix() = default;
-        matrix(const T& v) : secuence<secuence<T,n>,m>(v)
+        constexpr matrix(const T& v) : secuence<secuence<T,n>,m>(v)
         {
         }
-        matrix(std::initializer_list<std::initializer_list<T>>& l)
+        constexpr matrix(std::initializer_list<std::initializer_list<T>>& l)
         {
         }
+        constexpr matrix(const matrix& o) : secuence<secuence<T,n>,m>(o)
+        {
+        }
+
+        constexpr matrix& operator = (const matrix& o)
+        {
+
+            for(size_t i = 0; i < m; i++)
+            {
+                for(size_t j = 0; j < n; j++)
+                {
+                    secuence<secuence<T,n>,m>::data[i][j] = o[i][j];
+                }
+            }
+
+        }
+        constexpr matrix operator + (const matrix& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < n; i++)
+            {
+                for(size_t j = 0; j < m; j++)
+                {
+                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] + o[i][j];
+                }
+            }
+
+            return res;
+        }
+        constexpr matrix operator - (const matrix& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < n; i++)
+            {
+                for(size_t j = 0; j < m; j++)
+                {
+                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] - o[i][j];
+                }
+            }
+
+            return res;
+        }
+        constexpr matrix operator * (const T& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < n; i++)
+            {
+                for(size_t j = 0; j < m; j++)
+                {
+                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] * o;
+                }
+            }
+
+            return res;
+        }
+        template<unsigned char r> constexpr matrix<T,m,r,V> operator * (const matrix<T,r,n,V>& o) const
+        {//ref : Book 1(IAL), pag 88.
+            matrix<T,m,r,V> res;
+
+            for(size_t i = 0; i < m; i++)
+            {
+                for(size_t j = 0; j < r; j++)
+                {
+                    res[i][j] = 0;
+                    for(size_t k = 0; k < n; k++)
+                    {
+                        res[i][j] += secuence<secuence<T,n>,m>::data[i][k] * o[k][j];
+                        //std::cout << "(" << secuence<secuence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
+                    }
+                    //std::cout << "    ";
+                }
+                //std::cout << "\n";
+            }
+
+            return res;
+        }
+        /*constexpr matrix<T,m,n,V> operator * (const matrix<T,m,n,V>& o) const
+        {//ref : Book 1(IAL), pag 88.
+            matrix<T,m,n,V> res;
+
+            for(size_t i = 0; i < n; i++)
+            {
+                for(size_t j = 0; j < m; j++)
+                {
+                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] + o[j][i];
+                }
+            }
+
+            return res;
+        }*/
+
+
+        //>>>getter and setters
+        constexpr size_t columns() const
+        {
+            return n;
+        }
+        constexpr size_t rows() const
+        {
+            return m;
+        }
+
 
         /**
         *\brief Representa una matriz matematica m x n
@@ -256,10 +288,10 @@ namespace oct::nums::v0
     {
     public:
         vector() = default;
-        vector(const T& v) : secuence<T,D>(v)
+        constexpr vector(const T& v) : secuence<T,D>(v)
         {
         }
-        vector(std::initializer_list<T>& l) : secuence<T,D>(l)
+        constexpr vector(std::initializer_list<T>& l) : secuence<T,D>(l)
         {
         }
     };
@@ -284,19 +316,19 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        equation(const T& v) : secuence<T,L>(v)
+        constexpr equation(const T& v) : secuence<T,L>(v)
         {
         }
-        equation(std::initializer_list<T>& l);
+        constexpr equation(std::initializer_list<T>& l);
 
 
-        T& a(size_t i)
+        constexpr T& a(size_t i)
         {
             if(i < L) return secuence<T,L>::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        T a(size_t i) const
+        constexpr const T& a(size_t i) const
         {
             if(i < L) return secuence<T,L>::data[i];
 

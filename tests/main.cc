@@ -36,6 +36,12 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
+	if ((NULL == CU_add_test(pSuite_v0, "Matrix..", v0_matrix)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
 #endif
 
 	/* Run all tests using the CUnit Basic interface */

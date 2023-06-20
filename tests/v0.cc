@@ -40,6 +40,8 @@ void v0_developing()
     CU_ASSERT(sec3[1] == 1);
     CU_ASSERT(sec3[2] == 1);
 
+    constexpr numbers_here::secuence<int,3> sec4(1);
+
     numbers_here::equation<int,1,1,float> eq1(50,2);
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
@@ -81,6 +83,27 @@ void v0_developing()
     CU_ASSERT(vect3.y() == -3);
     CU_ASSERT(vect3.z() == 5);
 
+    constexpr numbers_here::vector<int,3,float> vect5 {4,-3,5};
+
+    CU_ASSERT(numbers_here::factorial(3) == 6);
+    CU_ASSERT(numbers_here::factorial(6) == 720);
+
+    numbers_here::secuence<numbers_here::secuence<int,3>,numbers_here::factorial(3)> pers;
+    numbers_here::vector<int,3,float> vect4 {4,-3,5};
+    vect4.permutation(pers);
+    /*
+    for(size_t i = 0; i < pers.size(); i++)
+    {
+        pers[i].printLn(std::cout);
+    }
+    */
+    //CU_ASSERT(pers[0] == {4,-3,5});
+
+}
+
+
+void v0_matrix()
+{
     numbers_here::matrix<int,3,3,float> mx1(1);
     CU_ASSERT(sizeof(mx1) == sizeof(int) * 3 * 3);
     //std::cout << "Size : " << sizeof(mx1) << "\n";
@@ -96,19 +119,67 @@ void v0_developing()
     //std::cout << "Size : " << sizeof(mx3) << "\n";
     //mx3.printLn(std::cout);
 
-    CU_ASSERT(numbers_here::factorial(3) == 6);
-    CU_ASSERT(numbers_here::factorial(6) == 720);
+    numbers_here::matrix<int,3,3,float> mx4(5);
+    numbers_here::matrix<int,3,3,float> mx5(7);
+    numbers_here::matrix<int,3,3,float> mx6 = mx4 + mx5;
+    //mx6.printLn(std::cout);
+    CU_ASSERT(mx6[0][0] == 12);
+    CU_ASSERT(mx6[1][0] == 12);
+    CU_ASSERT(mx6[2][0] == 12);
+    CU_ASSERT(mx6[1][1] == 12);
+    CU_ASSERT(mx6[2][2] == 12);
 
-    numbers_here::secuence<numbers_here::secuence<int,3>,numbers_here::factorial(3)> pers;
-    numbers_here::vector<int,3,float> vect4 {4,-3,5};
-    vect4.permutation(pers);
-    for(size_t i = 0; i < pers.size(); i++)
-    {
-        pers[i].printLn(std::cout);
-    }
-    //CU_ASSERT(pers[0] == {4,-3,5});
+    numbers_here::matrix<int,3,3,float> mx7 = mx5 - mx4;
+    CU_ASSERT(mx7[0][0] == 2);
+    CU_ASSERT(mx7[1][0] == 2);
+    CU_ASSERT(mx7[2][0] == 2);
+    CU_ASSERT(mx7[1][1] == 2);
+    CU_ASSERT(mx7[2][2] == 2);
+
+    numbers_here::matrix<int,3,3,float> mx8 = mx5 * 3;
+    CU_ASSERT(mx8[0][0] == 21);
+    CU_ASSERT(mx8[1][0] == 21);
+    CU_ASSERT(mx8[2][0] == 21);
+    CU_ASSERT(mx8[1][1] == 21);
+    CU_ASSERT(mx8[2][2] == 21);
+
+    numbers_here::matrix<int,3,2,float> mx9;
+    mx9[0][0] = 2;
+    mx9[0][1] = -1;
+    mx9[0][2] = 0;
+    mx9[1][0] = 1;
+    mx9[1][1] = 2;
+    mx9[1][2] = -3;
+    CU_ASSERT(mx9[0][0] == 2);
+    CU_ASSERT(mx9[0][1] == -1);
+    CU_ASSERT(mx9[0][2] == 0);
+    CU_ASSERT(mx9[1][0] == 1);
+    CU_ASSERT(mx9[1][1] == 2);
+    CU_ASSERT(mx9[1][2] == -3);
+
+    numbers_here::matrix<int,2,3,float> mx10;
+    mx10[0][0] = 1;
+    mx10[0][1] = 3;
+    mx10[1][0] = -2;
+    mx10[1][1] = 1;
+    mx10[2][0] = 0;
+    mx10[2][1] = 4;
+    CU_ASSERT(mx10[0][0] == 1);
+    CU_ASSERT(mx10[0][1] == 3);
+    CU_ASSERT(mx10[1][0] == -2);
+    CU_ASSERT(mx10[1][1] == 1);
+    CU_ASSERT(mx10[2][0] == 0);
+    CU_ASSERT(mx10[2][1] == 4);
+
+    auto mx11 = mx9 * mx10;
+    //mx11.printLn(std::cout);
+    //std::cout << "Columns : " << mx11.columns() << "\n";
+    //std::cout << "Rows : " << mx11.rows() << "\n";
+    CU_ASSERT(mx11[0][0] == 4);
+    CU_ASSERT(mx11[0][1] == 5);
+    CU_ASSERT(mx11[1][0] == -3);
+    CU_ASSERT(mx11[1][1] == -7);
 }
-
 
 
 

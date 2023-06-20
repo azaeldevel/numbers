@@ -12,5 +12,6 @@ int v0_init(void);
 int v0_clean(void);
 
 void v0_developing();
+void v0_matrix();
 
 #endif
