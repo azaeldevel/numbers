@@ -122,6 +122,9 @@ void v0_equation()
     CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
     CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
     CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
+
+    numbers_here::matrix<int,3,3,float> mx1;
+    numbers_here::equation<numbers_here::matrix<int,3,3,float>,3,3,float> eq3(4,mx1);
 }
 
 

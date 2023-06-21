@@ -156,7 +156,7 @@ namespace oct::nums::v0
     *\param m Renglones
     *\param n Columnas
     **/
-    template<number T,size_t n,size_t m,number V = T> class matrix : public secuence<secuence<T,n>,m>
+    template<typename T,size_t n,size_t m,number V> class matrix : public secuence<secuence<T,n>,m>
     {
     public:
         matrix() = default;
@@ -180,7 +180,7 @@ namespace oct::nums::v0
                     secuence<secuence<T,n>,m>::data[i][j] = o[i][j];
                 }
             }
-
+            return *this;
         }
         constexpr matrix operator + (const matrix& o) const
         {
@@ -265,11 +265,11 @@ namespace oct::nums::v0
         *\param i si i es 0 o mayor se elimina dicha fila
         *\param j si j es 0 o mayor se elimina dicha columna
         **/
-        template<number t,size_t w,size_t h,number v = t> matrix<t,w,h,v> submatrix(signed i, signed j);
+        template<typename t,size_t w,size_t h,number v> matrix<t,w,h,v> submatrix(signed i, signed j);
     };
 
 
-    template<number T,size_t D,number V = T> class vector : public secuence<T,D>
+    template<typename T,size_t D,number V> class vector : public secuence<T,D>
     {
     public:
         vector() = default;
@@ -281,7 +281,7 @@ namespace oct::nums::v0
         }
     };
 
-    template<number T,size_t D,number V = T> struct function
+    template<typename T,size_t D,number V = T> struct function
     {
     };
 
@@ -294,7 +294,7 @@ namespace oct::nums::v0
     *\param G El grado de la ecuacion
     *\param V Tipo de datos usado para calculos
     **/
-    template<number T,size_t L,size_t G,number V = T> class equation : public secuence<T,L>
+    template<typename T,size_t L,size_t G,number V> class equation : public secuence<T,L>
     {
     protected:
         T _c_;
@@ -334,7 +334,7 @@ namespace oct::nums::v0
         }
     };
 
-    template<number T,size_t L,size_t G,number V = T> V resolve(const equation<T,L,G,V>&);
+    template<typename T,size_t L,size_t G,number V> V resolve(const equation<T,L,G,V>&);
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH
