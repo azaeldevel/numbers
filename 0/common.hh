@@ -257,14 +257,14 @@ namespace oct::nums::v0
 
 
         /**
-        *\brief Representa una matriz matematica m x n
+        *\brief Crea una sub-matriz a partir de la actual
         *\param T Tipo de dato
-        *\param w Ancho de la matriz
-        *\param h Altos de la matriz
+        *\param c Ancho de la matriz
+        *\param r Altos de la matriz
         *\param i si i es 0 o mayor se elimina dicha fila
         *\param j si j es 0 o mayor se elimina dicha columna
         **/
-        template<typename t,size_t w,size_t h,number v> matrix<t,w,h,v> submatrix(signed i, signed j);
+        template<typename t,size_t w,size_t h,number v> matrix<t,w,h,v> submatrix(size_t i, size_t j);
 
         constexpr V det() const
         {
@@ -277,6 +277,10 @@ namespace oct::nums::v0
                 d -= secuence<secuence<T,n>,m>::data[0][1] * secuence<secuence<T,n>,m>::data[1][0];
 
                 return d;
+            }
+            else if(n == 3)
+            {//Regla de Laplace, https://www.matesfacil.com/matrices/resueltos-matrices-determinantes.html
+
             }
 
             throw core_here::exception("No esta soportada la determinate para esta dimension");
