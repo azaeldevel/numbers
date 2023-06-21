@@ -116,7 +116,7 @@ void v0_equation()
     float rest1[9];
     for(int i = -4; i < 5; i++)
     {
-        rest1[i + 4] = numbers_here::resolve(eq2,i,1);
+        rest1[i + 4] = numbers_here::resolve(eq2,1,i);
         //std::cout << "(" << i << "," << rest1[i + 4] << ")\n";
     }
     CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
