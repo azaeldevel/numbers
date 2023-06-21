@@ -121,8 +121,7 @@ void v0_matrix()
 
 void v0_equation()
 {
-
-    numbers_here::equation<int,1,1,float> eq1(50,numbers_here::vector<int,1,float>(2));
+    numbers_here::equation<int,1,1,float> eq1(50,{2});
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
     CU_ASSERT(eq1.c() == 50);

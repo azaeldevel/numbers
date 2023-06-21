@@ -321,13 +321,10 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        constexpr equation(const T& c, const vector<T,L,V>& v) : secuence<T,L>(v),_c_(c)
+        constexpr equation(const T& c, std::initializer_list<T> l) : secuence<T,L>(l),_c_(c)
         {
         }
-        constexpr equation(const T& c, std::initializer_list<T>& l) : secuence<T,L>(l),_c_(c)
-        {
-        }
-        constexpr equation(std::initializer_list<T>& l) : secuence<T,L>(l),_c_(0)
+        constexpr equation(std::initializer_list<T> l) : secuence<T,L>(l),_c_(0)
         {
         }
 
