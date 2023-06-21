@@ -148,6 +148,17 @@ namespace oct::nums::v0
         }
     };
 
+    template<typename T,size_t D,number V> class vector : public secuence<T,D>
+    {
+    public:
+        vector() = default;
+        constexpr vector(const T& v) : secuence<T,D>(v)
+        {
+        }
+        constexpr vector(std::initializer_list<T>& l) : secuence<T,D>(l)
+        {
+        }
+    };
 
     /**
     *\brief Representa una matriz matematica m x n
@@ -289,18 +300,6 @@ namespace oct::nums::v0
     };
 
 
-    template<typename T,size_t D,number V> class vector : public secuence<T,D>
-    {
-    public:
-        vector() = default;
-        constexpr vector(const T& v) : secuence<T,D>(v)
-        {
-        }
-        constexpr vector(std::initializer_list<T>& l) : secuence<T,D>(l)
-        {
-        }
-    };
-
     template<typename T,size_t D,number V = T> struct function
     {
     };
@@ -325,6 +324,12 @@ namespace oct::nums::v0
         {
         }
         constexpr equation(std::initializer_list<T> l) : secuence<T,L>(l),_c_(0)
+        {
+        }
+        constexpr equation(const T& c, const secuence<T,L>& s) : secuence<T,L>(s),_c_(c)
+        {
+        }
+        constexpr equation(const secuence<T,L>& s) : secuence<T,L>(s),_c_(0)
         {
         }
 
