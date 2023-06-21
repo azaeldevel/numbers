@@ -149,7 +149,6 @@ namespace oct::nums::v0
     };
 
 
-
     /**
     *\brief Representa una matriz matematica m x n
     *\param T Tipo de dato
@@ -266,6 +265,23 @@ namespace oct::nums::v0
         *\param j si j es 0 o mayor se elimina dicha columna
         **/
         template<typename t,size_t w,size_t h,number v> matrix<t,w,h,v> submatrix(signed i, signed j);
+
+        constexpr V det() const
+        {
+            if(n != m) throw core_here::exception("La matriz devbe ser cuadarada para optener su determintate");
+
+            if(n == 2)
+            {
+                V d = 0;
+                d = secuence<secuence<T,n>,m>::data[0][0] * secuence<secuence<T,n>,m>::data[1][1];
+                d -= secuence<secuence<T,n>,m>::data[0][1] * secuence<secuence<T,n>,m>::data[1][0];
+
+                return d;
+            }
+
+            throw core_here::exception("No esta soportada la determinate para esta dimension");
+            return 0;
+        }
     };
 
 
@@ -334,7 +350,33 @@ namespace oct::nums::v0
         }
     };
 
-    template<typename T,size_t L,size_t G,number V> V resolve(const equation<T,L,G,V>&);
+
+
+
+    /**
+    *\brief Resuelve un ecuacion
+    *\param T Tipo de dato
+    *\param L La cantidad de variables
+    *\param G Grado de la ecuacion
+    *\param V Tipo de datos usado para calculos
+    *\param i variable que sera resuelta
+    **/
+    template<typename T,size_t L,size_t G,number V> V resolve();
+
+    /**
+    *\brief Resuelve un ecuacion
+    *\param T Tipo de dato
+    *\param L La cantidad de variables, equivalente al tamano de la matriz(la cual deve ser cuadrada)
+    *\param G Grado de la ecuacion
+    *\param V Tipo de datos usado para calculos
+    *\param i variable que sera resuelta
+    **/
+    template<typename T,size_t L,size_t G,number V> V resolve(const matrix<T,2,2,V>& m,size_t v)
+    {
+
+        return V(0);
+    }
+
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH

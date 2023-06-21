@@ -92,6 +92,30 @@ void v0_matrix()
     CU_ASSERT(mx11[0][1] == 5);
     CU_ASSERT(mx11[1][0] == -3);
     CU_ASSERT(mx11[1][1] == -7);
+
+    numbers_here::matrix<int,2,2,float> mx12;
+    mx12[0][0] = 2;
+    mx12[0][1] = 0;
+    mx12[1][0] = -1;
+    mx12[1][1] = 3;
+    CU_ASSERT(mx12[0][0] == 2);
+    CU_ASSERT(mx12[0][1] == 0);
+    CU_ASSERT(mx12[1][0] == -1);
+    CU_ASSERT(mx12[1][1] == 3);
+    //std::cout << "det A : " << mx12.det() << "\n";
+    CU_ASSERT(mx12.det()  == 6);
+
+    numbers_here::matrix<int,2,2,float> mx13;
+    mx13[0][0] = 5;
+    mx13[0][1] = -2;
+    mx13[1][0] = 4;
+    mx13[1][1] = 1;
+    CU_ASSERT(mx13[0][0] == 5);
+    CU_ASSERT(mx13[0][1] == -2);
+    CU_ASSERT(mx13[1][0] == 4);
+    CU_ASSERT(mx13[1][1] == 1);
+    //std::cout << "det A : " << mx13.det() << "\n";
+    CU_ASSERT(mx13.det()  == 13);
 }
 
 
@@ -123,8 +147,7 @@ void v0_equation()
     CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
     CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
 
-    numbers_here::matrix<int,3,3,float> mx1;
-    numbers_here::equation<numbers_here::matrix<int,3,3,float>,3,3,float> eq3(4,mx1);
+
 }
 
 
