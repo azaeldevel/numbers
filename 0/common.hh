@@ -369,20 +369,6 @@ namespace oct::nums::v0
     **/
     template<typename T,size_t L,size_t G,number V> V resolve();
 
-    /**
-    *\brief Resuelve un ecuacion
-    *\param T Tipo de dato
-    *\param L La cantidad de variables, equivalente al tamano de la matriz(la cual deve ser cuadrada)
-    *\param G Grado de la ecuacion
-    *\param V Tipo de datos usado para calculos
-    *\param i variable que sera resuelta
-    **/
-    template<typename T,size_t L,size_t G,number V> V resolve(const matrix<T,2,2,V>& m,size_t v)
-    {
-
-        return V(0);
-    }
-
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH

@@ -129,7 +129,6 @@ void v0_equation()
     //std::cout << "eq1.x() : " << eq1.x() << "\n";
     CU_ASSERT(numbers_here::resolve(eq1) == 25);
 
-
     numbers_here::equation<int,2,1,float> eq2(4,{-3,5});
     CU_ASSERT(eq2.c() == 4);
     CU_ASSERT(eq2[0] == -3);
@@ -146,7 +145,9 @@ void v0_equation()
     CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
     CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
 
-
+    numbers_here::vector<int,3,float> vect1 {4,-3,5};
+    numbers_here::equation<int,3,1,float> eq3(3,vect1);
+    //numbers_here::resolve(eq3,0);
 }
 
 
