@@ -22,14 +22,26 @@ namespace oct::nums::v0
     /**
     *\brief Resuelve un ecuacion
     *\param T Tipo de dato
-    *\param L La cantidad de variables, equivalente al tamano de la matriz(la cual deve ser cuadrada)
     *\param V Tipo de datos usado para calculos
     **/
-    template<typename T,number V> V resolve(const equation<vector<T,3,V>,3,1,V>& eq,size_t i)
+    template<number T,size_t L,number V> V clearance(const equation<T,L,1,V>& eq, size_t index)
     {
-        std::cout << "Resolviendo ecuacion de de primer grado con 3 variables\n";
 
-        return V(0);
+
+        return 0;
+    }
+
+    /**
+    *\brief Resuelve un ecuacion
+    *\param T Tipo de dato
+    *\param L La cantidad de variables
+    *\param V Tipo de datos usado para calculos
+    **/
+    template<number T,size_t L,number V> V resolve(const equation<T,L,1,V>* eqs, size_t leng)
+    {
+        std::cout << "Resolviendo ecuacion de " << L << "º\n";
+
+        return 0;
     }
 
 

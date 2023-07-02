@@ -116,12 +116,36 @@ void v0_matrix()
     CU_ASSERT(mx13[1][1] == 1);
     //std::cout << "det A : " << mx13.det() << "\n";
     CU_ASSERT(mx13.det()  == 13);
+
+    numbers_here::matrix<int,4,3,float> mx14;
+    mx14[0] = {0,2,4,1};
+    //eqSA[0] = 10;
+    mx14[1] = {-2,5,-12,-6};
+    //eqSA[1] = 10;
+    mx14[2] = {1,-1,3,3};
+    //eqSA[2] = 1;
+
+    numbers_here::matrix<int,3,3,float> mx15;
+    mx15[0][0] = 1;
+    mx15[0][1] = 3;
+    mx15[0][2] = 3;
+    mx15[1][0] = -2;
+    mx15[1][1] = 1;
+    mx15[1][2] = 1;
+    mx15[2][0] = 0;
+    mx15[2][1] = 4;
+    mx15[2][2] = 4;
+
+    std::vector<int> exclus;
+    exclus.push_back(1);
+    numbers_here::matrix<int,2,2,float> mx16 = mx15.sub<int,2,2>(exclus,exclus,true);
+    //mx16.print(std::cout);
 }
 
 
 void v0_equation()
 {
-    numbers_here::equation<int,1,1,float> eq1(50,{2});
+    numbers_here::equation<int,1,1,float> eq1({2},50);
     //std::cout << "Size : " << sizeof(eq1) << "\n";
     CU_ASSERT(sizeof(eq1) == 8);
     CU_ASSERT(eq1.c() == 50);
@@ -129,7 +153,7 @@ void v0_equation()
     //std::cout << "eq1.x() : " << eq1.x() << "\n";
     CU_ASSERT(numbers_here::resolve(eq1) == 25);
 
-    numbers_here::equation<int,2,1,float> eq2(4,{-3,5});
+    numbers_here::equation<int,2,1,float> eq2({-3,5},4);
     CU_ASSERT(eq2.c() == 4);
     CU_ASSERT(eq2[0] == -3);
     CU_ASSERT(eq2[1] == 5);
@@ -145,9 +169,19 @@ void v0_equation()
     CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
     CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
 
-    numbers_here::vector<int,3,float> vect1 {4,-3,5};
-    numbers_here::equation<int,3,1,float> eq3(3,vect1);
-    //numbers_here::resolve(eq3,0);
+    numbers_here::equation<int,4,1,float> eqSA[3];
+    eqSA[0] = {0,2,4,1};
+    eqSA[0] = 10;
+    eqSA[1] = {-2,5,-12,-6};
+    eqSA[1] = 10;
+    eqSA[2] = {1,-1,3,3};
+    eqSA[2] = 1;
+    CU_ASSERT(eqSA[0][0] == 0);
+    CU_ASSERT(eqSA[0][1] == 2);
+    CU_ASSERT(eqSA[0][2] == 4);
+    CU_ASSERT(eqSA[0][3] == 1);
+    //numbers_here::resolve(eqSA,3);
+
 }
 
 

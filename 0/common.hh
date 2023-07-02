@@ -6,6 +6,8 @@
 #endif // OCTETOS_NUMBERS_TTD
 
 #include <concepts>
+#include <vector>
+#include <algorithm>
 
 
 #include <core/3/Exception.hh>
@@ -70,9 +72,35 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
+        constexpr const T& at(size_t i) const
+        {
+            if(i < L) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+        constexpr T& at(size_t i)
+        {
+            if(i < L) return data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
         constexpr secuence& operator =(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+
+            return *this;
+        }
+        constexpr secuence& operator = (std::initializer_list<T> l)
+        {
+            if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+
+            unsigned char i = 0;
+            for(const T& c : l)
+            {
+                data[i] = c;
+                i++;
+            }
 
             return *this;
         }
@@ -165,9 +193,12 @@ namespace oct::nums::v0
     *\param T Tipo de dato
     *\param m Renglones
     *\param n Columnas
+    *\param V para operaciones
     **/
     template<typename T,size_t n,size_t m,number V> class matrix : public secuence<secuence<T,n>,m>
     {
+    private:
+
     public:
         matrix() = default;
         constexpr matrix(const T& v) : secuence<secuence<T,n>,m>(v)
@@ -178,19 +209,6 @@ namespace oct::nums::v0
         }
         constexpr matrix(const matrix& o) : secuence<secuence<T,n>,m>(o)
         {
-        }
-
-        constexpr matrix& operator = (const matrix& o)
-        {
-
-            for(size_t i = 0; i < m; i++)
-            {
-                for(size_t j = 0; j < n; j++)
-                {
-                    secuence<secuence<T,n>,m>::data[i][j] = o[i][j];
-                }
-            }
-            return *this;
         }
         constexpr matrix operator + (const matrix& o) const
         {
@@ -256,6 +274,19 @@ namespace oct::nums::v0
             return res;
         }
 
+        constexpr matrix& operator = (const matrix& o)
+        {
+
+            for(size_t i = 0; i < m; i++)
+            {
+                for(size_t j = 0; j < n; j++)
+                {
+                    secuence<secuence<T,n>,m>::data[i][j] = o[i][j];
+                }
+            }
+            return *this;
+        }
+
         //>>>getter and setters
         constexpr size_t columns() const
         {
@@ -268,14 +299,36 @@ namespace oct::nums::v0
 
 
         /**
-        *\brief Crea una sub-matriz a partir de la actual
+        *\brief Crea una sub-matriz
         *\param T Tipo de dato
         *\param c Ancho de la matriz
         *\param r Altos de la matriz
-        *\param i si i es 0 o mayor se elimina dicha fila
-        *\param j si j es 0 o mayor se elimina dicha columna
+        *\param i filas indicadas
+        *\param j columnas indicadas
         **/
-        template<typename t,size_t w,size_t h,number v> matrix<t,w,h,v> submatrix(size_t i, size_t j);
+        template<typename t,size_t w,size_t h> matrix<t,w,h,V> sub(const std::vector<T>& row,const std::vector<T>& columns, bool exclude)
+        {
+            matrix<t,w,h,V> res;
+            T f=0,c;
+            for(size_t i = 0; i < m; i++)
+            {
+                if(std::find(row.begin(),row.end(),i) != row.end()) continue;
+                //std::cout << "File  : " << f << "\n";
+                c=0;
+                for(size_t j = 0; j < n; j++)
+                {
+                    if(std::find(columns.begin(),columns.end(),j) != columns.end()) continue;
+                    //std::cout << "\t" << c << "\n";
+                    res[f][c] = secuence<secuence<T,n>,m>::data[i][j];
+
+                    c++;
+                }
+
+                f++;
+            }
+
+            return res;
+        }
 
         constexpr V det() const
         {
@@ -296,6 +349,47 @@ namespace oct::nums::v0
 
             throw core_here::exception("No esta soportada la determinate para esta dimension");
             return 0;
+        }
+
+        constexpr matrix inverse() const
+        {
+            matrix<T,n * 2,m,V> temp;
+
+            for(size_t i = 0; i < n; i++)
+            {
+                for(size_t j = 0; j < m; j++)
+                {
+                    temp[i][j] = secuence<secuence<T,n>,m>::data[i][j];
+                }
+            }
+
+
+
+            matrix res;
+            return res;
+        }
+    };
+
+    /**
+    *\brief Representa una matriz aumentada m x n
+    *\param T Tipo de dato
+    *\param m Renglones
+    *\param n Columnas
+    *\param V para operaciones
+    **/
+    template<typename T,size_t n,size_t m,number V> class extended : public matrix<T,n,m,V>
+    {
+    private:
+        matrix<T,1,m,V> _c_;
+
+    public:
+        const matrix<T,1,m,V>& c()const
+        {
+            return _c_;
+        }
+        matrix<T,1,m,V>& c()
+        {
+            return _c_;
         }
     };
 
@@ -320,17 +414,31 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        constexpr equation(const T& c, std::initializer_list<T> l) : secuence<T,L>(l),_c_(c)
+        constexpr equation(std::initializer_list<T> l,const T& c) : secuence<T,L>(l),_c_(c)
         {
         }
         constexpr equation(std::initializer_list<T> l) : secuence<T,L>(l),_c_(0)
         {
         }
-        constexpr equation(const T& c, const secuence<T,L>& s) : secuence<T,L>(s),_c_(c)
+        constexpr equation(const secuence<T,L>& s,const T& c) : secuence<T,L>(s),_c_(c)
         {
         }
         constexpr equation(const secuence<T,L>& s) : secuence<T,L>(s),_c_(0)
         {
+        }
+
+        constexpr equation& operator = (const T& c)
+        {
+            _c_ = c;
+
+            return *this;
+        }
+        constexpr equation& operator = (const equation& e)
+        {
+            ((secuence<T,L>*)this)->operator =((const secuence<T,L>&)e);
+            _c_ = e._c_;
+
+            return *this;
         }
 
 
