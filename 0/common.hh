@@ -329,12 +329,39 @@ namespace oct::nums::v0
 
             return res;
         }
-
-        constexpr V det() const
+        template<typename t,size_t w,size_t h> matrix<t,w,h,V> sub(const T& row,const T& columns)
         {
-            if(n != m) throw core_here::exception("La matriz devbe ser cuadarada para optener su determintate");
+            matrix<t,w,h,V> res;
+            T f=0,c;
+            for(size_t i = 0; i < m; i++)
+            {
+                if(i == row) continue;
+                //std::cout << "File  : " << f << "\n";
+                c=0;
+                for(size_t j = 0; j < n; j++)
+                {
+                    if(columns  == j) continue;
+                    //std::cout << "\t" << c << "\n";
+                    res[f][c] = secuence<secuence<T,n>,m>::data[i][j];
 
-            if(n == 2)
+                    c++;
+                }
+
+                f++;
+            }
+
+            return res;
+        }
+
+        V det(const size_t actual = 0) const
+        {
+            if(n != m) throw core_here::exception("La matriz debe ser cuadarada para optener su determintate");
+
+            if(n == 1)
+            {
+                return secuence<secuence<T,n>,m>::data[0][0];
+            }
+            else if(n == 2)
             {
                 V d = 0;
                 d = secuence<secuence<T,n>,m>::data[0][0] * secuence<secuence<T,n>,m>::data[1][1];
@@ -342,9 +369,16 @@ namespace oct::nums::v0
 
                 return d;
             }
-            else if(n == 3)
+            else
             {//Regla de Laplace, https://www.matesfacil.com/matrices/resueltos-matrices-determinantes.html
+                //matrix res;
+                //T sign = 1;
+                //V value = 0;
 
+                for(size_t r = 0; r < n; r++)
+                {
+                    //value += sign * ((matrix<T,n - 1,m - 1,V>&)*this).det(actual - 1);
+                }
             }
 
             throw core_here::exception("No esta soportada la determinate para esta dimension");

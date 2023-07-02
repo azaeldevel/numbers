@@ -136,9 +136,10 @@ void v0_matrix()
     mx15[2][1] = 4;
     mx15[2][2] = 4;
 
-    std::vector<int> exclus;
-    exclus.push_back(1);
-    numbers_here::matrix<int,2,2,float> mx16 = mx15.sub<int,2,2>(exclus,exclus,true);
+    //std::vector<int> exclus;
+    //exclus.push_back(1);
+    //numbers_here::matrix<int,2,2,float> mx16 = mx15.sub<int,2,2>(exclus,exclus,true);
+    //numbers_here::matrix<int,2,2,float> mx17 = mx15.sub<int,2,2>(1,1);
     //mx16.print(std::cout);
 }
 
