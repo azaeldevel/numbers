@@ -8,7 +8,7 @@
 #include <concepts>
 #include <vector>
 #include <algorithm>
-
+#include <cmath>
 
 #include <core/3/Exception.hh>
 
@@ -329,9 +329,13 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<typename t,size_t w,size_t h> matrix<t,w,h,V> sub(const T& row,const T& columns)
+        matrix<T,n - 1, m - 1,V> sub(size_t row,size_t columns) const
         {
-            matrix<t,w,h,V> res;
+            if(n != m) throw core_here::exception("La matriz debe ser cuadarada para optener su determintate");
+            if(n < 1) throw core_here::exception("No se puede hacer una matriz con menos de un elemento");
+
+            matrix<T,n - 1, m - 1,V> res;
+            std::cout << "matriz  : " << res.rows() << " x " << res.columns() << "\n";
             T f=0,c;
             for(size_t i = 0; i < m; i++)
             {
@@ -352,8 +356,11 @@ namespace oct::nums::v0
 
             return res;
         }
-
-        V det(const size_t actual = 0) const
+        constexpr T at(size_t i, size_t j) const
+        {
+            return secuence<secuence<T,n>,m>::data[i][j];
+        }
+        V det() const
         {
             if(n != m) throw core_here::exception("La matriz debe ser cuadarada para optener su determintate");
 
@@ -371,14 +378,15 @@ namespace oct::nums::v0
             }
             else
             {//Regla de Laplace, https://www.matesfacil.com/matrices/resueltos-matrices-determinantes.html
-                //matrix res;
                 //T sign = 1;
-                //V value = 0;
-
-                for(size_t r = 0; r < n; r++)
+                V value = 0;
+                for(size_t j = 0; j < n; j++)
                 {
-                    //value += sign * ((matrix<T,n - 1,m - 1,V>&)*this).det(actual - 1);
+                    //std::cout << secuence<secuence<T,n>,m>::data[i][0] << " ";
+                    //value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
                 }
+
+                return value;
             }
 
             throw core_here::exception("No esta soportada la determinate para esta dimension");

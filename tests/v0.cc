@@ -135,6 +135,8 @@ void v0_matrix()
     mx15[2][0] = 0;
     mx15[2][1] = 4;
     mx15[2][2] = 4;
+    //mx15.det();
+    //mx15.sub(0,1).sub(0,0);
 
     //std::vector<int> exclus;
     //exclus.push_back(1);
