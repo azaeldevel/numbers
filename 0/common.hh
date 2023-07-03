@@ -335,7 +335,7 @@ namespace oct::nums::v0
             if(n < 1) throw core_here::exception("No se puede hacer una matriz con menos de un elemento");
 
             matrix<T,n - 1, m - 1,V> res;
-            std::cout << "matriz  : " << res.rows() << " x " << res.columns() << "\n";
+            //std::cout << "matriz  : " << res.rows() << " x " << res.columns() << "\n";
             T f=0,c;
             for(size_t i = 0; i < m; i++)
             {
@@ -347,10 +347,8 @@ namespace oct::nums::v0
                     if(columns  == j) continue;
                     //std::cout << "\t" << c << "\n";
                     res[f][c] = secuence<secuence<T,n>,m>::data[i][j];
-
                     c++;
                 }
-
                 f++;
             }
 

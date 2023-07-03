@@ -135,8 +135,13 @@ void v0_matrix()
     mx15[2][0] = 0;
     mx15[2][1] = 4;
     mx15[2][2] = 4;
-    //mx15.det();
-    //mx15.sub(0,1).sub(0,0);
+
+    auto mx16 = mx15.sub(0,1);
+    CU_ASSERT(mx16.rows() == 2);
+    CU_ASSERT(mx16.columns() == 2);
+    auto mx17 = mx16.sub(0,0);
+    CU_ASSERT(mx17.rows() == 1);
+    CU_ASSERT(mx17.columns() == 1);
 
     //std::vector<int> exclus;
     //exclus.push_back(1);
