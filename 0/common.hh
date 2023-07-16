@@ -381,7 +381,7 @@ namespace oct::nums::v0
                 for(size_t j = 0; j < n; j++)
                 {
                     //std::cout << secuence<secuence<T,n>,m>::data[i][0] << " ";
-                    //value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
+                    value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
                 }
 
                 return value;
