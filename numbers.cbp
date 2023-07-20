@@ -38,17 +38,18 @@
 					<Add option="-DOCTETOS_NUMBERS_TTD" />
 					<Add directory="../numbers" />
 				</Compiler>
-				<Linker>
-					<Add library="cunit" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-pedantic" />
 			<Add option="-Wall" />
 			<Add option="--std=c++20" />
+			<Add option="`pkg-config cunit --cflgas`" />
 			<Add directory="../../octetos" />
 		</Compiler>
+		<Linker>
+			<Add option="`pkg-config cunit --libs`" />
+		</Linker>
 		<Unit filename="0/common.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>

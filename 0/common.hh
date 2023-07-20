@@ -1,9 +1,9 @@
-#ifndef OCTETOS_NUMBERS_COMMON_HH
-#define OCTETOS_NUMBERS_COMMON_HH
+#ifndef OCTETOS_NUMBERS_COMMON_V0_HH
+#define OCTETOS_NUMBERS_COMMON_V0_HH
 
-#ifdef OCTETOS_NUMBERS_TTD
+#ifdef OCTETOS_NUMBERS_V0_TTD
     #include <iostream>
-#endif // OCTETOS_NUMBERS_TTD
+#endif
 
 #include <concepts>
 #include <vector>
@@ -18,6 +18,7 @@ namespace oct::nums::v0
 
     template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
+    template<typename T> concept natural = std::same_as<T, unsigned char> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int> || std::same_as<T, unsigned long> || std::same_as<T, unsigned long long>;
 
     template<typename T> constexpr T factorial(const T& n)
     {
@@ -381,7 +382,7 @@ namespace oct::nums::v0
                 for(size_t j = 0; j < n; j++)
                 {
                     //std::cout << secuence<secuence<T,n>,m>::data[i][0] << " ";
-                    value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
+                    //value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
                 }
 
                 return value;
@@ -515,7 +516,7 @@ namespace oct::nums::v0
     *\param V Tipo de datos usado para calculos
     *\param i variable que sera resuelta
     **/
-    template<typename T,size_t L,size_t G,number V> V resolve();
+    template<typename T,natural L,natural G,number V> V resolve();
 
 }
 
