@@ -21,7 +21,9 @@ void v0_developing()
         if(primes[i].prime) std::cout << " primo.\n";
         else std::cout << " compuesto.\n";
     }*/
-    primes.print(std::cout);
+    //primes.print(std::cout);
+
+    constexpr numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes2;
 }
 
 void v0_matrix()
