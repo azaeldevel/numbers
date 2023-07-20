@@ -207,22 +207,22 @@ void v0_equation()
 
 void v0_secuence()
 {
-    numbers_here::secuence<int,1ul> sec1(1);
+    numbers_here::consecutive<int,size_t,1ul> sec1(1);
     CU_ASSERT(sizeof(sec1) == sizeof(int));
     CU_ASSERT(sec1[0] == 1);
 
-    numbers_here::secuence<int,2ul> sec2(1);
+    numbers_here::consecutive<int,size_t,2ul> sec2(1);
     CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
     CU_ASSERT(sec2[0] == 1);
     CU_ASSERT(sec2[1] == 1);
 
-    numbers_here::secuence<int,3ul> sec3(1);
+    numbers_here::consecutive<int,size_t,3ul> sec3(1);
     CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
     CU_ASSERT(sec3[0] == 1);
     CU_ASSERT(sec3[1] == 1);
     CU_ASSERT(sec3[2] == 1);
 
-    constexpr numbers_here::secuence<int,3ul> sec4(1);
+    constexpr numbers_here::consecutive<int,size_t,3ul> sec4(1);
 
     numbers_here::consecutive<int,size_t,10> sec5(1);
     CU_ASSERT(sizeof(sec5) == sizeof(int) * sec5.size());
@@ -258,7 +258,7 @@ void v0_vector()
 
     constexpr numbers_here::vector<int,3ul,float> vect5 {4,-3,5};
 
-    numbers_here::secuence<numbers_here::secuence<int,3ul>,numbers_here::factorial(3ul)> pers;
+    numbers_here::consecutive<numbers_here::consecutive<int,size_t,3ul>,size_t,numbers_here::factorial(3ul)> pers;
     numbers_here::vector<int,3ul,float> vect4 {4,-3,5};
     vect4.permutation(pers);
     /*

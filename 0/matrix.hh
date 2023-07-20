@@ -175,7 +175,7 @@ namespace oct::nums::v0
         }
         constexpr T at(size_t i, size_t j) const
         {
-            return secuence<secuence<T,n>,m>::data[i][j];
+            return base::data[i][j];
         }
         V det() const
         {

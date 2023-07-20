@@ -27,10 +27,10 @@ namespace oct::nums::v0
         constexpr equation(std::initializer_list<T> l) : consecutive<T,size_t,L>(l),_c_(0)
         {
         }
-        constexpr equation(const secuence<T,L>& s,const T& c) : consecutive<T,size_t,L>(s),_c_(c)
+        constexpr equation(const consecutive<T,size_t,L>& s,const T& c) : consecutive<T,size_t,L>(s),_c_(c)
         {
         }
-        constexpr equation(const secuence<T,L>& s) : consecutive<T,size_t,L>(s),_c_(0)
+        constexpr equation(const consecutive<T,size_t,L>& s) : consecutive<T,size_t,L>(s),_c_(0)
         {
         }
 
