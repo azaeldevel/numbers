@@ -10,6 +10,17 @@
 namespace oct::nums::v0
 {
 
+    template<class T> struct CaseNumber
+    {
+        T number;
+        bool prime;
+    };
+
+    /*template<class T> class PrimeNUmbers : public secuence<T,100>
+    {
+
+    };*/
+
 
 }
 
