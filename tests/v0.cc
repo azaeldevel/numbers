@@ -4,6 +4,7 @@
 #include "v0.hh"
 #include <0/equation.hh>
 #include <0/vector.hh>
+#include <0/arithmetic.hh>
 
 
 namespace numbers_here = oct::nums::v0;
@@ -12,7 +13,15 @@ namespace numbers_here = oct::nums::v0;
 
 void v0_developing()
 {
-    numbers_here::consecutive<int,size_t,10> sec1(1);
+    numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes;
+    primes.erastostenes();
+    /*for(size_t i = 2; i < 1000; i++)
+    {
+        std::cout << primes[i].number << " es ";
+        if(primes[i].prime) std::cout << " primo.\n";
+        else std::cout << " compuesto.\n";
+    }*/
+    primes.print(std::cout);
 }
 
 void v0_matrix()
@@ -211,6 +220,20 @@ void v0_secuence()
     CU_ASSERT(sec3[2] == 1);
 
     constexpr numbers_here::secuence<int,3ul> sec4(1);
+
+    numbers_here::consecutive<int,size_t,10> sec5(1);
+    CU_ASSERT(sizeof(sec5) == sizeof(int) * sec5.size());
+    CU_ASSERT(sec5[0] == 1);
+    CU_ASSERT(sec5[1] == 1);
+    CU_ASSERT(sec5[2] == 1);
+    CU_ASSERT(sec5[9] == 1);
+
+    numbers_here::consecutive<unsigned long long,unsigned long long,10> sec6(1);
+    CU_ASSERT(sizeof(sec6) == sizeof(unsigned long long) * sec6.size());
+    CU_ASSERT(sec6[0] == 1);
+    CU_ASSERT(sec6[1] == 1);
+    CU_ASSERT(sec6[2] == 1);
+    CU_ASSERT(sec6[9] == 1);
 }
 
 void v0_vector()

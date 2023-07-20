@@ -50,6 +50,7 @@
 		<Linker>
 			<Add option="`pkg-config cunit --libs`" />
 		</Linker>
+		<Unit filename="0/arithmetic.hh" />
 		<Unit filename="0/common.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>
