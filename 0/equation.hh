@@ -6,6 +6,85 @@
 namespace oct::nums::v0
 {
 
+
+    /**
+    *\brief Representa una equacion con todos los termino no constantes en el lado izq
+    *\param T Tipo de dato
+    *\param L La cantidad de variables
+    *\param G El grado de la ecuacion
+    *\param V Tipo de datos usado para calculos
+    **/
+    template<typename T,size_t L,size_t G,number V> class equation : public consecutive<T,size_t,L>
+    {
+    protected:
+        T _c_;
+
+    public:
+        equation() = default;
+        constexpr equation(std::initializer_list<T> l,const T& c) : consecutive<T,size_t,L>(l),_c_(c)
+        {
+        }
+        constexpr equation(std::initializer_list<T> l) : consecutive<T,size_t,L>(l),_c_(0)
+        {
+        }
+        constexpr equation(const secuence<T,L>& s,const T& c) : consecutive<T,size_t,L>(s),_c_(c)
+        {
+        }
+        constexpr equation(const secuence<T,L>& s) : consecutive<T,size_t,L>(s),_c_(0)
+        {
+        }
+
+        constexpr equation& operator = (const T& c)
+        {
+            _c_ = c;
+
+            return *this;
+        }
+        constexpr equation& operator = (const equation& e)
+        {
+            ((consecutive<T,size_t,L>*)this)->operator =((const consecutive<T,size_t,L>&)e);
+            _c_ = e._c_;
+
+            return *this;
+        }
+
+
+        constexpr T& c()
+        {
+            return _c_;
+        }
+        constexpr const T& c() const
+        {
+            return _c_;
+        }
+        constexpr T& a(size_t i)
+        {
+            if(i < L) return consecutive<T,size_t,L>::data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+        constexpr const T& a(size_t i) const
+        {
+            if(i < L) return consecutive<T,size_t,L>::data[i];
+
+            throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+        }
+    };
+
+
+
+
+    /**
+    *\brief Resuelve un ecuacion
+    *\param T Tipo de dato
+    *\param L La cantidad de variables
+    *\param G Grado de la ecuacion
+    *\param V Tipo de datos usado para calculos
+    *\param i variable que sera resuelta
+    **/
+    template<typename T,natural L,natural G,number V> V resolve();
+
+
     template<number T,number V> V resolve(const equation<T,1,1,V>& eq)
     {
         return V(eq.c())/V(eq[0]);

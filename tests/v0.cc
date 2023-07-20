@@ -5,6 +5,7 @@
 #include <0/equation.hh>
 #include <0/vector.hh>
 #include <0/arithmetic.hh>
+#include <0/matrix.hh>
 
 
 namespace numbers_here = oct::nums::v0;
