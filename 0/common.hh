@@ -16,10 +16,10 @@ namespace oct::nums::v0
 {
     namespace core_here = oct::core::v3;
 
-    template<typename T> concept number = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, float> || std::same_as<T, double> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>  || std::same_as<T, long double>;
-    template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double>;
     template<typename T> concept natural = std::same_as<T, unsigned char> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int> || std::same_as<T, unsigned long> || std::same_as<T, unsigned long long> || std::same_as<T, size_t>;
-    template<typename T> concept integer = std::same_as<T, signed char> || std::same_as<T, unsigned char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int>|| std::same_as<T, signed int> || std::same_as<T, signed long> || std::same_as<T, unsigned long>|| std::same_as<T, signed long long> || std::same_as<T, unsigned long long>;
+    template<typename T> concept integer = std::same_as<T, signed char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, signed int> || std::same_as<T, signed long> || std::same_as<T, signed long long> || natural<T>;
+    template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double> || integer<T>;
+    template<typename T> concept number = real<T>;
 
     template<natural T> constexpr T factorial(const T& n)
     {
@@ -32,7 +32,8 @@ namespace oct::nums::v0
 
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al array
-    *\param T Tipo de dato
+    *\param T Tipo de dato de la secuencia
+    *\param Z Tipo de datos que expresa el raqngo de numeros que puede manejar(longitud del arreglo)
     *\param L La cantidad de datos
     **/
     template<typename T,natural Z,Z L> class secuence

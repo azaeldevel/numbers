@@ -26,16 +26,6 @@ namespace oct::nums::v0
                 secuence<T,Z,L>::data[i].number = i;
                 secuence<T,Z,L>::data[i].prime = true;
             }
-            /*secuence<T,Z,L>::data[2].prime = true;
-            secuence<T,Z,L>::data[3].prime = true;
-            secuence<T,Z,L>::data[5].prime = true;
-            secuence<T,Z,L>::data[7].prime = true;
-            secuence<T,Z,L>::data[9].prime = true;
-            secuence<T,Z,L>::data[11].prime = true;
-            secuence<T,Z,L>::data[13].prime = true;
-            secuence<T,Z,L>::data[17].prime = true;
-            secuence<T,Z,L>::data[19].prime = true;
-            secuence<T,Z,L>::data[23].prime = true;*/
         }
 
         constexpr void erastostenes()
