@@ -33,7 +33,7 @@ namespace oct::nums::v0
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al array
     *\param T Tipo de dato de la secuencia
-    *\param Z Tipo de datos que expresa el raqngo de numeros que puede manejar(longitud del arreglo)
+    *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(longitud del arreglo)
     *\param L La cantidad de datos
     **/
     template<typename T,natural Z,Z L> class secuence

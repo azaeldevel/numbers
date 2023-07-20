@@ -6,6 +6,7 @@
 #include <0/vector.hh>
 #include <0/arithmetic.hh>
 #include <0/matrix.hh>
+#include <0/algebra.hh>
 
 
 namespace numbers_here = oct::nums::v0;
@@ -13,6 +14,16 @@ namespace numbers_here = oct::nums::v0;
 
 
 void v0_developing()
+{
+}
+
+
+void v0_algebra()
+{
+    numbers_here::Monomio<int,size_t,3> mono1(1);
+}
+
+void v0_arithmetic()
 {
     numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes;
     primes.erastostenes();

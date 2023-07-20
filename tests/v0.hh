@@ -17,5 +17,7 @@ void v0_equation();
 void v0_secuence();
 void v0_vector();
 void v0_funtions();
+void v0_arithmetic();
+void v0_algebra();
 
 #endif
