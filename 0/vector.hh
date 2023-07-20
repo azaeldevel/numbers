@@ -13,7 +13,7 @@ namespace oct::nums::v0
         constexpr vector(const T& v) : secuence<T,size_t,L>(v)
         {
         }
-        constexpr vector(std::initializer_list<T>& l) : secuence<T,size_t,L>(l)
+        constexpr vector(const std::initializer_list<T>& l) : secuence<T,size_t,L>(l)
         {
         }
     };

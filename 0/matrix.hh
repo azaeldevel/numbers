@@ -23,9 +23,6 @@ namespace oct::nums::v0
         constexpr matrix(const T& v) : base(v)
         {
         }
-        constexpr matrix(std::initializer_list<std::initializer_list<T>>& l)
-        {
-        }
         constexpr matrix(const matrix& o) : base(o)
         {
         }

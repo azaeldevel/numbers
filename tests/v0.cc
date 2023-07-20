@@ -21,6 +21,8 @@ void v0_developing()
 void v0_algebra()
 {
     numbers_here::Monomio<int,size_t,3> mono1(1);
+    numbers_here::Monomio<int,size_t,3> mono2 {2,2,3,5};
+    mono2.print(std::cout,'x');
 }
 
 void v0_arithmetic()

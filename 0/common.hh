@@ -47,7 +47,7 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
-        constexpr secuence(std::initializer_list<T>& l)
+        constexpr secuence(const std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
