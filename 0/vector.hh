@@ -5,54 +5,68 @@
 
 namespace oct::nums::v0
 {
-    template<number T,number V> class vector<T,2,V> : public consecutive<T,size_t,2>
+
+    template<typename T,size_t L,number V> class vector : public secuence<T,size_t,L>
+    {
+    public:
+        vector() = default;
+        constexpr vector(const T& v) : secuence<T,size_t,L>(v)
+        {
+        }
+        constexpr vector(std::initializer_list<T>& l) : secuence<T,size_t,L>(l)
+        {
+        }
+    };
+
+
+    template<number T,number V> class vector<T,2,V> : public secuence<T,size_t,2>
     {
     public:
         constexpr vector(const T& x, const T& y)
         {
-            consecutive<T,size_t,2>::data[0] = x;
-            consecutive<T,size_t,2>::data[1] = y;
+            secuence<T,size_t,2>::data[0] = x;
+            secuence<T,size_t,2>::data[1] = y;
         }
 
 
 
         constexpr T& x()
         {
-            return consecutive<T,size_t,2>::data[0];
+            return secuence<T,size_t,2>::data[0];
         }
         constexpr T& y()
         {
-            return consecutive<T,size_t,2>::data[1];
+            return secuence<T,size_t,2>::data[1];
         }
     };
-    template<number T,number V> class vector<T,3,V> : public consecutive<T,size_t,3>
+    template<number T,number V> class vector<T,3,V> : public secuence<T,size_t,3>
     {
     public:
         constexpr vector(const T& x, const T& y)
         {
-            consecutive<T,size_t,3>::data[0] = x;
-            consecutive<T,size_t,3>::data[1] = y;
+            secuence<T,size_t,3>::data[0] = x;
+            secuence<T,size_t,3>::data[1] = y;
         }
         constexpr vector(const T& x, const T& y, const T& z)
         {
-            consecutive<T,size_t,3>::data[0] = x;
-            consecutive<T,size_t,3>::data[1] = y;
-            consecutive<T,size_t,3>::data[2] = z;
+            secuence<T,size_t,3>::data[0] = x;
+            secuence<T,size_t,3>::data[1] = y;
+            secuence<T,size_t,3>::data[2] = z;
         }
 
 
 
         constexpr T& x()
         {
-            return consecutive<T,size_t,3>::data[0];
+            return secuence<T,size_t,3>::data[0];
         }
         constexpr T& y()
         {
-            return consecutive<T,size_t,3>::data[1];
+            return secuence<T,size_t,3>::data[1];
         }
         constexpr T& z()
         {
-            return consecutive<T,size_t,3>::data[2];
+            return secuence<T,size_t,3>::data[2];
         }
     };
 

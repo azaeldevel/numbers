@@ -35,18 +35,18 @@ namespace oct::nums::v0
     *\param T Tipo de dato
     *\param L La cantidad de datos
     **/
-    template<typename T,natural Z,Z L> class consecutive
+    template<typename T,natural Z,Z L> class secuence
     {
     protected:
         T data[L];
 
     public:
-        consecutive() = default;
-        constexpr consecutive(const T& v)
+        secuence() = default;
+        constexpr secuence(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
-        constexpr consecutive(std::initializer_list<T>& l)
+        constexpr secuence(std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -58,7 +58,7 @@ namespace oct::nums::v0
                 i++;
             }
         }
-        constexpr consecutive(const consecutive& s)
+        constexpr secuence(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
         }
@@ -87,13 +87,13 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr consecutive& operator =(const consecutive& s)
+        constexpr secuence& operator =(const secuence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
 
             return *this;
         }
-        constexpr consecutive& operator = (std::initializer_list<T> l)
+        constexpr secuence& operator = (std::initializer_list<T> l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -111,9 +111,9 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutation(consecutive<consecutive<T,Z,L>,Z,factorial(L)>& pers) const
+        constexpr void permutation(secuence<secuence<T,Z,L>,Z,factorial(L)>& pers) const
         {
-            consecutive<T,Z,L> sec = *this;
+            secuence<T,Z,L> sec = *this;
             int index = 0;
             permutations(sec,0,L,index,pers);
         }
@@ -153,7 +153,7 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutations(consecutive<T,Z,L>& sec, int i, int n, int& p, consecutive<consecutive<T,Z,L>,Z,factorial(L)>& pers) const
+        constexpr void permutations(secuence<T,Z,L>& sec, int i, int n, int& p, secuence<secuence<T,Z,L>,Z,factorial(L)>& pers) const
         {
             // condición base
             if (i == n - 1)
@@ -179,17 +179,6 @@ namespace oct::nums::v0
         }
     };
 
-    template<typename T,size_t L,number V> class vector : public consecutive<T,size_t,L>
-    {
-    public:
-        vector() = default;
-        constexpr vector(const T& v) : consecutive<T,size_t,L>(v)
-        {
-        }
-        constexpr vector(std::initializer_list<T>& l) : consecutive<T,size_t,L>(l)
-        {
-        }
-    };
 
 
 

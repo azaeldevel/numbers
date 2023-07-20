@@ -14,10 +14,10 @@ namespace oct::nums::v0
     *\param n Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t n,size_t m,number V> class matrix : public consecutive<consecutive<T,size_t,n>,size_t,m>
+    template<typename T,size_t n,size_t m,number V> class matrix : public secuence<secuence<T,size_t,n>,size_t,m>
     {
     private:
-        typedef consecutive<consecutive<T,size_t,n>,size_t,m> base;
+        typedef secuence<secuence<T,size_t,n>,size_t,m> base;
     public:
         matrix() = default;
         constexpr matrix(const T& v) : base(v)

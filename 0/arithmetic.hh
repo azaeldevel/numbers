@@ -16,39 +16,39 @@ namespace oct::nums::v0
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public consecutive<T,Z,L>
+    template<typename T,natural Z,Z L> class PrimeNumbers : public secuence<T,Z,L>
     {
     public:
         constexpr PrimeNumbers()
         {
             for(Z i = 0; i < L; i++)
             {
-                consecutive<T,Z,L>::data[i].number = i;
-                consecutive<T,Z,L>::data[i].prime = true;
+                secuence<T,Z,L>::data[i].number = i;
+                secuence<T,Z,L>::data[i].prime = true;
             }
-            /*consecutive<T,Z,L>::data[2].prime = true;
-            consecutive<T,Z,L>::data[3].prime = true;
-            consecutive<T,Z,L>::data[5].prime = true;
-            consecutive<T,Z,L>::data[7].prime = true;
-            consecutive<T,Z,L>::data[9].prime = true;
-            consecutive<T,Z,L>::data[11].prime = true;
-            consecutive<T,Z,L>::data[13].prime = true;
-            consecutive<T,Z,L>::data[17].prime = true;
-            consecutive<T,Z,L>::data[19].prime = true;
-            consecutive<T,Z,L>::data[23].prime = true;*/
+            /*secuence<T,Z,L>::data[2].prime = true;
+            secuence<T,Z,L>::data[3].prime = true;
+            secuence<T,Z,L>::data[5].prime = true;
+            secuence<T,Z,L>::data[7].prime = true;
+            secuence<T,Z,L>::data[9].prime = true;
+            secuence<T,Z,L>::data[11].prime = true;
+            secuence<T,Z,L>::data[13].prime = true;
+            secuence<T,Z,L>::data[17].prime = true;
+            secuence<T,Z,L>::data[19].prime = true;
+            secuence<T,Z,L>::data[23].prime = true;*/
         }
 
         constexpr void erastostenes()
         {
-            consecutive<T,Z,L>::data[0].prime = false;
-            consecutive<T,Z,L>::data[1].prime = false;
+            secuence<T,Z,L>::data[0].prime = false;
+            secuence<T,Z,L>::data[1].prime = false;
             Z temp;
             for(Z i = 2; i < L; i++)
             {
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) consecutive<T,Z,L>::data[temp].prime = false;
+                    if(temp < L) secuence<T,Z,L>::data[temp].prime = false;
                 }
             }
 
@@ -58,7 +58,7 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(consecutive<T,Z,L>::data[i].prime) out << consecutive<T,Z,L>::data[i].number << "\n";
+                if(secuence<T,Z,L>::data[i].prime) out << secuence<T,Z,L>::data[i].number << "\n";
             }
         }
     };
