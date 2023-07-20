@@ -346,19 +346,19 @@ namespace oct::nums::v0
     *\param n Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t n,size_t m,number V> class matrix : public secuence<secuence<T,n>,m>
+    template<typename T,size_t n,size_t m,number V> class matrix : public consecutive<consecutive<T,size_t,n>,size_t,m>
     {
     private:
-
+        typedef consecutive<consecutive<T,size_t,n>,size_t,m> base;
     public:
         matrix() = default;
-        constexpr matrix(const T& v) : secuence<secuence<T,n>,m>(v)
+        constexpr matrix(const T& v) : base(v)
         {
         }
         constexpr matrix(std::initializer_list<std::initializer_list<T>>& l)
         {
         }
-        constexpr matrix(const matrix& o) : secuence<secuence<T,n>,m>(o)
+        constexpr matrix(const matrix& o) : base(o)
         {
         }
         constexpr matrix operator + (const matrix& o) const
@@ -369,7 +369,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < m; j++)
                 {
-                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] + o[i][j];
+                    res[i][j] = base::data[i][j] + o[i][j];
                 }
             }
 
@@ -383,7 +383,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < m; j++)
                 {
-                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] - o[i][j];
+                    res[i][j] = base::data[i][j] - o[i][j];
                 }
             }
 
@@ -397,7 +397,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < m; j++)
                 {
-                    res[i][j] = secuence<secuence<T,n>,m>::data[i][j] * o;
+                    res[i][j] = base::data[i][j] * o;
                 }
             }
 
@@ -414,7 +414,7 @@ namespace oct::nums::v0
                     res[i][j] = 0;
                     for(size_t k = 0; k < n; k++)
                     {
-                        res[i][j] += secuence<secuence<T,n>,m>::data[i][k] * o[k][j];
+                        res[i][j] += base::data[i][k] * o[k][j];
                         //std::cout << "(" << secuence<secuence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
                     }
                     //std::cout << "    ";
@@ -432,7 +432,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < n; j++)
                 {
-                    secuence<secuence<T,n>,m>::data[i][j] = o[i][j];
+                    base::data[i][j] = o[i][j];
                 }
             }
             return *this;
@@ -470,7 +470,7 @@ namespace oct::nums::v0
                 {
                     if(std::find(columns.begin(),columns.end(),j) != columns.end()) continue;
                     //std::cout << "\t" << c << "\n";
-                    res[f][c] = secuence<secuence<T,n>,m>::data[i][j];
+                    res[f][c] = base::data[i][j];
 
                     c++;
                 }
@@ -497,7 +497,7 @@ namespace oct::nums::v0
                 {
                     if(columns  == j) continue;
                     //std::cout << "\t" << c << "\n";
-                    res[f][c] = secuence<secuence<T,n>,m>::data[i][j];
+                    res[f][c] = base::data[i][j];
                     c++;
                 }
                 f++;
@@ -515,13 +515,13 @@ namespace oct::nums::v0
 
             if(n == 1)
             {
-                return secuence<secuence<T,n>,m>::data[0][0];
+                return base::data[0][0];
             }
             else if(n == 2)
             {
                 V d = 0;
-                d = secuence<secuence<T,n>,m>::data[0][0] * secuence<secuence<T,n>,m>::data[1][1];
-                d -= secuence<secuence<T,n>,m>::data[0][1] * secuence<secuence<T,n>,m>::data[1][0];
+                d = base::data[0][0] * base::data[1][1];
+                d -= base::data[0][1] * base::data[1][0];
 
                 return d;
             }
@@ -550,7 +550,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < m; j++)
                 {
-                    temp[i][j] = secuence<secuence<T,n>,m>::data[i][j];
+                    temp[i][j] = base::data[i][j];
                 }
             }
 
