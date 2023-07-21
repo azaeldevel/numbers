@@ -47,6 +47,16 @@ void v0_arithmetic()
     numbers_here::Primes<size_t,size_t,1000> primes4;
     primes4.erastos();
     //primes4.print(std::cout);
+    CU_ASSERT(primes4[0] == 0);
+    CU_ASSERT(primes4[1] == 0);
+    CU_ASSERT(primes4[2] == 2);
+    CU_ASSERT(primes4[3] == 3);
+    CU_ASSERT(primes4[4] == 0);
+    CU_ASSERT(primes4[5] == 5);
+    CU_ASSERT(primes4[6] == 0);
+    CU_ASSERT(primes4[7] == 7);
+    CU_ASSERT(primes4[8] == 0);
+    CU_ASSERT(primes4[9] == 0);
 
 }
 
