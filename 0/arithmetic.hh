@@ -16,29 +16,29 @@ namespace oct::nums::v0
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public secuence<T,Z,L>
+    template<typename T,natural Z,Z L> class PrimeNumbers : public Array<T,Z,L>
     {
     public:
         constexpr PrimeNumbers()
         {
             for(Z i = 0; i < L; i++)
             {
-                secuence<T,Z,L>::data[i].number = i;
-                secuence<T,Z,L>::data[i].prime = true;
+                Array<T,Z,L>::data[i].number = i;
+                Array<T,Z,L>::data[i].prime = true;
             }
         }
 
         constexpr void erastostenes()
         {
-            secuence<T,Z,L>::data[0].prime = false;
-            secuence<T,Z,L>::data[1].prime = false;
+            Array<T,Z,L>::data[0].prime = false;
+            Array<T,Z,L>::data[1].prime = false;
             Z temp;
             for(Z i = 2; i < L; i++)
             {
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) secuence<T,Z,L>::data[temp].prime = false;
+                    if(temp < L) Array<T,Z,L>::data[temp].prime = false;
                 }
             }
 
@@ -48,14 +48,14 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(secuence<T,Z,L>::data[i].prime) out << secuence<T,Z,L>::data[i].number << "\n";
+                if(Array<T,Z,L>::data[i].prime) out << Array<T,Z,L>::data[i].number << "\n";
             }
         }
     };
 
 
 
-    template<typename T,natural Z,Z L> class Primes : public secuence<T,Z,L>
+    template<natural T,natural Z,Z L> class Primes : public Array<T,Z,L>
     {
 
     public:
@@ -72,7 +72,7 @@ namespace oct::nums::v0
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) secuence<T,Z,L>::data[temp] = 0;
+                    if(temp < L) Array<T,Z,L>::data[temp] = 0;
                     else break;
                 }
             }
@@ -82,7 +82,7 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(secuence<T,Z,L>::data[i] > 0) out << secuence<T,Z,L>::data[i] << "\n";
+                if(Array<T,Z,L>::data[i] > 0) out << Array<T,Z,L>::data[i] << "\n";
             }
         }
     private:
@@ -90,10 +90,10 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                secuence<T,Z,L>::data[i] = i;
+                Array<T,Z,L>::data[i] = i;
             }
-            secuence<T,Z,L>::data[0] = 0;
-            secuence<T,Z,L>::data[1] = 0;
+            Array<T,Z,L>::data[0] = 0;
+            Array<T,Z,L>::data[1] = 0;
         }
     };
 

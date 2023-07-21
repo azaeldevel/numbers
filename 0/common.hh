@@ -36,18 +36,18 @@ namespace oct::nums::v0
     *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(longitud del arreglo)
     *\param L La cantidad de datos
     **/
-    template<typename T,natural Z,Z L> class secuence
+    template<typename T,natural Z,Z L> class Array
     {
     protected:
         T data[L];
 
     public:
-        secuence() = default;
-        constexpr secuence(const T& v)
+        Array() = default;
+        constexpr Array(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
-        constexpr secuence(const std::initializer_list<T>& l)
+        constexpr Array(const std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -59,7 +59,7 @@ namespace oct::nums::v0
                 i++;
             }
         }
-        constexpr secuence(const secuence& s)
+        constexpr Array(const Array& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
         }
@@ -88,13 +88,13 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr secuence& operator =(const secuence& s)
+        constexpr Array& operator =(const Array& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
 
             return *this;
         }
-        constexpr secuence& operator = (std::initializer_list<T> l)
+        constexpr Array& operator = (std::initializer_list<T> l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -112,9 +112,9 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutation(secuence<secuence<T,Z,L>,Z,factorial(L)>& pers) const
+        constexpr void permutation(Array<Array<T,Z,L>,Z,factorial(L)>& pers) const
         {
-            secuence<T,Z,L> sec = *this;
+            Array<T,Z,L> sec = *this;
             int index = 0;
             permutations(sec,0,L,index,pers);
         }
@@ -154,7 +154,7 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutations(secuence<T,Z,L>& sec, int i, int n, int& p, secuence<secuence<T,Z,L>,Z,factorial(L)>& pers) const
+        constexpr void permutations(Array<T,Z,L>& sec, int i, int n, int& p, Array<Array<T,Z,L>,Z,factorial(L)>& pers) const
         {
             // condición base
             if (i == n - 1)

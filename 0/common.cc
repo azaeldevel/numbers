@@ -15,20 +15,20 @@ template<> int factorial<int>(const int& n)
     return number;
 }
 
-template<> void secuence<int,1>::permutation(secuence<secuence<int,1>,1>& pers) const
+template<> void Array<int,1>::permutation(Array<Array<int,1>,1>& pers) const
 {
-    secuence<int,1> sec = *this;
+    Array<int,1> sec = *this;
     int index = 0;
     permutations(sec,0,1,index,pers);
 }
-template<> void secuence<int,2>::permutation(secuence<secuence<int,2>,2>& pers) const
+template<> void Array<int,2>::permutation(Array<Array<int,2>,2>& pers) const
 {
-    secuence<int,2> sec = *this;
+    Array<int,2> sec = *this;
     int index = 0;
     permutations(sec,0,2,index,pers);
 }
 
-template<> void secuence<int,1>::permutations(secuence<int,1>& sec, int i, int n, int& p, secuence<secuence<int,1>,1>& pers) const
+template<> void Array<int,1>::permutations(Array<int,1>& sec, int i, int n, int& p, Array<Array<int,1>,1>& pers) const
 {
     // condición base
     if (i == n - 1)
@@ -52,7 +52,7 @@ template<> void secuence<int,1>::permutations(secuence<int,1>& sec, int i, int n
         std::swap(sec[i], sec[j]);
     }
 }
-template<> void secuence<int,2>::permutations(secuence<int,2>& sec, int i, int n, int& p, secuence<secuence<int,2>,2>& pers) const
+template<> void Array<int,2>::permutations(Array<int,2>& sec, int i, int n, int& p, Array<Array<int,2>,2>& pers) const
 {
     // condición base
     if (i == n - 1)

@@ -16,10 +16,10 @@ namespace oct::nums::v0
     *\param L Cantidad de variables
     **/
     template<number T,natural Z,Z L>
-    class Monomio : public secuence<T,Z,L + 1>
+    class Monomio : public Array<T,Z,L + 1>
     {
     private:
-        typedef secuence<T,Z,L + 1> BASE;
+        typedef Array<T,Z,L + 1> BASE;
 
     public:
         constexpr Monomio() = default;
@@ -50,10 +50,10 @@ namespace oct::nums::v0
     *\param L Cantidad de variables
     **/
     template<number T,natural Z,Z L,Z G>
-    class Polinomio : public secuence<Monomio<T,Z,L>,Z,(L * G) + 1>
+    class Polinomio : public Array<Monomio<T,Z,L>,Z,(L * G) + 1>
     {
     private:
-        typedef secuence<Monomio<T,Z,L>,Z,(L * G) + 1> BASE;
+        typedef Array<Monomio<T,Z,L>,Z,(L * G) + 1> BASE;
 
     public:
         constexpr Polinomio() = default;
