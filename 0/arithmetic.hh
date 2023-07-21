@@ -54,6 +54,49 @@ namespace oct::nums::v0
     };
 
 
+
+    template<typename T,natural Z,Z L> class Primes : public secuence<T,Z,L>
+    {
+
+    public:
+        constexpr Primes()
+        {
+            init();
+        }
+
+        constexpr void erastos()
+        {
+            Z temp;
+            for(Z i = 2; i < L; i++)
+            {
+                for(Z j = 2; j < L; j++)
+                {
+                    temp = i * j;
+                    if(temp < L) secuence<T,Z,L>::data[temp] = 0;
+                    else break;
+                }
+            }
+        }
+
+        constexpr void print(std::ostream& out)
+        {
+            for(Z i = 0; i < L; i++)
+            {
+                if(secuence<T,Z,L>::data[i] > 0) out << secuence<T,Z,L>::data[i] << "\n";
+            }
+        }
+    private:
+        constexpr void init()
+        {
+            for(Z i = 0; i < L; i++)
+            {
+                secuence<T,Z,L>::data[i] = i;
+            }
+            secuence<T,Z,L>::data[0] = 0;
+            secuence<T,Z,L>::data[1] = 0;
+        }
+    };
+
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH

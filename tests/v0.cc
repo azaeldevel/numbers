@@ -27,8 +27,8 @@ void v0_algebra()
 
 void v0_arithmetic()
 {
-    numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes;
-    primes.erastostenes();
+    //numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes;
+    //primes.erastostenes();
     /*for(size_t i = 2; i < 1000; i++)
     {
         std::cout << primes[i].number << " es ";
@@ -37,7 +37,17 @@ void v0_arithmetic()
     }*/
     //primes.print(std::cout);
 
-    constexpr numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes2;
+    //constexpr numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes2;
+
+    /*numbers_here::secuence<size_t,size_t,10000> primes3(0);
+    numbers_here::init(primes3);
+    numbers_here::erastos(primes3);*/
+    //numbers_here::print(std::cout,primes3);
+
+    numbers_here::Primes<size_t,size_t,1000> primes4;
+    primes4.erastos();
+    //primes4.print(std::cout);
+
 }
 
 void v0_matrix()
