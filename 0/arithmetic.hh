@@ -16,29 +16,29 @@ namespace oct::nums::v0
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public Array<T,Z,L>
+    template<typename T,natural Z,Z L> class PrimeNumbers : public Sequence<T,L>
     {
     public:
         constexpr PrimeNumbers()
         {
             for(Z i = 0; i < L; i++)
             {
-                Array<T,Z,L>::data[i].number = i;
-                Array<T,Z,L>::data[i].prime = true;
+                Sequence<T,L>::data[i].number = i;
+                Sequence<T,L>::data[i].prime = true;
             }
         }
 
         constexpr void erastostenes()
         {
-            Array<T,Z,L>::data[0].prime = false;
-            Array<T,Z,L>::data[1].prime = false;
+            Sequence<T,L>::data[0].prime = false;
+            Sequence<T,L>::data[1].prime = false;
             Z temp;
             for(Z i = 2; i < L; i++)
             {
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) Array<T,Z,L>::data[temp].prime = false;
+                    if(temp < L) Sequence<T,L>::data[temp].prime = false;
                 }
             }
 
@@ -48,14 +48,14 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(Array<T,Z,L>::data[i].prime) out << Array<T,Z,L>::data[i].number << "\n";
+                if(Sequence<T,L>::data[i].prime) out << Sequence<T,L>::data[i].number << "\n";
             }
         }
     };
 
 
 
-    template<natural T,natural Z,Z L> class Primes : public Array<T,Z,L>
+    template<natural T,size_t L> class Primes : public Sequence<T,L>
     {
 
     public:
@@ -66,13 +66,13 @@ namespace oct::nums::v0
 
         constexpr void erastos()
         {
-            Z temp;
-            for(Z i = 2; i < L; i++)
+            size_t temp;
+            for(size_t i = 2; i < L; i++)
             {
-                for(Z j = 2; j < L; j++)
+                for(size_t j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) Array<T,Z,L>::data[temp] = 0;
+                    if(temp < L) Sequence<T,L>::data[temp] = 0;
                     else break;
                 }
             }
@@ -80,20 +80,20 @@ namespace oct::nums::v0
 
         constexpr void print(std::ostream& out)
         {
-            for(Z i = 0; i < L; i++)
+            for(size_t i = 0; i < L; i++)
             {
-                if(Array<T,Z,L>::data[i] > 0) out << Array<T,Z,L>::data[i] << "\n";
+                if(Sequence<T,L>::data[i] > 0) out << Sequence<T,L>::data[i] << "\n";
             }
         }
     private:
         constexpr void init()
         {
-            for(Z i = 0; i < L; i++)
+            Sequence<T,L>::data[0] = 0;
+            Sequence<T,L>::data[1] = 0;
+            for(size_t i = 2; i < L; i++)
             {
-                Array<T,Z,L>::data[i] = i;
+                Sequence<T,L>::data[i] = i;
             }
-            Array<T,Z,L>::data[0] = 0;
-            Array<T,Z,L>::data[1] = 0;
         }
     };
 

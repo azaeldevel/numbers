@@ -15,11 +15,11 @@ namespace oct::nums::v0
     *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(maxima cantidad de variables que puede tener)
     *\param L Cantidad de variables
     **/
-    template<number T,natural Z,Z L>
-    class Monomio : public Array<T,Z,L + 1>
+    template<number T,size_t L>
+    class Monomio : public Sequence<T,L + 1>
     {
     private:
-        typedef Array<T,Z,L + 1> BASE;
+        typedef Sequence<T,L + 1> BASE;
 
     public:
         constexpr Monomio() = default;
@@ -35,7 +35,7 @@ namespace oct::nums::v0
         void print(std::ostream& out,char tag) const
         {
             out << BASE::data[0];
-            for(Z i = 1; i < L + 1; i++)
+            for(size_t i = 1; i < L + 1; i++)
             {
                 out << char(tag + i - 1) << "^" << BASE::data[i];
             }
@@ -49,11 +49,11 @@ namespace oct::nums::v0
     *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(maxima cantidad de variables que puede tener)
     *\param L Cantidad de variables
     **/
-    template<number T,natural Z,Z L,Z G>
-    class Polinomio : public Array<Monomio<T,Z,L>,Z,(L * G) + 1>
+    template<number T,size_t L,size_t G>
+    class Polinomio : public Sequence<Monomio<T,L>,(L * G) + 1>
     {
     private:
-        typedef Array<Monomio<T,Z,L>,Z,(L * G) + 1> BASE;
+        typedef Sequence<Monomio<T,L>,(L * G) + 1> BASE;
 
     public:
         constexpr Polinomio() = default;
