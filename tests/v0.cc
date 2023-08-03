@@ -298,20 +298,20 @@ void v0_sequence()
 
 void v0_vector()
 {
-    numbers_here::vector<int,2ul,float> vect1(4,-3);
-    CU_ASSERT(vect1.x() == 4);
-    CU_ASSERT(vect1.y() == -3);
+    numbers_here::vector<int,2ul,float> vect1{4,-3};
+    CU_ASSERT(numbers_here::x(vect1) == 4);
+    CU_ASSERT(numbers_here::y(vect1) == -3);
 
 
-    numbers_here::vector<int,3ul,float> vect2(4,-3,5);
-    CU_ASSERT(vect2.x() == 4);
-    CU_ASSERT(vect2.y() == -3);
-    CU_ASSERT(vect2.z() == 5);
+    numbers_here::vector<int,3ul,float> vect2{4,-3,5};
+    CU_ASSERT(numbers_here::x(vect2) == 4);
+    CU_ASSERT(numbers_here::y(vect2) == -3);
+    CU_ASSERT(numbers_here::z(vect2) == 5);
 
     numbers_here::vector<int,3ul,float> vect3 {4,-3,5};
-    CU_ASSERT(vect3.x() == 4);
-    CU_ASSERT(vect3.y() == -3);
-    CU_ASSERT(vect3.z() == 5);
+    CU_ASSERT(numbers_here::x(vect3) == 4);
+    CU_ASSERT(numbers_here::y(vect3) == -3);
+    CU_ASSERT(numbers_here::z(vect3) == 5);
 
     constexpr numbers_here::vector<int,3ul,float> vect5 {4,-3,5};
 
@@ -324,7 +324,18 @@ void v0_vector()
         pers[i].printLn(std::cout);
     }
     */
-    //CU_ASSERT(pers[0] == {4,-3,5});s
+    //CU_ASSERT(pers[0] == {4,-3,5});
+
+    numbers_here::vector<int,3ul,float> vect6 = vect3 + vect2;
+    CU_ASSERT(numbers_here::x(vect6) == 8);
+    CU_ASSERT(numbers_here::y(vect6) == -6);
+    CU_ASSERT(numbers_here::z(vect6) == 10);
+
+    numbers_here::vector<int,3ul,float> vect7 = vect6 - vect2;
+    CU_ASSERT(numbers_here::x(vect7) == 4);
+    CU_ASSERT(numbers_here::y(vect7) == -3);
+    CU_ASSERT(numbers_here::z(vect7) == 5);
+
 }
 
 void v0_funtions()

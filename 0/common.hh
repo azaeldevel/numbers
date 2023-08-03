@@ -43,6 +43,10 @@ namespace oct::nums::v0
 
     public:
         sequence() = default;
+        constexpr sequence(const T v[L])
+        {
+            for(size_t i = 0; i < L; i++) data[i] = v;
+        }
         constexpr sequence(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
