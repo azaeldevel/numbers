@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 #include <core/3/Exception.hh>
 
@@ -29,6 +30,21 @@ namespace oct::nums::v0
         return number;
     }
 
+    constexpr bool is_equal(const float& a,const float& b)
+    {
+        constexpr float min = std::numeric_limits<float>::min() * 2;
+
+        if(a < b)
+        {
+            if(min < b - a) return true;
+        }
+        else if(a > b)
+        {
+            if(min < a - b) return true;
+        }
+
+        return false;
+    }
 
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al sequence
@@ -56,11 +72,10 @@ namespace oct::nums::v0
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
 
-            unsigned char i = 0;
-            for(const T& c : l)
+            const T* c = std::data(l);
+            for(size_t i = 0; i < l.size(); i++)
             {
-                data[i] = c;
-                i++;
+                data[i] = c[i];
             }
         }
         constexpr sequence(const sequence& s)

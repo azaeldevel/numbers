@@ -6,7 +6,7 @@
 namespace oct::nums::v0
 {
 
-    template<number T,size_t L,number V> class vector : public sequence<T,L>
+    template<number T,size_t L,number V = T> class vector : public sequence<T,L>
     {
     private:
         typedef sequence<T,L> BASE;
@@ -15,11 +15,23 @@ namespace oct::nums::v0
         constexpr vector(const T v[L]) : sequence<T,L>(v)
         {
         }
+        constexpr vector(const T& x,const T& y)
+        {
+            BASE::data[0] = x;
+            BASE::data[1] = y;
+        }
         constexpr vector(const vector& v) : sequence<T,L>(v)
         {
         }
         constexpr vector(const std::initializer_list<T>& l) : sequence<T,L>(l)
         {
+        }
+
+        constexpr bool operator == (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) if(not is_equal(BASE::data[i],s[i])) return false;
+
+            return true;
         }
 
 
@@ -40,12 +52,43 @@ namespace oct::nums::v0
 
 
 
+
+        void copy(size_t index, const vector& from, const vector<T,L-1,V>& to) const
+        {
+            for(size_t i = 0; i < L; i++)
+            {
+                if(i != index) to[i - 1] = from[i];
+            }
+        }
+        //https://es.wikipedia.org/wiki/Producto_vectorial
+        /**
+        *\brief Producto vectorial (entre vectores)
+        *
+        **/
+        vector operator * (const vector& v)
+        {
+            if(v.size() != L) throw core_here::exception("Ambos vectores debe ser del mismo tamano");
+
+            vector<T,L-1,V> vec[L];
+
+            for(size_t i = 0; i < L; i++)
+            {
+                copy(i,vec[i]);
+            }
+
+
+
+            return *this;
+        }
+
+
+
         //>>>>>
         /**
         *\brief Tranformacion de translacion
         *
         **/
-        void trans(const vector& v)
+        void transl(const vector& v)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] += v[i];
         }
@@ -67,7 +110,25 @@ namespace oct::nums::v0
             BASE::data[0] *= cos(radian);
             BASE::data[1] *= sin(radian);
         }
+        void rotate_xy(const T& radian)
+        {
+            BASE::data[0] *= cos(radian);
+            BASE::data[1] *= sin(radian);
+        }
+        void rotate_xz(const T& radian)
+        {
+            BASE::data[0] *= cos(radian);
+            BASE::data[2] *= sin(radian);
+        }
+        void rotate_zy(const T& radian)
+        {
+            BASE::data[2] *= cos(radian);
+            BASE::data[1] *= sin(radian);
+        }
+
     };
+
+
 
     template<number T,size_t L,number V> constexpr T x(const vector<T,L,V>& v)
     {
@@ -80,6 +141,18 @@ namespace oct::nums::v0
     template<number T,size_t L,number V> constexpr T z(const vector<T,L,V>& v)
     {
         return v[2];
+    }
+
+    /**
+    *\brief Producto escalar entre vectores
+    *
+    **/
+    template<number T,size_t L,number V> constexpr T scalar(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    {
+        T t = 0;
+        for(size_t i = 0; i < L; i++) t += v1[i]*v2[i];
+
+        return t;
     }
 
 

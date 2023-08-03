@@ -21,10 +21,10 @@ namespace oct::nums::v0
 
     public:
         equation() = default;
-        constexpr equation(std::initializer_list<T> l,const T& c) : sequence<T,L>(l),_c_(c)
+        constexpr equation(const std::initializer_list<T>& l,const T& c) : sequence<T,L>(l),_c_(c)
         {
         }
-        constexpr equation(std::initializer_list<T> l) : sequence<T,L>(l),_c_(0)
+        constexpr equation(const std::initializer_list<T>& l) : sequence<T,L>(l),_c_(0)
         {
         }
         constexpr equation(const sequence<T,L>& s,const T& c) : sequence<T,L>(s),_c_(c)

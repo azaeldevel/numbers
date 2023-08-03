@@ -64,57 +64,6 @@ namespace oct::nums::v0
 
     };
 
-    /**
-    *\brief Es un Polinomio
-    *\param T Es el tipo de datos que de las variables
-    *\param L La cantidad de monomios en el Polinomio
-    *\param M La catidad de variables del monomio
-    **/
-    template<number T,size_t L,size_t M,number V = T,char C = 'x'>
-    class Polinomio : public sequence<Monomio<T,M,V,C>,L>
-    {
-    private:
-        typedef sequence<Monomio<T,M,V,C>,L> BASE;
-
-    public:
-        constexpr Polinomio() = default;
-        constexpr Polinomio(T t) : BASE(t)
-        {
-        }
-        constexpr Polinomio(const std::initializer_list<T>& l) : BASE(l)
-        {
-        }
-
-
-
-        void print(std::ostream& out,char tag) const
-        {
-
-        }
-
-    };
-
-    /**
-    *\brief Es un Polinomio
-    *\param T Es el tipo de datos que de las variables
-    *\param L La cantidad de monomios en el Polinomio
-    *\param M La catidad de variables del monomio
-    **/
-    template<number T,size_t L,size_t M,number V = T,char C = 'x'>
-    class expre : public Polinomio<T,L,M,V,C>
-    {
-    private:
-        typedef Polinomio<T,L,M,V,C> BASE;
-
-    public:
-        constexpr expre() = default;
-        constexpr expre(T t) : BASE(t)
-        {
-        }
-
-
-
-    };
 
 }
 

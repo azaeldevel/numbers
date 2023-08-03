@@ -324,6 +324,12 @@ void v0_vector()
     CU_ASSERT(numbers_here::y(vect7) == -3);
     CU_ASSERT(numbers_here::z(vect7) == 5);
 
+
+    numbers_here::vector<int,2> vect8{1, 3};
+    numbers_here::vector<int,2> vect9{-5, 2};
+
+    CU_ASSERT(numbers_here::scalar(vect8,vect9) == 1);
+    //std::cout << " Dot : " << numbers_here::scalar(vect8,vect9) << "";
 }
 
 void v0_funtions()
