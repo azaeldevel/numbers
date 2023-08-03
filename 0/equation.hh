@@ -14,23 +14,23 @@ namespace oct::nums::v0
     *\param G El grado de la ecuacion
     *\param V Tipo de datos usado para calculos
     **/
-    template<typename T,size_t L,size_t G,number V> class equation : public Sequence<T,L>
+    template<typename T,size_t L,size_t G,number V> class equation : public sequence<T,L>
     {
     protected:
         T _c_;
 
     public:
         equation() = default;
-        constexpr equation(std::initializer_list<T> l,const T& c) : Sequence<T,L>(l),_c_(c)
+        constexpr equation(std::initializer_list<T> l,const T& c) : sequence<T,L>(l),_c_(c)
         {
         }
-        constexpr equation(std::initializer_list<T> l) : Sequence<T,L>(l),_c_(0)
+        constexpr equation(std::initializer_list<T> l) : sequence<T,L>(l),_c_(0)
         {
         }
-        constexpr equation(const Sequence<T,L>& s,const T& c) : Sequence<T,L>(s),_c_(c)
+        constexpr equation(const sequence<T,L>& s,const T& c) : sequence<T,L>(s),_c_(c)
         {
         }
-        constexpr equation(const Sequence<T,L>& s) : Sequence<T,L>(s),_c_(0)
+        constexpr equation(const sequence<T,L>& s) : sequence<T,L>(s),_c_(0)
         {
         }
 
@@ -42,7 +42,7 @@ namespace oct::nums::v0
         }
         constexpr equation& operator = (const equation& e)
         {
-            ((Sequence<T,L>*)this)->operator =((const Sequence<T,L>&)e);
+            ((sequence<T,L>*)this)->operator =((const sequence<T,L>&)e);
             _c_ = e._c_;
 
             return *this;
@@ -59,13 +59,13 @@ namespace oct::nums::v0
         }
         constexpr T& a(size_t i)
         {
-            if(i < L) return Sequence<T,L>::data[i];
+            if(i < L) return sequence<T,L>::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr const T& a(size_t i) const
         {
-            if(i < L) return Sequence<T,L>::data[i];
+            if(i < L) return sequence<T,L>::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }

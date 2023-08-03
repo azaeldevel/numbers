@@ -16,29 +16,29 @@ namespace oct::nums::v0
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public Sequence<T,L>
+    template<typename T,natural Z,Z L> class PrimeNumbers : public sequence<T,L>
     {
     public:
         constexpr PrimeNumbers()
         {
             for(Z i = 0; i < L; i++)
             {
-                Sequence<T,L>::data[i].number = i;
-                Sequence<T,L>::data[i].prime = true;
+                sequence<T,L>::data[i].number = i;
+                sequence<T,L>::data[i].prime = true;
             }
         }
 
         constexpr void erastostenes()
         {
-            Sequence<T,L>::data[0].prime = false;
-            Sequence<T,L>::data[1].prime = false;
+            sequence<T,L>::data[0].prime = false;
+            sequence<T,L>::data[1].prime = false;
             Z temp;
             for(Z i = 2; i < L; i++)
             {
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) Sequence<T,L>::data[temp].prime = false;
+                    if(temp < L) sequence<T,L>::data[temp].prime = false;
                 }
             }
 
@@ -48,14 +48,14 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(Sequence<T,L>::data[i].prime) out << Sequence<T,L>::data[i].number << "\n";
+                if(sequence<T,L>::data[i].prime) out << sequence<T,L>::data[i].number << "\n";
             }
         }
     };
 
 
 
-    template<natural T,size_t L> class Primes : public Sequence<T,L>
+    template<natural T,size_t L> class Primes : public sequence<T,L>
     {
 
     public:
@@ -72,7 +72,7 @@ namespace oct::nums::v0
                 for(size_t j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) Sequence<T,L>::data[temp] = 0;
+                    if(temp < L) sequence<T,L>::data[temp] = 0;
                     else break;
                 }
             }
@@ -82,17 +82,17 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++)
             {
-                if(Sequence<T,L>::data[i] > 0) out << Sequence<T,L>::data[i] << "\n";
+                if(sequence<T,L>::data[i] > 0) out << sequence<T,L>::data[i] << "\n";
             }
         }
     private:
         constexpr void init()
         {
-            Sequence<T,L>::data[0] = 0;
-            Sequence<T,L>::data[1] = 0;
+            sequence<T,L>::data[0] = 0;
+            sequence<T,L>::data[1] = 0;
             for(size_t i = 2; i < L; i++)
             {
-                Sequence<T,L>::data[i] = i;
+                sequence<T,L>::data[i] = i;
             }
         }
     };

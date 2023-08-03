@@ -22,7 +22,20 @@ void v0_algebra()
 {
     numbers_here::Monomio<int,3> mono1(1);
     numbers_here::Monomio<int,3> mono2 {2,2,3,5};
-    mono2.print(std::cout,'x');
+    numbers_here::Monomio<int,3> mono3 {-9,2,7,3};
+    numbers_here::Monomio<int,3> mono4 = mono3 + mono2;
+    CU_ASSERT(mono4[0] == -7);
+    CU_ASSERT(mono4[1] == 4);
+    CU_ASSERT(mono4[2] == 10);
+    CU_ASSERT(mono4[3] == 8);
+    numbers_here::Monomio<int,3> mono5 = mono3 - mono2;
+    CU_ASSERT(mono5[0] == -11);
+    CU_ASSERT(mono5[1] == 0);
+    CU_ASSERT(mono5[2] == 4);
+    CU_ASSERT(mono5[3] == -2);
+
+
+    //mono4.print(std::cout,'x');
 }
 
 void v0_arithmetic()
@@ -39,7 +52,7 @@ void v0_arithmetic()
 
     //constexpr numbers_here::PrimeNumbers<numbers_here::CaseNumber<size_t>,size_t,1000> primes2;
 
-    /*numbers_here::Sequence<size_t,size_t,10000> primes3(0);
+    /*numbers_here::sequence<size_t,size_t,10000> primes3(0);
     numbers_here::init(primes3);
     numbers_here::erastos(primes3);*/
     //numbers_here::print(std::cout,primes3);
@@ -249,33 +262,33 @@ void v0_equation()
 }
 
 
-void v0_Sequence()
+void v0_sequence()
 {
-    numbers_here::Sequence<int,1ul> sec1(1);
+    numbers_here::sequence<int,1ul> sec1(1);
     CU_ASSERT(sizeof(sec1) == sizeof(int));
     CU_ASSERT(sec1[0] == 1);
 
-    numbers_here::Sequence<int,2ul> sec2(1);
+    numbers_here::sequence<int,2ul> sec2(1);
     CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
     CU_ASSERT(sec2[0] == 1);
     CU_ASSERT(sec2[1] == 1);
 
-    numbers_here::Sequence<int,3ul> sec3(1);
+    numbers_here::sequence<int,3ul> sec3(1);
     CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
     CU_ASSERT(sec3[0] == 1);
     CU_ASSERT(sec3[1] == 1);
     CU_ASSERT(sec3[2] == 1);
 
-    constexpr numbers_here::Sequence<int,3ul> sec4(1);
+    constexpr numbers_here::sequence<int,3ul> sec4(1);
 
-    numbers_here::Sequence<int,10> sec5(1);
+    numbers_here::sequence<int,10> sec5(1);
     CU_ASSERT(sizeof(sec5) == sizeof(int) * sec5.size());
     CU_ASSERT(sec5[0] == 1);
     CU_ASSERT(sec5[1] == 1);
     CU_ASSERT(sec5[2] == 1);
     CU_ASSERT(sec5[9] == 1);
 
-    numbers_here::Sequence<unsigned long long,10> sec6(1);
+    numbers_here::sequence<unsigned long long,10> sec6(1);
     CU_ASSERT(sizeof(sec6) == sizeof(unsigned long long) * sec6.size());
     CU_ASSERT(sec6[0] == 1);
     CU_ASSERT(sec6[1] == 1);
@@ -302,7 +315,7 @@ void v0_vector()
 
     constexpr numbers_here::vector<int,3ul,float> vect5 {4,-3,5};
 
-    numbers_here::Sequence<numbers_here::Sequence<int,3ul>,numbers_here::factorial(3ul)> pers;
+    numbers_here::sequence<numbers_here::sequence<int,3ul>,numbers_here::factorial(3ul)> pers;
     numbers_here::vector<int,3ul,float> vect4 {4,-3,5};
     vect4.permutation(pers);
     /*

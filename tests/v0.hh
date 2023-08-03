@@ -14,7 +14,7 @@ int v0_clean(void);
 void v0_developing();
 void v0_matrix();
 void v0_equation();
-void v0_Sequence();
+void v0_sequence();
 void v0_vector();
 void v0_funtions();
 void v0_arithmetic();

@@ -31,23 +31,23 @@ namespace oct::nums::v0
 
 
     /**
-    *\brief Representa una secuacion continua de datos, eqiuvalante al Sequence
+    *\brief Representa una secuacion continua de datos, eqiuvalante al sequence
     *\param T Tipo de dato de la secuencia
     *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(longitud del arreglo)
     *\param L La cantidad de datos
     **/
-    template<typename T,size_t L> class Sequence
+    template<typename T,size_t L> class sequence
     {
     protected:
         T data[L];
 
     public:
-        Sequence() = default;
-        constexpr Sequence(const T& v)
+        sequence() = default;
+        constexpr sequence(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
-        constexpr Sequence(const std::initializer_list<T>& l)
+        constexpr sequence(const std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -59,7 +59,7 @@ namespace oct::nums::v0
                 i++;
             }
         }
-        constexpr Sequence(const Sequence& s)
+        constexpr sequence(const sequence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
         }
@@ -88,13 +88,13 @@ namespace oct::nums::v0
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr Sequence& operator =(const Sequence& s)
+        constexpr sequence& operator =(const sequence& s)
         {
             for(size_t i = 0; i < L; i++) data[i] = s.data[i];
 
             return *this;
         }
-        constexpr Sequence& operator = (std::initializer_list<T> l)
+        constexpr sequence& operator = (std::initializer_list<T> l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
@@ -112,9 +112,9 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutation(Sequence<Sequence<T,L>,factorial(L)>& pers) const
+        constexpr void permutation(sequence<sequence<T,L>,factorial(L)>& pers) const
         {
-            Sequence<T,L> sec = *this;
+            sequence<T,L> sec = *this;
             int index = 0;
             permutations(sec,0,L,index,pers);
         }
@@ -154,7 +154,7 @@ namespace oct::nums::v0
         /**
         *\brief Permita los elementos de la secuencia
         **/
-        constexpr void permutations(Sequence<T,L>& sec, int i, int n, int& p, Sequence<Sequence<T,L>,factorial(L)>& pers) const
+        constexpr void permutations(sequence<T,L>& sec, int i, int n, int& p, sequence<sequence<T,L>,factorial(L)>& pers) const
         {
             // condición base
             if (i == n - 1)
@@ -179,7 +179,6 @@ namespace oct::nums::v0
             }
         }
     };
-
 
 
 

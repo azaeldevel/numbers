@@ -2,6 +2,7 @@
 #define OCTETOS_NUMBERS_MATRIX_HH
 
 #include "common.hh"
+#include "vector.hh"
 
 namespace oct::nums::v0
 {
@@ -14,10 +15,10 @@ namespace oct::nums::v0
     *\param n Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t n,size_t m,number V> class matrix : public Sequence<Sequence<T,n>,m>
+    template<typename T,size_t n,size_t m,number V> class matrix : public sequence<sequence<T,n>,m>
     {
     private:
-        typedef Sequence<Sequence<T,n>,m> base;
+        typedef sequence<sequence<T,n>,m> base;
     public:
         matrix() = default;
         constexpr matrix(const T& v) : base(v)
@@ -80,7 +81,7 @@ namespace oct::nums::v0
                     for(size_t k = 0; k < n; k++)
                     {
                         res[i][j] += base::data[i][k] * o[k][j];
-                        //std::cout << "(" << Sequence<Sequence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
+                        //std::cout << "(" << sequence<sequence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
                     }
                     //std::cout << "    ";
                 }
@@ -196,7 +197,7 @@ namespace oct::nums::v0
                 V value = 0;
                 for(size_t j = 0; j < n; j++)
                 {
-                    //std::cout << Sequence<Sequence<T,n>,m>::data[i][0] << " ";
+                    //std::cout << sequence<sequence<T,n>,m>::data[i][0] << " ";
                     //value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
                 }
 
