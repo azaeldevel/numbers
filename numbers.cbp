@@ -63,6 +63,7 @@
 		</Unit>
 		<Unit filename="0/matrix.cc" />
 		<Unit filename="0/matrix.hh" />
+		<Unit filename="0/vector.cc" />
 		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
