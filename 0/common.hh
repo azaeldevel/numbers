@@ -113,6 +113,15 @@ namespace oct::nums::v0
             return *this;
         }
 
+
+        constexpr size_t size() const
+        {
+            return L;
+        }
+
+
+
+
         /**
         *\brief Permita los elementos de la secuencia
         **/
@@ -121,10 +130,6 @@ namespace oct::nums::v0
             sequence<T,L> sec = *this;
             int index = 0;
             permutations(sec,0,L,index,pers);
-        }
-        constexpr size_t size() const
-        {
-            return L;
         }
 
 

@@ -27,6 +27,8 @@ namespace oct::nums::v0
         constexpr matrix(const matrix& o) : base(o)
         {
         }
+
+
         constexpr matrix operator + (const matrix& o) const
         {
             matrix res;
@@ -114,117 +116,6 @@ namespace oct::nums::v0
             return m;
         }
 
-
-        /**
-        *\brief Crea una sub-matriz
-        *\param T Tipo de dato
-        *\param c Ancho de la matriz
-        *\param r Altos de la matriz
-        *\param i filas indicadas
-        *\param j columnas indicadas
-        **/
-        template<typename t,size_t w,size_t h> matrix<t,w,h,V> sub(const std::vector<T>& row,const std::vector<T>& columns, bool exclude)
-        {
-            matrix<t,w,h,V> res;
-            T f=0,c;
-            for(size_t i = 0; i < m; i++)
-            {
-                if(std::find(row.begin(),row.end(),i) != row.end()) continue;
-                //std::cout << "File  : " << f << "\n";
-                c=0;
-                for(size_t j = 0; j < n; j++)
-                {
-                    if(std::find(columns.begin(),columns.end(),j) != columns.end()) continue;
-                    //std::cout << "\t" << c << "\n";
-                    res[f][c] = base::data[i][j];
-
-                    c++;
-                }
-
-                f++;
-            }
-
-            return res;
-        }
-        matrix<T,n - 1, m - 1,V> sub(size_t row,size_t columns) const
-        {
-            if(n != m) throw core_here::exception("La matriz debe ser cuadarada para optener su determintate");
-            if(n < 1) throw core_here::exception("No se puede hacer una matriz con menos de un elemento");
-
-            matrix<T,n - 1, m - 1,V> res;
-            //std::cout << "matriz  : " << res.rows() << " x " << res.columns() << "\n";
-            T f=0,c;
-            for(size_t i = 0; i < m; i++)
-            {
-                if(i == row) continue;
-                //std::cout << "File  : " << f << "\n";
-                c=0;
-                for(size_t j = 0; j < n; j++)
-                {
-                    if(columns  == j) continue;
-                    //std::cout << "\t" << c << "\n";
-                    res[f][c] = base::data[i][j];
-                    c++;
-                }
-                f++;
-            }
-
-            return res;
-        }
-        constexpr T at(size_t i, size_t j) const
-        {
-            return base::data[i][j];
-        }
-        V det() const
-        {
-            if(n != m) throw core_here::exception("La matriz debe ser cuadarada para optener su determintate");
-
-            if(n == 1)
-            {
-                return base::data[0][0];
-            }
-            else if(n == 2)
-            {
-                V d = 0;
-                d = base::data[0][0] * base::data[1][1];
-                d -= base::data[0][1] * base::data[1][0];
-
-                return d;
-            }
-            else
-            {//Regla de Laplace, https://www.matesfacil.com/matrices/resueltos-matrices-determinantes.html
-                //T sign = 1;
-                V value = 0;
-                for(size_t j = 0; j < n; j++)
-                {
-                    //std::cout << sequence<sequence<T,n>,m>::data[i][0] << " ";
-                    //value += std::pow(-1,j) * at(0,j) * sub(0,j).det();
-                }
-
-                return value;
-            }
-
-            throw core_here::exception("No esta soportada la determinate para esta dimension");
-            return 0;
-        }
-
-        constexpr matrix inverse() const
-        {
-            matrix<T,n * 2,m,V> temp;
-
-            for(size_t i = 0; i < n; i++)
-            {
-                for(size_t j = 0; j < m; j++)
-                {
-                    temp[i][j] = base::data[i][j];
-                }
-            }
-
-
-
-            matrix res;
-            return res;
-        }
     };
 
     /**
