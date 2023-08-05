@@ -22,6 +22,13 @@ namespace oct::nums::v0
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double> || integer<T>;
     template<typename T> concept number = real<T>;
 
+    enum class axis
+    {
+        x,
+        y,
+        z
+    };
+
     template<natural T> constexpr T factorial(const T& n)
     {
         T number = 1;
