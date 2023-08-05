@@ -29,7 +29,7 @@ namespace oct::nums::v0
 
         constexpr bool operator == (const vector& s)
         {
-            for(size_t i = 0; i < L; i++) if(not is_equal(BASE::data[i],s[i])) return false;
+            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
 
             return true;
         }
@@ -105,10 +105,16 @@ namespace oct::nums::v0
         *\brief Transformacion de rotacion, solamente plano xy
         *
         **/
-        void rotate(const T& radian)
+        void rotate(const T& angle)
         {
-            BASE::data[0] *= cos(radian);
-            BASE::data[1] *= sin(radian);
+#ifdef OCTETOS_NUMBERS_V0_TTD
+        //std::cout << "(" << BASE::data[0] << "," << BASE::data[1] << ")\n";
+        //std::cout << "\tangle = " << angle << "\n";
+        //std::cout << "\tx2 = " << cos(BASE::data[0] * angle) - sin(BASE::data[1] * angle) << "\n";
+#endif
+            T x1 = BASE::data[0],y1 = BASE::data[1];
+            BASE::data[0] = x1 * cos(angle) - y1 * sin(angle);
+            BASE::data[1] = x1 * sin(angle) + y1 * cos(angle);
         }
         void rotate_xy(const T& radian)
         {

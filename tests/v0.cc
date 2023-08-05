@@ -330,6 +330,14 @@ void v0_vector()
 
     CU_ASSERT(numbers_here::scalar(vect8,vect9) == 1);
     //std::cout << " Dot : " << numbers_here::scalar(vect8,vect9) << "";
+
+    numbers_here::vector<double,2> vect10{1, 0};
+    for(size_t i = 0; i < 90; i++)
+    {
+        //std::cout << "(" << numbers_here::x(vect10) << "," << numbers_here::y(vect10) << ")\n";
+        vect10.rotate(0.0174533);
+    }
+    CU_ASSERT(numbers_here::y(vect10) - 1.0 < infimium);
 }
 
 void v0_funtions()
