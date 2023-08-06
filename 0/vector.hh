@@ -255,6 +255,13 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector operator * (const vector& s)
+        {
+            vector res;
+
+
+            return res;
+        }
 
         //>>>>>
         /**
