@@ -44,6 +44,14 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector operator * (const T& s)
+        {
+            vector res;
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
+
+            return res;
+        }
+
 
         //>>>>>
         /**
@@ -136,6 +144,14 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector operator * (const T& s)
+        {
+            vector res;
+            for(size_t i = 0; i < 2; i++) BASE::data[i] *= s;
+
+            return res;
+        }
+
 
         //>>>>>
         /**
@@ -232,6 +248,13 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector operator * (const T& s)
+        {
+            vector res;
+            for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
+
+            return res;
+        }
 
         //>>>>>
         /**
@@ -301,63 +324,23 @@ namespace oct::nums::v0
         }
     };
 
-
-    /*template<number T,number V> class vector<T,2,V> : public sequence<T,2>
+    template<class T, unsigned char D,class V> constexpr vector<T,D,V> normalize(const vector<T,D,V>& v)
     {
-    public:
-        constexpr vector(const T& x, const T& y)
-        {
-            sequence<T,2>::data[0] = x;
-            sequence<T,2>::data[1] = y;
-        }
-        constexpr vector(const std::initializer_list<T>& l) : sequence<T,2>(l)
-        {
-        }
+        V l = v.length();
+        vector<T,D,V> newv = v;
+        for(size_t i = 0; i < D; i++) newv[i] /= l;
+
+        return newv;
+    }
 
 
-
-        constexpr T& x()
-        {
-            return sequence<T,2>::data[0];
-        }
-        constexpr T& y()
-        {
-            return sequence<T,2>::data[1];
-        }
-    };
-    template<number T,number V> class vector<T,3,V> : public sequence<T,3>
+    template<class T, unsigned char L,class V> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
-    public:
-        constexpr vector(const T& x, const T& y)
-        {
-            sequence<T,3>::data[0] = x;
-            sequence<T,3>::data[1] = y;
-        }
-        constexpr vector(const T& x, const T& y, const T& z)
-        {
-            sequence<T,3>::data[0] = x;
-            sequence<T,3>::data[1] = y;
-            sequence<T,3>::data[2] = z;
-        }
-        constexpr vector(const std::initializer_list<T>& l) : sequence<T,3>(l)
-        {
-        }
+        vector<T,L,V> newv;
 
 
-
-        constexpr T& x()
-        {
-            return sequence<T,3>::data[0];
-        }
-        constexpr T& y()
-        {
-            return sequence<T,3>::data[1];
-        }
-        constexpr T& z()
-        {
-            return sequence<T,3>::data[2];
-        }
-    };*/
+        return newv;
+    }
 
 
 }
