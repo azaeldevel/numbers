@@ -396,6 +396,29 @@ namespace oct::nums::v0
             return *this;
         }
 
+#ifdef OCTETOS_NUMBERS_V0_TTD
+        void print(std::ostream& out, bool delim = true) const
+        {
+            if(delim) out << "(";
+                for(size_t i = 0; i < 3; i++)
+                {
+                    if(i > 0) out << ",";
+                    out << BASE::data[i];
+                }
+            if(delim) out << ")";
+        }
+        void printLn(std::ostream& out, bool delim = true) const
+        {
+            if(delim) out << "(";
+                for(size_t i = 0; i < 3; i++)
+                {
+                    if(i > 0) out << ",";
+                    out << BASE::data[i];
+                }
+            if(delim) out << ")\n";
+        }
+#endif
+
     };
 
     template<number T,size_t L,number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)

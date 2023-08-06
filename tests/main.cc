@@ -3,7 +3,7 @@
 #include <string>
 
 
-#ifdef OCTETOS_NUMBERS_V0_TESTING
+#ifdef OCTETOS_NUMBERS_V0_TTD
 	#include "v0.hh"
 #endif
 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	/* initialize the CUnit test registry */
 	if (CUE_SUCCESS != CU_initialize_registry()) return CU_get_error();
 
-#ifdef OCTETOS_NUMBERS_V0_TESTING
+#ifdef OCTETOS_NUMBERS_V0_TTD
 	CU_pSuite pSuite_v0 = CU_add_suite("Testing for Numbers v0", v0_init, v0_clean);
 	if (NULL == pSuite_v0)
 	{

@@ -352,6 +352,31 @@ void v0_vector()
     CU_ASSERT(vect16.x() == -8);
     CU_ASSERT(vect16.y() == -8);
     CU_ASSERT(vect16.z() == 12);
+
+    numbers_here::vector<float,3> vect17{3,0,2};
+    //vect17.printLn(std::cout);
+    numbers_here::vector<float,3> vect18 = numbers_here::normalize(vect17);
+    //vect18.printLn(std::cout);
+    //std::cout << "Longitud : " << vect18.length() << "\n";
+    CU_ASSERT_DECIMAL(vect18.x(), 0.83205,infimium);
+    CU_ASSERT_DECIMAL(vect18.y(), 0.0,infimium);
+    CU_ASSERT_DECIMAL(vect18.z(), 0.5547,infimium);
+
+    numbers_here::vector<float,3> vect19{3,0,2};
+    numbers_here::vector<float,3> vect20{-1,4,2};
+    numbers_here::vector<float,3> vect21 = vect19 * vect20;
+    CU_ASSERT_DECIMAL(vect21.x(), -8,infimium);
+    CU_ASSERT_DECIMAL(vect21.y(), -8,infimium);
+    CU_ASSERT_DECIMAL(vect21.z(), 12,infimium);
+    //vect21.printLn(std::cout);
+
+    numbers_here::vector<int,3> vect22{2,0,1};
+    numbers_here::vector<int,3> vect23{1,-1,3};
+    numbers_here::vector<int,3> vect24 = vect22 * vect23;
+    CU_ASSERT_DECIMAL(vect24.x(),1,infimium);
+    CU_ASSERT_DECIMAL(vect24.y(),-5,infimium);
+    CU_ASSERT_DECIMAL(vect24.z(),-2,infimium);
+    //vect24.printLn(std::cout);
 }
 
 void v0_funtions()
