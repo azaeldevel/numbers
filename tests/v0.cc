@@ -338,6 +338,20 @@ void v0_vector()
         vect10.rotate(0.0174533);
     }
     CU_ASSERT(numbers_here::y(vect10) - 1.0 < infimium);
+
+    numbers_here::vector<int,3> vect11{2,0,1};
+    numbers_here::vector<int,3> vect12{1,-1,3};
+    numbers_here::vector<int,3> vect13 = vect11 * vect12;
+    CU_ASSERT(vect13.x() == 1);
+    CU_ASSERT(vect13.y() == -5);
+    CU_ASSERT(vect13.z() == -2);
+
+    numbers_here::vector<int,3> vect14{3,0,2};
+    numbers_here::vector<int,3> vect15{-1,4,2};
+    numbers_here::vector<int,3> vect16 = vect14 * vect15;
+    CU_ASSERT(vect16.x() == -8);
+    CU_ASSERT(vect16.y() == -8);
+    CU_ASSERT(vect16.z() == 12);
 }
 
 void v0_funtions()

@@ -60,7 +60,7 @@ namespace oct::nums::v0
         **/
         void transl(const vector& v)
         {
-            for(size_t i = 0; i < 2; i++) BASE::data[i] += v[i];
+            for(size_t i = 0; i < L; i++) BASE::data[i] += v[i];
         }
         /**
         *\brief tranformacion de scalado
@@ -68,7 +68,27 @@ namespace oct::nums::v0
         **/
         void scale(const T& s)
         {
-            for(size_t i = 0; i < 2; i++) BASE::data[i] *= s;
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
+        }
+        /**
+        *\brief Longitud
+        *
+        **/
+        V length(const T& s)
+        {
+            V v = 0;
+            for(size_t i = 0; i < L; i++) v += pow(BASE::data[i],V(2));
+
+            return sqrt(v);
+        }
+
+
+        constexpr vector& normalize()
+        {
+            V l = length();
+            for(size_t i = 0; i < L; i++) BASE::data[i] /= l;
+
+            return *this;
         }
     };
 
@@ -170,6 +190,17 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < 2; i++) BASE::data[i] *= s;
         }
+        /**
+        *\brief Longitud
+        *
+        **/
+        V length() const
+        {
+            V v = 0;
+            for(size_t i = 0; i < 2; i++) v += pow(BASE::data[i],V(2));
+
+            return sqrt(v);
+        }
 
 
 
@@ -241,12 +272,24 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector& operator += (const vector& s)
+        {
+            for(size_t i = 0; i < 3; i++) BASE::data[i] += s[i];
+
+            return *this;
+        }
         constexpr vector operator - (const vector& s)
         {
             vector res;
             for(size_t i = 0; i < 3; i++) res[i] = BASE::data[i] - s[i];
 
             return res;
+        }
+        constexpr vector& operator -= (const vector& s)
+        {
+            for(size_t i = 0; i < 3; i++) BASE::data[i] -= s[i];
+
+            return *this;
         }
         constexpr vector operator * (const T& s)
         {
@@ -255,10 +298,13 @@ namespace oct::nums::v0
 
             return res;
         }
+        //https://es.wikipedia.org/wiki/Producto_vectorial
         constexpr vector operator * (const vector& s)
         {
             vector res;
-
+            res[0] = BASE::data[1] * s[2] - BASE::data[2] * s[1];
+            res[1] = BASE::data[2] * s[0] - BASE::data[0] * s[2];
+            res[2] = BASE::data[0] * s[1] - BASE::data[1] * s[0];
 
             return res;
         }
@@ -279,6 +325,17 @@ namespace oct::nums::v0
         void scale(const T& s)
         {
             for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
+        }
+        /**
+        *\brief Longitud
+        *
+        **/
+        V length() const
+        {
+            V v = 0;
+            for(size_t i = 0; i < 3; i++) v += pow(BASE::data[i],V(2));
+
+            return sqrt(v);
         }
 
 
@@ -329,19 +386,29 @@ namespace oct::nums::v0
                 break;
             }
         }
+
+
+        constexpr vector& normalize()
+        {
+            V l = length();
+            for(size_t i = 0; i < 3; i++) BASE::data[i] /= l;
+
+            return *this;
+        }
+
     };
 
-    template<class T, unsigned char D,class V> constexpr vector<T,D,V> normalize(const vector<T,D,V>& v)
+    template<number T,size_t L,number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)
     {
         V l = v.length();
-        vector<T,D,V> newv = v;
-        for(size_t i = 0; i < D; i++) newv[i] /= l;
+        vector<T,L,V> newv = v;
+        for(size_t i = 0; i < L; i++) newv[i] /= l;
 
         return newv;
     }
 
 
-    template<class T, unsigned char L,class V> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    template<number T,size_t L,number V = T> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
         vector<T,L,V> newv;
 
