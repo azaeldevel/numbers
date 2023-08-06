@@ -377,6 +377,16 @@ void v0_vector()
     CU_ASSERT_DECIMAL(vect24.y(),-5,infimium);
     CU_ASSERT_DECIMAL(vect24.z(),-2,infimium);
     //vect24.printLn(std::cout);
+
+    numbers_here::vector<int,3> vect25 = vect22 - vect23;
+    CU_ASSERT(vect25.x() == 1);
+    CU_ASSERT(vect25.y() == 1);
+    CU_ASSERT(vect25.z() == -2);
+
+    numbers_here::vector<int,3> vect26 = vect22 + vect23;
+    CU_ASSERT(vect26.x() == 3);
+    CU_ASSERT(vect26.y() == -1);
+    CU_ASSERT(vect26.z() == 4);
 }
 
 void v0_funtions()
