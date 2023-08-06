@@ -226,6 +226,23 @@ namespace oct::nums::v0
             BASE::data[0] = x1 * cos(angle) - y1 * sin(angle);
             BASE::data[1] = x1 * sin(angle) + y1 * cos(angle);
         }
+
+
+
+        constexpr vector& normalize()
+        {
+            V l = length();
+            for(size_t i = 0; i < 2; i++) BASE::data[i] /= l;
+
+            return *this;
+        }
+        constexpr V dot(const vector& v)
+        {
+            V newv = 0;
+            for(size_t i = 0; i < 2; i++) newv += BASE::data[i] * v[i];
+
+            return newv;
+        }
     };
 
 
@@ -294,7 +311,7 @@ namespace oct::nums::v0
         constexpr vector operator * (const T& s)
         {
             vector res;
-            for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
+            for(size_t i = 0; i < 3; i++) res[i] = BASE::data[i] * s;
 
             return res;
         }
@@ -394,6 +411,13 @@ namespace oct::nums::v0
             for(size_t i = 0; i < 3; i++) BASE::data[i] /= l;
 
             return *this;
+        }
+        constexpr V dot(const vector& v)
+        {
+            V newv = 0;
+            for(size_t i = 0; i < 3; i++) newv += BASE::data[i] * v[i];
+
+            return newv;
         }
 
 #ifdef OCTETOS_NUMBERS_V0_TTD

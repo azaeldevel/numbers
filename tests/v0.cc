@@ -387,6 +387,26 @@ void v0_vector()
     CU_ASSERT(vect26.x() == 3);
     CU_ASSERT(vect26.y() == -1);
     CU_ASSERT(vect26.z() == 4);
+
+
+    numbers_here::vector<int,3> vect27{0,0,0};
+    vect27 += vect22;
+    CU_ASSERT(vect27.x() == 2);
+    CU_ASSERT(vect27.y() == 0);
+    CU_ASSERT(vect27.z() == 1);
+
+    numbers_here::vector<float,3> vect28{0,0,0};
+    vect28 += vect20;
+    CU_ASSERT_DECIMAL(vect28.x(), -1,infimium);
+    CU_ASSERT_DECIMAL(vect28.y(), 4,infimium);
+    CU_ASSERT_DECIMAL(vect28.z(), 2,infimium);
+
+    numbers_here::vector<float,3> vect29{2,0,1};
+    numbers_here::vector<float,3> vect30 = vect29 * 1.1;
+    //vect30.printLn(std::cout);
+    CU_ASSERT_DECIMAL(vect30.x(), 2.2,infimium);
+    CU_ASSERT_DECIMAL(vect30.y(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect30.z(), 1.1,infimium);
 }
 
 void v0_funtions()
