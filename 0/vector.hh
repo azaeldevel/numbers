@@ -12,16 +12,16 @@ namespace oct::nums::v0
         typedef sequence<T,L> BASE;
     public:
         vector() = default;
-        constexpr vector(const T& v) : sequence<T,L>(v)
+        constexpr vector(const T& v) : BASE(v)
         {
         }
         /*constexpr vector(const T v[L]) : sequence<T,L>(v)
         {
         }*/
-        constexpr vector(const vector& v) : sequence<T,L>(v)
+        constexpr vector(const vector& v) : BASE(v)
         {
         }
-        constexpr vector(const std::initializer_list<T>& l) : sequence<T,L>(l)
+        constexpr vector(const std::initializer_list<T>& l) : BASE(l)
         {
         }
 
