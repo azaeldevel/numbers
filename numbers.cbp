@@ -34,8 +34,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-DOCTETOS_NUMBERS_V0_TESTING" />
-					<Add option="-DOCTETOS_NUMBERS_TTD" />
+					<Add option="-DOCTETOS_NUMBERS_V0_TTD" />
 					<Add directory="../numbers" />
 				</Compiler>
 			</Target>
@@ -63,6 +62,7 @@
 		</Unit>
 		<Unit filename="0/matrix.cc" />
 		<Unit filename="0/matrix.hh" />
+		<Unit filename="0/shapes.hh" />
 		<Unit filename="0/vector.cc" />
 		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />

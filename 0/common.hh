@@ -21,8 +21,9 @@ namespace oct::nums::v0
     template<typename T> concept integer = std::same_as<T, signed char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, signed int> || std::same_as<T, signed long> || std::same_as<T, signed long long> || natural<T>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double> || integer<T>;
     template<typename T> concept number = real<T>;
+    //template<typename T> concept dimension = static_assert(T == 2);
 
-    enum class axis
+    enum class axis : unsigned char
     {
         x,
         y,
@@ -66,14 +67,14 @@ namespace oct::nums::v0
 
     public:
         sequence() = default;
-        constexpr sequence(const T v[L])
-        {
-            for(size_t i = 0; i < L; i++) data[i] = v;
-        }
         constexpr sequence(const T& v)
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }
+        /*constexpr explicit sequence(const T v[L])
+        {
+            for(size_t i = 0; i < L; i++) data[i] = v;
+        }*/
         constexpr sequence(const std::initializer_list<T>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");

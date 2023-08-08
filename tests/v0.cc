@@ -7,6 +7,7 @@
 #include <0/arithmetic.hh>
 #include <0/matrix.hh>
 #include <0/algebra.hh>
+#include <0/shapes.hh>
 
 
 namespace numbers_here = oct::nums::v0;
@@ -17,6 +18,19 @@ void v0_developing()
 {
 }
 
+
+void v0_shapes()
+{
+    numbers_here::sequence<float,3> seq1(0);
+
+    constexpr numbers_here::vector<float> vec1(0,0,0);
+    constexpr numbers_here::Triangle<float> tri1(vec1, 1.0);
+    //tri1[0].printLn(std::cout);
+    //tri1[1].printLn(std::cout);
+    //tri1[2].printLn(std::cout);
+
+
+}
 
 void v0_algebra()
 {

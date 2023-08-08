@@ -20,5 +20,6 @@ void v0_vector();
 void v0_funtions();
 void v0_arithmetic();
 void v0_algebra();
+void v0_shapes();
 
 #endif

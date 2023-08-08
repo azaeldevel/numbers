@@ -6,15 +6,18 @@
 namespace oct::nums::v0
 {
 
-    template<number T,size_t L,number V = T> class vector : public sequence<T,L>
+    template<number T,size_t L = 3,number V = T> class vector : public sequence<T,L>
     {
     private:
         typedef sequence<T,L> BASE;
     public:
         vector() = default;
-        constexpr vector(const T v[L]) : sequence<T,L>(v)
+        constexpr vector(const T& v) : sequence<T,L>(v)
         {
         }
+        /*constexpr vector(const T v[L]) : sequence<T,L>(v)
+        {
+        }*/
         constexpr vector(const vector& v) : sequence<T,L>(v)
         {
         }
@@ -126,10 +129,13 @@ namespace oct::nums::v0
         typedef sequence<T,2> BASE;
 
     public:
-    vector() = default;
-        constexpr vector(const T v[2]) : BASE(v)
+        vector() = default;
+        constexpr vector(const T& v) : BASE(v)
         {
         }
+        /*constexpr vector(const T v[2]) : BASE(v)
+        {
+        }*/
         constexpr vector(const vector& v) : BASE(v)
         {
         }
@@ -208,7 +214,15 @@ namespace oct::nums::v0
         {
             return BASE::data[0];
         }
+        constexpr const T& x() const
+        {
+            return BASE::data[0];
+        }
         constexpr T& y()
+        {
+            return BASE::data[1];
+        }
+        constexpr const T& y() const
         {
             return BASE::data[1];
         }
@@ -252,10 +266,13 @@ namespace oct::nums::v0
         typedef sequence<T,3> BASE;
 
     public:
-    vector() = default;
-        constexpr vector(const T v[3]) : BASE(v)
+        vector() = default;
+        constexpr vector(const T& v) : BASE(v)
         {
         }
+        /*constexpr vector(const T v[3]) : BASE(v)
+        {
+        }*/
         constexpr vector(const vector& v) : BASE(v)
         {
         }
@@ -362,11 +379,23 @@ namespace oct::nums::v0
         {
             return BASE::data[0];
         }
+        constexpr const T& x() const
+        {
+            return BASE::data[0];
+        }
         constexpr T& y()
         {
             return BASE::data[1];
         }
+        constexpr const T& y() const
+        {
+            return BASE::data[1];
+        }
         constexpr T& z()
+        {
+            return BASE::data[2];
+        }
+        constexpr const T& z() const
         {
             return BASE::data[2];
         }
