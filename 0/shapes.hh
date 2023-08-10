@@ -338,11 +338,12 @@ namespace oct::nums::v0
     /**
     *\brief Line
     *\param C tipo de dato para la coordenada
+    *\param P cantidad de vetices creados
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
-    class Circle : public Shape<C,D,2,V>
+    template<number C,size_t P, size_t D = 3,number V = C>
+    class Circle : public Shape<C,D,P,V>
     {
     public:
         typedef Shape<C,D,2,V> BASE;
