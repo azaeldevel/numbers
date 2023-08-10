@@ -35,6 +35,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DOCTETOS_NUMBERS_V0_TTD" />
+					<Add option="-DOCTETOS_NUMBERS_TTD=0" />
 					<Add directory="../numbers" />
 				</Compiler>
 			</Target>
@@ -44,6 +45,7 @@
 			<Add option="-Wall" />
 			<Add option="--std=c++20" />
 			<Add option="`pkg-config cunit --cflgas`" />
+			<Add option="-DOCTETOS_NUMBERS_TTD=0" />
 			<Add directory="../../octetos" />
 		</Compiler>
 		<Linker>
