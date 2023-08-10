@@ -449,7 +449,7 @@ namespace oct::nums::v0
             return newv;
         }
 
-#ifdef OCTETOS_NUMBERS_V0_TTD
+#if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out, bool delim = true) const
         {
             if(delim) out << "(";
