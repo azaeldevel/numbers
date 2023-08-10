@@ -39,15 +39,8 @@ namespace oct::nums::v0
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
-        constexpr Line(const vector<C,D> vs[3]) : BASE(vs)
+        constexpr Line(const vector<C,D> vs[2]) : BASE(vs)
         {
-        }
-        /**
-        *\brief Contrulle un triangulo equilatero con centro geometro en O y la longitud indicada
-        **/
-        constexpr Line(const vector<C,D>& O, const C& length)
-        {
-            equilateral(O,length);
         }
     };
 
@@ -339,6 +332,28 @@ namespace oct::nums::v0
             out << "\n";
         }
 #endif
+    };
+
+
+    /**
+    *\brief Line
+    *\param C tipo de dato para la coordenada
+    *\param D dimension del espacio
+    *\param V Tipo de datos para calculos
+    **/
+    template<number C, size_t D = 3,number V = C>
+    class Circle : public Shape<C,D,2,V>
+    {
+    public:
+        typedef Shape<C,D,2,V> BASE;
+    public:
+        Circle() = default;
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Circle(const vector<C,D> vs[3]) : BASE(vs)
+        {
+        }
     };
 }
 
