@@ -350,9 +350,9 @@ void v0_vector()
 
     constexpr numbers_here::vector<int,3ul,float> vect5 {4,-3,5};
 
-    numbers_here::sequence<numbers_here::sequence<int,3ul>,numbers_here::factorial(3ul)> pers;
+    /*numbers_here::sequence<numbers_here::sequence<int,3ul>,numbers_here::factorial(3ul)> pers;
     numbers_here::vector<int,3ul,float> vect4 {4,-3,5};
-    vect4.permutation(pers);
+    vect4.permutation(pers);*/
     /*
     for(size_t i = 0; i < pers.size(); i++)
     {

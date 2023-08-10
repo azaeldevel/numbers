@@ -58,19 +58,18 @@ namespace oct::nums::v0
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al sequence
     *\param T Tipo de dato de la secuencia
-    *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(longitud del arreglo)
-    *\param L La cantidad de datos
+    *\param S La cantidad de datos, si es 0, la asignacion es dinamica
     **/
-    template<typename T,size_t L> class sequence
+    template<typename T,size_t S> class sequence
     {
     protected:
-        T data[L];
+        T data[S];
 
     public:
         sequence() = default;
         constexpr sequence(const T& v)
         {
-            for(size_t i = 0; i < L; i++) data[i] = v;
+            for(size_t i = 0; i < S; i++) data[i] = v;
         }
         /*constexpr explicit sequence(const T v[L])
         {
@@ -78,8 +77,8 @@ namespace oct::nums::v0
         }*/
         constexpr sequence(const std::initializer_list<T>& l)
         {
-            if(l.size() < L) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > L) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+            if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
             const T* c = std::data(l);
             for(size_t i = 0; i < l.size(); i++)
@@ -89,43 +88,43 @@ namespace oct::nums::v0
         }
         constexpr sequence(const sequence& s)
         {
-            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+            for(size_t i = 0; i < S; i++) data[i] = s.data[i];
         }
 
         constexpr T& operator [](size_t i)
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr const T& operator [](size_t i) const
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr const T& at(size_t i) const
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr T& at(size_t i)
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr sequence& operator =(const sequence& s)
         {
-            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+            for(size_t i = 0; i < S; i++) data[i] = s.data[i];
 
             return *this;
         }
         constexpr sequence& operator = (std::initializer_list<T> l)
         {
-            if(l.size() < L) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > L) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+            if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
             unsigned char i = 0;
             for(const T& c : l)
@@ -140,28 +139,16 @@ namespace oct::nums::v0
 
         constexpr size_t size() const
         {
-            return L;
+            return S;
         }
 
-
-
-
-        /**
-        *\brief Permita los elementos de la secuencia
-        **/
-        constexpr void permutation(sequence<sequence<T,L>,factorial(L)>& pers) const
-        {
-            sequence<T,L> sec = *this;
-            int index = 0;
-            permutations(sec,0,L,index,pers);
-        }
 
 
 #ifdef OCTETOS_NUMBERS_V0_TTD
         void print(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < L; i++)
+                for(size_t i = 0; i < S; i++)
                 {
                     if(i > 0) out << ",";
                     out << data[i];
@@ -171,7 +158,7 @@ namespace oct::nums::v0
         void printLn(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < L; i++)
+                for(size_t i = 0; i < S; i++)
                 {
                     if(i > 0) out << ",";
                     out << data[i];
@@ -184,114 +171,86 @@ namespace oct::nums::v0
 
     private:
 
-        /**
-        *\brief Permita los elementos de la secuencia
-        **/
-        constexpr void permutations(sequence<T,L>& sec, int i, int n, int& p, sequence<sequence<T,L>,factorial(L)>& pers) const
-        {
-            // condición base
-            if (i == n - 1)
-            {
-                //std::cout << p << "\n";
-                pers[p++] = sec;
-                //sec.printLn(std::cout);
-                return;
-            }
-
-            // procesa cada caracter de la string restante
-            for (int j = i; j < n; j++)
-            {
-                // intercambiar carácter en el índice `i` con el carácter actual
-                std::swap(sec[i], sec[j]);        // STL `swap()` usado
-
-                // recurre para la subcadena `str[i+1, n-1]`
-                permutations(sec, i + 1, n, p, pers);
-
-                // retroceder (restaurar la string a su estado original)
-                std::swap(sec[i], sec[j]);
-            }
-        }
     };
 
     /**
     *\brief Representa una secuacion continua de datos, eqiuvalante al sequence
     *\param T Tipo de dato de la secuencia
-    *\param Z Tipo de datos que expresa el rango de numeros que puede manejar(longitud del arreglo)
-    *\param L La cantidad de datos
+    *\param L 0 para que la asignacion sea dinamica
     **/
     template<typename T> class sequence<T,0>
     {
     protected:
-        size_t L;
+        size_t S;
         T* data;
 
     public:
         sequence() = default;
-        constexpr sequence(size_t s,const T& v) : L(s)
+        sequence(size_t s, const T& v) : S(s)
         {
-            data = new T[L];
-            for(size_t i = 0; i < L; i++) data[i] = v;
+            data = new T[S];
+            for(size_t i = 0; i < S; i++) data[i] = v;
         }
         /*constexpr explicit sequence(const T v[L])
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }*/
-        constexpr sequence(const std::initializer_list<T>& l)  : L(l.size())
+        sequence(const std::initializer_list<T>& l) : S(l.S)
         {
-            if(l.size() < L) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > L) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+            if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
-            data = new T[L];
+            data = new T[S];
             const T* c = std::data(l);
             for(size_t i = 0; i < l.size(); i++)
             {
                 data[i] = c[i];
             }
         }
-        constexpr sequence(const sequence& s) : L(s.L)
+        sequence(const sequence& s)  : S(s.S)
         {
-            data = new T[L];
-            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+            data = new T[S];
+            for(size_t i = 0; i < S; i++) data[i] = s.data[i];
         }
         ~sequence()
         {
             delete[] data;
         }
 
-        constexpr T& operator [](size_t i)
+        T& operator [](size_t i)
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr const T& operator [](size_t i) const
+        const T& operator [](size_t i) const
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr const T& at(size_t i) const
+        const T& at(size_t i) const
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr T& at(size_t i)
+        T& at(size_t i)
         {
-            if(i < L) return data[i];
+            if(i < S) return data[i];
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr sequence& operator =(const sequence& s)
+        sequence& operator =(const sequence& s)
         {
-            for(size_t i = 0; i < L; i++) data[i] = s.data[i];
+            for(size_t i = 0; i < S; i++) data[i] = s.data[i];
 
             return *this;
         }
-        constexpr sequence& operator = (std::initializer_list<T> l)
+        sequence& operator = (std::initializer_list<T> l)
         {
-            if(l.size() < L) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > L) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+            if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
             unsigned char i = 0;
             for(const T& c : l)
@@ -304,11 +263,10 @@ namespace oct::nums::v0
         }
 
 
-        constexpr size_t size() const
+        size_t size() const
         {
-            return L;
+            return S;
         }
-
 
 
 
@@ -316,7 +274,7 @@ namespace oct::nums::v0
         void print(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < L; i++)
+                for(size_t i = 0; i < S; i++)
                 {
                     if(i > 0) out << ",";
                     out << data[i];
@@ -326,7 +284,7 @@ namespace oct::nums::v0
         void printLn(std::ostream& out, bool delim = false) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < L; i++)
+                for(size_t i = 0; i < S; i++)
                 {
                     if(i > 0) out << ",";
                     out << data[i];
