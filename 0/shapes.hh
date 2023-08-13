@@ -45,6 +45,36 @@ namespace oct::nums::v0
     };
 
 
+
+    /**
+    *\brief Figura Plana
+    *\param C tipo de dato para la coordenada
+    *\param D dimension del espacio
+    *\param P Cantidad de vertises que tiene
+    *\param V Tipo de datos para calculos
+    **/
+    template<number C, size_t D,size_t P,number V = C>
+    class Plane : public Shape<C,D,P,V>
+    {
+    public:
+
+    };
+
+
+    /**
+    *\brief Figuras espacial
+    *\param C tipo de dato para la coordenada
+    *\param D dimension del espacio
+    *\param P Cantidad de vertises que tiene
+    *\param V Tipo de datos para calculos
+    **/
+    template<number C, size_t D,size_t P,number V = C>
+    class Spatial : public Shape<C,D,P,V>
+    {
+    public:
+
+    };
+
     /*
                     P3
                    /   \
@@ -59,7 +89,7 @@ namespace oct::nums::v0
     *\param V Tipo de datos para calculos
     **/
     template<number C, size_t D = 3,number V = C>
-    class Triangle : public Shape<C,D,3,V>
+    class Triangle : public Plane<C,D,3,V>
     {
     public:
         typedef Shape<C,D,3,V> BASE;
@@ -268,8 +298,8 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t B, size_t D = 3,number V = C>
-    class Pyramid : public Shape<C,D,B + 1,V>
+    template<number C, size_t D, size_t B,number V = C>
+    class Pyramid : public Spatial<C,D,B + 1,V>
     {
     public:
         typedef Shape<C,D,B + 1,V> BASE;
@@ -335,27 +365,7 @@ namespace oct::nums::v0
     };
 
 
-    /**
-    *\brief Line
-    *\param C tipo de dato para la coordenada
-    *\param P cantidad de vetices creados
-    *\param D dimension del espacio
-    *\param V Tipo de datos para calculos
-    **/
-    template<number C,size_t P, size_t D = 3,number V = C>
-    class Circle : public Shape<C,D,P,V>
-    {
-    public:
-        typedef Shape<C,D,2,V> BASE;
-    public:
-        Circle() = default;
-        /**
-        *\brief Contrulle un triangulo con los 3 puntos indicados
-        **/
-        constexpr Circle(const vector<C,D> vs[3]) : BASE(vs)
-        {
-        }
-    };
+
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH
