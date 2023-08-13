@@ -44,8 +44,6 @@ namespace oct::nums::v0
         }
     };
 
-
-
     /**
     *\brief Figura Plana
     *\param C tipo de dato para la coordenada
@@ -56,6 +54,16 @@ namespace oct::nums::v0
     template<number C, size_t D,size_t P,number V = C>
     class Plane : public Shape<C,D,P,V>
     {
+    public:
+        typedef Shape<C,D,P,V> BASE;
+        Plane() = default;
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Plane(const vector<C,D> vs[3]) : BASE(vs)
+        {
+        }
+
     public:
 
     };
@@ -72,8 +80,19 @@ namespace oct::nums::v0
     class Spatial : public Shape<C,D,P,V>
     {
     public:
+        typedef Shape<C,D,P,V> BASE;
+        Spatial() = default;
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Spatial(const vector<C,D> vs[3]) : BASE(vs)
+        {
+        }
+
+    public:
 
     };
+
 
     /*
                     P3
@@ -92,7 +111,7 @@ namespace oct::nums::v0
     class Triangle : public Plane<C,D,3,V>
     {
     public:
-        typedef Shape<C,D,3,V> BASE;
+        typedef Plane<C,D,3,V> BASE;
     public:
         Triangle() = default;
         /**
@@ -323,7 +342,7 @@ namespace oct::nums::v0
         /**
         *\brief Contrulle una piramide
         **/
-        constexpr Pyramid(const Shape<C,D,B,V>& base,const vector<C,D>& cusp)
+        constexpr Pyramid(const Plane<C,D,B,V>& base,const vector<C,D>& cusp)
         {
             for(size_t i = 0; i < B; i++)
             {
