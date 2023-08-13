@@ -324,7 +324,7 @@ void v0_sequence()
     CU_ASSERT(sec6[9] == 1);
 
     numbers_here::sequence<unsigned long long,0> sec7(10,1);
-    CU_ASSERT(sizeof(sec7) == sizeof(unsigned long long*) + sizeof(size_t));
+    CU_ASSERT(sizeof(sec7) >= sizeof(unsigned long long*) + sizeof(size_t) + sizeof(bool));
     CU_ASSERT(sec7[0] == 1);
     CU_ASSERT(sec7[1] == 1);
     CU_ASSERT(sec7[2] == 1);
@@ -466,12 +466,10 @@ void v0_funtions()
 int v0_init(void)
 {
 
-
 	return 0;
 }
 int v0_clean(void)
 {
-
 
 	return 0;
 }

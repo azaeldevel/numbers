@@ -20,7 +20,39 @@ namespace oct::nums::v0
     class Shape : public sequence<vector<C,D>,P>
     {
     public:
+        typedef Shape<C,D,P,V> BASE;
 
+    public:
+        Shape() = default;
+
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Shape(const vector<C,D> vs[2]) : BASE(vs)
+        {
+        }
+
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        Shape(size_t s, const C& v) : BASE(s,v)
+        {
+        }
+
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        Shape(size_t s, C* v) : BASE(s,v)
+        {
+        }
+
+        /**
+        *\brief Contrulle un line desde un arreglo de puntos(shape)
+        **/
+        static Shape<C,D,0,V> from(size_t s,Shape<C,D,0,V>& shape)
+        {
+            return Shape<C,D,0,V>(s,&shape);
+        }
     };
 
     /**
@@ -36,6 +68,7 @@ namespace oct::nums::v0
         typedef Shape<C,D,2,V> BASE;
     public:
         Line() = default;
+
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
@@ -322,6 +355,7 @@ namespace oct::nums::v0
     {
     public:
         typedef Shape<C,D,B + 1,V> BASE;
+
         //const size_t vertex_count = B + 1;
 
     public:

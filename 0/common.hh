@@ -183,19 +183,24 @@ namespace oct::nums::v0
     protected:
         size_t S;
         T* data;
+        bool free;
 
     public:
         sequence() = default;
-        sequence(size_t s, const T& v) : S(s)
+        sequence(size_t s, const T& v) : S(s),free(true)
         {
             data = new T[S];
             for(size_t i = 0; i < S; i++) data[i] = v;
+        }
+        sequence(size_t s, T* v) : S(s),free(false)
+        {
+            data = v;
         }
         /*constexpr explicit sequence(const T v[L])
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }*/
-        sequence(const std::initializer_list<T>& l) : S(l.S)
+        sequence(const std::initializer_list<T>& l) : S(l.S),free(true)
         {
             if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -207,14 +212,14 @@ namespace oct::nums::v0
                 data[i] = c[i];
             }
         }
-        sequence(const sequence& s)  : S(s.S)
+        sequence(const sequence& s)  : S(s.S),free(true)
         {
             data = new T[S];
             for(size_t i = 0; i < S; i++) data[i] = s.data[i];
         }
         ~sequence()
         {
-            delete[] data;
+            if(free) delete[] data;
         }
 
         T& operator [](size_t i)
