@@ -322,7 +322,6 @@ namespace oct::nums::v0
     {
     public:
         typedef Shape<C,D,B + 1,V> BASE;
-        typedef Shape<C,D,B,V> BASE_TRIANGLE;
         //const size_t vertex_count = B + 1;
 
     public:
