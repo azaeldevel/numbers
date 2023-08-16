@@ -438,9 +438,9 @@ namespace oct::nums::v0
 
 
         /**
-        *\brief Contrulle un triangulo equilatero con centro geometro en O y la longitud indicada
+        *\brief Contrulle un rectangulo con centro geometro en O y la longitud indicada
         **/
-        constexpr void create(const vector<C,D>& O, const C& length)
+        constexpr void create(const vector<C,D>& O, const C& length)//const C& height, const C& width
         {
             V m = length / V(2);
 
@@ -461,7 +461,33 @@ namespace oct::nums::v0
             BASE::data[1][2] = O.z();
             BASE::data[2][2] = O.z();
             BASE::data[3][2] = O.z();
+        }/**
+        *\brief Contrulle un rectangulo con centro geometro en O y la longitudes indicadas
+        **/
+        constexpr void create(const vector<C,D>& O, const C& height, const C& width)//const C& height, const C& width
+        {
+            V w = width / V(2);
+            V h = height / V(2);
+
+            //asignado coordenas en x
+            BASE::data[0][0] = O.x() - w;
+            BASE::data[1][0] = O.x() + w;
+            BASE::data[2][0] = O.x() + w;
+            BASE::data[3][0] = O.x() - w;
+
+            //asignado coordenas en y
+            BASE::data[0][1] = O.y() - h;
+            BASE::data[1][1] = O.y() - h;
+            BASE::data[2][1] = O.y() + h;
+            BASE::data[3][1] = O.y() + h;
+
+            //asignado coordenas en z
+            BASE::data[0][2] = O.z();
+            BASE::data[1][2] = O.z();
+            BASE::data[2][2] = O.z();
+            BASE::data[3][2] = O.z();
         }
+
     };
 
 }
