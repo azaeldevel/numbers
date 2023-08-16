@@ -1,7 +1,7 @@
 #ifndef OCTETOS_NUMBERS_COMMON_V0_HH
 #define OCTETOS_NUMBERS_COMMON_V0_HH
 
-#ifdef OCTETOS_NUMBERS_V0_TTD
+#if OCTETOS_NUMBERS_TTD == 0
     #include <iostream>
 #endif
 

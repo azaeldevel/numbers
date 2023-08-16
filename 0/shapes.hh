@@ -150,11 +150,11 @@ namespace oct::nums::v0
 
 
     /*
-                    P3
+                    P1
                    /   \
                   /  *  \
                  /       \
-                P1-------P2
+                P3-------P2
     */
     /**
     *\brief Triangulo
@@ -191,14 +191,14 @@ namespace oct::nums::v0
             V w = length / V(2);
 
             //asignado coordenas en x
-            BASE::data[0][0] = O.x() - w;
+            BASE::data[0][0] = O.x();
             BASE::data[1][0] = O.x() + w;
-            BASE::data[2][0] = O.x();
+            BASE::data[2][0] = O.x() - w;
 
             //asignado coordenas en y
-            BASE::data[0][1] = O.y() - (h/V(2));
+            BASE::data[0][1] = O.y() + (h/V(2));
             BASE::data[1][1] = O.y() - (h/V(2));
-            BASE::data[2][1] = O.y() + (h/V(2));
+            BASE::data[2][1] = O.y() - (h/V(2));
 
             //asignado coordenas en z
             BASE::data[0][2] = O.z();
@@ -279,9 +279,9 @@ namespace oct::nums::v0
             BASE::data[2][0] = O.x() - w;
 
             //asignado coordenas en y
-            BASE::data[0][1] = O.y() - h;
+            BASE::data[0][1] = O.y() + h;
             BASE::data[1][1] = O.y() - h;
-            BASE::data[2][1] = O.y() + h;
+            BASE::data[2][1] = O.y() - h;
 
             //asignado coordenas en z
             BASE::data[0][2] = O.z();
@@ -326,14 +326,14 @@ namespace oct::nums::v0
             V w = height / V(2);
 
             //asignado coordenas en x
-            BASE::data[0][0] = O.x() - w;
+            BASE::data[0][0] = O.x();
             BASE::data[1][0] = O.x() + w;
-            BASE::data[2][0] = O.x();
+            BASE::data[2][0] = O.x() - w;
 
             //asignado coordenas en y
-            BASE::data[0][1] = O.y() - h;
+            BASE::data[0][1] = O.y() + h;
             BASE::data[1][1] = O.y() - h;
-            BASE::data[2][1] = O.y() + h;
+            BASE::data[2][1] = O.y() - h;
 
             //asignado coordenas en z
             BASE::data[0][2] = O.z();
@@ -363,18 +363,21 @@ namespace oct::nums::v0
 
     public:
         Pyramid() = default;
+
         /**
         *\brief Contrulle una piramide
         **/
         constexpr Pyramid(const vector<C,D> vs[B + 1]) : BASE(vs)
         {
         }
+
         /**
         *\brief Contrulle una piramide
         **/
         constexpr Pyramid(const vector<C,D> vs[B],const vector<C,D>& cusp) : BASE(vs)
         {
         }
+
         /**
         *\brief Contrulle una piramide
         **/
@@ -386,6 +389,7 @@ namespace oct::nums::v0
             }
             BASE::data[B] = cusp;
         }
+
         /**
         *\brief Contrulle una piramide
         **/
@@ -400,12 +404,12 @@ namespace oct::nums::v0
 
     };
 
-   /*
-                P4-------P3
-                |        |
-                |        |
-                |        |
+    /*
                 P1-------P2
+                |        |
+                |        |
+                |        |
+                P4-------P3
     */
     /**
     *\brief Cuadrilatero
@@ -451,17 +455,19 @@ namespace oct::nums::v0
             BASE::data[3][0] = O.x() - m;
 
             //asignado coordenas en y
-            BASE::data[0][1] = O.y() - m;
-            BASE::data[1][1] = O.y() - m;
-            BASE::data[2][1] = O.y() + m;
-            BASE::data[3][1] = O.y() + m;
+            BASE::data[0][1] = O.y() + m;
+            BASE::data[1][1] = O.y() + m;
+            BASE::data[2][1] = O.y() - m;
+            BASE::data[3][1] = O.y() - m;
 
             //asignado coordenas en z
             BASE::data[0][2] = O.z();
             BASE::data[1][2] = O.z();
             BASE::data[2][2] = O.z();
             BASE::data[3][2] = O.z();
-        }/**
+        }
+
+        /**
         *\brief Contrulle un rectangulo con centro geometro en O y la longitudes indicadas
         **/
         constexpr void create(const vector<C,D>& O, const C& height, const C& width)//const C& height, const C& width
@@ -476,10 +482,10 @@ namespace oct::nums::v0
             BASE::data[3][0] = O.x() - w;
 
             //asignado coordenas en y
-            BASE::data[0][1] = O.y() - h;
-            BASE::data[1][1] = O.y() - h;
-            BASE::data[2][1] = O.y() + h;
-            BASE::data[3][1] = O.y() + h;
+            BASE::data[0][1] = O.y() + h;
+            BASE::data[1][1] = O.y() + h;
+            BASE::data[2][1] = O.y() - h;
+            BASE::data[3][1] = O.y() - h;
 
             //asignado coordenas en z
             BASE::data[0][2] = O.z();
