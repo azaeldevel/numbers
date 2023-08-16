@@ -56,12 +56,12 @@ namespace oct::nums::v0
 
         operator C*()
         {
-            return &BASE::data[0];
+            return &BASE::data;
         }
 
         operator const C*() const
         {
-            return &BASE::data[0];
+            return &BASE::data;
         }
 
 

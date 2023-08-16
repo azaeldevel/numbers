@@ -29,27 +29,27 @@ void v0_shapes()
     //tri1[1].printLn(std::cout);
     //tri1[2].printLn(std::cout);
     //tri1.printLn(std::cout);
-    CU_ASSERT_DECIMAL(tri1[0].x(),-0.5, infimium);
-    CU_ASSERT_DECIMAL(tri1[0].y(),-0.433013, infimium);
+    CU_ASSERT_DECIMAL(tri1[0].x(),0, infimium);
+    CU_ASSERT_DECIMAL(tri1[0].y(),0.433013, infimium);
     CU_ASSERT_DECIMAL(tri1[0].z(),0, infimium);
     CU_ASSERT_DECIMAL(tri1[1].x(),0.5, infimium);
     CU_ASSERT_DECIMAL(tri1[1].y(),-0.433013, infimium);
     CU_ASSERT_DECIMAL(tri1[1].z(),0, infimium);
-    CU_ASSERT_DECIMAL(tri1[2].x(),0, infimium);
-    CU_ASSERT_DECIMAL(tri1[2].y(),0.433013, infimium);
+    CU_ASSERT_DECIMAL(tri1[2].x(),-0.5, infimium);
+    CU_ASSERT_DECIMAL(tri1[2].y(),-0.433013, infimium);
     CU_ASSERT_DECIMAL(tri1[2].z(),0, infimium);
 
     constexpr numbers_here::vector<float> vec2(0,0,1);
     constexpr numbers_here::Pyramid pyramid(tri1, vec2);
     //pyramid.printLn(std::cout);
-    CU_ASSERT_DECIMAL(pyramid[0].x(),-0.5, infimium);
-    CU_ASSERT_DECIMAL(pyramid[0].y(),-0.433013, infimium);
+    CU_ASSERT_DECIMAL(pyramid[0].x(),0, infimium);
+    CU_ASSERT_DECIMAL(pyramid[0].y(),0.433013, infimium);
     CU_ASSERT_DECIMAL(pyramid[0].z(),0, infimium);
     CU_ASSERT_DECIMAL(pyramid[1].x(),0.5, infimium);
     CU_ASSERT_DECIMAL(pyramid[1].y(),-0.433013, infimium);
     CU_ASSERT_DECIMAL(pyramid[1].z(),0, infimium);
-    CU_ASSERT_DECIMAL(pyramid[2].x(),0, infimium);
-    CU_ASSERT_DECIMAL(pyramid[2].y(),0.433013, infimium);
+    CU_ASSERT_DECIMAL(pyramid[2].x(),-0.5, infimium);
+    CU_ASSERT_DECIMAL(pyramid[2].y(),-0.433013, infimium);
     CU_ASSERT_DECIMAL(pyramid[2].z(),0, infimium);
     CU_ASSERT_DECIMAL(pyramid[3].x(),0, infimium);
     CU_ASSERT_DECIMAL(pyramid[3].y(),0, infimium);
@@ -58,7 +58,7 @@ void v0_shapes()
 
     constexpr numbers_here::vector<float> vec3(0,0,0);
     constexpr numbers_here::Rectangle<float> rec1(vec3, 1.0);
-    rec1.printLn(std::cout);
+    //rec1.printLn(std::cout);
 }
 
 void v0_algebra()
