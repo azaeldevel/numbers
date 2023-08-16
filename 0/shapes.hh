@@ -53,6 +53,28 @@ namespace oct::nums::v0
         {
             return Shape<C,D,0,V>(s,&shape);
         }
+
+
+
+#if OCTETOS_NUMBERS_TTD == 0
+        void print(std::ostream& out, bool delim = true) const
+        {
+            for(size_t i = 0; i < P; i++)
+            {
+                if(i > 0) out << ",";
+                BASE::data[i].print(out);
+            }
+        }
+        void printLn(std::ostream& out, bool delim = true) const
+        {
+            for(size_t i = 0; i < P; i++)
+            {
+                if(i > 0) out << ",";
+                BASE::data[i].print(out);
+            }
+            out << "\n";
+        }
+#endif
     };
 
     /**
@@ -184,25 +206,6 @@ namespace oct::nums::v0
             BASE::data[2][2] = O.z();
         }
 
-#if OCTETOS_NUMBERS_TTD == 0
-        void print(std::ostream& out, bool delim = true) const
-        {
-            for(size_t i = 0; i < 3; i++)
-            {
-                if(i > 0) out << ",";
-                BASE::data[i].print(out);
-            }
-        }
-        void printLn(std::ostream& out, bool delim = true) const
-        {
-            for(size_t i = 0; i < 3; i++)
-            {
-                if(i > 0) out << ",";
-                BASE::data[i].print(out);
-            }
-            out << "\n";
-        }
-#endif
     };
 
 
@@ -395,28 +398,71 @@ namespace oct::nums::v0
             BASE::data[B] = cusp;
         }
 
-#if OCTETOS_NUMBERS_TTD == 0
-        void print(std::ostream& out, bool delim = true) const
-        {
-            for(size_t i = 0; i < B + 1; i++)
-            {
-                if(i > 0) out << ",";
-                BASE::data[i].print(out);
-            }
-        }
-        void printLn(std::ostream& out, bool delim = true) const
-        {
-            for(size_t i = 0; i < B + 1; i++)
-            {
-                if(i > 0) out << ",";
-                BASE::data[i].print(out);
-            }
-            out << "\n";
-        }
-#endif
     };
 
+   /*
+                P4-------P3
+                |        |
+                |        |
+                |        |
+                P1-------P2
+    */
+    /**
+    *\brief Cuadrilatero
+    *\param C tipo de dato para la coordenada
+    *\param D dimension del espacio
+    *\param V Tipo de datos para calculos
+    **/
+    template<number C, size_t D = 3,number V = C>
+    class Rectangle : public Plane<C,D,4,V>
+    {
+    public:
+        typedef Plane<C,D,4,V> BASE;
+    public:
+        Rectangle() = default;
 
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Rectangle(const vector<C,D> vs[4]) : BASE(vs)
+        {
+        }
+
+        /**
+        *\brief Contrulle un triangulo equilatero con centro geometro en O y la longitud indicada
+        **/
+        constexpr Rectangle(const vector<C,D>& O, const C& length)
+        {
+            create(O,length);
+        }
+
+
+        /**
+        *\brief Contrulle un triangulo equilatero con centro geometro en O y la longitud indicada
+        **/
+        constexpr void create(const vector<C,D>& O, const C& length)
+        {
+            V m = length / V(2);
+
+            //asignado coordenas en x
+            BASE::data[0][0] = O.x() - m;
+            BASE::data[1][0] = O.x() + m;
+            BASE::data[2][0] = O.x() + m;
+            BASE::data[3][0] = O.x() - m;
+
+            //asignado coordenas en y
+            BASE::data[0][1] = O.y() - m;
+            BASE::data[1][1] = O.y() - m;
+            BASE::data[2][1] = O.y() + m;
+            BASE::data[3][1] = O.y() + m;
+
+            //asignado coordenas en z
+            BASE::data[0][2] = O.z();
+            BASE::data[1][2] = O.z();
+            BASE::data[2][2] = O.z();
+            BASE::data[3][2] = O.z();
+        }
+    };
 
 }
 

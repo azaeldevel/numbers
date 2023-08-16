@@ -56,6 +56,9 @@ void v0_shapes()
     CU_ASSERT_DECIMAL(pyramid[3].z(),1, infimium);
 
 
+    constexpr numbers_here::vector<float> vec3(0,0,0);
+    constexpr numbers_here::Rectangle<float> rec1(vec3, 1.0);
+    rec1.printLn(std::cout);
 }
 
 void v0_algebra()
