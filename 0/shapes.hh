@@ -54,6 +54,16 @@ namespace oct::nums::v0
             return Shape<C,D,0,V>(s,&shape);
         }
 
+        operator C*()
+        {
+            return &BASE::data[0];
+        }
+
+        operator const C*() const
+        {
+            return &BASE::data[0];
+        }
+
 
 
 #if OCTETOS_NUMBERS_TTD == 0
