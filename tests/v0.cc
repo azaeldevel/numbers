@@ -59,6 +59,12 @@ void v0_shapes()
     constexpr numbers_here::vector<float> vec3(0,0,0);
     constexpr numbers_here::Rectangle<float> rec1(vec3, 1.0);
     //rec1.printLn(std::cout);
+
+
+    constexpr numbers_here::vector<float> vec4(0,0,0);
+    constexpr numbers_here::Circle<float,3,200> cir1(vec4, 1.0);
+    cir1.printLn(std::cout);
+
 }
 
 void v0_algebra()

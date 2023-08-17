@@ -58,8 +58,16 @@ namespace oct::nums::v0
         {
             return &BASE::data;
         }
-
         operator const C*() const
+        {
+            return &BASE::data;
+        }
+
+        operator void*()
+        {
+            return &BASE::data;
+        }
+        operator const void*() const
         {
             return &BASE::data;
         }
@@ -72,15 +80,14 @@ namespace oct::nums::v0
             for(size_t i = 0; i < P; i++)
             {
                 if(i > 0) out << ",";
-                BASE::data[i].print(out);
+                BASE::data[i].print(out,delim);
             }
         }
         void printLn(std::ostream& out, bool delim = true) const
         {
             for(size_t i = 0; i < P; i++)
             {
-                if(i > 0) out << ",";
-                BASE::data[i].print(out);
+                BASE::data[i].printLn(out,delim);
             }
             out << "\n";
         }
@@ -502,6 +509,87 @@ namespace oct::nums::v0
             BASE::data[1][2] = O.z();
             BASE::data[2][2] = O.z();
             BASE::data[3][2] = O.z();
+        }
+
+    };
+
+
+
+    /**
+    *\brief Piramide
+    *\param C tipo de dato para la coordenada
+    *\param D dimension del espacio
+    *\param P Cantidad de vetices en la base
+    *\param V Tipo de datos para calculos
+    **/
+    template<number C, size_t D, size_t P,number V = C>
+    class Circle : public Plane<C,D,P,V>
+    {
+    public:
+        typedef Shape<C,D,P,V> BASE;
+
+        //const size_t vertex_count = B + 1;
+
+    public:
+        Circle() = default;
+
+        /**
+        *\brief Contrulle una Circulo
+        **/
+        constexpr Circle(const vector<C,D> vs[P]) : BASE(vs)
+        {
+        }
+
+        /**
+        *\brief Contrulle una Circulo
+        **/
+        constexpr Circle(const vector<C,D>& O,const C& radio)
+        {
+            create(O,radio);
+        }
+
+        /**
+        *\brief Contrulle una Circulo
+        **/
+        constexpr void create(const vector<C,D>& O,const C& radio)
+        {
+            const C slice = (radio * 2)/C(P/2);
+            C x = O.x() + radio,y = 0;
+            const C r2 = pow(radio,C(2));
+
+            BASE::data[0].x() = x;
+            BASE::data[0].y() = O.y();
+            BASE::data[0].z() = O.z();
+
+            size_t i = 1;
+            for(; i < P/2; i++)
+            {
+                BASE::data[i].x() = x;
+                y = pow(x - O.x(),C(2));
+                y = sqrt(r2 - y) + O.y();
+                BASE::data[i].y() = y;
+                BASE::data[i].z() = O.z();
+                x -= slice;
+            }
+
+            x = O.x() - radio;
+            BASE::data[i].x() = x;
+            BASE::data[i].y() = O.y();
+            BASE::data[i].z() = O.z();
+            i++;
+            for(; i < P - 1; i++)
+            {
+                BASE::data[i].x() = x;
+                y = pow(x - O.x(),C(2));
+                y = sqrt(r2 - y) + O.y();
+                BASE::data[i].y() = -y;
+                BASE::data[i].z() = O.z();
+                x += slice;
+            }
+            i = P - 1;
+            BASE::data[i].x() = O.x() + radio;
+            BASE::data[i].y() = O.y();
+            BASE::data[i].z() = O.z();
         }
 
     };
