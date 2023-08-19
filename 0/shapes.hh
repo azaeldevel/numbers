@@ -519,7 +519,7 @@ namespace oct::nums::v0
     *\brief Piramide
     *\param C tipo de dato para la coordenada
     *\param D dimension del espacio
-    *\param P Cantidad de vetices en la base
+    *\param P Cantidad de vertices en la base
     *\param V Tipo de datos para calculos
     **/
     template<number C, size_t D, size_t P,number V = C>
@@ -527,7 +527,6 @@ namespace oct::nums::v0
     {
     public:
         typedef Shape<C,D,P,V> BASE;
-
         //const size_t vertex_count = B + 1;
 
     public:
