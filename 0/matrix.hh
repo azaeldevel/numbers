@@ -11,14 +11,15 @@ namespace oct::nums::v0
     /**
     *\brief Representa una matriz matematica m x n
     *\param T Tipo de dato
-    *\param m Renglones
-    *\param n Columnas
+    *\param R Renglones
+    *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t n,size_t m,number V> class matrix : public sequence<sequence<T,n>,m>
+    template<typename T,size_t C,size_t R,number V> class matrix : public sequence<sequence<T,C>,R>
     {
     private:
-        typedef sequence<sequence<T,n>,m> base;
+        typedef sequence<sequence<T,C>,R> base;
+
     public:
         matrix() = default;
         constexpr matrix(const T& v) : base(v)
@@ -33,9 +34,9 @@ namespace oct::nums::v0
         {
             matrix res;
 
-            for(size_t i = 0; i < n; i++)
+            for(size_t i = 0; i < C; i++)
             {
-                for(size_t j = 0; j < m; j++)
+                for(size_t j = 0; j < R; j++)
                 {
                     res[i][j] = base::data[i][j] + o[i][j];
                 }
@@ -47,9 +48,9 @@ namespace oct::nums::v0
         {
             matrix res;
 
-            for(size_t i = 0; i < n; i++)
+            for(size_t i = 0; i < C; i++)
             {
-                for(size_t j = 0; j < m; j++)
+                for(size_t j = 0; j < R; j++)
                 {
                     res[i][j] = base::data[i][j] - o[i][j];
                 }
@@ -61,9 +62,9 @@ namespace oct::nums::v0
         {
             matrix res;
 
-            for(size_t i = 0; i < n; i++)
+            for(size_t i = 0; i < C; i++)
             {
-                for(size_t j = 0; j < m; j++)
+                for(size_t j = 0; j < R; j++)
                 {
                     res[i][j] = base::data[i][j] * o;
                 }
@@ -71,16 +72,16 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<size_t r> constexpr matrix<T,m,r,V> operator * (const matrix<T,r,n,V>& o) const
+        template<size_t r> constexpr matrix<T,R,r,V> operator * (const matrix<T,r,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
-            matrix<T,m,r,V> res;
+            matrix<T,R,r,V> res;
 
-            for(size_t i = 0; i < m; i++)
+            for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < r; j++)
                 {
                     res[i][j] = 0;
-                    for(size_t k = 0; k < n; k++)
+                    for(size_t k = 0; k < C; k++)
                     {
                         res[i][j] += base::data[i][k] * o[k][j];
                         //std::cout << "(" << sequence<sequence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
@@ -95,10 +96,9 @@ namespace oct::nums::v0
 
         constexpr matrix& operator = (const matrix& o)
         {
-
-            for(size_t i = 0; i < m; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < n; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     base::data[i][j] = o[i][j];
                 }
@@ -109,11 +109,11 @@ namespace oct::nums::v0
         //>>>getter and setters
         constexpr size_t columns() const
         {
-            return n;
+            return C;
         }
         constexpr size_t rows() const
         {
-            return m;
+            return R;
         }
 
     };

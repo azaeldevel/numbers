@@ -63,7 +63,7 @@ void v0_shapes()
 
     constexpr numbers_here::vector<float> vec4(0,0,0);
     constexpr numbers_here::Circle<float,3,200> cir1(vec4, 1.0);
-    cir1.printLn(std::cout);
+    //cir1.printLn(std::cout);
 
 }
 
