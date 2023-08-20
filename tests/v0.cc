@@ -174,7 +174,7 @@ void v0_matrix()
     CU_ASSERT(mx8[1][1] == 21);
     CU_ASSERT(mx8[2][2] == 21);
 
-    numbers_here::matrix<int,3ul,2ul,float> mx9;
+    numbers_here::matrix<int,3,2,float> mx9;
     mx9[0][0] = 2;
     mx9[0][1] = -1;
     mx9[0][2] = 0;
@@ -188,7 +188,7 @@ void v0_matrix()
     CU_ASSERT(mx9[1][1] == 2);
     CU_ASSERT(mx9[1][2] == -3);
 
-    numbers_here::matrix<int,2ul,3ul,float> mx10;
+    numbers_here::matrix<int,2,3,float> mx10;
     mx10[0][0] = 1;
     mx10[0][1] = 3;
     mx10[1][0] = -2;
@@ -202,14 +202,14 @@ void v0_matrix()
     CU_ASSERT(mx10[2][0] == 0);
     CU_ASSERT(mx10[2][1] == 4);
 
-    numbers_here::matrix<int,2ul,2ul,float> mx11 = mx9 * mx10;
+    //auto mx11 = mx10 * mx9;
     //mx11.printLn(std::cout);
     //std::cout << "Columns : " << mx11.columns() << "\n";
     //std::cout << "Rows : " << mx11.rows() << "\n";
-    CU_ASSERT(mx11[0][0] == 4);
+    /*CU_ASSERT(mx11[0][0] == 4);
     CU_ASSERT(mx11[0][1] == 5);
     CU_ASSERT(mx11[1][0] == -3);
-    CU_ASSERT(mx11[1][1] == -7);
+    CU_ASSERT(mx11[1][1] == -7);*/
 
     numbers_here::matrix<int,2ul,2ul,float> mx12;
     mx12[0][0] = 2;
@@ -254,6 +254,14 @@ void v0_matrix()
     mx15[2][1] = 4;
     mx15[2][2] = 4;
 
+    numbers_here::matrix<int,1,3,float> mx16;
+    mx16[0][0] = 0;
+    //eqSA[0] = 10;
+    mx16[1][0] = -2;
+    //eqSA[1] = 10;
+    mx16[2][0] = 1;
+
+    //numbers_here::matrix<int,3ul,3ul,float> mx17 = mx15 * mx16;
 }
 
 

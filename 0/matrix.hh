@@ -44,6 +44,20 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr matrix operator + (const T& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < C; i++)
+            {
+                for(size_t j = 0; j < R; j++)
+                {
+                    res[i][j] = base::data[i][j] + o;
+                }
+            }
+
+            return res;
+        }
         constexpr matrix operator - (const matrix& o) const
         {
             matrix res;
@@ -53,6 +67,38 @@ namespace oct::nums::v0
                 for(size_t j = 0; j < R; j++)
                 {
                     res[i][j] = base::data[i][j] - o[i][j];
+                }
+            }
+
+            return res;
+        }
+        constexpr matrix operator - (const T& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < C; i++)
+            {
+                for(size_t j = 0; j < R; j++)
+                {
+                    res[i][j] = base::data[i][j] - o;
+                }
+            }
+
+            return res;
+        }
+        template<size_t c> constexpr matrix<T,R,c,V> operator * (const matrix<T,C,c,V>& o) const
+        {//ref : Book 1(IAL), pag 88.
+            matrix<T,R,c,V> res(0);
+
+            for(size_t k = 0; k < c; k++)
+            {
+                for(size_t i = 0; i < R; i++)
+                {
+                    for(size_t j = 0; j < c; j++)
+                    {
+                        std::cout << k << " : " << i << "," << j << "";
+                        res[i][j] += base::data[i][k] * o[k][j];
+                    }
                 }
             }
 
@@ -72,27 +118,6 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<size_t r> constexpr matrix<T,R,r,V> operator * (const matrix<T,r,C,V>& o) const
-        {//ref : Book 1(IAL), pag 88.
-            matrix<T,R,r,V> res;
-
-            for(size_t i = 0; i < R; i++)
-            {
-                for(size_t j = 0; j < r; j++)
-                {
-                    res[i][j] = 0;
-                    for(size_t k = 0; k < C; k++)
-                    {
-                        res[i][j] += base::data[i][k] * o[k][j];
-                        //std::cout << "(" << sequence<sequence<T,n>,m>::data[i][k] << "," << o[k][j] << ") ";
-                    }
-                    //std::cout << "    ";
-                }
-                //std::cout << "\n";
-            }
-
-            return res;
-        }
 
         constexpr matrix& operator = (const matrix& o)
         {
@@ -104,6 +129,19 @@ namespace oct::nums::v0
                 }
             }
             return *this;
+        }
+
+        constexpr bool operator == (const matrix& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    if(base::data[i][j] == o[i][j]) return false;
+                }
+            }
+
+            return true;
         }
 
         //>>>getter and setters
