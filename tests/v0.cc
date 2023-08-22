@@ -202,14 +202,16 @@ void v0_matrix()
     CU_ASSERT(mx10[2][0] == 0);
     CU_ASSERT(mx10[2][1] == 4);
 
-    //auto mx11 = mx10 * mx9;
+    auto mx11 = mx9 * mx10;
     //mx11.printLn(std::cout);
     //std::cout << "Columns : " << mx11.columns() << "\n";
     //std::cout << "Rows : " << mx11.rows() << "\n";
-    /*CU_ASSERT(mx11[0][0] == 4);
+    CU_ASSERT(mx11.columns() == 2);
+    CU_ASSERT(mx11.rows() == 2);
+    CU_ASSERT(mx11[0][0] == 4);
     CU_ASSERT(mx11[0][1] == 5);
     CU_ASSERT(mx11[1][0] == -3);
-    CU_ASSERT(mx11[1][1] == -7);*/
+    CU_ASSERT(mx11[1][1] == -7);
 
     numbers_here::matrix<int,2ul,2ul,float> mx12;
     mx12[0][0] = 2;
