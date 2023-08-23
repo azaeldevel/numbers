@@ -31,6 +31,45 @@ namespace oct::nums::v0
         z
     };
 
+    template<number N>
+    class Number
+    {
+    private:
+        N n;
+
+    public:
+        Number() = default;
+        Number(const N& v) : n(v)
+        {
+        }
+
+        operator N&()
+        {
+            return n;
+        }
+        operator const N&() const
+        {
+            return n;
+        }
+    };
+
+    template<number N>
+    class Degree : public Number<N>
+    {
+    private:
+
+    public:
+        typedef Number<N> BASE;
+
+    public:
+        Degree() = default;
+        Degree(const N& v) : BASE(v)
+        {
+        }
+
+    };
+
+
     template<natural T> constexpr T factorial(const T& n)
     {
         T number = 1;
