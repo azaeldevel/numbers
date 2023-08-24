@@ -15,7 +15,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t C,size_t R,number V> class matrix : public sequence<sequence<T,C>,R>
+    template<typename T,size_t C,size_t R,number V = T> class matrix : public sequence<sequence<T,C>,R>
     {
     private:
         typedef sequence<sequence<T,C>,R> base;
