@@ -13,7 +13,7 @@
 #include <stdexcept>
 
 #include <core/3/Exception.hh>
-#include <core/3/arrays.hh>
+#include <core/3/array.hh>
 
 namespace oct::nums::v0
 {
