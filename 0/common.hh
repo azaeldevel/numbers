@@ -99,14 +99,14 @@ namespace oct::nums::v0
     *\param T Tipo de dato de la secuencia
     *\param S La cantidad de datos, si es 0, la asignacion es dinamica
     **/
-    template<typename T,size_t S> class sequence
+    template<typename T,size_t S> class array
     {
     protected:
         T data[S];
 
     public:
-        sequence() = default;
-        constexpr sequence(const T& v)
+        array() = default;
+        constexpr array(const T& v)
         {
             for(size_t i = 0; i < S; i++) data[i] = v;
         }
@@ -114,7 +114,7 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }*/
-        constexpr sequence(const std::initializer_list<T>& l)
+        constexpr array(const std::initializer_list<T>& l)
         {
             if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -125,7 +125,7 @@ namespace oct::nums::v0
                 data[i] = c[i];
             }
         }
-        constexpr sequence(const sequence& s)
+        constexpr array(const array& s)
         {
             for(size_t i = 0; i < S; i++) data[i] = s.data[i];
         }
@@ -154,13 +154,13 @@ namespace oct::nums::v0
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        constexpr sequence& operator =(const sequence& s)
+        constexpr array& operator =(const array& s)
         {
             for(size_t i = 0; i < S; i++) data[i] = s.data[i];
 
             return *this;
         }
-        constexpr sequence& operator = (std::initializer_list<T> l)
+        constexpr array& operator = (std::initializer_list<T> l)
         {
             if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -217,7 +217,7 @@ namespace oct::nums::v0
     *\param T Tipo de dato de la secuencia
     *\param L 0 para que la asignacion sea dinamica
     **/
-    template<typename T> class sequence<T,0>
+    template<typename T> class array<T,0>
     {
     protected:
         size_t S;
@@ -225,13 +225,13 @@ namespace oct::nums::v0
         bool free;
 
     public:
-        sequence() = default;
-        sequence(size_t s, const T& v) : S(s),free(true)
+        array() = default;
+        array(size_t s, const T& v) : S(s),free(true)
         {
             data = new T[S];
             for(size_t i = 0; i < S; i++) data[i] = v;
         }
-        sequence(size_t s, T* v) : S(s),free(false)
+        array(size_t s, T* v) : S(s),free(false)
         {
             data = v;
         }
@@ -239,7 +239,7 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++) data[i] = v;
         }*/
-        sequence(const std::initializer_list<T>& l) : S(l.S),free(true)
+        array(const std::initializer_list<T>& l) : S(l.S),free(true)
         {
             if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -251,12 +251,12 @@ namespace oct::nums::v0
                 data[i] = c[i];
             }
         }
-        sequence(const sequence& s)  : S(s.S),free(true)
+        array(const array& s)  : S(s.S),free(true)
         {
             data = new T[S];
             for(size_t i = 0; i < S; i++) data[i] = s.data[i];
         }
-        ~sequence()
+        ~array()
         {
             if(free) delete[] data;
         }
@@ -285,13 +285,13 @@ namespace oct::nums::v0
 
             throw std::out_of_range("La cantidad de datos execede la capacidad del objeto");
         }
-        sequence& operator =(const sequence& s)
+        array& operator =(const array& s)
         {
             for(size_t i = 0; i < S; i++) data[i] = s.data[i];
 
             return *this;
         }
-        sequence& operator = (std::initializer_list<T> l)
+        array& operator = (std::initializer_list<T> l)
         {
             if(l.size() < S) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > S) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");

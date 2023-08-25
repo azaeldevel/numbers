@@ -6,10 +6,10 @@
 namespace oct::nums::v0
 {
 
-    template<number T,size_t L = 3,number V = T> class vector : public sequence<T,L>
+    template<number T,size_t L = 3,number V = T> class vector : public array<T,L>
     {
     private:
-        typedef sequence<T,L> BASE;
+        typedef array<T,L> BASE;
     public:
         vector() = default;
         constexpr vector(const T& v) : BASE(v)
@@ -123,10 +123,10 @@ namespace oct::nums::v0
 
 
 
-    template<number T,number V> class vector<T,2,V> : public sequence<T,2>
+    template<number T,number V> class vector<T,2,V> : public array<T,2>
     {
     private:
-        typedef sequence<T,2> BASE;
+        typedef array<T,2> BASE;
 
     public:
         vector() = default;
@@ -260,10 +260,10 @@ namespace oct::nums::v0
     };
 
 
-    template<number T,number V> class vector<T,3,V> : public sequence<T,3>
+    template<number T,number V> class vector<T,3,V> : public array<T,3>
     {
     private:
-        typedef sequence<T,3> BASE;
+        typedef array<T,3> BASE;
 
     public:
         vector() = default;
