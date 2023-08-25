@@ -21,7 +21,7 @@ void v0_developing()
 
 void v0_shapes()
 {
-    numbers_here::array<float,3> seq1(0);
+    numbers_here::core::array<float,3> seq1(0);
 
     constexpr numbers_here::vector<float> vec1(0,0,0);
     constexpr numbers_here::Triangle<float> tri1(vec1, 1.0);
@@ -311,38 +311,38 @@ void v0_equation()
 
 void v0_sequence()
 {
-    numbers_here::array<int,1ul> sec1(1);
+    numbers_here::core::array<int,1ul> sec1(1);
     CU_ASSERT(sizeof(sec1) == sizeof(int));
     CU_ASSERT(sec1[0] == 1);
 
-    numbers_here::array<int,2ul> sec2(1);
+    numbers_here::core::array<int,2ul> sec2(1);
     CU_ASSERT(sizeof(sec2) == sizeof(int) * 2);
     CU_ASSERT(sec2[0] == 1);
     CU_ASSERT(sec2[1] == 1);
 
-    numbers_here::array<int,3ul> sec3(1);
+    numbers_here::core::array<int,3ul> sec3(1);
     CU_ASSERT(sizeof(sec3) == sizeof(int) * 3);
     CU_ASSERT(sec3[0] == 1);
     CU_ASSERT(sec3[1] == 1);
     CU_ASSERT(sec3[2] == 1);
 
-    constexpr numbers_here::array<int,3ul> sec4(1);
+    constexpr numbers_here::core::array<int,3ul> sec4(1);
 
-    numbers_here::array<int,10> sec5(1);
+    numbers_here::core::array<int,10> sec5(1);
     CU_ASSERT(sizeof(sec5) == sizeof(int) * sec5.size());
     CU_ASSERT(sec5[0] == 1);
     CU_ASSERT(sec5[1] == 1);
     CU_ASSERT(sec5[2] == 1);
     CU_ASSERT(sec5[9] == 1);
 
-    numbers_here::array<unsigned long long,10> sec6(1);
+    numbers_here::core::array<unsigned long long,10> sec6(1);
     CU_ASSERT(sizeof(sec6) == sizeof(unsigned long long) * sec6.size());
     CU_ASSERT(sec6[0] == 1);
     CU_ASSERT(sec6[1] == 1);
     CU_ASSERT(sec6[2] == 1);
     CU_ASSERT(sec6[9] == 1);
 
-    numbers_here::array<unsigned long long,0> sec7(10,1);
+    numbers_here::core::array<unsigned long long,0> sec7(10,1);
     CU_ASSERT(sizeof(sec7) >= sizeof(unsigned long long*) + sizeof(size_t) + sizeof(bool));
     CU_ASSERT(sec7[0] == 1);
     CU_ASSERT(sec7[1] == 1);

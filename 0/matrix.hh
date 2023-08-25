@@ -15,10 +15,10 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t C,size_t R,number V = T> class matrix : public array<array<T,C>,R>
+    template<typename T,size_t C,size_t R,number V = T> class matrix : public core::array<core::array<T,C>,R>
     {
     private:
-        typedef array<array<T,C>,R> base;
+        typedef core::array<core::array<T,C>,R> base;
 
     public:
         matrix() = default;

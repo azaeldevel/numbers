@@ -16,10 +16,10 @@ namespace oct::nums::v0
     *\param L Cantidad de variables
     **/
     template<number T,size_t L,number V = T,char C = 'x'>
-    class Monomio : public array<T,L + 1>
+    class Monomio : public core::array<T,L + 1>
     {
     private:
-        typedef array<T,L + 1> BASE;
+        typedef core::array<T,L + 1> BASE;
 
     public:
         constexpr Monomio() = default;

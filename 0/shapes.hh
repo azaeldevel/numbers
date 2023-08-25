@@ -17,10 +17,10 @@ namespace oct::nums::v0
     *\param V Tipo de datos para calculos
     **/
     template<number C, size_t D, size_t P,number V = C>
-    class Shape : public array<vector<C,D>,P>
+    class Shape : public core::array<vector<C,D>,P>
     {
     public:
-        typedef Shape<C,D,P,V> BASE;
+        typedef core::array<vector<C,D>,P> BASE;
 
     public:
         Shape() = default;

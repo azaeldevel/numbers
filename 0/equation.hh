@@ -14,23 +14,25 @@ namespace oct::nums::v0
     *\param G El grado de la ecuacion
     *\param V Tipo de datos usado para calculos
     **/
-    template<typename T,size_t L,size_t G,number V> class equation : public array<T,L>
+    template<typename T,size_t L,size_t G,number V> class equation : public core::array<T,L>
     {
+    private:
+        typedef core::array<T,L> BASE;
     protected:
         T _c_;
 
     public:
         equation() = default;
-        constexpr equation(const std::initializer_list<T>& l,const T& c) : array<T,L>(l),_c_(c)
+        constexpr equation(const std::initializer_list<T>& l,const T& c) : BASE(l),_c_(c)
         {
         }
-        constexpr equation(const std::initializer_list<T>& l) : array<T,L>(l),_c_(0)
+        constexpr equation(const std::initializer_list<T>& l) : BASE(l),_c_(0)
         {
         }
-        constexpr equation(const array<T,L>& s,const T& c) : array<T,L>(s),_c_(c)
+        constexpr equation(const BASE& s,const T& c) : BASE(s),_c_(c)
         {
         }
-        constexpr equation(const array<T,L>& s) : array<T,L>(s),_c_(0)
+        constexpr equation(const BASE& s) : BASE(s),_c_(0)
         {
         }
 
@@ -42,7 +44,7 @@ namespace oct::nums::v0
         }
         constexpr equation& operator = (const equation& e)
         {
-            ((array<T,L>*)this)->operator =((const array<T,L>&)e);
+            ((BASE*)this)->operator =((const BASE&)e);
             _c_ = e._c_;
 
             return *this;
@@ -59,13 +61,13 @@ namespace oct::nums::v0
         }
         constexpr T& a(size_t i)
         {
-            if(i < L) return array<T,L>::data[i];
+            if(i < L) return BASE::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }
         constexpr const T& a(size_t i) const
         {
-            if(i < L) return array<T,L>::data[i];
+            if(i < L) return BASE::data[i];
 
             throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
         }

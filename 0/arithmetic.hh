@@ -16,29 +16,31 @@ namespace oct::nums::v0
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public array<T,L>
+    template<typename T,natural Z,Z L> class PrimeNumbers : public core::array<T,L>
     {
+    private:
+        typedef core::array<T,L> BASE;
     public:
         constexpr PrimeNumbers()
         {
             for(Z i = 0; i < L; i++)
             {
-                array<T,L>::data[i].number = i;
-                array<T,L>::data[i].prime = true;
+                BASE::data[i].number = i;
+                BASE::data[i].prime = true;
             }
         }
 
         constexpr void erastostenes()
         {
-            array<T,L>::data[0].prime = false;
-            array<T,L>::data[1].prime = false;
+            BASE::data[0].prime = false;
+            BASE::data[1].prime = false;
             Z temp;
             for(Z i = 2; i < L; i++)
             {
                 for(Z j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) array<T,L>::data[temp].prime = false;
+                    if(temp < L) BASE::data[temp].prime = false;
                 }
             }
 
@@ -48,15 +50,17 @@ namespace oct::nums::v0
         {
             for(Z i = 0; i < L; i++)
             {
-                if(array<T,L>::data[i].prime) out << array<T,L>::data[i].number << "\n";
+                if(BASE::data[i].prime) out << BASE::data[i].number << "\n";
             }
         }
     };
 
 
 
-    template<natural T,size_t L> class Primes : public array<T,L>
+    template<natural T,size_t L> class Primes : public core::array<T,L>
     {
+    private:
+        typedef core::array<T,L> BASE;
 
     public:
         constexpr Primes()
@@ -72,7 +76,7 @@ namespace oct::nums::v0
                 for(size_t j = 2; j < L; j++)
                 {
                     temp = i * j;
-                    if(temp < L) array<T,L>::data[temp] = 0;
+                    if(temp < L) BASE::data[temp] = 0;
                     else break;
                 }
             }
@@ -82,17 +86,17 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++)
             {
-                if(array<T,L>::data[i] > 0) out << array<T,L>::data[i] << "\n";
+                if(BASE::data[i] > 0) out << BASE::data[i] << "\n";
             }
         }
     private:
         constexpr void init()
         {
-            array<T,L>::data[0] = 0;
-            array<T,L>::data[1] = 0;
+            BASE::data[0] = 0;
+            BASE::data[1] = 0;
             for(size_t i = 2; i < L; i++)
             {
-                array<T,L>::data[i] = i;
+                BASE::data[i] = i;
             }
         }
     };
