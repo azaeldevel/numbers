@@ -136,8 +136,9 @@ void v0_arithmetic()
 void v0_matrix()
 {
     numbers_here::matrix<int,3ul,3ul,float> mx1(1);
-    CU_ASSERT(sizeof(mx1) == sizeof(int) * 3 * 3);
-    //std::cout << "Size : " << sizeof(mx1) << "\n";
+    CU_ASSERT(sizeof(mx1) == sizeof(int) * 9);
+    //std::cout << "Size matrix : " << sizeof(mx1) << "\n";
+    //std::cout << "Size int : " << sizeof(int) << "\n";
     //mx1.printLn(std::cout);
 
     numbers_here::matrix<int,1ul,3ul,float> mx2(1);
@@ -473,6 +474,22 @@ void v0_vector()
     CU_ASSERT_DECIMAL(vect30.x(), 2.2,infimium);
     CU_ASSERT_DECIMAL(vect30.y(), 0,infimium);
     CU_ASSERT_DECIMAL(vect30.z(), 1.1,infimium);
+
+    numbers_here::vector<float,3> vect31(0);
+    vect31 = vect30;
+    CU_ASSERT_DECIMAL(vect31.x(), 2.2,infimium);
+    CU_ASSERT_DECIMAL(vect31.y(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect31.z(), 1.1,infimium);
+    //vect31.printLn(std::cout);
+
+    numbers_here::vector<float,3> vect32(0);
+    vect32.x() = 2.2;
+    vect32.y() = 0;
+    vect32.z() = 1.1;
+    CU_ASSERT_DECIMAL(vect32.x(), 2.2,infimium);
+    CU_ASSERT_DECIMAL(vect32.y(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect32.z(), 1.1,infimium);
+    //vect32.printLn(std::cout);
 }
 
 void v0_funtions()
