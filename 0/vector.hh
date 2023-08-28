@@ -96,6 +96,12 @@ namespace oct::nums::v0
 
             return *this;
         }
+        constexpr vector& operator = (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] = s;
+
+            return *this;
+        }
 
 
 
