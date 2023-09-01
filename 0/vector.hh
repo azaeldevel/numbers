@@ -80,7 +80,7 @@ namespace oct::nums::v0
             return res;
         }
         //https://es.wikipedia.org/wiki/Producto_vectorial
-        constexpr vector operator * (const vector& s)
+        constexpr vector operator * (const vector& s) const
         {
             static_assert(L == 3);
             vector res;
@@ -282,6 +282,18 @@ namespace oct::nums::v0
         return t;
     }
 
+    /**
+    *\brief Producto escalar entre vectores
+    *
+    **/
+    template<number T,size_t L,number V> constexpr T dot(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    {
+        T t = 0;
+        for(size_t i = 0; i < L; i++) t += v1[i]*v2[i];
+
+        return t;
+    }
+
 
     template<number T,size_t L,number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)
     {
@@ -295,10 +307,7 @@ namespace oct::nums::v0
 
     template<number T,size_t L,number V = T> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
-        vector<T,L,V> newv;
-
-
-        return newv;
+        return v1 * v2;
     }
 
 

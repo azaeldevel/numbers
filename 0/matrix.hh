@@ -162,6 +162,23 @@ namespace oct::nums::v0
             return true;
         }
 
+        /*operator T*()
+        {
+            return (T*)&base::data[0];
+        }
+        operator const T*() const
+        {
+            return (T*)&base::data[0];
+        }
+        operator void*()
+        {
+            return (void*)&base::data[0];
+        }
+        operator const void*() const
+        {
+            return (const void*)&base::data[0];
+        }*/
+
         //>>>getter and setters
         constexpr size_t columns() const
         {
