@@ -243,6 +243,12 @@ namespace oct::nums::v0
     public:
         Triangle() = default;
         /**
+        *\brief Contructor de brakets
+        **/
+        constexpr Triangle(const std::initializer_list<C>& l) : BASE(l)
+        {
+        }
+        /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
         constexpr Triangle(const vector<C,D> vs[3]) : BASE(vs)

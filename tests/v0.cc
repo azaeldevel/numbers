@@ -80,6 +80,17 @@ void v0_shapes()
     CU_ASSERT(line1[1].x() == 6);
     CU_ASSERT(line1[1].y() == 8);
     CU_ASSERT(line1[1].z() == 3);
+
+    constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
+    CU_ASSERT(tri2[0].x() == 0);
+    CU_ASSERT(tri2[0].y() == 0);
+    CU_ASSERT(tri2[0].z() == 0);
+    CU_ASSERT(tri2[1].x() == 1);
+    CU_ASSERT(tri2[1].y() == 1);
+    CU_ASSERT(tri2[1].z() == 1);
+    CU_ASSERT(tri2[2].x() == 2);
+    CU_ASSERT(tri2[2].y() == 2);
+    CU_ASSERT(tri2[2].z() == 2);
 }
 
 void v0_algebra()
