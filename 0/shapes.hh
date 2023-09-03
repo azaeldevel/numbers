@@ -47,6 +47,23 @@ namespace oct::nums::v0
         Shape() = default;
 
         /**
+        *\brief
+        **/
+        constexpr Shape(const std::initializer_list<C>& l)
+        {
+            if(l.size() < D * P) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > D * P) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+
+            const int* c = std::data(l);
+            for(size_t i = 0; i < P; i++)
+            {
+                for(size_t j = 0; j < D; j++)
+                {
+                    BASE::data[i][j] = c[(D * i) + j];
+                }
+            }
+        }
+        /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
         constexpr Shape(const vector<C,D> vs[2]) : BASE(vs)
@@ -56,14 +73,14 @@ namespace oct::nums::v0
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
-        Shape(size_t s, const C& v) : BASE(s,v)
+        constexpr Shape(size_t s, const C& v) : BASE(s,v)
         {
         }
 
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
-        Shape(size_t s, C* v) : BASE(s,v)
+        constexpr Shape(size_t s, C* v) : BASE(s,v)
         {
         }
 
@@ -130,6 +147,12 @@ namespace oct::nums::v0
         Line() = default;
 
         /**
+        *\brief Contructor de brakets
+        **/
+        constexpr Line(const std::initializer_list<C>& l) : BASE(l)
+        {
+        }
+        /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
         constexpr Line(const vector<C,D> vs[2]) : BASE(vs)
@@ -150,6 +173,12 @@ namespace oct::nums::v0
     public:
         typedef Shape<C,D,P,V> BASE;
         Plane() = default;
+        /**
+        *\brief Contructor de brakets
+        **/
+        constexpr Plane(const std::initializer_list<C>& l) : BASE(l)
+        {
+        }
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
@@ -175,6 +204,12 @@ namespace oct::nums::v0
     public:
         typedef Shape<C,D,P,V> BASE;
         Spatial() = default;
+        /**
+        *\brief Contructor de brakets
+        **/
+        constexpr Spatial(const std::initializer_list<C>& l) : BASE(l)
+        {
+        }
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
