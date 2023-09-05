@@ -65,6 +65,32 @@ void v0_shapes()
     constexpr numbers_here::Circle<float,3,200> cir1(vec4, 1.0);
     //cir1.printLn(std::cout);
 
+    constexpr numbers_here::Shape<int,3,2,int> shape1{-1,9,2,6,8,3};
+    CU_ASSERT(shape1[0].x() == -1);
+    CU_ASSERT(shape1[0].y() == 9);
+    CU_ASSERT(shape1[0].z() == 2);
+    CU_ASSERT(shape1[1].x() == 6);
+    CU_ASSERT(shape1[1].y() == 8);
+    CU_ASSERT(shape1[1].z() == 3);
+
+    constexpr numbers_here::Line<int,3> line1{-1,9,2,6,8,3};
+    CU_ASSERT(line1[0].x() == -1);
+    CU_ASSERT(line1[0].y() == 9);
+    CU_ASSERT(line1[0].z() == 2);
+    CU_ASSERT(line1[1].x() == 6);
+    CU_ASSERT(line1[1].y() == 8);
+    CU_ASSERT(line1[1].z() == 3);
+
+    constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
+    CU_ASSERT(tri2[0].x() == 0);
+    CU_ASSERT(tri2[0].y() == 0);
+    CU_ASSERT(tri2[0].z() == 0);
+    CU_ASSERT(tri2[1].x() == 1);
+    CU_ASSERT(tri2[1].y() == 1);
+    CU_ASSERT(tri2[1].z() == 1);
+    CU_ASSERT(tri2[2].x() == 2);
+    CU_ASSERT(tri2[2].y() == 2);
+    CU_ASSERT(tri2[2].z() == 2);
 }
 
 void v0_algebra()
