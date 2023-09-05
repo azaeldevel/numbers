@@ -84,9 +84,9 @@ namespace oct::nums::v0
         {
             static_assert(L == 3);
             vector res;
-            res[0] = BASE::data[1] * s[2] - BASE::data[2] * s[1];
-            res[1] = BASE::data[2] * s[0] - BASE::data[0] * s[2];
-            res[2] = BASE::data[0] * s[1] - BASE::data[1] * s[0];
+            res[0] = (BASE::data[1] * s[2]) - (BASE::data[2] * s[1]);
+            res[1] = (BASE::data[2] * s[0]) - (BASE::data[0] * s[2]);
+            res[2] = (BASE::data[0] * s[1]) - (BASE::data[1] * s[0]);
 
             return res;
         }
