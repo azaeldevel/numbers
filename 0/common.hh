@@ -14,16 +14,17 @@
 
 #include <core/3/Exception.hh>
 #include <core/3/array.hh>
+#include <core/3/numbers.hh>
 
 namespace oct::nums::v0
 {
     namespace core_here = oct::core::v3;
     namespace core = oct::core::v3;
 
-    template<typename T> concept natural = std::same_as<T, unsigned char> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int> || std::same_as<T, unsigned long> || std::same_as<T, unsigned long long> || std::same_as<T, size_t>;
+    /*template<typename T> concept natural = std::same_as<T, unsigned char> || std::same_as<T, unsigned short> || std::same_as<T, unsigned int> || std::same_as<T, unsigned long> || std::same_as<T, unsigned long long> || std::same_as<T, size_t>;
     template<typename T> concept integer = std::same_as<T, signed char> || std::same_as<T, signed short> || std::same_as<T, signed short> || std::same_as<T, signed int> || std::same_as<T, signed long> || std::same_as<T, signed long long> || natural<T>;
     template<typename T> concept real = std::same_as<T, float> || std::same_as<T, double>  || std::same_as<T, long double> || integer<T>;
-    template<typename T> concept number = real<T>;
+    template<typename T> concept number = real<T>;*/
     //template<typename T> concept dimension = static_assert(T == 2);
 
     enum class axis : unsigned char
@@ -33,7 +34,7 @@ namespace oct::nums::v0
         z
     };
 
-    template<number N>
+    template<core::number N>
     class Number
     {
     private:
@@ -55,7 +56,7 @@ namespace oct::nums::v0
         }
     };
 
-    template<number N>
+    template<core::number N>
     class Degree : public Number<N>
     {
     private:
@@ -72,7 +73,7 @@ namespace oct::nums::v0
     };
 
 
-    template<natural T> constexpr T factorial(const T& n)
+    template<core::natural T> constexpr T factorial(const T& n)
     {
         T number = 1;
         for(T i = 1; i <= n; i++) number *= i;
@@ -99,7 +100,7 @@ namespace oct::nums::v0
 
 
 
-    template<typename T,size_t D,number V = T> struct function
+    template<typename T,size_t D,core::number V = T> struct function
     {
     };
 

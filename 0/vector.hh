@@ -6,7 +6,7 @@
 namespace oct::nums::v0
 {
 
-    template<number T,size_t L = 3,number V = T> class vector : public core::array<T,L>
+    template<core::number T,size_t L = 3,core::number V = T> class vector : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;
@@ -257,15 +257,15 @@ namespace oct::nums::v0
     };
 
 
-    template<number T,size_t L,number V> constexpr T x(const vector<T,L,V>& v)
+    template<core::number T,size_t L,core::number V> constexpr T x(const vector<T,L,V>& v)
     {
         return v[0];
     }
-    template<number T,size_t L,number V> constexpr T y(const vector<T,L,V>& v)
+    template<core::number T,size_t L,core::number V> constexpr T y(const vector<T,L,V>& v)
     {
         return v[1];
     }
-    template<number T,size_t L,number V> constexpr T z(const vector<T,L,V>& v)
+    template<core::number T,size_t L,core::number V> constexpr T z(const vector<T,L,V>& v)
     {
         return v[2];
     }
@@ -274,7 +274,7 @@ namespace oct::nums::v0
     *\brief Producto escalar entre vectores
     *
     **/
-    template<number T,size_t L,number V> constexpr T scalar(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    template<core::number T,size_t L,core::number V> constexpr T scalar(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
         T t = 0;
         for(size_t i = 0; i < L; i++) t += v1[i]*v2[i];
@@ -286,7 +286,7 @@ namespace oct::nums::v0
     *\brief Producto escalar entre vectores
     *
     **/
-    template<number T,size_t L,number V> constexpr T dot(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    template<core::number T,size_t L,core::number V> constexpr T dot(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
         T t = 0;
         for(size_t i = 0; i < L; i++) t += v1[i]*v2[i];
@@ -295,7 +295,7 @@ namespace oct::nums::v0
     }
 
 
-    template<number T,size_t L,number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)
+    template<core::number T,size_t L,core::number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)
     {
         V l = v.length();
         vector<T,L,V> newv = v;
@@ -305,7 +305,7 @@ namespace oct::nums::v0
     }
 
 
-    template<number T,size_t L,number V = T> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    template<core::number T,size_t L,core::number V = T> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
         return v1 * v2;
     }

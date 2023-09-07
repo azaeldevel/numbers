@@ -14,7 +14,7 @@ namespace oct::nums::v0
     *\param G El grado de la ecuacion
     *\param V Tipo de datos usado para calculos
     **/
-    template<typename T,size_t L,size_t G,number V> class equation : public core::array<T,L>
+    template<typename T,size_t L,size_t G,core::number V> class equation : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;
@@ -84,14 +84,14 @@ namespace oct::nums::v0
     *\param V Tipo de datos usado para calculos
     *\param i variable que sera resuelta
     **/
-    template<typename T,natural L,natural G,number V> V resolve();
+    template<typename T,core::natural L,core::natural G,core::number V> V resolve();
 
 
-    template<number T,number V> V resolve(const equation<T,1,1,V>& eq)
+    template<core::number T,core::number V> V resolve(const equation<T,1,1,V>& eq)
     {
         return V(eq.c())/V(eq[0]);
     }
-    template<number T,number V> V resolve(const equation<T,2,1,V>& eq, size_t index, const T& v)
+    template<core::number T,core::number V> V resolve(const equation<T,2,1,V>& eq, size_t index, const T& v)
     {
         if(index == 0) return (eq.c() - (eq[1] * v)) / V(eq[0]);
         else if(index == 1) return V(eq.c() - (eq[0] * v)) / V(eq[1]);
@@ -105,7 +105,7 @@ namespace oct::nums::v0
     *\param T Tipo de dato
     *\param V Tipo de datos usado para calculos
     **/
-    template<number T,size_t L,number V> V clearance(const equation<T,L,1,V>& eq, size_t index)
+    template<core::number T,size_t L,core::number V> V clearance(const equation<T,L,1,V>& eq, size_t index)
     {
 
 
@@ -118,7 +118,7 @@ namespace oct::nums::v0
     *\param L La cantidad de variables
     *\param V Tipo de datos usado para calculos
     **/
-    template<number T,size_t L,number V> V resolve(const equation<T,L,1,V>* eqs, size_t leng)
+    template<core::number T,size_t L,core::number V> V resolve(const equation<T,L,1,V>* eqs, size_t leng)
     {
         std::cout << "Resolviendo ecuacion de " << L << "º\n";
 

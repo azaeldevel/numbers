@@ -15,7 +15,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t C,size_t R,number V = T> class matrix : public core::array<core::array<T,C>,R>
+    template<typename T,size_t C,size_t R,core::number V = T> class matrix : public core::array<core::array<T,C>,R>
     {
     private:
         typedef core::array<core::array<T,C>,R> base;
@@ -218,7 +218,7 @@ namespace oct::nums::v0
     *\param n Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t n,size_t m,number V> class extended : public matrix<T,n,m,V>
+    template<typename T,size_t n,size_t m,core::number V> class extended : public matrix<T,n,m,V>
     {
     private:
         matrix<T,1,m,V> _c_;

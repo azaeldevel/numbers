@@ -15,7 +15,7 @@ namespace oct::nums::v0
     *\param L la cantiad de variables del monomio
     *\param L Cantidad de variables
     **/
-    template<number T,size_t L,number V = T,char C = 'x'>
+    template<core::number T,size_t L,core::number V = T,char C = 'x'>
     class Monomio : public core::array<T,L + 1>
     {
     private:

@@ -10,13 +10,13 @@
 namespace oct::nums::v0
 {
 
-    template<natural T> struct CaseNumber
+    template<core::natural T> struct CaseNumber
     {
         T number;
         bool prime;
     };
 
-    template<typename T,natural Z,Z L> class PrimeNumbers : public core::array<T,L>
+    template<typename T,core::natural Z,Z L> class PrimeNumbers : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;
@@ -57,7 +57,7 @@ namespace oct::nums::v0
 
 
 
-    template<natural T,size_t L> class Primes : public core::array<T,L>
+    template<core::natural T,size_t L> class Primes : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;

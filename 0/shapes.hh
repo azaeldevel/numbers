@@ -37,7 +37,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertises que tiene
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D, size_t P,number V = C>
+    template<core::number C, size_t D, size_t P,core::number V = C>
     class Shape : public core::array<vector<C,D>,P>
     {
     public:
@@ -138,7 +138,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Line : public Shape<C,D,2,V>
     {
     public:
@@ -167,7 +167,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertises que tiene
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D,size_t P,number V = C>
+    template<core::number C, size_t D,size_t P,core::number V = C>
     class Plane : public Shape<C,D,P,V>
     {
     public:
@@ -198,7 +198,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertises que tiene
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D,size_t P,number V = C>
+    template<core::number C, size_t D,size_t P,core::number V = C>
     class Spatial : public Shape<C,D,P,V>
     {
     public:
@@ -235,7 +235,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Triangle : public Plane<C,D,3,V>
     {
     public:
@@ -294,7 +294,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Equilateral : public Triangle<C,D,V>
     {
     public:
@@ -324,7 +324,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Scalene : public Triangle<C,D,V>
     {
     public:
@@ -376,7 +376,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Isosceles : public Triangle<C,D,V>
     {
     public:
@@ -432,7 +432,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D, size_t B,number V = C>
+    template<core::number C, size_t D, size_t B,core::number V = C>
     class Pyramid : public Spatial<C,D,B + 1,V>
     {
     public:
@@ -496,7 +496,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D = 3,number V = C>
+    template<core::number C, size_t D = 3,core::number V = C>
     class Rectangle : public Plane<C,D,4,V>
     {
     public:
@@ -584,7 +584,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertices en la base
     *\param V Tipo de datos para calculos
     **/
-    template<number C, size_t D, size_t P,number V = C>
+    template<core::number C, size_t D, size_t P,core::number V = C>
     class Circle : public Plane<C,D,P,V>
     {
     public:
@@ -657,4 +657,4 @@ namespace oct::nums::v0
 
 }
 
-#endif // OCTETOS_NUMBERS_MATH_HH
+#endif
