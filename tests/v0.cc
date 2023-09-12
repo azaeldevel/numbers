@@ -13,6 +13,7 @@
 
 
 namespace numbers_here = oct::nums::v0;
+namespace numbers = oct::nums::v0;
 
 
 
@@ -332,10 +333,20 @@ void v0_matrix()
 
     auto mx21 = mx19 * mx20;
     //mx21.print(std::cout);
-    std::cout<< std::setprecision(3)<< std::fixed;
+    //std::cout<< std::setprecision(3)<< std::fixed;
+    //Algebra Lineal pag 96
     constexpr numbers_here::matrix<float,3,3,float> mx22 = {1,1,1,0,2,3,5,5,1};
     auto mx23 = mx22.inverse();
-    mx23.print(std::cout);
+    /*mx23.print(std::cout);
+    CU_ASSERT(numbers::core::equal(mx23[0][0], (float)13/(float)3));
+    CU_ASSERT(numbers::core::equal(mx23[0][1], (float)-1/(float)2));
+    CU_ASSERT(numbers::core::equal(mx23[0][2], (float)-1/(float)8));
+    CU_ASSERT(numbers::core::equal(mx23[1][0], (float)-15/(float)8));
+    CU_ASSERT(numbers::core::equal(mx23[1][1], (float)1/(float)1));
+    CU_ASSERT(numbers::core::equal(mx23[1][2], (float)3/(float)8));
+    CU_ASSERT(numbers::core::equal(mx23[2][0], (float)5/(float)4));
+    CU_ASSERT(numbers::core::equal(mx23[2][1], (float)0));
+    CU_ASSERT(numbers::core::equal(mx23[2][2], (float)-1/(float)4));*/
 
     constexpr numbers_here::matrix<int,4,3,float> mx24(mx18);
     //mx24.print(std::cout);
@@ -595,6 +606,27 @@ void v0_funtions()
 {
     CU_ASSERT(numbers_here::factorial(3ul) == 6);
     CU_ASSERT(numbers_here::factorial(6ul) == 720);
+    CU_ASSERT(numbers_here::factorial(9ul) == 362880);
+
+    auto list1 = numbers::list<int,2ul>();
+    //list1.print(std::cout);
+    CU_ASSERT(list1[0] == 1)
+    CU_ASSERT(list1[1] == 2)
+
+    auto list2 = numbers::list<int,3ul>();
+    //list1.print(std::cout);
+    CU_ASSERT(list2[0] == 1)
+    CU_ASSERT(list2[1] == 2)
+    CU_ASSERT(list2[2] == 3)
+
+    auto list3 = numbers::list<int,4ul>();
+    //list1.print(std::cout);
+    CU_ASSERT(list3[0] == 1)
+    CU_ASSERT(list3[1] == 2)
+    CU_ASSERT(list3[2] == 3)
+    CU_ASSERT(list3[3] == 4)
+
+    auto persm1 = numbers::permutations<int,4ul>();
 }
 
 

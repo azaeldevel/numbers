@@ -179,6 +179,20 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr matrix operator / (const T& o) const
+        {
+            matrix res;
+
+            for(size_t i = 0; i < C; i++)
+            {
+                for(size_t j = 0; j < R; j++)
+                {
+                    res[i][j] = base::data[i][j] / o;
+                }
+            }
+
+            return res;
+        }
 
         constexpr matrix& operator = (const matrix& o)
         {
@@ -230,20 +244,41 @@ namespace oct::nums::v0
             }
         }
 
-        constexpr T neutralizar(const T& base, const T& target) const
-        {
-            if(base < target) return base - target;
-            else if(base > target) return target - base;
-        }
-        constexpr matrix inverse () const
+        constexpr matrix adj() const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
-            matrix m(*this),u;
-            u.diagonal(1);
+            matrix m(*this);
+
 
 
 
             return m;
+        }
+        constexpr matrix<T,C-1,R-1,V> cofactor() const
+        {
+            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+
+
+
+
+
+            return 0;
+        }
+        constexpr V det () const
+        {
+            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+
+
+
+
+
+            return 1;
+        }
+        constexpr matrix inverse () const
+        {
+            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+
+            return adj()/det();
         }
 
         /*operator T*()
