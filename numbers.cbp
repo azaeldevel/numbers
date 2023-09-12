@@ -107,7 +107,7 @@
 		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
-		<Unit filename="tests/gauss-jordan-2.cc">
+		<Unit filename="tests/gauss-jordan-1.cc">
 			<Option target="fast-dbg" />
 		</Unit>
 		<Unit filename="tests/main.cc">
