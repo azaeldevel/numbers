@@ -39,6 +39,15 @@
 					<Add directory="../numbers" />
 				</Compiler>
 			</Target>
+			<Target title="fast-dbg">
+				<Option output="bin/Debug/fast" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin/Debug/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-pedantic" />
@@ -51,8 +60,16 @@
 		<Linker>
 			<Add option="`pkg-config cunit --libs`" />
 		</Linker>
-		<Unit filename="0/algebra.hh" />
-		<Unit filename="0/arithmetic.hh" />
+		<Unit filename="0/algebra.hh">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/arithmetic.hh">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
 		<Unit filename="0/common.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>
@@ -62,13 +79,36 @@
 		<Unit filename="0/equation.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
-		<Unit filename="0/matrix.cc" />
-		<Unit filename="0/matrix.hh" />
-		<Unit filename="0/shapes.hh" />
-		<Unit filename="0/statistics.hh" />
-		<Unit filename="0/vector.cc" />
+		<Unit filename="0/matrix.cc">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/matrix.hh">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/shapes.hh">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/statistics.hh">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="0/vector.cc">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="tests-dbg-v0" />
+		</Unit>
 		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />
+		</Unit>
+		<Unit filename="tests/gauss-jordan-2.cc">
+			<Option target="fast-dbg" />
 		</Unit>
 		<Unit filename="tests/main.cc">
 			<Option target="tests-dbg-v0" />

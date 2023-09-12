@@ -28,6 +28,35 @@ namespace oct::nums::v0
         constexpr matrix(const matrix& o) : base(o)
         {
         }
+        /***
+        *\brief Contructor de copias para un matrix
+        *
+        */
+        constexpr matrix(const matrix<T,C - 1,R,V>& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    if(j < C - 1) base::data[i][j] = o[i][j];
+                    else base::data[i][j] = 0;
+                }
+            }
+        }
+        /***
+        *\brief Contructor de copias para un matrix aumentada
+        *
+        */
+        constexpr matrix(const matrix<T,C + 1,R,V>& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    base::data[i][j] = o[i][j];
+                }
+            }
+        }
         constexpr matrix(const std::initializer_list<T>& l)
         {
             if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
@@ -199,6 +228,22 @@ namespace oct::nums::v0
                     base::data[i][j] = o[j][i];
                 }
             }
+        }
+
+        constexpr T neutralizar(const T& base, const T& target) const
+        {
+            if(base < target) return base - target;
+            else if(base > target) return target - base;
+        }
+        constexpr matrix inverse () const
+        {
+            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+            matrix m(*this),u;
+            u.diagonal(1);
+
+
+
+            return m;
         }
 
         /*operator T*()
