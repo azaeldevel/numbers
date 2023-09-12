@@ -290,7 +290,42 @@ void v0_matrix()
     //eqSA[1] = 10;
     mx16[2][0] = 1;
 
-    //numbers_here::matrix<int,3ul,3ul,float> mx17 = mx15 * mx16;
+    numbers_here::matrix<float,3,3,float> mx17;
+    mx17.diagonal(1.5);
+    //mx17.print(std::cout);
+
+
+    constexpr numbers_here::matrix<int,3,3,float> mx18 = {1,2,3,4,5,6,7,8,9};
+    //mx18.print(std::cout);
+    CU_ASSERT(mx18[0][0] == 1);
+    CU_ASSERT(mx18[0][1] == 2);
+    CU_ASSERT(mx18[0][2] == 3);
+    CU_ASSERT(mx18[1][0] == 4);
+    CU_ASSERT(mx18[1][1] == 5);
+    CU_ASSERT(mx18[1][2] == 6);
+    CU_ASSERT(mx18[2][0] == 7);
+    CU_ASSERT(mx18[2][1] == 8);
+    CU_ASSERT(mx18[2][2] == 9);
+
+
+    constexpr numbers_here::matrix<int,3,2,float> mx19 = {1,2,3,4,5,6};
+    //mx19.print(std::cout);
+    CU_ASSERT(mx19[0][0] == 1);
+    CU_ASSERT(mx19[0][1] == 2);
+    CU_ASSERT(mx19[0][2] == 3);
+    CU_ASSERT(mx19[1][0] == 4);
+    CU_ASSERT(mx19[1][1] == 5);
+    CU_ASSERT(mx19[1][2] == 6);
+
+    numbers_here::matrix<int,2,3,float> mx20;
+    mx20.transpose(mx19);
+    mx20.print(std::cout);
+    CU_ASSERT(mx20[0][0] == 1);
+    CU_ASSERT(mx20[1][0] == 2);
+    CU_ASSERT(mx20[2][0] == 3);
+    CU_ASSERT(mx20[0][1] == 4);
+    CU_ASSERT(mx20[1][1] == 5);
+    CU_ASSERT(mx20[2][1] == 6);
 }
 
 

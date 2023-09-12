@@ -2,39 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="tests-dbg-v0" />
+	<File name="0/arithmetic.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1297" topLine="63" />
+		</Cursor>
+	</File>
 	<File name="tests/v0.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="418" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="0/matrix.hh" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4166" topLine="157" />
-		</Cursor>
-	</File>
-	<File name="0/common.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2030" topLine="65" />
-		</Cursor>
-	</File>
-	<File name="0/shapes.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="13234" topLine="482" />
-		</Cursor>
-	</File>
-	<File name="0/common.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="305" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="0/equation.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="476" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="tests/v0.cc" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3038" topLine="79" />
 		</Cursor>
 	</File>
 	<File name="tests/main.cc" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,19 +17,49 @@
 			<Cursor1 position="1539" topLine="56" />
 		</Cursor>
 	</File>
-	<File name="0/arithmetic.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="0/shapes.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1992" topLine="80" />
+			<Cursor1 position="860" topLine="23" />
+		</Cursor>
+	</File>
+	<File name="0/matrix.hh" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5428" topLine="206" />
+		</Cursor>
+	</File>
+	<File name="0/vector.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="73" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="0/equation.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3152" topLine="100" />
+		</Cursor>
+	</File>
+	<File name="0/statistics.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4150" topLine="118" />
 		</Cursor>
 	</File>
 	<File name="0/algebra.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="517" topLine="0" />
+			<Cursor1 position="413" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="0/vector.hh" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="tests/v0.cc" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="211" topLine="0" />
+			<Cursor1 position="3038" topLine="79" />
+		</Cursor>
+	</File>
+	<File name="0/common.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2030" topLine="65" />
+		</Cursor>
+	</File>
+	<File name="0/common.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="36" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

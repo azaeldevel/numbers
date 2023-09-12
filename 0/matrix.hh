@@ -28,6 +28,20 @@ namespace oct::nums::v0
         constexpr matrix(const matrix& o) : base(o)
         {
         }
+        constexpr matrix(const std::initializer_list<T>& l)
+        {
+            if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+
+            const T* c = std::data(l);
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    base::data[i][j] = c[(C * i) + j];
+                }
+            }
+        }
 
 
         constexpr matrix operator + (const matrix& o) const
@@ -162,6 +176,31 @@ namespace oct::nums::v0
             return true;
         }
 
+        void diagonal(const T& v)
+        {
+            static_assert(C == R,"Esta operacion es solo para matrizes cuadradas");
+
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    if(i == j) base::data[i][j] = v;
+                    else base::data[i][j] = 0;
+                }
+            }
+        }
+
+        constexpr void transpose (const matrix<T,R,C,V>& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    base::data[i][j] = o[j][i];
+                }
+            }
+        }
+
         /*operator T*()
         {
             return (T*)&base::data[0];
@@ -211,28 +250,6 @@ namespace oct::nums::v0
 
     };
 
-    /**
-    *\brief Representa una matriz aumentada m x n
-    *\param T Tipo de dato
-    *\param m Renglones
-    *\param n Columnas
-    *\param V para operaciones
-    **/
-    template<typename T,size_t n,size_t m,core::number V> class extended : public matrix<T,n,m,V>
-    {
-    private:
-        matrix<T,1,m,V> _c_;
-
-    public:
-        const matrix<T,1,m,V>& c()const
-        {
-            return _c_;
-        }
-        matrix<T,1,m,V>& c()
-        {
-            return _c_;
-        }
-    };
 
 
 }

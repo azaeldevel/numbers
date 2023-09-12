@@ -54,7 +54,7 @@ namespace oct::nums::v0
             if(l.size() < D * P) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > D * P) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
-            const int* c = std::data(l);
+            const C* c = std::data(l);
             for(size_t i = 0; i < P; i++)
             {
                 for(size_t j = 0; j < D; j++)
