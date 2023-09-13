@@ -12,6 +12,9 @@ namespace oct::nums::v0
         typedef core::array<T,L> BASE;
     public:
         vector() = default;
+        /**
+        *\brief Asigna valor a todos los elementos del arreglo
+        */
         constexpr vector(const T& v) : BASE(v)
         {
         }
