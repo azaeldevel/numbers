@@ -375,6 +375,8 @@ void v0_matrix()
     CU_ASSERT(mx25[2][1] == 8);
     CU_ASSERT(mx25[2][2] == 9);
 
+    numbers::permutation<size_t,3ul>(numbers::listing<size_t,numbers::factorial(3ul)>(),0ul);
+
 }
 
 

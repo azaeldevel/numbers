@@ -88,6 +88,21 @@ namespace oct::nums::v0
         return number;
     }
 
+    template<core::natural T,core::index auto L> constexpr core::array<T,factorial(L)> permutation(const core::array<T,factorial(L)>& l, size_t position = 0)
+    {
+        //std::cout << "Index : " << position << "\n";
+        if constexpr (L == 1)
+        {
+            return core::array<T,1>(1);
+        }
+        else
+        {
+            core::array<T,factorial(L)> perms;
+            //permutation<T,L - 1>(listing<T,factorial(L - 1)>(), position + 1);
+            return perms;
+        }
+    }
+
 
 
 
