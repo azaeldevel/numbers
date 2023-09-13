@@ -73,6 +73,13 @@ namespace oct::nums::v0
     };
 
 
+    template<core::integer T,core::index auto L> constexpr const core::array<T,L> listing()
+    {
+        core::array<T,L> l;
+        for(size_t i = 0; i < L; i++) l[i] = i + 1;
+
+        return l;
+    }
     template<core::natural T> constexpr T factorial(const T& n)
     {
         T number = 1;
@@ -81,21 +88,6 @@ namespace oct::nums::v0
         return number;
     }
 
-    constexpr bool is_equal(const float& a,const float& b)
-    {
-        constexpr float min = std::numeric_limits<float>::min() * 2;
-
-        if(a < b)
-        {
-            if(min < b - a) return true;
-        }
-        else if(a > b)
-        {
-            if(min < a - b) return true;
-        }
-
-        return false;
-    }
 
 
 

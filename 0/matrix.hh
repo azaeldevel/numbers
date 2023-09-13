@@ -4,6 +4,7 @@
 #include "common.hh"
 #include "vector.hh"
 
+
 namespace oct::nums::v0
 {
 
@@ -15,17 +16,17 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,size_t C,size_t R,core::number V = T> class matrix : public core::array<core::array<T,C>,R>
+    template<typename T,core::index auto C,core::index auto R,core::number V = T> class matrix : public core::array<core::array<T,C>,R>
     {
     private:
-        typedef core::array<core::array<T,C>,R> base;
+        typedef core::array<core::array<T,C>,R> BASE;
 
     public:
         matrix() = default;
-        constexpr matrix(const T& v) : base(v)
+        constexpr matrix(const T& v) : BASE(v)
         {
         }
-        constexpr matrix(const matrix& o) : base(o)
+        constexpr matrix(const matrix& o) : BASE(o)
         {
         }
         /***
@@ -38,8 +39,8 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(j < C - 1) base::data[i][j] = o[i][j];
-                    else base::data[i][j] = 0;
+                    if(j < C - 1) BASE::data[i][j] = o[i][j];
+                    else BASE::data[i][j] = 0;
                 }
             }
         }
@@ -53,7 +54,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    base::data[i][j] = o[i][j];
+                    BASE::data[i][j] = o[i][j];
                 }
             }
         }
@@ -67,7 +68,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    base::data[i][j] = c[(C * i) + j];
+                    BASE::data[i][j] = c[(C * i) + j];
                 }
             }
         }
@@ -81,7 +82,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] + o[i][j];
+                    res[i][j] = BASE::data[i][j] + o[i][j];
                 }
             }
 
@@ -95,7 +96,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] + o;
+                    res[i][j] = BASE::data[i][j] + o;
                 }
             }
 
@@ -109,7 +110,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] - o[i][j];
+                    res[i][j] = BASE::data[i][j] - o[i][j];
                 }
             }
 
@@ -123,13 +124,13 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] - o;
+                    res[i][j] = BASE::data[i][j] - o;
                 }
             }
 
             return res;
         }
-        template<size_t c> constexpr matrix<T,R,c,V> operator * (const matrix<T,c,C,V>& o) const
+        template<core::index auto c> constexpr matrix<T,R,c,V> operator * (const matrix<T,c,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
             matrix<T,R,c,V> res(0);
 
@@ -140,7 +141,7 @@ namespace oct::nums::v0
                     for(size_t j = 0; j < c; j++)
                     {
                         //std::cout << k << " : " << i << "," << j << "\n";
-                        res[i][j] += base::data[i][k] * o[k][j];
+                        res[i][j] += BASE::data[i][k] * o[k][j];
                     }
                 }
             }
@@ -173,7 +174,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] * o;
+                    res[i][j] = BASE::data[i][j] * o;
                 }
             }
 
@@ -187,7 +188,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = base::data[i][j] / o;
+                    res[i][j] = BASE::data[i][j] / o;
                 }
             }
 
@@ -200,7 +201,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    base::data[i][j] = o[i][j];
+                    BASE::data[i][j] = o[i][j];
                 }
             }
             return *this;
@@ -212,7 +213,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(base::data[i][j] == o[i][j]) return false;
+                    if(BASE::data[i][j] == o[i][j]) return false;
                 }
             }
 
@@ -227,8 +228,8 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(i == j) base::data[i][j] = v;
-                    else base::data[i][j] = 0;
+                    if(i == j) BASE::data[i][j] = v;
+                    else BASE::data[i][j] = 0;
                 }
             }
         }
@@ -239,7 +240,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    base::data[i][j] = o[j][i];
+                    BASE::data[i][j] = o[j][i];
                 }
             }
         }
@@ -316,7 +317,7 @@ namespace oct::nums::v0
             {
                 for(size_t i = 0; i < C; i++)
                 {
-                    out << base::data[j][i] << " ";
+                    out << BASE::data[j][i] << " ";
                 }
                 out << "\n";
             }
