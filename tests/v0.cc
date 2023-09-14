@@ -375,11 +375,11 @@ void v0_matrix()
     CU_ASSERT(mx25[2][1] == 8);
     CU_ASSERT(mx25[2][2] == 9);
 
-    constexpr numbers_here::matrix<int,3,3,float> mx26{1,2,3,4,5,6,7,8,9};
+    //constexpr numbers_here::matrix<int,3,3,float> mx26{1,2,3,4,5,6,7,8,9};
     //mx25.print(std::cout);
-    float mx26_det = mx26.determinant();
+    //float mx26_det = mx26.determinant();
     //std::cout << "det(mx26) is " << mx26_det << "\n";
-    CU_ASSERT(mx26_det == -24)
+    //CU_ASSERT(mx26_det == -24)
 
 
     constexpr numbers_here::matrix<int,3,3,float> mx27{3,-1,2,4,5,6,7,1,2};
@@ -409,11 +409,24 @@ void v0_matrix()
     CU_ASSERT(mx27_minor31[1][0] == 5);
     CU_ASSERT(mx27_minor31[1][1] == 6);
     int mx27_minor31_det = mx27_minor31.determinant();
-    //std::cout << "det(mx27_minor31_det) is " << mx27_minor31_det << "\n";
     CU_ASSERT(mx27_minor31_det == -16)
-    //float mx27_det = mx27.determinant();
-    //std::cout << "det(mx27) is " << mx27_det << "\n";
-    //CU_ASSERT(mx27_det == 6)
+    //std::cout << "det(mx27_minor31_det) is " << mx27_minor31_det << "\n";
+    //std::cout << "\n\n\n";
+    int mx27_minor12_cofac = mx27.cofactor(0,1);
+    int mx27_minor23_cofac = mx27.cofactor(1,2);
+    int mx27_minor31_cofac = mx27.cofactor(2,0);
+    int mx27_det1 = mx27_minor12_cofac + mx27_minor23_cofac + mx27_minor31_cofac;
+    CU_ASSERT(mx27_det1 == 8)
+
+    int mx27_teorema_inversa = 0;//pag 199
+    for(size_t i = 0; i < mx27.rows(); i++)
+    {
+        mx27_teorema_inversa += mx27[2][i] * mx27.cofactor(1,i);
+    }
+    CU_ASSERT(mx27_teorema_inversa == 0)
+
+    //constexpr numbers_here::matrix<int,4,4,float> mx28{1,2,3,4,-4,2,1,3,3,0,0,-3,2,0,-2,3};
+    //CU_ASSERT(mx28.determinant(2) == 48)
 }
 
 

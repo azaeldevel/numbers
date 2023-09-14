@@ -255,26 +255,25 @@ namespace oct::nums::v0
 
             return m;
         }
-        constexpr matrix<T,C-1,R-1,V> cofactor() const
+        constexpr V cofactor(const I& i,const I& j) const
         {
-            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
-
-
-
-
-
-            return 0;
+            V sign = std::pow(V(-1),V((i + 1) + (j + 1)));
+            V det = minor(i,j).determinant();
+            V ret = sign * det;
+            //std::cout << "(" << sign << ") : " <<  i + 1 << " + " << j + 1 << " | det = " << det << "\n";
+            //std::cout << "(" << sign << ")(" <<  i + 1 << " + " << j + 1 << ") * " << det << " = " << ret << "\n";
+            //std::cout << sign << " * det = " << det << "\n";
+            return ret;
         }
-
         constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
         {
             I x = 0, y = 0;
             matrix<T,C - 1, R - 1,V> submatrix;
 
-            for (int i = 0; i < R; i++)
+            for (I i = 0; i < R; i++)
             {
                 if(i == a) continue;
-                for (int j = 0; j < R; j++)
+                for (I j = 0; j < R; j++)
                 {
                     if(j == b) continue;
                     //std::cout << "matrix[" << x << "," << y << "]" << BASE::at(i)[j] << "\n";
@@ -287,7 +286,7 @@ namespace oct::nums::v0
 
             return submatrix;
         }
-        constexpr V determinant() const
+        constexpr V determinant(const I& i = 0) const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
@@ -303,40 +302,17 @@ namespace oct::nums::v0
                 return BASE::at(0)[0] * BASE::at(1)[1] - BASE::at(0)[1] * BASE::at(1)[0];
             }
 
-            V det = 0;
             if constexpr (R > 2)
             {
-                matrix<T,C - 1, R - 1,V> submatrix;
-
-                // Iterate over the elements of the first row
-                for (int j = 0; j < R; j++)
+                V det = 0;
+                for (I j = 0; j < R; j++)
                 {
-                    // Create a submatrix by removing the current row and column
-                    for (int i = 1; i < R; i++)
-                    {
-                        for (int k = 0; k < R; k++)
-                        {
-                            if (k < j)
-                            {
-                                submatrix[i - 1][k] = BASE::at(i)[k];
-                            }
-                            else if (k > j)
-                            {
-                                submatrix[i - 1][k - 1] = BASE::at(i)[k];
-                            }
-                        }
-                    }
-
-                    // Calculate the determinant of the submatrix recursively
-                    V submatrixDet = submatrix.determinant();
-
-                    // Multiply the current element by the determinant of the submatrix
-                    // and add it to the det variable
-                    det += BASE::at(0)[j] * submatrixDet;
+                    det += cofactor(i,j);
                 }
+                return det;
             }
 
-            return det;
+            return 1;
         }
         constexpr matrix inverse () const
         {
