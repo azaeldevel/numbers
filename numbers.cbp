@@ -116,6 +116,9 @@
 		<Unit filename="0/vector.hh">
 			<Option target="tests-dbg-v0" />
 		</Unit>
+		<Unit filename="tests/develop.cc">
+			<Option target="fast-dbg" />
+		</Unit>
 		<Unit filename="tests/main.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>
