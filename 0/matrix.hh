@@ -245,13 +245,18 @@ namespace oct::nums::v0
             }
         }
 
-        constexpr matrix adj() const
+        constexpr matrix adjoint() const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
-            matrix m(*this);
+            matrix m;
 
-
-
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    m[i][j] = cofactor(j,i);
+                }
+            }
 
             return m;
         }
@@ -262,7 +267,7 @@ namespace oct::nums::v0
             V ret = sign * det;
             //std::cout << "(" << sign << ") : " <<  i + 1 << " + " << j + 1 << " | det = " << det << "\n";
             //std::cout << "(" << sign << ")(" <<  i + 1 << " + " << j + 1 << ") * " << det << " = " << ret << "\n";
-            //std::cout << sign << " * det = " << det << "\n";
+            std::cout << sign << " * det = " << det << "\n";
             return ret;
         }
         constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
@@ -318,7 +323,7 @@ namespace oct::nums::v0
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
-            return adj()/determinant();
+            return adjoint()/determinant();
         }
 
         /*operator T*()
