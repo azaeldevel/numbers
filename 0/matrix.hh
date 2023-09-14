@@ -265,21 +265,62 @@ namespace oct::nums::v0
 
             return 0;
         }
-        constexpr V det () const
+        constexpr V determinant() const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
+            // Base case: 1x1 matrix
+            if constexpr (R == 1)
+            {
+                return BASE::at(0)[0];
+            }
 
+            // Base case: 2x2 matrix
+            if constexpr (R == 2)
+            {
+                return BASE::at(0)[0] * BASE::at(1)[1] - BASE::at(0)[1] * BASE::at(1)[0];
+            }
 
+            V det = 0;
+            if constexpr (R > 2)
+            {
+                matrix<T,C - 1, R - 1,V> submatrix;
 
+                // Iterate over the elements of the first row
+                for (int j = 0; j < R; j++)
+                {
+                    // Create a submatrix by removing the current row and column
+                    for (int i = 1; i < R; i++)
+                    {
+                        for (int k = 0; k < R; k++)
+                        {
+                            if (k < j)
+                            {
+                                submatrix[i - 1][k] = BASE::at(i)[k];
+                            }
+                            else if (k > j)
+                            {
+                                submatrix[i - 1][k - 1] = BASE::at(i)[k];
+                            }
+                        }
+                    }
 
-            return 1;
+                    // Calculate the determinant of the submatrix recursively
+                    V submatrixDet = submatrix.determinant();
+
+                    // Multiply the current element by the determinant of the submatrix
+                    // and add it to the det variable
+                    det += BASE::at(0)[j] * submatrixDet;
+                }
+            }
+
+            return det;
         }
         constexpr matrix inverse () const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
-            return adj()/det();
+            return adj()/determinant();
         }
 
         /*operator T*()

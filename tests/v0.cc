@@ -375,8 +375,18 @@ void v0_matrix()
     CU_ASSERT(mx25[2][1] == 8);
     CU_ASSERT(mx25[2][2] == 9);
 
-    numbers::permutation<size_t,3ul>(numbers::listing<size_t,numbers::factorial(3ul)>(),0ul);
+    constexpr numbers_here::matrix<int,3,3,float> mx26{1,2,3,4,5,6,7,8,9};
+    //mx25.print(std::cout);
+    float mx26_det = mx26.determinant();
+    //std::cout << "det(mx26) is " << mx26_det << "\n";
+    CU_ASSERT(mx26_det == -24)
 
+
+    constexpr numbers_here::matrix<int,3,3,float> mx27{1,2,3,2,1,3,3,1,2};
+    //mx25.print(std::cout);
+    float mx27_det = mx27.determinant();
+    std::cout << "det(mx27) is " << mx27_det << "\n";
+    CU_ASSERT(mx27_det == 6)
 }
 
 
