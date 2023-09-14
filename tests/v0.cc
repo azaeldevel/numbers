@@ -382,11 +382,38 @@ void v0_matrix()
     CU_ASSERT(mx26_det == -24)
 
 
-    constexpr numbers_here::matrix<int,3,3,float> mx27{1,2,3,2,1,3,3,1,2};
+    constexpr numbers_here::matrix<int,3,3,float> mx27{3,-1,2,4,5,6,7,1,2};
     //mx25.print(std::cout);
-    float mx27_det = mx27.determinant();
-    std::cout << "det(mx27) is " << mx27_det << "\n";
-    CU_ASSERT(mx27_det == 6)
+    auto mx27_minor12 = mx27.minor(0,1);
+    //mx27_minor12.print(std::cout);
+    CU_ASSERT(mx27_minor12[0][0] == 4);
+    CU_ASSERT(mx27_minor12[0][1] == 6);
+    CU_ASSERT(mx27_minor12[1][0] == 7);
+    CU_ASSERT(mx27_minor12[1][1] == 2);
+    int mx27_minor12_det = mx27_minor12.determinant();
+    //std::cout << "det(mx27_minor12_det) is " << mx27_minor12_det << "\n";
+    CU_ASSERT(mx27_minor12_det == -34)
+    auto mx27_minor23 = mx27.minor(1,2);
+    //mx27_minor23.print(std::cout);
+    CU_ASSERT(mx27_minor23[0][0] == 3);
+    CU_ASSERT(mx27_minor23[0][1] == -1);
+    CU_ASSERT(mx27_minor23[1][0] == 7);
+    CU_ASSERT(mx27_minor23[1][1] == 1);
+    int mx27_minor23_det = mx27_minor23.determinant();
+    //std::cout << "det(mx27_minor23_det) is " << mx27_minor23_det << "\n";
+    CU_ASSERT(mx27_minor23_det == 10)
+    auto mx27_minor31 = mx27.minor(2,0);
+    //mx27_minor31.print(std::cout);
+    CU_ASSERT(mx27_minor31[0][0] == -1);
+    CU_ASSERT(mx27_minor31[0][1] == 2);
+    CU_ASSERT(mx27_minor31[1][0] == 5);
+    CU_ASSERT(mx27_minor31[1][1] == 6);
+    int mx27_minor31_det = mx27_minor31.determinant();
+    //std::cout << "det(mx27_minor31_det) is " << mx27_minor31_det << "\n";
+    CU_ASSERT(mx27_minor31_det == -16)
+    //float mx27_det = mx27.determinant();
+    //std::cout << "det(mx27) is " << mx27_det << "\n";
+    //CU_ASSERT(mx27_det == 6)
 }
 
 

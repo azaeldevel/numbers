@@ -16,7 +16,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto C,core::index auto R,core::number V = T> class matrix : public core::array<core::array<T,C>,R>
+    template<typename T,core::index auto C,core::index auto R,core::number V = T,core::index I = size_t> class matrix : public core::array<core::array<T,C>,R>
     {
     private:
         typedef core::array<core::array<T,C>,R> BASE;
@@ -264,6 +264,28 @@ namespace oct::nums::v0
 
 
             return 0;
+        }
+
+        constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
+        {
+            I x = 0, y = 0;
+            matrix<T,C - 1, R - 1,V> submatrix;
+
+            for (int i = 0; i < R; i++)
+            {
+                if(i == a) continue;
+                for (int j = 0; j < R; j++)
+                {
+                    if(j == b) continue;
+                    //std::cout << "matrix[" << x << "," << y << "]" << BASE::at(i)[j] << "\n";
+                    submatrix[x][y] = BASE::at(i)[j];
+                    y++;
+                }
+                y = 0;
+                x++;
+            }
+
+            return submatrix;
         }
         constexpr V determinant() const
         {
