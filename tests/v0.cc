@@ -425,6 +425,7 @@ void v0_matrix()
 
 
     constexpr numbers_here::matrix<int,3,3,float> mx28{3,-2,1,5,6,2,1,0,-3};
+    CU_ASSERT(mx28.determinant() == -94)
     auto mx29 = mx28.adjoint();
     //mx29.print(std::cout);
     CU_ASSERT(mx29[0][0] == -18);
@@ -465,6 +466,24 @@ void v0_matrix()
     CU_ASSERT((numbers::core::equal((float)mx32[2][1],2.0f/94.0f)));
     CU_ASSERT((numbers::core::equal((float)mx32[2][2],-28.0f/94.0f)));
 
+    constexpr numbers_here::matrix<int,1,3> mx33{3,-2,1};
+    //mx33.print(std::cout);
+    auto mx34 = mx30 * mx33;
+    //mx34.print(std::cout);
+    CU_ASSERT(mx34[0][0] == 15);
+    CU_ASSERT(mx34[1][0] == 4);
+    CU_ASSERT(mx34[2][0] == -7);
+
+    auto mx35 = mx30 * mx28;
+    CU_ASSERT(mx35[0][0] == 1);
+    CU_ASSERT(mx35[0][1] == -18);
+    CU_ASSERT(mx35[0][2] == -7);
+    CU_ASSERT(mx35[1][0] == 4);
+    CU_ASSERT(mx35[1][1] == -2);
+    CU_ASSERT(mx35[1][2] == -2);
+    CU_ASSERT(mx35[2][0] == 7);
+    CU_ASSERT(mx35[2][1] == 14);
+    CU_ASSERT(mx35[2][2] == 3);
 }
 
 

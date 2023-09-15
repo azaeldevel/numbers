@@ -16,7 +16,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto C,core::index auto R,core::number V = T,core::index I = size_t> class matrix : public core::array<core::array<T,C,I>,R,I>
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> class matrix : public core::array<core::array<T,C,I>,R,I>
     {
     private:
         typedef core::array<core::array<T,C>,R> BASE;
@@ -130,7 +130,7 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::index auto c> constexpr matrix<T,R,c,V> operator * (const matrix<T,c,C,V>& o) const
+        /*template<core::index auto c> constexpr matrix<T,R,c,V> operator * (const matrix<T,c,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
             matrix<T,R,c,V> res(0);
 
@@ -147,25 +147,25 @@ namespace oct::nums::v0
             }
 
             return res;
-        }
-        /*template<size_t c> constexpr matrix<T,R,c,V> mul (const matrix<T,c,C,V>& o) const
+        }*/
+        template<core::index auto c> constexpr matrix<T,c,R,V> operator * (const matrix<T,c,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
-            matrix<T,R,c,V> res(0);
+            matrix<T,c,R,V> res(0);
 
-            for(size_t k = 0; k < c; k++)
+            for(I i = 0; i < R; i++)
             {
-                for(size_t i = 0; i < R; i++)
+                for(I j = 0; j < c; j++)
                 {
-                    for(size_t j = 0; j < c; j++)
+                    for(size_t k = 0; k < C; k++)
                     {
-                        std::cout << k << " : " << i << "," << j << "";
-                        res[i][j] += base::data[i][k] * o[k][j];
+                        res[i][j] += BASE::data[i][k] * o[k][j];
+                        //res[i][j] = 1;
                     }
                 }
             }
 
             return res;
-        }*/
+        }
         template<core::number t> constexpr matrix<t,C,R,V> operator * (t const& o) const
         {
             matrix<t,C,R,V> res;
