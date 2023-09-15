@@ -335,10 +335,10 @@ void v0_matrix()
     //mx21.print(std::cout);
     //std::cout<< std::setprecision(3)<< std::fixed;
     //Algebra Lineal pag 96
-    constexpr numbers_here::matrix<float,3,3,float> mx22 = {1,1,1,0,2,3,5,5,1};
-    auto mx23 = mx22.inverse();
+    //constexpr numbers_here::matrix<float,3,3,float> mx22 = {1,1,1,0,2,3,5,5,1};
+    //auto mx23 = mx22.inverse();
     //mx23.print(std::cout);
-    CU_ASSERT(numbers::core::equal(mx23[0][0], (float)13/(float)3));
+    //CU_ASSERT(numbers::core::equal(mx23[0][0], (float)13/(float)3));
     /*CU_ASSERT(numbers::core::equal(mx23[0][1], (float)-1/(float)2));
     CU_ASSERT(numbers::core::equal(mx23[0][2], (float)-1/(float)8));
     CU_ASSERT(numbers::core::equal(mx23[1][0], (float)-15/(float)8));
@@ -448,6 +448,22 @@ void v0_matrix()
     //mx30_minor12.print(std::cout);
     //std::cout << "det mx29 = " << mx30.determinant(0) << "\n";
     CU_ASSERT(mx30.determinant(0) == 0)
+
+    auto mx31 = mx28 * mx28.adjoint();
+    //mx31.print(std::cout);
+    CU_ASSERT(-94 == mx31[0][0])
+
+    auto mx32 = mx28.inverse();
+    //mx32.print(std::cout);
+    CU_ASSERT((numbers::core::equal((float)mx32[0][0],18.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[0][1],6.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[0][2],10.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[1][0],-17.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[1][1],10.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[1][2],1.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[2][0],6.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[2][1],2.0f/94.0f)));
+    CU_ASSERT((numbers::core::equal((float)mx32[2][2],-28.0f/94.0f)));
 
 }
 

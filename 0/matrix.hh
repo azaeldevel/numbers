@@ -88,9 +88,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        constexpr matrix operator + (const T& o) const
+        template<core::number t> constexpr matrix<t,C,R,V> operator + (t const& o) const
         {
-            matrix res;
+            matrix<t,C,R,V> res;
 
             for(size_t i = 0; i < C; i++)
             {
@@ -116,9 +116,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        constexpr matrix operator - (const T& o) const
+        template<core::number t> constexpr matrix<t,C,R,V> operator  - (t const& o) const
         {
-            matrix res;
+            matrix<t,C,R,V> res;
 
             for(size_t i = 0; i < C; i++)
             {
@@ -166,9 +166,9 @@ namespace oct::nums::v0
 
             return res;
         }*/
-        constexpr matrix operator * (const T& o) const
+        template<core::number t> constexpr matrix<t,C,R,V> operator * (t const& o) const
         {
-            matrix res;
+            matrix<t,C,R,V> res;
 
             for(size_t i = 0; i < C; i++)
             {
@@ -180,9 +180,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        constexpr matrix operator / (const T& o) const
+        template<core::number t> constexpr matrix<t,C,R,V> operator / (t const&  o) const
         {
-            matrix res;
+            matrix<t,C,R,V> res;
 
             for(size_t i = 0; i < C; i++)
             {
@@ -319,7 +319,7 @@ namespace oct::nums::v0
 
             return 1;
         }
-        constexpr matrix inverse () const
+        constexpr matrix<V,C,R,V> inverse () const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
