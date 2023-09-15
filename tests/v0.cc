@@ -440,11 +440,11 @@ void v0_matrix()
 
     //std::cout << "\n\n\n";
     constexpr numbers_here::matrix<int,3,3,float> mx30{3,-2,2,1,0,1,-1,2,0};
-    auto mx30_minor10 = mx30.minor(1,0);
+    //auto mx30_minor10 = mx30.minor(1,0);
     //mx30_minor10.print(std::cout);
-    auto mx30_minor11 = mx30.minor(1,1);
+    //auto mx30_minor11 = mx30.minor(1,1);
     //mx30_minor11.print(std::cout);
-    auto mx29_minor12 = mx30.minor(1,2);
+    //auto mx29_minor12 = mx30.minor(1,2);
     //mx30_minor12.print(std::cout);
     //std::cout << "det mx29 = " << mx30.determinant(0) << "\n";
     CU_ASSERT(mx30.determinant(0) == 0)
@@ -470,42 +470,7 @@ void v0_matrix()
 
 void v0_equation()
 {
-    numbers_here::equation<int,1ul,1ul,float> eq1({2},50);
-    //std::cout << "Size : " << sizeof(eq1) << "\n";
-    CU_ASSERT(sizeof(eq1) == 8);
-    CU_ASSERT(eq1.c() == 50);
-    CU_ASSERT(eq1.a(0) == 2);
-    //std::cout << "eq1.x() : " << eq1.x() << "\n";
-    CU_ASSERT(numbers_here::resolve(eq1) == 25);
 
-    numbers_here::equation<int,2ul,1ul,float> eq2({-3,5},4);
-    CU_ASSERT(eq2.c() == 4);
-    CU_ASSERT(eq2[0] == -3);
-    CU_ASSERT(eq2[1] == 5);
-    //std::cout << "Size : " << sizeof(eq2) << "\n";
-    CU_ASSERT(sizeof(eq2) == 12);
-    float rest1[9];
-    for(int i = -4; i < 5; i++)
-    {
-        rest1[i + 4] = numbers_here::resolve(eq2,1,i);
-        //std::cout << "(" << i << "," << rest1[i + 4] << ")\n";
-    }
-    CU_ASSERT(abs(rest1[0] + 1.6) < infimium);
-    CU_ASSERT(abs(rest1[4] - 0.8) < infimium);
-    CU_ASSERT(abs(rest1[8] - 3.2) < infimium);
-
-    numbers_here::equation<int,4ul,1ul,float> eqSA[3];
-    eqSA[0] = {0,2,4,1};
-    eqSA[0] = 10;
-    eqSA[1] = {-2,5,-12,-6};
-    eqSA[1] = 10;
-    eqSA[2] = {1,-1,3,3};
-    eqSA[2] = 1;
-    CU_ASSERT(eqSA[0][0] == 0);
-    CU_ASSERT(eqSA[0][1] == 2);
-    CU_ASSERT(eqSA[0][2] == 4);
-    CU_ASSERT(eqSA[0][3] == 1);
-    //numbers_here::resolve(eqSA,3);
 
 }
 

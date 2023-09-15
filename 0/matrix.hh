@@ -16,7 +16,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto C,core::index auto R,core::number V = T,core::index I = size_t> class matrix : public core::array<core::array<T,C>,R>
+    template<typename T,core::index auto C,core::index auto R,core::number V = T,core::index I = size_t> class matrix : public core::array<core::array<T,C,I>,R,I>
     {
     private:
         typedef core::array<core::array<T,C>,R> BASE;
@@ -336,6 +336,15 @@ namespace oct::nums::v0
         *
         */
         constexpr bool is_alternante()const;
+
+        /**
+        *\brief determinan si la matriz cumple con la propiedad de ser alternate
+        *
+        */
+        constexpr bool is_singular()const
+        {
+            return not core::equal(determinant(),0);
+        }
 
 
         /*operator T*()
