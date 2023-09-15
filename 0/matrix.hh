@@ -267,7 +267,7 @@ namespace oct::nums::v0
             V ret = sign * det;
             //std::cout << "(" << sign << ") : " <<  i + 1 << " + " << j + 1 << " | det = " << det << "\n";
             //std::cout << "(" << sign << ")(" <<  i + 1 << " + " << j + 1 << ") * " << det << " = " << ret << "\n";
-            std::cout << sign << " * det = " << det << "\n";
+            //std::cout << sign << " * det = " << det << "\n";
             return ret;
         }
         constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
@@ -312,7 +312,7 @@ namespace oct::nums::v0
                 V det = 0;
                 for (I j = 0; j < R; j++)
                 {
-                    det += cofactor(i,j);
+                    det += BASE::at(i)[j] * cofactor(i,j);
                 }
                 return det;
             }
@@ -325,6 +325,18 @@ namespace oct::nums::v0
 
             return adjoint()/determinant();
         }
+
+        /**
+        *\brief determinan si la matriz cumple con la propiedad de ser lineal en cada fila
+        *
+        */
+        constexpr bool is_lineal()const;
+        /**
+        *\brief determinan si la matriz cumple con la propiedad de ser alternate
+        *
+        */
+        constexpr bool is_alternante()const;
+
 
         /*operator T*()
         {
