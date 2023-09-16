@@ -19,7 +19,6 @@ namespace oct::nums::v0
     template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> class matrix //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
-        //typedef core::array<core::array<T,C>,R> BASE;
         T data[R][C];
 
     public:
@@ -145,24 +144,6 @@ namespace oct::nums::v0
 
             return res;
         }
-        /*template<core::index auto c> constexpr matrix<T,R,c,V> operator * (const matrix<T,c,C,V>& o) const
-        {//ref : Book 1(IAL), pag 88.
-            matrix<T,R,c,V> res(0);
-
-            for(size_t k = 0; k < C; k++)
-            {
-                for(size_t i = 0; i < R; i++)
-                {
-                    for(size_t j = 0; j < c; j++)
-                    {
-                        //std::cout << k << " : " << i << "," << j << "\n";
-                        res[i][j] += BASE::data[i][k] * o[k][j];
-                    }
-                }
-            }
-
-            return res;
-        }*/
         template<core::index auto c> constexpr matrix<T,c,R,V> operator * (const matrix<T,c,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
             matrix<T,c,R,V> res(0);
@@ -209,7 +190,6 @@ namespace oct::nums::v0
 
             return res;
         }
-
         constexpr matrix& operator = (const matrix& o)
         {
             for(size_t i = 0; i < R; i++)
@@ -221,7 +201,6 @@ namespace oct::nums::v0
             }
             return *this;
         }
-
         constexpr bool operator == (const matrix& o)
         {
             for(size_t i = 0; i < R; i++)
@@ -373,24 +352,6 @@ namespace oct::nums::v0
         {
             return not core::equal(determinant(),0);
         }
-
-
-        /*operator T*()
-        {
-            return (T*)&base::data[0];
-        }
-        operator const T*() const
-        {
-            return (T*)&base::data[0];
-        }
-        operator void*()
-        {
-            return (void*)&base::data[0];
-        }
-        operator const void*() const
-        {
-            return (const void*)&base::data[0];
-        }*/
 
         //>>>getter and setters
         constexpr size_t columns() const
