@@ -269,11 +269,11 @@ void v0_matrix()
     //CU_ASSERT(mx13.det()  == 13);
 
     numbers_here::matrix<int,4ul,3ul,float> mx14;
-    mx14[0] = {0,2,4,1};
+    //mx14[0] = {0,2,4,1};
     //eqSA[0] = 10;
-    mx14[1] = {-2,5,-12,-6};
+    //mx14[1] = {-2,5,-12,-6};
     //eqSA[1] = 10;
-    mx14[2] = {1,-1,3,3};
+    //mx14[2] = {1,-1,3,3};
     //eqSA[2] = 1;
 
     numbers_here::matrix<int,3ul,3ul,float> mx15;

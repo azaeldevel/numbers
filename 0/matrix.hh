@@ -16,31 +16,46 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> class matrix : public core::array<core::array<T,C,I>,R,I>
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> class matrix //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
-        typedef core::array<core::array<T,C>,R> BASE;
+        //typedef core::array<core::array<T,C>,R> BASE;
+        T data[R][C];
 
     public:
         matrix() = default;
-        constexpr matrix(const T& v) : BASE(v)
-        {
-        }
-        constexpr matrix(const matrix& o) : BASE(o)
-        {
-        }
-        /***
-        *\brief Contructor de copias para un matrix
-        *
-        */
-        constexpr matrix(const matrix<T,C - 1,R,V>& o)
+        constexpr matrix(const T& v)
         {
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(j < C - 1) BASE::data[i][j] = o[i][j];
-                    else BASE::data[i][j] = 0;
+                    data[i][j] = v;
+                }
+            }
+        }
+        constexpr matrix(const matrix& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    data[i][j] = o[i][j];
+                }
+            }
+        }
+        /***
+        *\brief Contructor de copias para un matrix
+        *
+        */
+        constexpr matrix(matrix<T,C - 1,R,V> const& o)
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    if(j < C - 1) data[i][j] = o[i][j];
+                    else data[i][j] = 0;
                 }
             }
         }
@@ -48,13 +63,13 @@ namespace oct::nums::v0
         *\brief Contructor de copias para un matrix aumentada
         *
         */
-        constexpr matrix(const matrix<T,C + 1,R,V>& o)
+        constexpr matrix(matrix<T,C + 1,R,V> const& o)
         {
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    BASE::data[i][j] = o[i][j];
+                    data[i][j] = o[i][j];
                 }
             }
         }
@@ -68,7 +83,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    BASE::data[i][j] = c[(C * i) + j];
+                    data[i][j] = c[(C * i) + j];
                 }
             }
         }
@@ -82,7 +97,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] + o[i][j];
+                    res.data[i][j] = data[i][j] + o.data[i][j];
                 }
             }
 
@@ -96,7 +111,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] + o;
+                    res[i][j] = data[i][j] + o;
                 }
             }
 
@@ -110,7 +125,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] - o[i][j];
+                    res[i][j] = data[i][j] - o[i][j];
                 }
             }
 
@@ -124,7 +139,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] - o;
+                    res[i][j] = data[i][j] - o;
                 }
             }
 
@@ -158,7 +173,7 @@ namespace oct::nums::v0
                 {
                     for(size_t k = 0; k < C; k++)
                     {
-                        res[i][j] += BASE::data[i][k] * o[k][j];
+                        res[i][j] += data[i][k] * o[k][j];
                         //res[i][j] = 1;
                     }
                 }
@@ -174,7 +189,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] * o;
+                    res[i][j] = data[i][j] * o;
                 }
             }
 
@@ -188,7 +203,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res[i][j] = BASE::data[i][j] / o;
+                    res[i][j] = data[i][j] / o;
                 }
             }
 
@@ -201,7 +216,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    BASE::data[i][j] = o[i][j];
+                    data[i][j] = o[i][j];
                 }
             }
             return *this;
@@ -213,11 +228,24 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(BASE::data[i][j] == o[i][j]) return false;
+                    if(data[i][j] == o[i][j]) return false;
                 }
             }
 
             return true;
+        }
+
+        constexpr T* operator [](I const& i)
+        {
+            if(i < R) return data[i];
+
+            throw std::out_of_range("Indice fuera de rango");
+        }
+        constexpr const T* operator [](I const& i) const
+        {
+            if(i < R) return data[i];
+
+            throw std::out_of_range("Indice fuera de rango");
         }
 
         void diagonal(const T& v)
@@ -228,8 +256,8 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(i == j) BASE::data[i][j] = v;
-                    else BASE::data[i][j] = 0;
+                    if(i == j) data[i][j] = v;
+                    else data[i][j] = 0;
                 }
             }
         }
@@ -240,7 +268,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    BASE::data[i][j] = o[j][i];
+                    data[i][j] = o[j][i];
                 }
             }
         }
@@ -282,7 +310,7 @@ namespace oct::nums::v0
                 {
                     if(j == b) continue;
                     //std::cout << "matrix[" << x << "," << y << "]" << BASE::at(i)[j] << "\n";
-                    submatrix[x][y] = BASE::at(i)[j];
+                    submatrix[x][y] = data[i][j];
                     y++;
                 }
                 y = 0;
@@ -298,13 +326,13 @@ namespace oct::nums::v0
             // Base case: 1x1 matrix
             if constexpr (R == 1)
             {
-                return BASE::at(0)[0];
+                return data[0][0];
             }
 
             // Base case: 2x2 matrix
             if constexpr (R == 2)
             {
-                return BASE::at(0)[0] * BASE::at(1)[1] - BASE::at(0)[1] * BASE::at(1)[0];
+                return data[0][0] * data[1][1] - data[0][1] * data[1][0];
             }
 
             if constexpr (R > 2)
@@ -312,7 +340,7 @@ namespace oct::nums::v0
                 V det = 0;
                 for (I j = 0; j < R; j++)
                 {
-                    det += BASE::at(i)[j] * cofactor(i,j);
+                    det += data[i][j] * cofactor(i,j);
                 }
                 return det;
             }
@@ -382,7 +410,7 @@ namespace oct::nums::v0
             {
                 for(size_t i = 0; i < C; i++)
                 {
-                    out << BASE::data[j][i] << " ";
+                    out << data[j][i] << " ";
                 }
                 out << "\n";
             }
