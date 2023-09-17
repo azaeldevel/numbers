@@ -226,6 +226,30 @@ namespace oct::nums::v0
 
             throw std::out_of_range("Indice fuera de rango");
         }
+        constexpr T& at(I const& i,I const& j)
+        {
+            if(i < R) if(j < C) return data[i][j];
+
+            throw std::out_of_range("Indice fuera de rango");
+        }
+        constexpr T const& at(I const& i,I const& j) const
+        {
+            if(i < R) if(j < C) return data[i][j];
+
+            throw std::out_of_range("Indice fuera de rango");
+        }
+        constexpr T& operator [](I const& i,I const& j)
+        {
+            if(i < R) if(j < C) return data[i][j];
+
+            throw std::out_of_range("Indice fuera de rango");
+        }
+        constexpr T const& operator [](I const& i,I const& j)const
+        {
+            if(i < R) if(j < C) return data[i][j];
+
+            throw std::out_of_range("Indice fuera de rango");
+        }
 
         void diagonal(const T& v)
         {

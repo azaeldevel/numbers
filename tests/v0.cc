@@ -484,6 +484,8 @@ void v0_matrix()
     CU_ASSERT(mx35[2][0] == 7);
     CU_ASSERT(mx35[2][1] == 14);
     CU_ASSERT(mx35[2][2] == 3);
+    //std::cout << "number : " << mx35[1,0] << "\n";
+
 }
 
 

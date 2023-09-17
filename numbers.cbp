@@ -61,7 +61,7 @@
 		<Compiler>
 			<Add option="-pedantic" />
 			<Add option="-Wall" />
-			<Add option="--std=c++20" />
+			<Add option="--std=c++23" />
 			<Add option="`pkg-config cunit --cflgas`" />
 			<Add option="-DOCTETOS_NUMBERS_TTD=0" />
 			<Add directory="../../octetos" />
