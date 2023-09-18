@@ -10,6 +10,7 @@
 #include <0/matrix.hh>
 #include <0/algebra.hh>
 #include <0/shapes.hh>
+#include <0/equation.hh>
 
 
 namespace numbers_here = oct::nums::v0;
@@ -268,7 +269,7 @@ void v0_matrix()
     //std::cout << "det A : " << mx13.det() << "\n";
     //CU_ASSERT(mx13.det()  == 13);
 
-    numbers_here::matrix<int,4ul,3ul,float> mx14;
+    //numbers_here::matrix<int,4ul,3ul,float> mx14;
     //mx14[0] = {0,2,4,1};
     //eqSA[0] = 10;
     //mx14[1] = {-2,5,-12,-6};
@@ -485,6 +486,16 @@ void v0_matrix()
     CU_ASSERT(mx35[2][1] == 14);
     CU_ASSERT(mx35[2][2] == 3);
     //std::cout << "number : " << mx35[1,0] << "\n";
+
+    constexpr numbers::matrix<float,3,3> mx36{-2,3,-1,1,2,-1,-2,-1,1};
+    constexpr numbers::matrix<float,3,3> mx36_inverse = mx36.inverse();
+    constexpr numbers::matrix<float,1,3> mx37{1,4,-3};
+    //auto mx36_x =  mx36_inverse * mx37;
+    constexpr numbers::matrix<float,1,3> mx36_x1 =  mx36_inverse * mx37;
+    //mx36_x1.print(std::cout);
+    constexpr numbers::matrix<float,1,3> mx36_x2 = numbers::resolve(mx36,mx37);
+    //mx36_x2.print(std::cout);
+    CU_ASSERT(mx36_x1 == mx36_x2)
 
 }
 

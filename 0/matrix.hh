@@ -19,7 +19,11 @@ namespace oct::nums::v0
     template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> class matrix //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
         T data[R][C];
+#pragma GCC diagnostic pop
 
     public:
         matrix() = default;
@@ -201,13 +205,25 @@ namespace oct::nums::v0
             }
             return *this;
         }
-        constexpr bool operator == (const matrix& o)
+        constexpr bool operator == (const matrix& o) const
         {
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(data[i][j] == o[i][j]) return false;
+                    if(not core::equal(data[i][j],o[i][j])) return false;
+                }
+            }
+
+            return true;
+        }
+        constexpr bool operator != (const matrix& o) const
+        {
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    if(core::equal(data[i][j],o[i][j])) return false;
                 }
             }
 
@@ -362,6 +378,7 @@ namespace oct::nums::v0
         *
         */
         constexpr bool is_lineal()const;
+
         /**
         *\brief determinan si la matriz cumple con la propiedad de ser alternate
         *

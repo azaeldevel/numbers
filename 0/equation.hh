@@ -20,11 +20,10 @@ namespace oct::nums::v0
     *\brief Resuleve 'x' en la ecuacion de la forma ax = b
     *
     */
-    template<core::number T,core::index auto S, core::number V = core::convertion<T>::type> constexpr matrix<T,1,S,V> resolve(matrix<T,S,S,V> const& a,matrix<T,1,S,V> const& b)
+    template<core::decimal T,core::index auto S> constexpr matrix<T,1,S> resolve(matrix<T,S,S> const& a, matrix<T,1,S> const& b)
     {
-        matrix<T,1,S,V> res;
-
-        return res;
+        auto x = a.inverse() * b;
+        return x;
     }
 
 
