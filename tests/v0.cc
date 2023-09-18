@@ -501,15 +501,15 @@ void v0_matrix()
     numbers::core::array<float,3> array2 {1,2,-1};
     numbers::core::array<float,3> array3 {-2,-1,1};
     auto mx38 = numbers::create_matrix<float,3,3>(array1,array2,array3);
-    CU_ASSERT(mx38[0][0] == -2);
-    CU_ASSERT(mx38[0][1] == 3);
-    CU_ASSERT(mx38[0][2] == -1);
-    CU_ASSERT(mx38[1][0] == 1);
-    CU_ASSERT(mx38[1][1] == 2);
-    CU_ASSERT(mx38[1][2] == -1);
-    CU_ASSERT(mx38[2][0] == -2);
-    CU_ASSERT(mx38[2][1] == -1);
-    CU_ASSERT(mx38[2][2] == 1);
+    CU_ASSERT(numbers::core::equal(mx38[0][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx38[0][1], (float)3));
+    CU_ASSERT(numbers::core::equal(mx38[0][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx38[1][0], (float)1));
+    CU_ASSERT(numbers::core::equal(mx38[1][1], (float)2));
+    CU_ASSERT(numbers::core::equal(mx38[1][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx38[2][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx38[2][1], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx38[2][2], (float)1));
 
 
 }
