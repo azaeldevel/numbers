@@ -426,6 +426,25 @@ namespace oct::nums::v0
 
     };
 
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(core::array<T,3> const& v1,core::array<T,3> const& v2,core::array<T,3> const& v3)
+    {
+        matrix<T,C,R,V> m;
+        m[0,0] = v1[0];
+        m[0,1] = v1[1];
+        m[0,2] = v1[2];
+        m[1,0] = v2[0];
+        m[1,1] = v2[1];
+        m[1,2] = v2[2];
+        m[2,0] = v3[0];
+        m[2,1] = v3[1];
+        m[2,2] = v3[2];
+        return m;
+    }
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(vector<T,3> const& v1,vector<T,3> const& v2,vector<T,3> const& v3)
+    {
+
+    }
+
 
 
 }
