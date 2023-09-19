@@ -723,6 +723,10 @@ void v0_vector()
     CU_ASSERT_DECIMAL(vect32.y(), 0,infimium);
     CU_ASSERT_DECIMAL(vect32.z(), 1.1,infimium);
     //vect32.printLn(std::cout);
+
+    //constexpr numbers::vector<float,3> vect33{2,-5};
+    //CU_ASSERT(numbers::core::equal(sqrt(29), vect33.length()))
+    //numbers_here::vector<float,3> vect33{2,-5};
 }
 
 void v0_funtions()

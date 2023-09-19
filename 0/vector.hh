@@ -6,10 +6,11 @@
 namespace oct::nums::v0
 {
 
-    template<core::number T,size_t L = 3,core::number V = T> class vector : public core::array<T,L>
+    template<core::number T,size_t L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> class vector : public core::array<T,L,I>
     {
     private:
-        typedef core::array<T,L> BASE;
+        typedef core::array<T,L,I> BASE;
+        typedef vector<T,L,I> VECTOR;
     public:
         vector() = default;
         /**
@@ -108,37 +109,6 @@ namespace oct::nums::v0
 
 
 
-        //>>>>>
-        /**
-        *\brief Tranformacion de translacion
-        *
-        **/
-        void transl(const vector& v)
-        {
-            for(size_t i = 0; i < 3; i++) BASE::data[i] += v[i];
-        }
-        /**
-        *\brief tranformacion de scalado
-        *
-        **/
-        void scale(const T& s)
-        {
-            for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
-        }
-        /**
-        *\brief Longitud
-        *
-        **/
-        V length() const
-        {
-            V v = 0;
-            for(size_t i = 0; i < 3; i++) v += pow(BASE::data[i],V(2));
-
-            return sqrt(v);
-        }
-
-
-
 
         constexpr T& x()
         {
@@ -171,7 +141,50 @@ namespace oct::nums::v0
             return BASE::data[2];
         }
 
-        //>>>>>
+
+
+
+
+        //>>>>>Algebra vectorial
+        /**
+        *\brief Tranformacion de translacion
+        *
+        **/
+        void transl(const vector& v)
+        {
+            for(size_t i = 0; i < 3; i++) BASE::data[i] += v[i];
+        }
+        /**
+        *\brief tranformacion de scalado
+        *
+        **/
+        void scale(const T& s)
+        {
+            for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
+        }
+        /**
+        *\brief Longitud
+        *
+        **/
+        V length() const
+        {
+            V v = 0;
+            for(size_t i = 0; i < 3; i++) v += pow(BASE::data[i],V(2));
+
+            return sqrt(v);
+        }
+        /**
+        *\brief Longitud
+        *
+        **/
+        V distance(VECTOR const& p) const
+        {
+            V v = 0;
+            for(size_t i = 0; i < 3; i++) v += pow(p.data[i] - BASE::data[i],V(2));
+
+            return sqrt(v);
+        }
+
         /**
         *\brief Transformacion de rotacion
         *\param axis Eje de rotacion
