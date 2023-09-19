@@ -90,6 +90,56 @@ namespace oct::nums::v0
                 }
             }
         }
+        /***
+        *\brief Contrulle un matrix de 2x2 a partir de vectores
+        *
+        */
+        template<class B> constexpr matrix(B const& v1,B const& v2)
+        {
+            at(0,0) = v1[0];
+            at(0,1) = v1[1];
+            at(1,0) = v2[0];
+            at(1,1) = v2[1];
+        }
+        /***
+        *\brief Contrulle un matrix de 3x3 a partir de vectores
+        *
+        */
+        template<class B> constexpr matrix(B const& v1,B const& v2,B const& v3)
+        {
+            at(0,0) = v1[0];
+            at(0,1) = v1[1];
+            at(0,2) = v1[2];
+            at(1,0) = v2[0];
+            at(1,1) = v2[1];
+            at(1,2) = v2[2];
+            at(2,0) = v3[0];
+            at(2,1) = v3[1];
+            at(2,2) = v3[2];
+        }
+        /***
+        *\brief Contrulle un matrix de 4x4 a partir de vectores
+        *
+        */
+        template<class B> constexpr matrix(B const& v1,B const& v2,B const& v3,B const& v4)
+        {
+            at(0,0) = v1[0];
+            at(0,1) = v1[1];
+            at(0,2) = v1[2];
+            at(0,3) = v1[3];
+            at(1,0) = v2[0];
+            at(1,1) = v2[1];
+            at(1,2) = v2[2];
+            at(1,3) = v2[3];
+            at(2,0) = v3[0];
+            at(2,1) = v3[1];
+            at(2,2) = v3[2];
+            at(2,3) = v3[3];
+            at(3,0) = v4[0];
+            at(3,1) = v4[1];
+            at(3,2) = v4[2];
+            at(3,3) = v4[3];
+        }
 
 
         constexpr matrix operator + (const matrix& o) const

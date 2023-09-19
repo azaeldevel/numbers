@@ -1,6 +1,9 @@
 
 #include <iostream>
 #include<iomanip>
+#include <array>
+#include <vector>
+
 
 
 #include "v0.hh"
@@ -497,9 +500,9 @@ void v0_matrix()
     //mx36_x2.print(std::cout);
     CU_ASSERT(mx36_x1 == mx36_x2)
 
-    numbers::core::array<float,3> array1 {-2,3,-1};
-    numbers::core::array<float,3> array2 {1,2,-1};
-    numbers::core::array<float,3> array3 {-2,-1,1};
+    constexpr numbers::core::array<float,3> array1{-2,3,-1};
+    constexpr numbers::core::array<float,3> array2{1,2,-1};
+    constexpr numbers::core::array<float,3> array3{-2,-1,1};
     auto mx38 = numbers::create_matrix<float,3,3>(array1,array2,array3);
     CU_ASSERT(numbers::core::equal(mx38[0][0], (float)-2));
     CU_ASSERT(numbers::core::equal(mx38[0][1], (float)3));
@@ -511,7 +514,31 @@ void v0_matrix()
     CU_ASSERT(numbers::core::equal(mx38[2][1], (float)-1));
     CU_ASSERT(numbers::core::equal(mx38[2][2], (float)1));
 
+    constexpr numbers::matrix<float,3,3> mx39(array1,array2,array3);
+    //mx39.print(std::cout);
+    CU_ASSERT(numbers::core::equal(mx39[0][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx39[0][1], (float)3));
+    CU_ASSERT(numbers::core::equal(mx39[0][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx39[1][0], (float)1));
+    CU_ASSERT(numbers::core::equal(mx39[1][1], (float)2));
+    CU_ASSERT(numbers::core::equal(mx39[1][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx39[2][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx39[2][1], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx39[2][2], (float)1));
 
+    constexpr std::array<float,3> array4{-2,3,-1};
+    constexpr std::array<float,3> array5{1,2,-1};
+    constexpr std::array<float,3> array6{-2,-1,1};
+    constexpr numbers::matrix<float,3,3> mx40(array4,array5,array6);
+    CU_ASSERT(numbers::core::equal(mx40[0][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx40[0][1], (float)3));
+    CU_ASSERT(numbers::core::equal(mx40[0][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx40[1][0], (float)1));
+    CU_ASSERT(numbers::core::equal(mx40[1][1], (float)2));
+    CU_ASSERT(numbers::core::equal(mx40[1][2], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx40[2][0], (float)-2));
+    CU_ASSERT(numbers::core::equal(mx40[2][1], (float)-1));
+    CU_ASSERT(numbers::core::equal(mx40[2][2], (float)1));
 }
 
 
