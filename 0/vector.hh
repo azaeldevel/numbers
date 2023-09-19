@@ -63,6 +63,12 @@ namespace oct::nums::v0
 
             return *this;
         }
+        constexpr vector& operator += (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] += s;
+
+            return *this;
+        }
         constexpr vector operator - (const vector& s)
         {
             vector res;
@@ -76,6 +82,12 @@ namespace oct::nums::v0
 
             return *this;
         }
+        constexpr vector& operator -= (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] -= s;
+
+            return *this;
+        }
         constexpr vector operator * (const T& s)
         {
             vector res;
@@ -83,23 +95,37 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector& operator *= (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) this->at(i) *= s;
+
+            return *this;
+        }
         //https://es.wikipedia.org/wiki/Producto_vectorial
         constexpr vector operator * (const vector& s) const
         {
             static_assert(L == 3);
             vector res;
-            res[0] = (BASE::data[1] * s[2]) - (BASE::data[2] * s[1]);
-            res[1] = (BASE::data[2] * s[0]) - (BASE::data[0] * s[2]);
-            res[2] = (BASE::data[0] * s[1]) - (BASE::data[1] * s[0]);
+
+            if constexpr (L == 2)
+            {
+
+            }
+            else if constexpr (L == 3)
+            {
+                res[0] = (BASE::data[1] * s[2]) - (BASE::data[2] * s[1]);
+                res[1] = (BASE::data[2] * s[0]) - (BASE::data[0] * s[2]);
+                res[2] = (BASE::data[0] * s[1]) - (BASE::data[1] * s[0]);
+            }
 
             return res;
         }
-        constexpr vector& operator = (const vector& s)
+        /*constexpr vector& operator = (const vector& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s[i];
 
             return *this;
-        }
+        }*/
         constexpr vector& operator = (const T& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s;
@@ -235,17 +261,25 @@ namespace oct::nums::v0
         constexpr vector& normalize()
         {
             V l = length();
-            for(size_t i = 0; i < 3; i++) BASE::data[i] /= l;
+            for(size_t i = 0; i < L; i++) BASE::data[i] /= l;
 
             return *this;
         }
         constexpr V dot(const vector& v)
         {
+            static_assert(L == 3,"Solo para vectores de 3D");
+
             V newv = 0;
             for(size_t i = 0; i < 3; i++) newv += BASE::data[i] * v[i];
 
             return newv;
         }
+
+        /**
+        *\brief Determina si los vectores son paralelos
+        *
+        **/
+        constexpr bool is_parallel(const vector& v);
 
 #if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out, bool delim = true) const
