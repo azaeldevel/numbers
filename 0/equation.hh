@@ -37,19 +37,6 @@ namespace oct::nums::v0
     }
 
 
-
-
-
-
-
-    template<core::number T,size_t L,core::number V,core::index I>
-    constexpr bool vector<T,L,V,I>::is_parallel(const vector<T,L,V,I>& v)//TODO:impletmatar
-    {
-
-
-        return false;
-    }
-
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH

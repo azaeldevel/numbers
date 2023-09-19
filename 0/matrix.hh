@@ -304,7 +304,8 @@ namespace oct::nums::v0
 
             throw std::out_of_range("Indice fuera de rango");
         }
-        /*constexpr T& operator [](I const& i,I const& j)
+#ifdef __cpp_multidimensional_subscript
+        constexpr T& operator [](I const& i,I const& j)
         {
             if(i < R) if(j < C) return data[i][j];
 
@@ -315,7 +316,8 @@ namespace oct::nums::v0
             if(i < R) if(j < C) return data[i][j];
 
             throw std::out_of_range("Indice fuera de rango");
-        }*/
+        }
+#endif
 
         void diagonal(const T& v)
         {

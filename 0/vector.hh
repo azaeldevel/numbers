@@ -44,7 +44,7 @@ namespace oct::nums::v0
 
         constexpr bool operator == (const vector& s)
         {
-            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
+            for(size_t i = 0; i < L; i++) if(not core::equal(BASE::data[i],s[i])) return false;
 
             return true;
         }
@@ -107,16 +107,9 @@ namespace oct::nums::v0
             static_assert(L == 3);
             vector res;
 
-            if constexpr (L == 2)
-            {
-
-            }
-            else if constexpr (L == 3)
-            {
-                res[0] = (BASE::data[1] * s[2]) - (BASE::data[2] * s[1]);
-                res[1] = (BASE::data[2] * s[0]) - (BASE::data[0] * s[2]);
-                res[2] = (BASE::data[0] * s[1]) - (BASE::data[1] * s[0]);
-            }
+            res[0] = (BASE::data[1] * s[2]) - (BASE::data[2] * s[1]);
+            res[1] = (BASE::data[2] * s[0]) - (BASE::data[0] * s[2]);
+            res[2] = (BASE::data[0] * s[1]) - (BASE::data[1] * s[0]);
 
             return res;
         }
@@ -265,12 +258,16 @@ namespace oct::nums::v0
 
             return *this;
         }
-        constexpr V dot(const vector& v)
+        constexpr void normalize(vector& v)const
         {
-            static_assert(L == 3,"Solo para vectores de 3D");
-
+            V l = v.length();
+            for(size_t i = 0; i < L; i++) v[i] /= l;
+        }
+        constexpr V dot(const vector& v)const
+        {
+            //static_assert(L == 3,"Solo para vectores de 3D");
             V newv = 0;
-            for(size_t i = 0; i < 3; i++) newv += BASE::data[i] * v[i];
+            for(size_t i = 0; i < L; i++) newv += BASE::data[i] * v[i];
 
             return newv;
         }
@@ -279,7 +276,34 @@ namespace oct::nums::v0
         *\brief Determina si los vectores son paralelos
         *
         **/
-        constexpr bool is_parallel(const vector& v);
+        constexpr bool is_parallel(const vector& v)const
+        {
+            //la comparacion se hace con 5 digitos de presicion
+            if(core::equal(dot(v),length() * v.length(),1.0e-5f)) return true;
+
+            return false;
+        }
+        /**
+        *\brief Determina si los vectores son paralelos
+        *
+        **/
+        constexpr bool is_ortho(const vector& v)const
+        {
+            if(core::equal(dot(v),(V)0)) return true;
+
+            return false;
+        }
+
+        /**
+        *\brief Obtiene el coseno entre los vectores
+        *
+        **/
+        constexpr V cos(const vector& v) const
+        {
+            T t = 0;
+            for(size_t i = 0; i < L; i++) t += this->at(i) * v[i];
+            return t/(length() * v.length());
+        }
 
 #if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out, bool delim = true) const
@@ -336,30 +360,33 @@ namespace oct::nums::v0
     *\brief Producto escalar entre vectores
     *
     **/
-    template<core::number T,size_t L,core::number V> constexpr T dot(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
+    template<core::number T,size_t L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr T dot(const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
     {
-        T t = 0;
-        for(size_t i = 0; i < L; i++) t += v1[i]*v2[i];
-
-        return t;
+        return v1.dot(v2);
     }
 
-
-    template<core::number T,size_t L,core::number V = T> constexpr vector<T,L,V> normalize(const vector<T,L,V>& v)
+    template<core::number T,size_t L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> normalize(const vector<T,L,V,I>& v)
     {
-        V l = v.length();
-        vector<T,L,V> newv = v;
-        for(size_t i = 0; i < L; i++) newv[i] /= l;
-
-        return newv;
+        vector<T,L,V> vnew(v);
+        vnew.normalize();
+        return vnew;
     }
+    template<core::number T,size_t L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> cross (const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
+    {
+        static_assert(L == 3);
+        vector<T,L,V,I> res;
 
+        res[0] = (v1[1] * v2[2]) - (v1[2] * v2[1]);
+        res[1] = (v1[2] * v2[0]) - (v1[0] * v2[2]);
+        res[2] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
+
+        return res;
+    }
 
     template<core::number T,size_t L,core::number V = T> constexpr vector<T,L,V> cross(const vector<T,L,V>& v1,const vector<T,L,V>& v2)
     {
         return v1 * v2;
     }
-
 
 
 }

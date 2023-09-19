@@ -733,6 +733,42 @@ void v0_vector()
     CU_ASSERT(numbers::core::equal(vect34.distance(vect35),5.0f))
     //std::cout << "vect34.distance(vect35) = " << vect34.distance(vect35) << "\n";
 
+    constexpr numbers::vector<float,2> vect36{2,4};
+    constexpr numbers::vector<float,2> vect37{-1,2};
+    CU_ASSERT(numbers::core::equal(vect36.cos(vect37),0.6f))
+
+    constexpr numbers::vector<float,4> vect38{2,3,2,-1};
+    CU_ASSERT(numbers::core::equal(vect38.length(),(float)sqrt(18)))
+
+    constexpr numbers::vector<float,4> vect39{4,2,1,3};
+    CU_ASSERT(numbers::core::equal(vect39.length(),(float)sqrt(30)))
+
+    CU_ASSERT(numbers::core::equal(vect38.distance(vect39),(float)sqrt(22)))
+
+    CU_ASSERT(numbers::core::equal(vect38.dot(vect39),13.0f))
+    //std::cout << "vect38.dot(vect39) = " << vect38.dot(vect39) << "\n";
+
+
+    constexpr numbers::vector<float,4> vect40{1,0,0,1};
+    constexpr numbers::vector<float,4> vect41{0,1,1,0};
+    constexpr numbers::vector<float,4> vect42{3,0,0,3};
+    CU_ASSERT(numbers::core::equal(vect40.dot(vect41),0.0f))
+    CU_ASSERT(numbers::core::equal(vect41.dot(vect42),0.0f))
+    CU_ASSERT(numbers::core::equal(vect40.dot(vect42),6.0f))
+    CU_ASSERT(numbers::core::equal(vect40.length() * vect42.length(),6.0f,1.0e-6f))
+    CU_ASSERT(numbers::core::equal(vect40.length(),(float)sqrt(2)))
+    CU_ASSERT(numbers::core::equal(vect42.length(),(float)sqrt(18)))
+    CU_ASSERT(numbers::core::equal(vect40.cos(vect42),1.0f))
+    //std::cout << sqrt(2) * sqrt(18) << " == " << vect40.length() * vect42.length() << "\n";
+
+    CU_ASSERT(vect40.is_ortho(vect41))
+    CU_ASSERT(vect41.is_ortho(vect42))
+    CU_ASSERT_FALSE(vect40.is_ortho(vect42))
+
+    CU_ASSERT_FALSE(vect40.is_parallel(vect41))
+    CU_ASSERT_FALSE(vect41.is_parallel(vect42))
+    CU_ASSERT(vect40.is_parallel(vect42))
+
 }
 
 void v0_funtions()
