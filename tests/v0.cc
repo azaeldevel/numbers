@@ -724,9 +724,15 @@ void v0_vector()
     CU_ASSERT_DECIMAL(vect32.z(), 1.1,infimium);
     //vect32.printLn(std::cout);
 
-    //constexpr numbers::vector<float,3> vect33{2,-5};
-    //CU_ASSERT(numbers::core::equal(sqrt(29), vect33.length()))
+    constexpr numbers::vector<float,2> vect33{2,-5};
+    CU_ASSERT(numbers::core::equal(vect33.length(),(float)sqrt(29)))
     //numbers_here::vector<float,3> vect33{2,-5};
+
+    constexpr numbers::vector<float,2> vect34{3,2};
+    constexpr numbers::vector<float,2> vect35{-1,5};
+    CU_ASSERT(numbers::core::equal(vect34.distance(vect35),5.0f))
+    //std::cout << "vect34.distance(vect35) = " << vect34.distance(vect35) << "\n";
+
 }
 
 void v0_funtions()

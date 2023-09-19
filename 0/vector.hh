@@ -10,7 +10,7 @@ namespace oct::nums::v0
     {
     private:
         typedef core::array<T,L,I> BASE;
-        typedef vector<T,L,I> VECTOR;
+        typedef vector<T,L,V,I> VECTOR;
     public:
         vector() = default;
         /**
@@ -152,7 +152,7 @@ namespace oct::nums::v0
         **/
         void transl(const vector& v)
         {
-            for(size_t i = 0; i < 3; i++) BASE::data[i] += v[i];
+            for(size_t i = 0; i < L; i++) BASE::data[i] += v[i];
         }
         /**
         *\brief tranformacion de scalado
@@ -160,7 +160,7 @@ namespace oct::nums::v0
         **/
         void scale(const T& s)
         {
-            for(size_t i = 0; i < 3; i++) BASE::data[i] *= s;
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
         }
         /**
         *\brief Longitud
@@ -169,7 +169,7 @@ namespace oct::nums::v0
         V length() const
         {
             V v = 0;
-            for(size_t i = 0; i < 3; i++) v += pow(BASE::data[i],V(2));
+            for(size_t i = 0; i < L; i++) v += pow(BASE::data[i],V(2));
 
             return sqrt(v);
         }
@@ -180,7 +180,7 @@ namespace oct::nums::v0
         V distance(VECTOR const& p) const
         {
             V v = 0;
-            for(size_t i = 0; i < 3; i++) v += pow(p.data[i] - BASE::data[i],V(2));
+            for(size_t i = 0; i < L; i++) v += pow(p.data[i] - BASE::data[i],V(2));
 
             return sqrt(v);
         }
