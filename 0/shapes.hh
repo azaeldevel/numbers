@@ -103,11 +103,11 @@ namespace oct::nums::v0
 
         operator void*()
         {
-            return &BASE::data;
+            return (void*)BASE::data;
         }
         operator const void*() const
         {
-            return &BASE::data;
+            return (void*)BASE::data;
         }
 
 
@@ -138,7 +138,7 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<core::number C, size_t D = 3,core::number V = C>
+    template<core::number C,core::index auto D = 3,core::number V = C>
     class Line : public Shape<C,D,2,V>
     {
     public:
@@ -167,7 +167,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertises que tiene
     *\param V Tipo de datos para calculos
     **/
-    template<core::number C, size_t D,size_t P,core::number V = C>
+    template<core::number C,core::index auto D,core::index auto P = 4,core::number V = C>
     class Plane : public Shape<C,D,P,V>
     {
     public:
