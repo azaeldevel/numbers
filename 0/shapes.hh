@@ -167,7 +167,7 @@ namespace oct::nums::v0
     *\param P Cantidad de vertises que tiene
     *\param V Tipo de datos para calculos
     **/
-    template<core::number C,core::index auto D = 3,core::index auto P = 4,core::number V = C>
+    template<core::number C,core::index auto D = 3,core::index auto P = 6,core::number V = C>
     class Plane : public Shape<C,D,P,V>
     {
     public:
@@ -184,6 +184,32 @@ namespace oct::nums::v0
         **/
         constexpr Plane(const vector<C,D> vs[3]) : BASE(vs)
         {
+        }
+        /**
+        *\brief Crea un rectangulo
+        **/
+        constexpr void rectangle(const vector<C,D>& O, const C& height, const C& width)
+        {
+            V h = height / V(2);
+            V w = height / V(2);
+
+            //asignado coordenas en x
+            BASE::data[0][0] = O.x() + w;
+            BASE::data[1][0] = O.x() + w;
+            BASE::data[2][0] = O.x() - w;
+            BASE::data[3][0] = O.x() - w;
+
+            //asignado coordenas en y
+            BASE::data[0][1] = O.y() + h;
+            BASE::data[1][1] = O.y() - h;
+            BASE::data[2][1] = O.y() - h;
+            BASE::data[3][1] = O.y() + h;
+
+            //asignado coordenas en z
+            BASE::data[0][2] = O.z();
+            BASE::data[1][2] = O.z();
+            BASE::data[2][2] = O.z();
+            BASE::data[3][2] = O.z();
         }
 
     public:
