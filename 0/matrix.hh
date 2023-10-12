@@ -343,6 +343,19 @@ namespace oct::nums::v0
                 }
             }
         }
+        constexpr matrix<T,R,C,V> transpose () const
+        {
+            matrix<T,R,C,V> res;
+            for(size_t i = 0; i < C; i++)
+            {
+                for(size_t j = 0; j < R; j++)
+                {
+                    res[i][j] = data[j][i];
+                }
+            }
+
+            return res;
+        }
 
         constexpr matrix adjoint() const
         {
@@ -886,16 +899,53 @@ namespace oct::nums::v0
             }
         }
 
-        /*constexpr void transpose (const matrix<T,R,C,V>& o)
+        constexpr void transpose (const matrix& o)
         {
+            if(data)
+            {
+                if(R != o.C or C != o.R)
+                {
+                    for(size_t i = 0; i < R; i++)
+                    {
+                        delete[] data[i];
+                    }
+                    delete[] data;
+                    C = o.R;
+                    R = o.C;
+                    data = new T*[R];
+                }
+            }
+            else
+            {
+                C = o.R;
+                R = o.C;
+                data = new T*[R];
+            }
+
             for(size_t i = 0; i < R; i++)
             {
+                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
                     data[i][j] = o[j][i];
                 }
             }
-        }*/
+        }
+
+        constexpr matrix transpose () const
+        {
+            matrix res(C,R);
+
+            for(size_t i = 0; i < C; i++)
+            {
+                for(size_t j = 0; j < R; j++)
+                {
+                    res.data[i][j] = data[j][i];
+                }
+            }
+
+            return res;
+        }
 
         /*constexpr matrix adjoint() const
         {

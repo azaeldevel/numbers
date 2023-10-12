@@ -591,6 +591,13 @@ void v0_matrix()
     CU_ASSERT(mx47[1][1] == 1);
     CU_ASSERT(mx47[1][2] == 1);
 
+    auto  mx48 = mx19.transpose();
+    CU_ASSERT(mx48[0][0] == 1);
+    CU_ASSERT(mx48[1][0] == 2);
+    CU_ASSERT(mx48[2][0] == 3);
+    CU_ASSERT(mx48[0][1] == 4);
+    CU_ASSERT(mx48[1][1] == 5);
+    CU_ASSERT(mx48[2][1] == 6);
 
 
 
@@ -738,6 +745,24 @@ void v0_matrix()
     CU_ASSERT(mx114[1][0] == 1);
     CU_ASSERT(mx114[1][1] == 1);
     CU_ASSERT(mx114[1][2] == 1);
+
+    numbers_here::matrix<int> mx115;
+    mx115.transpose(mx102);
+    //mx115.print(std::cout);
+    CU_ASSERT(mx115[0][0] == 1);
+    CU_ASSERT(mx115[1][0] == 2);
+    CU_ASSERT(mx115[2][0] == 3);
+    CU_ASSERT(mx115[0][1] == 4);
+    CU_ASSERT(mx115[1][1] == 5);
+    CU_ASSERT(mx115[2][1] == 6);
+
+    numbers_here::matrix<int> mx116 = mx102.transpose();
+    CU_ASSERT(mx116[0][0] == 1);
+    CU_ASSERT(mx116[1][0] == 2);
+    CU_ASSERT(mx116[2][0] == 3);
+    CU_ASSERT(mx116[0][1] == 4);
+    CU_ASSERT(mx116[1][1] == 5);
+    CU_ASSERT(mx116[2][1] == 6);
 }
 
 
