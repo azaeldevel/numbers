@@ -146,9 +146,9 @@ namespace oct::nums::v0
         {
             matrix res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res.data[i][j] = data[i][j] + o.data[i][j];
                 }
@@ -160,9 +160,9 @@ namespace oct::nums::v0
         {
             matrix<t,C,R,V> res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] + o;
                 }
@@ -174,9 +174,9 @@ namespace oct::nums::v0
         {
             matrix res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] - o[i][j];
                 }
@@ -188,9 +188,9 @@ namespace oct::nums::v0
         {
             matrix<t,C,R,V> res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] - o;
                 }
@@ -220,9 +220,9 @@ namespace oct::nums::v0
         {
             matrix<t,C,R,V> res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] * o;
                 }
@@ -234,9 +234,9 @@ namespace oct::nums::v0
         {
             matrix<t,C,R,V> res;
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] / o;
                 }
@@ -670,9 +670,9 @@ namespace oct::nums::v0
             if(C != o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
             matrix res(R,C);
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
                     res.data[i][j] = data[i][j] + o.data[i][j];
                 }
@@ -680,48 +680,51 @@ namespace oct::nums::v0
 
             return res;
         }
-        /*template<core::number t> constexpr matrix<t,C,R,V> operator + (t const& o) const
+        template<core::number t> constexpr matrix<t> operator + (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix res(R,C);
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
-                    res[i][j] = data[i][j] + o;
+                    res.data[i][j] = data[i][j] + o;
                 }
             }
 
             return res;
-        }*/
-        /*constexpr matrix operator - (const matrix& o) const
+        }
+        constexpr matrix operator - (const matrix& o) const
         {
-            matrix res;
+            if(R != o.R) throw std::logic_error("Los operadore no tiene la misma dimension");
+            if(C != o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
-            for(size_t i = 0; i < C; i++)
+            matrix res(R,C);
+
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
-                    res[i][j] = data[i][j] - o[i][j];
+                    res.data[i][j] = data[i][j] - o[i][j];
                 }
             }
 
             return res;
-        }*/
-        /*template<core::number t> constexpr matrix<t,C,R,V> operator  - (t const& o) const
+        }
+        template<core::number t> constexpr matrix operator  - (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix res(R,C);
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
-                    res[i][j] = data[i][j] - o;
+                    res.data[i][j] = data[i][j] - o;
                 }
             }
 
             return res;
-        }*/
+        }
         /*template<core::index auto c> constexpr matrix<T,c,R,V> operator * (const matrix<T,c,C,V>& o) const
         {//ref : Book 1(IAL), pag 88.
             matrix<T,c,R,V> res(0);
@@ -772,13 +775,16 @@ namespace oct::nums::v0
         {
             if(data)
             {
-                if(R != o.R and C != o.C)
+                if(R != o.R or C != o.C)
                 {
                     for(size_t i = 0; i < R; i++)
                     {
                         delete[] data[i];
                     }
                     delete[] data;
+                    R = o.R;
+                    C = o.C;
+                    data = new T*[R];
                 }
             }
             else

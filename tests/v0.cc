@@ -542,68 +542,128 @@ void v0_matrix()
     CU_ASSERT(numbers::core::equal(mx40[2][2], (float)1));
 
 
+    constexpr numbers_here::matrix<int,3,2,float> mx41 = {6,5,4,3,2,1};
+    auto mx42 = mx41 + mx19;
+    CU_ASSERT(mx42[0][0] == 7);
+    CU_ASSERT(mx42[0][1] == 7);
+    CU_ASSERT(mx42[0][2] == 7);
+    CU_ASSERT(mx42[1][0] == 7);
+    CU_ASSERT(mx42[1][1] == 7);
+    CU_ASSERT(mx42[1][2] == 7);
+
+    auto mx43 = mx41 + 5;
+    CU_ASSERT(mx43[0][0] == 11);
+    CU_ASSERT(mx43[0][1] == 10);
+    CU_ASSERT(mx43[0][2] == 9);
+    CU_ASSERT(mx43[1][0] == 8);
+    CU_ASSERT(mx43[1][1] == 7);
+    CU_ASSERT(mx43[1][2] == 6);
+
+    auto mx44 = mx42 - mx19;
+    CU_ASSERT(mx44[0][0] == 6);
+    CU_ASSERT(mx44[0][1] == 5);
+    CU_ASSERT(mx44[0][2] == 4);
+    CU_ASSERT(mx44[1][0] == 3);
+    CU_ASSERT(mx44[1][1] == 2);
+    CU_ASSERT(mx44[1][2] == 1);
+
+    auto mx45 = mx44 - 1;
+    CU_ASSERT(mx45[0][0] == 5);
+    CU_ASSERT(mx45[0][1] == 4);
+    CU_ASSERT(mx45[0][2] == 3);
+    CU_ASSERT(mx45[1][0] == 2);
+    CU_ASSERT(mx45[1][1] == 1);
+    CU_ASSERT(mx45[1][2] == 0);
+
+
+
+
+
 
 
 
 
     //>>>>>
-    numbers_here::matrix<int> mx41(2,2);
-    mx41[0][0] = 5;
-    mx41[0][1] = -2;
-    mx41[1][0] = 4;
-    mx41[1][1] = 1;
-    CU_ASSERT(mx41[0][0] == 5);
-    CU_ASSERT(mx41[0][1] == -2);
-    CU_ASSERT(mx41[1][0] == 4);
-    CU_ASSERT(mx41[1][1] == 1);
+    numbers_here::matrix<int> mx100(2,2);
+    mx100[0][0] = 5;
+    mx100[0][1] = -2;
+    mx100[1][0] = 4;
+    mx100[1][1] = 1;
+    CU_ASSERT(mx100[0][0] == 5);
+    CU_ASSERT(mx100[0][1] == -2);
+    CU_ASSERT(mx100[1][0] == 4);
+    CU_ASSERT(mx100[1][1] == 1);
 
-    numbers_here::matrix<int> mx42(mx41);
-    CU_ASSERT(mx42[0][0] == 5);
-    CU_ASSERT(mx42[0][1] == -2);
-    CU_ASSERT(mx42[1][0] == 4);
-    CU_ASSERT(mx42[1][1] == 1);
+    numbers_here::matrix<int> mx101(mx100);
+    CU_ASSERT(mx101[0][0] == 5);
+    CU_ASSERT(mx101[0][1] == -2);
+    CU_ASSERT(mx101[1][0] == 4);
+    CU_ASSERT(mx101[1][1] == 1);
 
-    const numbers_here::matrix<int> mx43(2,3,{1,2,3,4,5,6});
+    const numbers_here::matrix<int> mx102(2,3,{1,2,3,4,5,6});
     //mx19.print(std::cout);
-    CU_ASSERT(mx43[0][0] == 1);
-    CU_ASSERT(mx43[0][1] == 2);
-    CU_ASSERT(mx43[0][2] == 3);
-    CU_ASSERT(mx43[1][0] == 4);
-    CU_ASSERT(mx43[1][1] == 5);
-    CU_ASSERT(mx43[1][2] == 6);
+    CU_ASSERT(mx102[0][0] == 1);
+    CU_ASSERT(mx102[0][1] == 2);
+    CU_ASSERT(mx102[0][2] == 3);
+    CU_ASSERT(mx102[1][0] == 4);
+    CU_ASSERT(mx102[1][1] == 5);
+    CU_ASSERT(mx102[1][2] == 6);
 
-    const numbers_here::matrix<int> mx44 {2,3,1,2,3,4,5,6};
+    const numbers_here::matrix<int> mx103 {2,3,1,2,3,4,5,6};
     //mx19.print(std::cout);
-    CU_ASSERT(mx44[0][0] == 1);
-    CU_ASSERT(mx44[0][1] == 2);
-    CU_ASSERT(mx44[0][2] == 3);
-    CU_ASSERT(mx44[1][0] == 4);
-    CU_ASSERT(mx44[1][1] == 5);
-    CU_ASSERT(mx44[1][2] == 6);
+    CU_ASSERT(mx103[0][0] == 1);
+    CU_ASSERT(mx103[0][1] == 2);
+    CU_ASSERT(mx103[0][2] == 3);
+    CU_ASSERT(mx103[1][0] == 4);
+    CU_ASSERT(mx103[1][1] == 5);
+    CU_ASSERT(mx103[1][2] == 6);
 
-    CU_ASSERT(mx43.rows() == mx44.rows());
-    CU_ASSERT(mx43.columns() == mx44.columns());
+    CU_ASSERT(mx102.rows() == mx103.rows());
+    CU_ASSERT(mx102.columns() == mx103.columns());
 
-
-    const numbers_here::matrix<int> mx45(2,3,{6,5,4,3,2,1});
+    const numbers_here::matrix<int> mx104(2,3,{6,5,4,3,2,1});
     //mx19.print(std::cout);
-    CU_ASSERT(mx45[0][0] == 6);
-    CU_ASSERT(mx45[0][1] == 5);
-    CU_ASSERT(mx45[0][2] == 4);
-    CU_ASSERT(mx45[1][0] == 3);
-    CU_ASSERT(mx45[1][1] == 2);
-    CU_ASSERT(mx45[1][2] == 1);
+    CU_ASSERT(mx104[0][0] == 6);
+    CU_ASSERT(mx104[0][1] == 5);
+    CU_ASSERT(mx104[0][2] == 4);
+    CU_ASSERT(mx104[1][0] == 3);
+    CU_ASSERT(mx104[1][1] == 2);
+    CU_ASSERT(mx104[1][2] == 1);
 
-    CU_ASSERT(mx45.rows() == mx44.rows());
-    CU_ASSERT(mx45.columns() == mx44.columns());
+    CU_ASSERT(mx104.rows() == mx103.rows());
+    CU_ASSERT(mx104.columns() == mx103.columns());
 
-    //numbers_here::matrix<int> mx46 = mx45 + mx44;
-    /*CU_ASSERT(mx46[0][0] == 7);
-    CU_ASSERT(mx46[0][1] == 7);
-    CU_ASSERT(mx46[0][2] == 7);
-    CU_ASSERT(mx46[1][0] == 7);
-    CU_ASSERT(mx46[1][1] == 7);
-    CU_ASSERT(mx46[1][2] == 7);*/
+    numbers_here::matrix<int> mx106 = mx104 + mx103;
+    CU_ASSERT(mx106[0][0] == 7);
+    CU_ASSERT(mx106[0][1] == 7);
+    CU_ASSERT(mx106[0][2] == 7);
+    CU_ASSERT(mx106[1][0] == 7);
+    CU_ASSERT(mx106[1][1] == 7);
+    CU_ASSERT(mx106[1][2] == 7);
+
+    const numbers_here::matrix<int> mx107 = mx104 + 5;
+    CU_ASSERT(mx107[0][0] == 11);
+    CU_ASSERT(mx107[0][1] == 10);
+    CU_ASSERT(mx107[0][2] == 9);
+    CU_ASSERT(mx107[1][0] == 8);
+    CU_ASSERT(mx107[1][1] == 7);
+    CU_ASSERT(mx107[1][2] == 6);
+
+    numbers_here::matrix<int> mx108 = mx106 - mx103;
+    CU_ASSERT(mx108[0][0] == 6);
+    CU_ASSERT(mx108[0][1] == 5);
+    CU_ASSERT(mx108[0][2] == 4);
+    CU_ASSERT(mx108[1][0] == 3);
+    CU_ASSERT(mx108[1][1] == 2);
+    CU_ASSERT(mx108[1][2] == 1);
+
+    const numbers_here::matrix<int> mx109 = mx104 - 1;
+    CU_ASSERT(mx109[0][0] == 5);
+    CU_ASSERT(mx109[0][1] == 4);
+    CU_ASSERT(mx109[0][2] == 3);
+    CU_ASSERT(mx109[1][0] == 2);
+    CU_ASSERT(mx109[1][1] == 1);
+    CU_ASSERT(mx109[1][2] == 0);
 }
 
 
