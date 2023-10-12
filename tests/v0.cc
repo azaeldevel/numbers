@@ -210,7 +210,7 @@ void v0_matrix()
     CU_ASSERT(mx8[1][1] == 21);
     CU_ASSERT(mx8[2][2] == 21);
 
-    numbers_here::matrix<int,3,2,float> mx9;
+    numbers_here::matrix<int,2,3,float> mx9;
     mx9[0][0] = 2;
     mx9[0][1] = -1;
     mx9[0][2] = 0;
@@ -224,7 +224,7 @@ void v0_matrix()
     CU_ASSERT(mx9[1][1] == 2);
     CU_ASSERT(mx9[1][2] == -3);
 
-    numbers_here::matrix<int,2,3,float> mx10;
+    numbers_here::matrix<int,3,2,float> mx10;
     mx10[0][0] = 1;
     mx10[0][1] = 3;
     mx10[1][0] = -2;
@@ -292,7 +292,7 @@ void v0_matrix()
     mx15[2][1] = 4;
     mx15[2][2] = 4;
 
-    numbers_here::matrix<int,1,3,float> mx16;
+    numbers_here::matrix<int,3,1,float> mx16;
     mx16[0][0] = 0;
     //eqSA[0] = 10;
     mx16[1][0] = -2;
@@ -317,7 +317,7 @@ void v0_matrix()
     CU_ASSERT(mx18[2][2] == 9);
 
 
-    constexpr numbers_here::matrix<int,3,2,float> mx19 = {1,2,3,4,5,6};
+    constexpr numbers_here::matrix<int,2,3,float> mx19 = {1,2,3,4,5,6};
     //mx19.print(std::cout);
     CU_ASSERT(mx19[0][0] == 1);
     CU_ASSERT(mx19[0][1] == 2);
@@ -326,7 +326,7 @@ void v0_matrix()
     CU_ASSERT(mx19[1][1] == 5);
     CU_ASSERT(mx19[1][2] == 6);
 
-    numbers_here::matrix<int,2,3,float> mx20;
+    numbers_here::matrix<int,3,2,float> mx20;
     mx20.transpose(mx19);
     //mx20.print(std::cout);
     CU_ASSERT(mx20[0][0] == 1);
@@ -353,7 +353,7 @@ void v0_matrix()
     CU_ASSERT(numbers::core::equal(mx23[2][1], (float)0));
     CU_ASSERT(numbers::core::equal(mx23[2][2], (float)-1/(float)4));*/
 
-    constexpr numbers_here::matrix<int,4,3,float> mx24(mx18);
+    constexpr numbers_here::matrix<int,3,4,float> mx24(mx18);
     //mx24.print(std::cout);
     CU_ASSERT(mx24[0][0] == 1);
     CU_ASSERT(mx24[0][1] == 2);
@@ -471,7 +471,7 @@ void v0_matrix()
     CU_ASSERT((numbers::core::equal((float)mx32[2][1],2.0f/94.0f)));
     CU_ASSERT((numbers::core::equal((float)mx32[2][2],-28.0f/94.0f)));
 
-    constexpr numbers_here::matrix<int,1,3> mx33{3,-2,1};
+    constexpr numbers_here::matrix<int,3,1> mx33{3,-2,1};
     //mx33.print(std::cout);
     auto mx34 = mx30 * mx33;
     //mx34.print(std::cout);
@@ -493,11 +493,11 @@ void v0_matrix()
 
     constexpr numbers::matrix<float,3,3> mx36{-2,3,-1,1,2,-1,-2,-1,1};
     constexpr numbers::matrix<float,3,3> mx36_inverse = mx36.inverse();
-    constexpr numbers::matrix<float,1,3> mx37{1,4,-3};
+    constexpr numbers::matrix<float,3,1> mx37{1,4,-3};
     //auto mx36_x =  mx36_inverse * mx37;
-    constexpr numbers::matrix<float,1,3> mx36_x1 =  mx36_inverse * mx37;
+    constexpr numbers::matrix<float,3,1> mx36_x1 =  mx36_inverse * mx37;
     //mx36_x1.print(std::cout);
-    constexpr numbers::matrix<float,1,3> mx36_x2 = numbers::resolve(mx36,mx37);
+    constexpr numbers::matrix<float,3,1> mx36_x2 = numbers::resolve(mx36,mx37);
     //mx36_x2.print(std::cout);
     CU_ASSERT(mx36_x1 == mx36_x2)
 
@@ -542,7 +542,7 @@ void v0_matrix()
     CU_ASSERT(numbers::core::equal(mx40[2][2], (float)1));
 
 
-    constexpr numbers_here::matrix<int,3,2,float> mx41 = {6,5,4,3,2,1};
+    constexpr numbers_here::matrix<int,2,3,float> mx41 = {6,5,4,3,2,1};
     auto mx42 = mx41 + mx19;
     CU_ASSERT(mx42[0][0] == 7);
     CU_ASSERT(mx42[0][1] == 7);

@@ -16,7 +16,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto C = 0,core::index auto R = 0,core::number V = core::convertion<T>::type,core::index I = size_t,class A = T> class matrix //: public core::array<core::array<T,C,I>,R,I>
+    template<typename T,core::index auto R = 0,core::index auto C = 0,core::number V = core::convertion<T>::type,core::index I = size_t,class A = T> class matrix //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
 
@@ -51,7 +51,7 @@ namespace oct::nums::v0
         *\brief Contructor de copias para un matrix
         *
         */
-        constexpr matrix(matrix<T,C - 1,R,V> const& o)
+        constexpr matrix(matrix<T,R,C - 1,V> const& o)
         {
             for(size_t i = 0; i < R; i++)
             {
@@ -66,7 +66,7 @@ namespace oct::nums::v0
         *\brief Contructor de copias para un matrix aumentada
         *
         */
-        constexpr matrix(matrix<T,C + 1,R,V> const& o)
+        constexpr matrix(matrix<T,R,C + 1,V> const& o)
         {
             for(size_t i = 0; i < R; i++)
             {
@@ -156,9 +156,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::number t> constexpr matrix<t,C,R,V> operator + (t const& o) const
+        template<core::number t> constexpr matrix<t,R,C,V> operator + (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix<t,R,C,V> res;
 
             for(size_t i = 0; i < R; i++)
             {
@@ -184,9 +184,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::number t> constexpr matrix<t,C,R,V> operator  - (t const& o) const
+        template<core::number t> constexpr matrix<t,R,C,V> operator  - (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix<t,R,C,V> res;
 
             for(size_t i = 0; i < R; i++)
             {
@@ -198,9 +198,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::index auto c> constexpr matrix<T,c,R,V> operator * (const matrix<T,c,C,V>& o) const
+        template<core::index auto c> constexpr matrix<T,R,c,V> operator * (const matrix<T,C,c,V>& o) const
         {//ref : Book 1(IAL), pag 88.
-            matrix<T,c,R,V> res(0);
+            matrix<T,R,c,V> res(0);
 
             for(I i = 0; i < R; i++)
             {
@@ -216,9 +216,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::number t> constexpr matrix<t,C,R,V> operator * (t const& o) const
+        template<core::number t> constexpr matrix<t,R,C,V> operator * (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix<t,R,C,V> res;
 
             for(size_t i = 0; i < R; i++)
             {
@@ -230,9 +230,9 @@ namespace oct::nums::v0
 
             return res;
         }
-        template<core::number t> constexpr matrix<t,C,R,V> operator / (t const&  o) const
+        template<core::number t> constexpr matrix<t,R,C,V> operator / (t const&  o) const
         {
-            matrix<t,C,R,V> res;
+            matrix<t,R,C,V> res;
 
             for(size_t i = 0; i < R; i++)
             {
@@ -333,7 +333,7 @@ namespace oct::nums::v0
             }
         }
 
-        constexpr void transpose (const matrix<T,R,C,V>& o)
+        constexpr void transpose (const matrix<T,C,R,V>& o)
         {
             for(size_t i = 0; i < R; i++)
             {
@@ -343,9 +343,9 @@ namespace oct::nums::v0
                 }
             }
         }
-        constexpr matrix<T,R,C,V> transpose () const
+        constexpr matrix<T,C,R,V> transpose () const
         {
-            matrix<T,R,C,V> res;
+            matrix<T,C,R,V> res;
             for(size_t i = 0; i < C; i++)
             {
                 for(size_t j = 0; j < R; j++)
@@ -382,7 +382,7 @@ namespace oct::nums::v0
             //std::cout << sign << " * det = " << det << "\n";
             return ret;
         }
-        constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
+        constexpr matrix<T,R - 1, C - 1,V> minor(const I& a,const I& b) const
         {
             I x = 0, y = 0;
             matrix<T,C - 1, R - 1,V> submatrix;
@@ -431,7 +431,7 @@ namespace oct::nums::v0
 
             return 1;
         }
-        constexpr matrix<V,C,R,V> inverse () const
+        constexpr matrix<V,R,C,V> inverse () const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
 
