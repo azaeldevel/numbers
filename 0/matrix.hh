@@ -962,7 +962,7 @@ namespace oct::nums::v0
 
             return m;
         }*/
-        /*constexpr V cofactor(const I& i,const I& j) const
+        template<core::number V = core::convertion<T>::type>  constexpr V cofactor(size_t i,size_t j) const
         {
             V sign = std::pow(V(-1),V((i + 1) + (j + 1)));
             V det = minor(i,j).determinant();
@@ -971,16 +971,16 @@ namespace oct::nums::v0
             //std::cout << "(" << sign << ")(" <<  i + 1 << " + " << j + 1 << ") * " << det << " = " << ret << "\n";
             //std::cout << sign << " * det = " << det << "\n";
             return ret;
-        }*/
-        /*constexpr matrix<T,C - 1, R - 1,V> minor(const I& a,const I& b) const
+        }
+        template<core::number V = core::convertion<T>::type> constexpr matrix minor( size_t a,size_t b) const
         {
-            I x = 0, y = 0;
-            matrix<T,C - 1, R - 1,V> submatrix;
+            size_t x = 0, y = 0;
+            matrix submatrix(R - 1,C - 1);
 
-            for (I i = 0; i < R; i++)
+            for (size_t i = 0; i < R; i++)
             {
                 if(i == a) continue;
-                for (I j = 0; j < R; j++)
+                for (size_t j = 0; j < R; j++)
                 {
                     if(j == b) continue;
                     //std::cout << "matrix[" << x << "," << y << "]" << BASE::at(i)[j] << "\n";
@@ -992,27 +992,27 @@ namespace oct::nums::v0
             }
 
             return submatrix;
-        }*/
-        /*constexpr V determinant(const I& i = 0) const
+        }
+        template<core::number V = core::convertion<T>::type> V determinant(size_t i = 0) const
         {
-            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+            if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
 
             // Base case: 1x1 matrix
-            if constexpr (R == 1)
+            if (R == 1)
             {
                 return data[0][0];
             }
 
             // Base case: 2x2 matrix
-            if constexpr (R == 2)
+            if (R == 2)
             {
                 return data[0][0] * data[1][1] - data[0][1] * data[1][0];
             }
 
-            if constexpr (R > 2)
+            if (R > 2)
             {
                 V det = 0;
-                for (I j = 0; j < R; j++)
+                for (size_t j = 0; j < R; j++)
                 {
                     det += data[i][j] * cofactor(i,j);
                 }
@@ -1020,7 +1020,7 @@ namespace oct::nums::v0
             }
 
             return 1;
-        }*/
+        }
         /*constexpr matrix<V,C,R,V> inverse () const
         {
             static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");

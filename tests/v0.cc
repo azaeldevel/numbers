@@ -763,6 +763,48 @@ void v0_matrix()
     CU_ASSERT(mx116[0][1] == 4);
     CU_ASSERT(mx116[1][1] == 5);
     CU_ASSERT(mx116[2][1] == 6);
+
+    numbers_here::matrix<int> mx117{3,3,3,-1,2,4,5,6,7,1,2};
+    CU_ASSERT(mx117.rows() == 3);
+    CU_ASSERT(mx117.columns() == 3);
+    auto mx117_minor12 = mx117.minor(0,1);
+    //mx117_minor12.print(std::cout);
+    CU_ASSERT(mx117_minor12[0][0] == 4);
+    CU_ASSERT(mx117_minor12[0][1] == 6);
+    CU_ASSERT(mx117_minor12[1][0] == 7);
+    CU_ASSERT(mx117_minor12[1][1] == 2);
+    int mx117_minor12_det = mx117_minor12.determinant();
+    //std::cout << "det(mx117_minor12_det) is " << mx117_minor12_det << "\n";
+    CU_ASSERT(mx117_minor12_det == -34)
+    auto mx117_minor23 = mx117.minor(1,2);
+    //mx27_minor23.print(std::cout);
+    CU_ASSERT(mx117_minor23[0][0] == 3);
+    CU_ASSERT(mx117_minor23[0][1] == -1);
+    CU_ASSERT(mx117_minor23[1][0] == 7);
+    CU_ASSERT(mx117_minor23[1][1] == 1);
+    int mx117_minor23_det = mx117_minor23.determinant();
+    //std::cout << "det(mx27_minor23_det) is " << mx27_minor23_det << "\n";
+    CU_ASSERT(mx117_minor23_det == 10)
+    auto mx117_minor31 = mx117.minor(2,0);
+    //mx27_minor31.print(std::cout);
+    CU_ASSERT(mx117_minor31[0][0] == -1);
+    CU_ASSERT(mx117_minor31[0][1] == 2);
+    CU_ASSERT(mx117_minor31[1][0] == 5);
+    CU_ASSERT(mx117_minor31[1][1] == 6);
+    int mx117_minor31_det = mx117_minor31.determinant();
+    CU_ASSERT(mx117_minor31_det == -16)
+    //std::cout << "det(mx27_minor31_det) is " << mx27_minor31_det << "\n";
+    //std::cout << "\n\n\n";
+    /*int mx27_minor12_cofac = mx117.cofactor(0,1);
+    int mx27_minor23_cofac = mx117.cofactor(1,2);
+    int mx27_minor31_cofac = mx117.cofactor(2,0);
+    int mx27_det1 = mx27_minor12_cofac + mx27_minor23_cofac + mx27_minor31_cofac;
+    CU_ASSERT(mx27_minor12_cofac == 34)
+    CU_ASSERT(mx27_minor23_cofac == -10)
+    CU_ASSERT(mx27_minor31_cofac == -16)
+    CU_ASSERT(mx27_det1 == 8)
+    //std::cout << "\n\n\n";
+    //CU_ASSERT(mx27.determinant() == 6)*/
 }
 
 
