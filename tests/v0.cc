@@ -575,6 +575,22 @@ void v0_matrix()
     CU_ASSERT(mx45[1][1] == 1);
     CU_ASSERT(mx45[1][2] == 0);
 
+    auto mx46 = mx45 * 5;
+    CU_ASSERT(mx46[0][0] == 25);
+    CU_ASSERT(mx46[0][1] == 20);
+    CU_ASSERT(mx46[0][2] == 15);
+    CU_ASSERT(mx46[1][0] == 10);
+    CU_ASSERT(mx46[1][1] == 5);
+    CU_ASSERT(mx46[1][2] == 0);
+
+    auto mx47 = mx42 / 7;
+    CU_ASSERT(mx47[0][0] == 1);
+    CU_ASSERT(mx47[0][1] == 1);
+    CU_ASSERT(mx47[0][2] == 1);
+    CU_ASSERT(mx47[1][0] == 1);
+    CU_ASSERT(mx47[1][1] == 1);
+    CU_ASSERT(mx47[1][2] == 1);
+
 
 
 
@@ -664,6 +680,64 @@ void v0_matrix()
     CU_ASSERT(mx109[1][0] == 2);
     CU_ASSERT(mx109[1][1] == 1);
     CU_ASSERT(mx109[1][2] == 0);
+
+    numbers_here::matrix<int> mx110(2,3);
+    mx110[0][0] = 2;
+    mx110[0][1] = -1;
+    mx110[0][2] = 0;
+    mx110[1][0] = 1;
+    mx110[1][1] = 2;
+    mx110[1][2] = -3;
+    CU_ASSERT(mx110[0][0] == 2);
+    CU_ASSERT(mx110[0][1] == -1);
+    CU_ASSERT(mx110[0][2] == 0);
+    CU_ASSERT(mx110[1][0] == 1);
+    CU_ASSERT(mx110[1][1] == 2);
+    CU_ASSERT(mx110[1][2] == -3);
+
+    numbers_here::matrix<int> mx111(3,2);
+    mx111[0][0] = 1;
+    mx111[0][1] = 3;
+    mx111[1][0] = -2;
+    mx111[1][1] = 1;
+    mx111[2][0] = 0;
+    mx111[2][1] = 4;
+    CU_ASSERT(mx111[0][0] == 1);
+    CU_ASSERT(mx111[0][1] == 3);
+    CU_ASSERT(mx111[1][0] == -2);
+    CU_ASSERT(mx111[1][1] == 1);
+    CU_ASSERT(mx111[2][0] == 0);
+    CU_ASSERT(mx111[2][1] == 4);
+
+    auto mx112 = mx110 * mx111;
+    //mx11.printLn(std::cout);
+    //std::cout << "Columns : " << mx11.columns() << "\n";
+    //std::cout << "Rows : " << mx11.rows() << "\n";
+    CU_ASSERT(mx112.columns() == 2);
+    CU_ASSERT(mx112.rows() == 2);
+    CU_ASSERT(mx112[0][0] == 4);
+    CU_ASSERT(mx112[0][1] == 5);
+    CU_ASSERT(mx112[1][0] == -3);
+    CU_ASSERT(mx112[1][1] == -7);
+
+    CU_ASSERT(mx112.rows() == 2);
+    CU_ASSERT(mx112.columns() == 2);
+
+    const numbers_here::matrix<int> mx113 = mx109 * 5;
+    CU_ASSERT(mx113[0][0] == 25);
+    CU_ASSERT(mx113[0][1] == 20);
+    CU_ASSERT(mx113[0][2] == 15);
+    CU_ASSERT(mx113[1][0] == 10);
+    CU_ASSERT(mx113[1][1] == 5);
+    CU_ASSERT(mx113[1][2] == 0);
+
+    const numbers_here::matrix<int> mx114 = mx106 / 7;
+    CU_ASSERT(mx114[0][0] == 1);
+    CU_ASSERT(mx114[0][1] == 1);
+    CU_ASSERT(mx114[0][2] == 1);
+    CU_ASSERT(mx114[1][0] == 1);
+    CU_ASSERT(mx114[1][1] == 1);
+    CU_ASSERT(mx114[1][2] == 1);
 }
 
 

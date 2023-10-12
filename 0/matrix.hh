@@ -725,52 +725,56 @@ namespace oct::nums::v0
 
             return res;
         }
-        /*template<core::index auto c> constexpr matrix<T,c,R,V> operator * (const matrix<T,c,C,V>& o) const
+        /**
+        *\brief realiza la operacion de multimplicacion de matrices
+        **/
+        constexpr matrix operator * (const matrix& o) const
         {//ref : Book 1(IAL), pag 88.
-            matrix<T,c,R,V> res(0);
+            if(C != o.R) throw std::logic_error("Los operadore no tiene las demiensiones adecuada");
+            //if(R == o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
-            for(I i = 0; i < R; i++)
+            matrix res(R,o.C);
+            for(size_t i = 0; i < R; i++)
             {
-                for(I j = 0; j < c; j++)
+                for(size_t j = 0; j < o.C; j++)
                 {
                     for(size_t k = 0; k < C; k++)
                     {
-                        res[i][j] += data[i][k] * o[k][j];
-                        //res[i][j] = 1;
+                        res.data[i][j] += data[i][k] * o[k][j];
                     }
                 }
             }
 
             return res;
-        }*/
-        /*template<core::number t> constexpr matrix<t,C,R,V> operator * (t const& o) const
+        }
+        template<core::number t> constexpr matrix operator * (t const& o) const
         {
-            matrix<t,C,R,V> res;
+            matrix res(R,C);
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
-                    res[i][j] = data[i][j] * o;
+                    res.data[i][j] = data[i][j] * o;
                 }
             }
 
             return res;
-        }*/
-        /*template<core::number t> constexpr matrix<t,C,R,V> operator / (t const&  o) const
+        }
+        template<core::number t> constexpr matrix operator / (t const&  o) const
         {
-            matrix<t,C,R,V> res;
+            matrix res(R,C);
 
-            for(size_t i = 0; i < C; i++)
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t j = 0; j < R; j++)
+                for(size_t j = 0; j < C; j++)
                 {
-                    res[i][j] = data[i][j] / o;
+                    res.data[i][j] = data[i][j] / o;
                 }
             }
 
             return res;
-        }*/
+        }
         constexpr matrix& operator = (const matrix& o)
         {
             if(data)
