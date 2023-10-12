@@ -795,16 +795,16 @@ void v0_matrix()
     CU_ASSERT(mx117_minor31_det == -16)
     //std::cout << "det(mx27_minor31_det) is " << mx27_minor31_det << "\n";
     //std::cout << "\n\n\n";
-    /*int mx27_minor12_cofac = mx117.cofactor(0,1);
-    int mx27_minor23_cofac = mx117.cofactor(1,2);
-    int mx27_minor31_cofac = mx117.cofactor(2,0);
-    int mx27_det1 = mx27_minor12_cofac + mx27_minor23_cofac + mx27_minor31_cofac;
-    CU_ASSERT(mx27_minor12_cofac == 34)
-    CU_ASSERT(mx27_minor23_cofac == -10)
-    CU_ASSERT(mx27_minor31_cofac == -16)
-    CU_ASSERT(mx27_det1 == 8)
+    int mx117_minor12_cofac = mx117.cofactor(0,1);
+    int mx117_minor23_cofac = mx117.cofactor(1,2);
+    int mx117_minor31_cofac = mx117.cofactor(2,0);
+    int mx117_det1 = mx117_minor12_cofac + mx117_minor23_cofac + mx117_minor31_cofac;
+    CU_ASSERT(mx117_minor12_cofac == 34)
+    CU_ASSERT(mx117_minor23_cofac == -10)
+    CU_ASSERT(mx117_minor31_cofac == -16)
+    CU_ASSERT(mx117_det1 == 8)
     //std::cout << "\n\n\n";
-    //CU_ASSERT(mx27.determinant() == 6)*/
+    //CU_ASSERT(mx27.determinant() == 6)
 }
 
 
