@@ -838,6 +838,12 @@ void v0_matrix()
     CU_ASSERT((numbers::core::equal((float)mx121[2][1],2.0f/94.0f)));
     CU_ASSERT((numbers::core::equal((float)mx121[2][2],-28.0f/94.0f)));
 
+    numbers_here::matrix<int> mx122;
+    mx122.resize(3,3);
+    CU_ASSERT(mx122.rows() == 3);
+    CU_ASSERT(mx122.columns() == 3);
+    int** data = mx122;
+    CU_ASSERT(data != NULL);
 }
 
 

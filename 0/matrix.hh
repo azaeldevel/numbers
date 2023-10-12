@@ -870,6 +870,14 @@ namespace oct::nums::v0
 
             throw std::out_of_range("Indice fuera de rango");
         }
+        constexpr operator T**()
+        {
+            return data;
+        }
+        constexpr operator const T**() const
+        {
+            return data;
+        }
 #ifdef __cpp_multidimensional_subscript
         constexpr T& operator [](I const& i,I const& j)
         {
