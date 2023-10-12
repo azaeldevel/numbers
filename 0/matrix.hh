@@ -545,6 +545,10 @@ namespace oct::nums::v0
                 }
             }
         }
+        constexpr matrix(matrix&& o) : R(o.R),C(o.C),data(o.data)
+        {
+            o.data = NULL;
+        }
         /***
         *\brief Contructor de copias para un matrix
         *
@@ -669,11 +673,14 @@ namespace oct::nums::v0
 
         constexpr ~matrix()
         {
-            for(size_t i = 0; i < R; i++)
+            if(data)
             {
-                delete[] data[i];
+                for(size_t i = 0; i < R; i++)
+                {
+                    delete[] data[i];
+                }
+                delete[] data;
             }
-            delete[] data;
         }
 
 
