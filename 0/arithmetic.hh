@@ -101,6 +101,26 @@ namespace oct::nums::v0
         }
     };
 
+    template<core::number T> constexpr T sqrterr(T const& target,T const& value)
+    {
+        T v = value - target;
+        v = std::pow(v,T(2));
+        v /= T(2);
+        return v;
+    }
+
+    template<core::number T> constexpr T media(core::array<T> const& ds)
+    {
+        T v = 0;
+        for(size_t i = 0; i < ds.size(); i++)
+        {
+            v += ds[i];
+        }
+        v /= T(ds.size());
+
+        return v;
+    }
+
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH

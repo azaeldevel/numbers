@@ -167,6 +167,7 @@ void v0_arithmetic()
 
 }
 
+
 void v0_matrix()
 {
     numbers_here::matrix<int,3ul,3ul,float> mx1(1);
@@ -539,6 +540,70 @@ void v0_matrix()
     CU_ASSERT(numbers::core::equal(mx40[2][0], (float)-2));
     CU_ASSERT(numbers::core::equal(mx40[2][1], (float)-1));
     CU_ASSERT(numbers::core::equal(mx40[2][2], (float)1));
+
+
+
+
+
+
+    //>>>>>
+    numbers_here::matrix<int> mx41(2,2);
+    mx41[0][0] = 5;
+    mx41[0][1] = -2;
+    mx41[1][0] = 4;
+    mx41[1][1] = 1;
+    CU_ASSERT(mx41[0][0] == 5);
+    CU_ASSERT(mx41[0][1] == -2);
+    CU_ASSERT(mx41[1][0] == 4);
+    CU_ASSERT(mx41[1][1] == 1);
+
+    numbers_here::matrix<int> mx42(mx41);
+    CU_ASSERT(mx42[0][0] == 5);
+    CU_ASSERT(mx42[0][1] == -2);
+    CU_ASSERT(mx42[1][0] == 4);
+    CU_ASSERT(mx42[1][1] == 1);
+
+    const numbers_here::matrix<int> mx43(2,3,{1,2,3,4,5,6});
+    //mx19.print(std::cout);
+    CU_ASSERT(mx43[0][0] == 1);
+    CU_ASSERT(mx43[0][1] == 2);
+    CU_ASSERT(mx43[0][2] == 3);
+    CU_ASSERT(mx43[1][0] == 4);
+    CU_ASSERT(mx43[1][1] == 5);
+    CU_ASSERT(mx43[1][2] == 6);
+
+    const numbers_here::matrix<int> mx44 {2,3,1,2,3,4,5,6};
+    //mx19.print(std::cout);
+    CU_ASSERT(mx44[0][0] == 1);
+    CU_ASSERT(mx44[0][1] == 2);
+    CU_ASSERT(mx44[0][2] == 3);
+    CU_ASSERT(mx44[1][0] == 4);
+    CU_ASSERT(mx44[1][1] == 5);
+    CU_ASSERT(mx44[1][2] == 6);
+
+    CU_ASSERT(mx43.rows() == mx44.rows());
+    CU_ASSERT(mx43.columns() == mx44.columns());
+
+
+    const numbers_here::matrix<int> mx45(2,3,{6,5,4,3,2,1});
+    //mx19.print(std::cout);
+    CU_ASSERT(mx45[0][0] == 6);
+    CU_ASSERT(mx45[0][1] == 5);
+    CU_ASSERT(mx45[0][2] == 4);
+    CU_ASSERT(mx45[1][0] == 3);
+    CU_ASSERT(mx45[1][1] == 2);
+    CU_ASSERT(mx45[1][2] == 1);
+
+    CU_ASSERT(mx45.rows() == mx44.rows());
+    CU_ASSERT(mx45.columns() == mx44.columns());
+
+    //numbers_here::matrix<int> mx46 = mx45 + mx44;
+    /*CU_ASSERT(mx46[0][0] == 7);
+    CU_ASSERT(mx46[0][1] == 7);
+    CU_ASSERT(mx46[0][2] == 7);
+    CU_ASSERT(mx46[1][0] == 7);
+    CU_ASSERT(mx46[1][1] == 7);
+    CU_ASSERT(mx46[1][2] == 7);*/
 }
 
 
