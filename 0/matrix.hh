@@ -947,10 +947,11 @@ namespace oct::nums::v0
             return res;
         }
 
-        /*constexpr matrix adjoint() const
+        constexpr matrix adjoint() const
         {
-            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
-            matrix m;
+            //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+            if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
+            matrix m(R,C);
 
             for(size_t i = 0; i < R; i++)
             {
@@ -961,7 +962,7 @@ namespace oct::nums::v0
             }
 
             return m;
-        }*/
+        }
         template<core::number V = core::convertion<T>::type>  constexpr V cofactor(size_t i,size_t j) const
         {
             V sign = std::pow(V(-1),V((i + 1) + (j + 1)));
@@ -1021,12 +1022,13 @@ namespace oct::nums::v0
 
             return 1;
         }
-        /*constexpr matrix<V,C,R,V> inverse () const
+        constexpr matrix inverse () const
         {
-            static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+            //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
+            if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
 
             return adjoint()/determinant();
-        }*/
+        }
 
         /**
         *\brief determinan si la matriz cumple con la propiedad de ser lineal en cada fila
