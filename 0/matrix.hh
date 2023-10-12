@@ -1061,6 +1061,35 @@ namespace oct::nums::v0
             return R;
         }
 
+        void resize(size_t r, size_t c)
+        {
+            if(data)
+            {
+                if(R != r or C != c)
+                {
+                    for(size_t i = 0; i < R; i++)
+                    {
+                        delete[] data[i];
+                    }
+                    delete[] data;
+                    R = r;
+                    C = c;
+                    data = new T*[R];
+                }
+            }
+            else
+            {
+                R = r;
+                C = c;
+                data = new T*[R];
+            }
+
+            for(size_t i = 0; i < R; i++)
+            {
+                data[i] = new T[C];
+            }
+        }
+
 
 #if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out) const
