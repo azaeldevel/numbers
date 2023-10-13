@@ -872,6 +872,37 @@ void v0_matrix()
     CU_ASSERT(mx122.columns() == 3);
     int* data122 = mx122;
     CU_ASSERT(data122 != NULL);
+
+    numbers::core::array<int> arr1 {3,-2,1,5,6,2,1,0,-3};
+    numbers::core::array<int,9> arr2 {3,-2,1,5,6,2,1,0,-3};
+
+    numbers_here::matrix<int> mx123(3,3,(int*)arr1);
+    CU_ASSERT(mx123[0][0] == 3);
+    CU_ASSERT(mx123[0][1] == -2);
+    CU_ASSERT(mx123[0][2] == 1);
+    CU_ASSERT(mx123[1][0] == 5);
+    CU_ASSERT(mx123[1][1] == 6);
+    CU_ASSERT(mx123[1][2] == 2);
+    CU_ASSERT(mx123[2][0] == 1);
+    CU_ASSERT(mx123[2][1] == 0);
+    CU_ASSERT(mx123[2][2] == -3);
+
+    numbers_here::matrix<int> mx124(3,3,(int*)arr2);
+    CU_ASSERT(mx124[0][0] == 3);
+    CU_ASSERT(mx124[0][1] == -2);
+    CU_ASSERT(mx124[0][2] == 1);
+    CU_ASSERT(mx124[1][0] == 5);
+    CU_ASSERT(mx124[1][1] == 6);
+    CU_ASSERT(mx124[1][2] == 2);
+    CU_ASSERT(mx124[2][0] == 1);
+    CU_ASSERT(mx124[2][1] == 0);
+    CU_ASSERT(mx124[2][2] == -3);
+
+    numbers::core::array<int> arr3 {3,-2,1};
+    numbers_here::matrix<int> mx125(3,1,(int*)arr3);
+    CU_ASSERT(mx125[0][0] == 3);
+    CU_ASSERT(mx125[1][0] == -2);
+    CU_ASSERT(mx125[2][0] == 1);
 }
 
 

@@ -510,15 +510,16 @@ namespace oct::nums::v0
     private:
         size_t R,C;
         T* data;
+        bool free;
 
     public://contriuctores
-        matrix() : R(0),C(0),data(NULL)
+        matrix() : R(0),C(0),data(NULL),free(true)
         {
         }
-        matrix(size_t r,size_t c) : R(r),C(c),data(new T[R * C])
+        matrix(size_t r,size_t c) : R(r),C(c),data(new T[R * C]),free(true)
         {
         }
-        constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T[R * C])
+        constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T[R * C]),free(true)
         {
             for(size_t i = 0; i < R; i++)
             {
@@ -527,6 +528,9 @@ namespace oct::nums::v0
                     at(i,j) = value;
                 }
             }
+        }
+        constexpr matrix(size_t r,size_t c,T* buff) : R(r),C(c),data(buff),free(false)
+        {
         }
         /*constexpr matrix(const T& v)
         {
@@ -548,7 +552,7 @@ namespace oct::nums::v0
                 }
             }
         }
-        constexpr matrix(matrix&& o) : R(o.R),C(o.C),data(o.data)
+        constexpr matrix(matrix&& o) : R(o.R),C(o.C),data(o.data),free(true)
         {
             o.data = NULL;
         }
@@ -581,7 +585,7 @@ namespace oct::nums::v0
                 }
             }
         }*/
-        constexpr matrix(size_t r,size_t col,const std::initializer_list<T>& l) : R(r),C(col),data(new T[R * C])
+        constexpr matrix(size_t r,size_t col,const std::initializer_list<T>& l) : R(r),C(col),data(new T[R * C]),free(true)
         {
             if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -603,6 +607,7 @@ namespace oct::nums::v0
                 R = c[0];
                 C = c[1];
                 data = new T[R * C];
+                free = true;
             }
             else
             {
@@ -674,7 +679,7 @@ namespace oct::nums::v0
 
         constexpr ~matrix()
         {
-            if(data)
+            if(data and free)
             {
                 delete[] data;
                 data = NULL;
@@ -819,7 +824,7 @@ namespace oct::nums::v0
         }
         constexpr matrix& operator = (const matrix& o)
         {
-            if(data)
+            if(data and free)
             {
                 if(R != o.R or C != o.C)
                 {
@@ -933,7 +938,7 @@ namespace oct::nums::v0
 
         constexpr void transpose (const matrix& o)
         {
-            if(data)
+            if(data and free)
             {
                 if(R != o.C or C != o.R)
                 {
@@ -1090,7 +1095,7 @@ namespace oct::nums::v0
 
         void resize(size_t r, size_t c)
         {
-            if(data)
+            if(data and free)
             {
                 if(R != r or C != c)
                 {
