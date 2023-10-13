@@ -542,7 +542,7 @@ namespace oct::nums::v0
                 }
             }
         }*/
-        constexpr matrix(const matrix& o) : R(o.R),C(o.C),data(new T[R * C])
+        constexpr matrix(const matrix& o) : R(o.R),C(o.C),data(new T[R * C]),free(true)
         {
             for(size_t i = 0; i < R; i++)
             {
@@ -887,13 +887,13 @@ namespace oct::nums::v0
 
             throw std::out_of_range("Indice fuera de rango");
         }
-        constexpr T& at(size_t const& i,size_t const& j)
+        constexpr T& at(size_t i,size_t j)
         {
             if(i < R) if(j < C) return data[(C * i) + j];
 
             throw std::out_of_range("Indice fuera de rango");
         }
-        constexpr T const& at(size_t const& i,size_t const& j) const
+        constexpr T const& at(size_t i,size_t j) const
         {
             if(i < R) if(j < C) return data[(C * i) + j];
 
@@ -907,20 +907,7 @@ namespace oct::nums::v0
         {
             return data;
         }
-#ifdef __cpp_multidimensional_subscript
-        constexpr T& operator [](I const& i,I const& j)
-        {
-            if(i < R) if(j < C) return at(i,j);
 
-            throw std::out_of_range("Indice fuera de rango");
-        }
-        constexpr T const& operator [](I const& i,I const& j)const
-        {
-            if(i < R) if(j < C) return at(i,j);
-
-            throw std::out_of_range("Indice fuera de rango");
-        }
-#endif
 
         void diagonal(const T& v)
         {
@@ -1117,9 +1104,10 @@ namespace oct::nums::v0
 #if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out) const
         {
-            for(size_t j = 0; j < R; j++)
+
+            for(size_t i = 0; i < R; i++)
             {
-                for(size_t i = 0; i < C; i++)
+                for(size_t j = 0; j < C; j++)
                 {
                     out << at(i,j) << " ";
                 }

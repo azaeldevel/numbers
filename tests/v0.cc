@@ -903,6 +903,7 @@ void v0_matrix()
     CU_ASSERT(mx125[0][0] == 3);
     CU_ASSERT(mx125[1][0] == -2);
     CU_ASSERT(mx125[2][0] == 1);
+    //mx125.print(std::cout);
 }
 
 
