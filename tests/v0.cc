@@ -904,6 +904,18 @@ void v0_matrix()
     CU_ASSERT(mx125[1][0] == -2);
     CU_ASSERT(mx125[2][0] == 1);
     //mx125.print(std::cout);
+
+    /*numbers_here::matrix<int> mx126;
+    mx126 = (mx124 * mx125) + mx125;
+    mx126.print(std::cout);
+    mx126 = (mx124 * mx125) + mx125;
+    mx126.print(std::cout);
+    mx126 = (mx124 * mx125) + mx125;
+    mx126.print(std::cout);
+    mx126 = (mx124 * mx125) + mx125;
+    mx126.print(std::cout);
+    mx126 = (mx124 * mx125) + mx125;
+    mx126.print(std::cout);*/
 }
 
 

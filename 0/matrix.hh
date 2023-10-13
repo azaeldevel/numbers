@@ -555,6 +555,7 @@ namespace oct::nums::v0
         constexpr matrix(matrix&& o) : R(o.R),C(o.C),data(o.data),free(true)
         {
             o.data = NULL;
+            o.free = false;
         }
         /***
         *\brief Contructor de copias para un matrix
@@ -824,22 +825,7 @@ namespace oct::nums::v0
         }
         constexpr matrix& operator = (const matrix& o)
         {
-            if(data and free)
-            {
-                if(R != o.R or C != o.C)
-                {
-                    delete[] data;
-                    R = o.R;
-                    C = o.C;
-                    data = new T[R * C];
-                }
-            }
-            else
-            {
-                R = o.R;
-                C = o.C;
-                data = new T[R * C];
-            }
+            create(o);
 
             for(size_t i = 0; i < R; i++)
             {
@@ -848,6 +834,16 @@ namespace oct::nums::v0
                     at(i,j) = o[i][j];
                 }
             }
+            return *this;
+        }
+        constexpr matrix& operator = (matrix&& o)
+        {
+            R = o.R;
+            C = o.C;
+            data = o.data;
+            o.data = NULL;
+            o.free = false;
+
             return *this;
         }
         constexpr bool operator == (const matrix& o) const
@@ -926,22 +922,7 @@ namespace oct::nums::v0
 
         constexpr void transpose (const matrix& o)
         {
-            if(data and free)
-            {
-                if(R != o.C or C != o.R)
-                {
-                    delete[] data;
-                    C = o.R;
-                    R = o.C;
-                    data = new T[R * C];
-                }
-            }
-            else
-            {
-                C = o.R;
-                R = o.C;
-                data = new T[R * C];
-            }
+            create(o);
 
             for(size_t i = 0; i < R; i++)
             {
@@ -1083,46 +1064,10 @@ namespace oct::nums::v0
 
         void resize(size_t r, size_t c)
         {
-            if(data and free)
-            {
-                if(R != r or C != c)
-                {
-                    delete[] data;
-                    R = r;
-                    C = c;
-                    data = new T[R * C];
-                    free = true;
-                }
-            }
-            else
-            {
-                R = r;
-                C = c;
-                data = new T[R * C];
-                free = true;
-            }
+            create(r,c);
         }
-        void buffer(size_t r, size_t c,T* buff)
-        {
-            if(data and free)
-            {
-                if(R != r or C != c)
-                {
-                    delete[] data;
-                    R = r;
-                    C = c;
-                    data = buff;
-                    free = false;
-                }
-            }
-            else //even if(data and not free)
-            {
-                R = r;
-                C = c;
-                data = buff;
-                free = false;
-            }
-        }
+
+
 
 
 #if OCTETOS_NUMBERS_TTD == 0
@@ -1144,6 +1089,73 @@ namespace oct::nums::v0
             out << "\n";
         }
 #endif // OCTETOS_AVERSO_TTD
+
+    private://funciones mimebro
+        void buffer(size_t r, size_t c,T* buff)
+        {
+            create(r,c,buff);
+        }
+        void create(const matrix& o)
+        {
+            if(data and free)
+            {
+                if(R != o.C or C != o.R)
+                {
+                    delete[] data;
+                    C = o.R;
+                    R = o.C;
+                    data = new T[R * C];
+                }
+            }
+            else
+            {
+                C = o.R;
+                R = o.C;
+                data = new T[R * C];
+            }
+        }
+        void create(size_t r, size_t c,T* buff)
+        {
+            if(data and free)
+            {
+                if(R != r or C != c)
+                {
+                    delete[] data;
+                    R = r;
+                    C = c;
+                    data = buff;
+                    free = false;
+                }
+            }
+            else //even if(data and not free)
+            {
+                R = r;
+                C = c;
+                data = buff;
+                free = false;
+            }
+        }
+        void create(size_t r, size_t c)
+        {
+            if(data and free)
+            {
+                if(R != r or C != c)
+                {
+                    delete[] data;
+                    R = r;
+                    C = c;
+                    data = new T[R * C];
+                    free = true;
+                }
+            }
+            else
+            {
+                R = r;
+                C = c;
+                data = new T[R * C];
+                free = true;
+            }
+        }
 
     };
 
