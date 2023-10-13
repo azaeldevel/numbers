@@ -1067,6 +1067,10 @@ namespace oct::nums::v0
             create(r,c);
         }
 
+        void buffer(size_t r, size_t c,T* buff)
+        {
+            create(r,c,buff);
+        }
 
 
 
@@ -1091,10 +1095,6 @@ namespace oct::nums::v0
 #endif // OCTETOS_AVERSO_TTD
 
     private://funciones mimebro
-        void buffer(size_t r, size_t c,T* buff)
-        {
-            create(r,c,buff);
-        }
         void create(const matrix& o)
         {
             if(data and free)
