@@ -504,7 +504,6 @@ namespace oct::nums::v0
     /**
     *\brief Representa una matriz matematica m x n
     *\param T Tipo de dato
-    *\param V para operaciones
     **/
     template<typename T> class matrix<T,0,0,float,size_t,T> //: public core::array<core::array<T,C,I>,R,I>
     {
@@ -525,7 +524,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = value;
+                    at(i,j) = value;
                 }
             }
         }
@@ -535,7 +534,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = v;
+                    at(i,j) = v;
                 }
             }
         }*/
@@ -563,8 +562,8 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(j < C - 1) data[i][j] = o[i][j];
-                    else data[i][j] = 0;
+                    if(j < C - 1) at(i,j) = o[i][j];
+                    else at(i,j) = 0;
                 }
             }
         }*/
@@ -767,6 +766,29 @@ namespace oct::nums::v0
 
             return res;
         }
+        //
+        /**
+        *\brief realiza la operacion de multimplicacion de matrices
+        **/
+        template<core::number V = core::convertion<T>::type> constexpr matrix<V> operator * (const matrix<V>& o) const
+        {//ref : Book 1(IAL), pag 88.
+            if(C != o.rows()) throw std::logic_error("Los operadore no tiene las demiensiones adecuada");
+            //if(R == o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
+
+            matrix<V> res(R,o.columns());
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < o.columns(); j++)
+                {
+                    for(size_t k = 0; k < C; k++)
+                    {
+                        res[i][j] += V(at(i,k)) * o[k][j];
+                    }
+                }
+            }
+
+            return res;
+        }
         template<core::number t> constexpr matrix operator * (t const& o) const
         {
             matrix res(R,C);
@@ -829,7 +851,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(not core::equal(data[i][j],o[i][j])) return false;
+                    if(not core::equal(at(i,j),o[i][j])) return false;
                 }
             }
 
@@ -862,7 +884,7 @@ namespace oct::nums::v0
         }
         constexpr T& at(size_t const& i,size_t const& j)
         {
-            if(i < R) if(j < C) return data[(C * i) + j];//data[(C * i) + j]
+            if(i < R) if(j < C) return data[(C * i) + j];
 
             throw std::out_of_range("Indice fuera de rango");
         }
@@ -883,13 +905,13 @@ namespace oct::nums::v0
 #ifdef __cpp_multidimensional_subscript
         constexpr T& operator [](I const& i,I const& j)
         {
-            if(i < R) if(j < C) return data[i][j];
+            if(i < R) if(j < C) return at(i,j);
 
             throw std::out_of_range("Indice fuera de rango");
         }
         constexpr T const& operator [](I const& i,I const& j)const
         {
-            if(i < R) if(j < C) return data[i][j];
+            if(i < R) if(j < C) return at(i,j);
 
             throw std::out_of_range("Indice fuera de rango");
         }
@@ -903,8 +925,8 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(i == j) data[i][j] = v;
-                    else data[i][j] = 0;
+                    if(i == j) at(i,j) = v;
+                    else at(i,j) = 0;
                 }
             }
         }
@@ -952,11 +974,11 @@ namespace oct::nums::v0
             return res;
         }
 
-        constexpr matrix adjoint() const
+        template<core::number V = core::convertion<T>::type> constexpr matrix<V> adjoint() const
         {
             //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
             if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
-            matrix m(R,C);
+            matrix<V> m(R,C);
 
             for(size_t i = 0; i < R; i++)
             {
@@ -1012,7 +1034,7 @@ namespace oct::nums::v0
             // Base case: 2x2 matrix
             if(R == 2)
             {
-                return at(0,0) * at(1,1) - at(0,1) * at(1,0);
+                return (at(0,0) * at(1,1)) - (at(0,1) * at(1,0));
             }
 
             if (R > 2)
@@ -1027,12 +1049,12 @@ namespace oct::nums::v0
 
             return 1;
         }
-        constexpr matrix inverse () const
+        template<core::number V = core::convertion<T>::type> constexpr matrix<V> inverse () const
         {
             //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
             if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
 
-            return adjoint()/determinant();
+            return adjoint<V>()/determinant<V>();
         }
 
         /**
@@ -1094,7 +1116,7 @@ namespace oct::nums::v0
             {
                 for(size_t i = 0; i < C; i++)
                 {
-                    out << data[j][i] << " ";
+                    out << at(i,j) << " ";
                 }
                 out << "\n";
             }
