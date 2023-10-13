@@ -237,6 +237,14 @@ void v0_matrix()
     CU_ASSERT(mx10[1][1] == 1);
     CU_ASSERT(mx10[2][0] == 0);
     CU_ASSERT(mx10[2][1] == 4);
+    int* data1 = mx10;
+    CU_ASSERT(data1[0] == 1);
+    CU_ASSERT(data1[1] == 3);
+    CU_ASSERT(data1[2] == -2);
+    CU_ASSERT(data1[3] == 1);
+    CU_ASSERT(data1[4] == 0);
+    CU_ASSERT(data1[5] == 4);
+
 
     auto mx11 = mx9 * mx10;
     //mx11.printLn(std::cout);

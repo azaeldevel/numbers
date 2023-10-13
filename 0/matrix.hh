@@ -25,7 +25,7 @@ namespace oct::nums::v0
         A data[R][C];
 #pragma GCC diagnostic pop
 
-    public:
+    public://constructores
         matrix() = default;
         constexpr matrix(const T& v)
         {
@@ -142,6 +142,7 @@ namespace oct::nums::v0
         }
 
 
+    public://operators
         constexpr matrix operator + (const matrix& o) const
         {
             matrix res;
@@ -304,6 +305,14 @@ namespace oct::nums::v0
 
             throw std::out_of_range("Indice fuera de rango");
         }
+        constexpr operator T*()
+        {
+            return (T*)&data;
+        }
+        constexpr operator const T*() const
+        {
+            return (const T*)&data;
+        }
 #ifdef __cpp_multidimensional_subscript
         constexpr T& operator [](I const& i,I const& j)
         {
@@ -318,6 +327,7 @@ namespace oct::nums::v0
             throw std::out_of_range("Indice fuera de rango");
         }
 #endif
+
 
         void diagonal(const T& v)
         {
@@ -502,7 +512,7 @@ namespace oct::nums::v0
         size_t R,C;
         T** data;
 
-    public:
+    public://contriuctores
         matrix() : R(0),C(0),data(NULL)
         {
         }
@@ -684,6 +694,7 @@ namespace oct::nums::v0
         }
 
 
+    public://operators
         constexpr matrix operator + (const matrix& o) const
         {
             if(R != o.R) throw std::logic_error("Los operadore no tiene la misma dimension");
