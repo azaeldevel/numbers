@@ -505,7 +505,7 @@ namespace oct::nums::v0
     *\brief Representa una matriz matematica m x n
     *\param T Tipo de dato
     **/
-    template<typename T> class matrix<T,0,0,float,size_t,T> //: public core::array<core::array<T,C,I>,R,I>
+    template<typename T> class matrix<T,0,0> //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
         size_t R,C;
