@@ -909,6 +909,7 @@ namespace oct::nums::v0
         }
 
 
+        //funtiones mimebro
         void diagonal(const T& v)
         {
             static_assert(C == R,"Esta operacion es solo para matrizes cuadradas");
@@ -1090,6 +1091,7 @@ namespace oct::nums::v0
                     R = r;
                     C = c;
                     data = new T[R * C];
+                    free = true;
                 }
             }
             else
@@ -1097,6 +1099,28 @@ namespace oct::nums::v0
                 R = r;
                 C = c;
                 data = new T[R * C];
+                free = true;
+            }
+        }
+        void buffer(size_t r, size_t c,T* buff)
+        {
+            if(data and free)
+            {
+                if(R != r or C != c)
+                {
+                    delete[] data;
+                    R = r;
+                    C = c;
+                    data = buff;
+                    free = false;
+                }
+            }
+            else //even if(data and not free)
+            {
+                R = r;
+                C = c;
+                data = buff;
+                free = false;
             }
         }
 
