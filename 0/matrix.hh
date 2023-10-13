@@ -510,24 +510,19 @@ namespace oct::nums::v0
     {
     private:
         size_t R,C;
-        T** data;
+        T* data;
 
     public://contriuctores
         matrix() : R(0),C(0),data(NULL)
         {
         }
-        matrix(size_t r,size_t c) : R(r),C(c),data(new T*[R])
+        matrix(size_t r,size_t c) : R(r),C(c),data(new T[R * C])
         {
-            for(size_t i = 0; i < R; i++)
-            {
-                data[i] = new T[C];
-            }
         }
-        constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T*[R])
+        constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T[R * C])
         {
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
                     data[i][j] = value;
@@ -544,14 +539,13 @@ namespace oct::nums::v0
                 }
             }
         }*/
-        constexpr matrix(const matrix& o) : R(o.R),C(o.C),data(new T*[R])
+        constexpr matrix(const matrix& o) : R(o.R),C(o.C),data(new T[R * C])
         {
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = o[i][j];
+                    at(i,j) = o[i][j];
                 }
             }
         }
@@ -588,7 +582,7 @@ namespace oct::nums::v0
                 }
             }
         }*/
-        constexpr matrix(size_t r,size_t col,const std::initializer_list<T>& l) : R(r),C(col),data(new T*[R])
+        constexpr matrix(size_t r,size_t col,const std::initializer_list<T>& l) : R(r),C(col),data(new T[R * C])
         {
             if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
@@ -596,10 +590,9 @@ namespace oct::nums::v0
             const T* c = std::data(l);
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = c[(C * i) + j];
+                    at(i,j) = c[(C * i) + j];
                 }
             }
         }
@@ -610,7 +603,7 @@ namespace oct::nums::v0
             {
                 R = c[0];
                 C = c[1];
-                data = new T*[R];
+                data = new T[R * C];
             }
             else
             {
@@ -623,10 +616,9 @@ namespace oct::nums::v0
             c += 2;
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = c[(C * i) + j];
+                    at(i,j) = c[(C * i) + j];
                 }
             }
         }
@@ -685,11 +677,8 @@ namespace oct::nums::v0
         {
             if(data)
             {
-                for(size_t i = 0; i < R; i++)
-                {
-                    delete[] data[i];
-                }
                 delete[] data;
+                data = NULL;
             }
         }
 
@@ -705,7 +694,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] + o.data[i][j];
+                    res[i][j] = at(i,j) + o[i][j];
                 }
             }
 
@@ -719,7 +708,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] + o;
+                    res[i][j] = at(i,j) + o;
                 }
             }
 
@@ -736,7 +725,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] - o[i][j];
+                    res[i][j] = at(i,j) - o[i][j];
                 }
             }
 
@@ -750,7 +739,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] - o;
+                    res[i][j] = at(i,j) - o;
                 }
             }
 
@@ -771,7 +760,7 @@ namespace oct::nums::v0
                 {
                     for(size_t k = 0; k < C; k++)
                     {
-                        res.data[i][j] += data[i][k] * o[k][j];
+                        res[i][j] += at(i,k) * o[k][j];
                     }
                 }
             }
@@ -786,7 +775,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] * o;
+                    res[i][j] = at(i,j) * o;
                 }
             }
 
@@ -800,7 +789,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    res.data[i][j] = data[i][j] / o;
+                    res[i][j] = at(i,j) / o;
                 }
             }
 
@@ -812,29 +801,24 @@ namespace oct::nums::v0
             {
                 if(R != o.R or C != o.C)
                 {
-                    for(size_t i = 0; i < R; i++)
-                    {
-                        delete[] data[i];
-                    }
                     delete[] data;
                     R = o.R;
                     C = o.C;
-                    data = new T*[R];
+                    data = new T[R * C];
                 }
             }
             else
             {
                 R = o.R;
                 C = o.C;
-                data = new T*[R];
+                data = new T[R * C];
             }
 
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = o[i][j];
+                    at(i,j) = o[i][j];
                 }
             }
             return *this;
@@ -857,7 +841,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    if(core::equal(data[i][j],o[i][j])) return false;
+                    if(core::equal(at(i,j),o[i][j])) return false;
                 }
             }
 
@@ -866,33 +850,33 @@ namespace oct::nums::v0
 
         constexpr T* operator [](size_t const& i)
         {
-            if(i < R) return data[i];
+            if(i < R) return &data[(C * i)];
 
             throw std::out_of_range("Indice fuera de rango");
         }
         constexpr const T* operator [](size_t const& i) const
         {
-            if(i < R) return data[i];
+            if(i < R) return &data[(C * i)];
 
             throw std::out_of_range("Indice fuera de rango");
         }
         constexpr T& at(size_t const& i,size_t const& j)
         {
-            if(i < R) if(j < C) return data[i][j];
+            if(i < R) if(j < C) return data[(C * i) + j];//data[(C * i) + j]
 
             throw std::out_of_range("Indice fuera de rango");
         }
         constexpr T const& at(size_t const& i,size_t const& j) const
         {
-            if(i < R) if(j < C) return data[i][j];
+            if(i < R) if(j < C) return data[(C * i) + j];
 
             throw std::out_of_range("Indice fuera de rango");
         }
-        constexpr operator T**()
+        constexpr operator T*()
         {
             return data;
         }
-        constexpr operator const T**() const
+        constexpr operator const T*() const
         {
             return data;
         }
@@ -931,29 +915,24 @@ namespace oct::nums::v0
             {
                 if(R != o.C or C != o.R)
                 {
-                    for(size_t i = 0; i < R; i++)
-                    {
-                        delete[] data[i];
-                    }
                     delete[] data;
                     C = o.R;
                     R = o.C;
-                    data = new T*[R];
+                    data = new T[R * C];
                 }
             }
             else
             {
                 C = o.R;
                 R = o.C;
-                data = new T*[R];
+                data = new T[R * C];
             }
 
             for(size_t i = 0; i < R; i++)
             {
-                data[i] = new T[C];
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = o[j][i];
+                    at(i,j) = o[j][i];
                 }
             }
         }
@@ -966,7 +945,7 @@ namespace oct::nums::v0
             {
                 for(size_t j = 0; j < R; j++)
                 {
-                    res.data[i][j] = data[j][i];
+                    res[i][j] = at(j,i);
                 }
             }
 
@@ -1011,7 +990,7 @@ namespace oct::nums::v0
                 {
                     if(j == b) continue;
                     //std::cout << "matrix[" << x << "," << y << "]" << BASE::at(i)[j] << "\n";
-                    submatrix[x][y] = data[i][j];
+                    submatrix[x][y] = at(i,j);
                     y++;
                 }
                 y = 0;
@@ -1027,13 +1006,13 @@ namespace oct::nums::v0
             // Base case: 1x1 matrix
             if (R == 1)
             {
-                return data[0][0];
+                return at(0,0);
             }
 
             // Base case: 2x2 matrix
-            if (R == 2)
+            if(R == 2)
             {
-                return data[0][0] * data[1][1] - data[0][1] * data[1][0];
+                return at(0,0) * at(1,1) - at(0,1) * at(1,0);
             }
 
             if (R > 2)
@@ -1041,7 +1020,7 @@ namespace oct::nums::v0
                 V det = 0;
                 for (size_t j = 0; j < R; j++)
                 {
-                    det += data[i][j] * cofactor(i,j);
+                    det += at(i,j) * cofactor(i,j);
                 }
                 return det;
             }
@@ -1093,26 +1072,17 @@ namespace oct::nums::v0
             {
                 if(R != r or C != c)
                 {
-                    for(size_t i = 0; i < R; i++)
-                    {
-                        delete[] data[i];
-                    }
                     delete[] data;
                     R = r;
                     C = c;
-                    data = new T*[R];
+                    data = new T[R * C];
                 }
             }
             else
             {
                 R = r;
                 C = c;
-                data = new T*[R];
-            }
-
-            for(size_t i = 0; i < R; i++)
-            {
-                data[i] = new T[C];
+                data = new T[R * C];
             }
         }
 
