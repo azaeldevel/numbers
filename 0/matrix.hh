@@ -838,7 +838,7 @@ namespace oct::nums::v0
             if(C != o.rows()) throw std::logic_error("Los operadore no tiene las demiensiones adecuada");
             //if(R == o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
-            matrix<V> res(R,o.columns());
+            matrix<V> res(R,o.columns(),T(0));
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < o.columns(); j++)
