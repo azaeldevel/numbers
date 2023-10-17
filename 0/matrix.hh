@@ -515,12 +515,22 @@ namespace oct::nums::v0
     public://contriuctores
         matrix() : R(0),C(0),data(NULL),free(true)
         {
+            //std::cout << "matrix()\n";
+            //std::cout << "\tdata = " << data << "\n";
         }
         matrix(size_t r,size_t c) : R(r),C(c),data(new T[R * C]),free(true)
         {
+            /*std::cout << "matrix(size_t r,size_t c)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
         }
         constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T[R * C]),free(true)
         {
+            /*std::cout << "matrix(size_t r,size_t c,T value)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
@@ -531,6 +541,10 @@ namespace oct::nums::v0
         }
         constexpr matrix(size_t r,size_t c,T* buff) : R(r),C(c),data(buff),free(false)
         {
+            /*std::cout << "matrix(size_t r,size_t c,T* buff)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
         }
         /*constexpr matrix(const T& v)
         {
@@ -544,6 +558,10 @@ namespace oct::nums::v0
         }*/
         constexpr matrix(const matrix& o) : R(o.R),C(o.C),data(new T[R * C]),free(true)
         {
+            /*std::cout << "matrix(const matrix& o)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
@@ -552,8 +570,12 @@ namespace oct::nums::v0
                 }
             }
         }
-        constexpr matrix(matrix&& o) : R(o.R),C(o.C),data(o.data),free(true)
+        constexpr matrix(matrix&& o) : R(o.R),C(o.C),data{o.data},free(true)
         {
+            /*std::cout << "matrix(matrix&& o)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
             o.data = NULL;
             o.free = false;
         }
@@ -591,6 +613,11 @@ namespace oct::nums::v0
             if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
+            /*std::cout << "matrix(size_t r,size_t col,const std::initializer_list<T>& l)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
+
             const T* c = std::data(l);
             for(size_t i = 0; i < R; i++)
             {
@@ -600,7 +627,7 @@ namespace oct::nums::v0
                 }
             }
         }
-        constexpr matrix(const std::initializer_list<T>& l)
+        constexpr matrix(const std::initializer_list<T>& l): R(0),C(0),data(NULL),free(false)
         {
             const T* c = std::data(l);
             if(l.size() > 2)
@@ -618,6 +645,9 @@ namespace oct::nums::v0
             if(l.size() - 2 < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
             if(l.size()  - 2 > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
+            //std::cout << "matrix(const std::initializer_list<T>& l)\n";
+            //std::cout << "\tdata = " << data << "\n";
+
             c += 2;
             for(size_t i = 0; i < R; i++)
             {
@@ -626,6 +656,8 @@ namespace oct::nums::v0
                     at(i,j) = c[(C * i) + j];
                 }
             }
+            /*print(std::cout);
+            std::cout << "\n";*/
         }
         /***
         *\brief Contrulle un matrix de 2x2 a partir de vectores
@@ -680,10 +712,13 @@ namespace oct::nums::v0
 
         constexpr ~matrix()
         {
+            //std::cout << "~matrix()\n";
             if(data and free)
             {
+                //std::cout << "\tdata = " << data << "\n";
                 delete[] data;
                 data = NULL;
+                free = false;
             }
         }
 
@@ -694,6 +729,14 @@ namespace oct::nums::v0
             if(R != o.R) throw std::logic_error("Los operadore no tiene la misma dimension");
             if(C != o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
+            /*std::cout << "matrix operator + (const matrix& o) const\n";
+            std::cout << "\tdata = " << data << "\n";
+            std::cout << "\to.data = " << o.data << "\n";
+            print(std::cout);
+            std::cout << " + \n";
+            o.print(std::cout);
+            std::cout << "\n";*/
+
             matrix res(R,C);
             for(size_t i = 0; i < R; i++)
             {
@@ -702,6 +745,9 @@ namespace oct::nums::v0
                     res[i][j] = at(i,j) + o[i][j];
                 }
             }
+            /*std::cout << " = \n";
+            res.print(std::cout);
+            std::cout << "\n";*/
 
             return res;
         }
@@ -758,7 +804,15 @@ namespace oct::nums::v0
             if(C != o.R) throw std::logic_error("Los operadore no tiene las demiensiones adecuada");
             //if(R == o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
 
-            matrix res(R,o.C);
+            /*std::cout << "matrix operator * (const matrix& o) const\n";
+            std::cout << "\tdata = " << data << "\n";
+            std::cout << "\to.data = " << o.data << "\n";
+            print(std::cout);
+            std::cout << " * \n";
+            o.print(std::cout);
+            std::cout << "\n";*/
+
+            matrix res(R,o.C,0);
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < o.C; j++)
@@ -769,6 +823,9 @@ namespace oct::nums::v0
                     }
                 }
             }
+            /*std::cout << " = \n";
+            res.print(std::cout);
+            std::cout << "\n";*/
 
             return res;
         }
@@ -825,7 +882,9 @@ namespace oct::nums::v0
         }
         constexpr matrix& operator = (const matrix& o)
         {
+            /*std::cout << "matrix& operator = (const matrix& o)\n";
             create(o);
+            std::cout << "\tdata = " << data << "\n";*/
 
             for(size_t i = 0; i < R; i++)
             {
@@ -838,11 +897,13 @@ namespace oct::nums::v0
         }
         constexpr matrix& operator = (matrix&& o)
         {
+            //std::cout << "matrix& operator = (matrix&& o)\n";
             R = o.R;
             C = o.C;
             data = o.data;
             o.data = NULL;
             o.free = false;
+            //std::cout << "\tdata = " << data << "\n";
 
             return *this;
         }

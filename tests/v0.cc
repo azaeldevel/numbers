@@ -908,17 +908,32 @@ void v0_matrix()
 
     numbers_here::matrix<int> mx126({3,1,3,-2,1});
 
-    /*numbers_here::matrix<int> mx127;
-    mx127 = (mx124 * mx126) + mx126;
-    mx127.print(std::cout);
-    mx127 = (mx124 * mx126) + mx126;
-    mx127.print(std::cout);
-    mx127 = (mx124 * mx126) + mx126;
-    mx127.print(std::cout);
-    mx127 = (mx124 * mx126) + mx126;
-    mx127.print(std::cout);
-    mx127 = (mx124 * mx126) + mx126;
-    mx127.print(std::cout);*/
+    numbers_here::matrix<int> mx127;
+    mx127 = mx124 * mx126 + mx125;
+    //mx127.print(std::cout);
+    CU_ASSERT(mx127[0][0] == 17);
+    CU_ASSERT(mx127[1][0] == 3);
+    CU_ASSERT(mx127[2][0] == 1);
+    mx127 = mx124 * mx126 + mx125;
+    //mx127.print(std::cout);
+    CU_ASSERT(mx127[0][0] == 17);
+    CU_ASSERT(mx127[1][0] == 3);
+    CU_ASSERT(mx127[2][0] == 1);
+    mx127 = mx124 * mx126 + mx126;
+    //mx127.print(std::cout);
+    CU_ASSERT(mx127[0][0] == 17);
+    CU_ASSERT(mx127[1][0] == 3);
+    CU_ASSERT(mx127[2][0] == 1);
+    mx127 = (mx124 * mx126) + mx125;
+    //mx127.print(std::cout);
+    CU_ASSERT(mx127[0][0] == 17);
+    CU_ASSERT(mx127[1][0] == 3);
+    CU_ASSERT(mx127[2][0] == 1);
+    mx127 = (mx124 * mx126) + mx125;
+    //mx127.print(std::cout);
+    CU_ASSERT(mx127[0][0] == 17);
+    CU_ASSERT(mx127[1][0] == 3);
+    CU_ASSERT(mx127[2][0] == 1);
 }
 
 
