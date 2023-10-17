@@ -525,7 +525,7 @@ namespace oct::nums::v0
             print(std::cout);
             std::cout << "\n";*/
         }
-        constexpr matrix(size_t r,size_t c,T value) : R(r),C(c),data(new T[R * C]),free(true)
+        constexpr matrix(size_t r,size_t c,const T& value) : R(r),C(c),data(new T[R * C]),free(true)
         {
             /*std::cout << "matrix(size_t r,size_t c,T value)\n";
             std::cout << "\tdata = " << data << "\n";
@@ -812,7 +812,7 @@ namespace oct::nums::v0
             o.print(std::cout);
             std::cout << "\n";*/
 
-            matrix res(R,o.C,0);
+            matrix res(R,o.C,T(0));
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < o.C; j++)
