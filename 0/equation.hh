@@ -11,7 +11,7 @@ namespace oct::nums::v0
     *\brief Resuleve 'x' en la ecuacion de la forma ax = b
     *
     */
-    template<core::number T, core::number V = core::convertion<T>::type> constexpr V resolve(V const& a,V const& b)
+    template<core::number T, core::number V = core::convertion_to_real<T>::type> constexpr V resolve(V const& a,V const& b)
     {
         return a/b;
     }
@@ -31,7 +31,7 @@ namespace oct::nums::v0
     *\brief Resuleve una ecuacion de la forma ax + b = y
     *
     */
-    template<core::number T, core::number V = core::convertion<T>::type> constexpr V resolve(V const& a,V const& b,V const& y)
+    template<core::number T, core::number V = core::convertion_to_real<T>::type> constexpr V resolve(V const& a,V const& b,V const& y)
     {
         return (y + b) / a;
     }

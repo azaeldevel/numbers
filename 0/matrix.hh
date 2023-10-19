@@ -16,7 +16,7 @@ namespace oct::nums::v0
     *\param C Columnas
     *\param V para operaciones
     **/
-    template<typename T,core::index auto R = 0,core::index auto C = 0,core::number V = core::convertion<T>::type,core::index I = size_t,class A = T> class matrix //: public core::array<core::array<T,C,I>,R,I>
+    template<typename T,core::index auto R = 0,core::index auto C = 0,core::number V = core::convertion_to_real<T>::type,core::index I = size_t,class A = T> class matrix //: public core::array<core::array<T,C,I>,R,I>
     {
     private:
 
@@ -841,7 +841,7 @@ namespace oct::nums::v0
         /**
         *\brief realiza la operacion de multimplicacion de matrices
         **/
-        template<core::number V = core::convertion<T>::type> constexpr matrix<V> operator * (const matrix<V>& o) const
+        template<core::number V = core::convertion_to_real<T>::type> constexpr matrix<V> operator * (const matrix<V>& o) const
         {//ref : Book 1(IAL), pag 88.
             if(C != o.rows()) throw std::logic_error("Los operadore no tiene las demiensiones adecuada");
             //if(R == o.C) throw std::logic_error("Los operadore no tiene la misma dimension");
@@ -1017,7 +1017,7 @@ namespace oct::nums::v0
             return res;
         }
 
-        template<core::number V = core::convertion<T>::type> constexpr matrix<V> adjoint() const
+        template<core::number V = core::convertion_to_real<T>::type> constexpr matrix<V> adjoint() const
         {
             //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
             if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
@@ -1033,7 +1033,7 @@ namespace oct::nums::v0
 
             return m;
         }
-        template<core::number V = core::convertion<T>::type>  constexpr V cofactor(size_t i,size_t j) const
+        template<core::number V = core::convertion_to_real<T>::type>  constexpr V cofactor(size_t i,size_t j) const
         {
             V sign = std::pow(V(-1),V((i + 1) + (j + 1)));
             V det = minor(i,j).determinant();
@@ -1043,7 +1043,7 @@ namespace oct::nums::v0
             //std::cout << sign << " * det = " << det << "\n";
             return ret;
         }
-        template<core::number V = core::convertion<T>::type> constexpr matrix minor( size_t a,size_t b) const
+        template<core::number V = core::convertion_to_real<T>::type> constexpr matrix minor( size_t a,size_t b) const
         {
             size_t x = 0, y = 0;
             matrix submatrix(R - 1,C - 1);
@@ -1064,7 +1064,7 @@ namespace oct::nums::v0
 
             return submatrix;
         }
-        template<core::number V = core::convertion<T>::type> V determinant(size_t i = 0) const
+        template<core::number V = core::convertion_to_real<T>::type> V determinant(size_t i = 0) const
         {
             if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
 
@@ -1092,7 +1092,7 @@ namespace oct::nums::v0
 
             return 1;
         }
-        template<core::number V = core::convertion<T>::type> constexpr matrix<V> inverse () const
+        template<core::number V = core::convertion_to_real<T>::type> constexpr matrix<V> inverse () const
         {
             //static_assert(R == C,"La matriz deve ser cuadrada para aplicar esta operacion.");
             if(R != C) throw std::logic_error("La matriz deve ser cuadrada para aplicar esta operacion.");
@@ -1228,7 +1228,7 @@ namespace oct::nums::v0
 
     };
 
-    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(core::array<T,3> const& v1,core::array<T,3> const& v2,core::array<T,3> const& v3)
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(core::array<T,3> const& v1,core::array<T,3> const& v2,core::array<T,3> const& v3)
     {
         matrix<T,C,R,V> m;
         m[0][0] = v1[0];
@@ -1242,7 +1242,7 @@ namespace oct::nums::v0
         m[2][2] = v3[2];
         return m;
     }
-    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(vector<T,3> const& v1,vector<T,3> const& v2,vector<T,3> const& v3)
+    template<typename T,core::index auto C,core::index auto R,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> matrix<T,C,R,V> create_matrix(vector<T,3> const& v1,vector<T,3> const& v2,vector<T,3> const& v3)
     {
 
     }

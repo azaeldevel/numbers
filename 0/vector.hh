@@ -6,7 +6,7 @@
 namespace oct::nums::v0
 {
 
-    template<core::number T,core::index auto L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> class vector : public core::array<T,L,I>
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> class vector : public core::array<T,L,I>
     {
     private:
         typedef core::array<T,L,I> BASE;
@@ -360,18 +360,18 @@ namespace oct::nums::v0
     *\brief Producto escalar entre vectores
     *
     **/
-    template<core::number T,core::index auto L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr T dot(const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> constexpr T dot(const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
     {
         return v1.dot(v2);
     }
 
-    template<core::number T,core::index auto L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> normalize(const vector<T,L,V,I>& v)
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> normalize(const vector<T,L,V,I>& v)
     {
         vector<T,L,V> vnew(v);
         vnew.normalize();
         return vnew;
     }
-    template<core::number T,core::index auto L = 3,core::number V = core::convertion<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> cross (const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> constexpr vector<T,L,V,I> cross (const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2)
     {
         static_assert(L == 3);
         vector<T,L,V,I> res;
