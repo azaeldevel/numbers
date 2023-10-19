@@ -546,6 +546,14 @@ namespace oct::nums::v0
             print(std::cout);
             std::cout << "\n";*/
         }
+        constexpr matrix(size_t r,size_t c,const T* buff) : R(r),C(c),data(NULL),free(false)
+        {
+            /*std::cout << "matrix(size_t r,size_t c,T* buff)\n";
+            std::cout << "\tdata = " << data << "\n";
+            print(std::cout);
+            std::cout << "\n";*/
+            data = const_cast<T*>(buff);
+        }
         /*constexpr matrix(const T& v)
         {
             for(size_t i = 0; i < R; i++)
