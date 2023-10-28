@@ -934,6 +934,12 @@ void v0_matrix()
     CU_ASSERT(mx127[0][0] == 17);
     CU_ASSERT(mx127[1][0] == 3);
     CU_ASSERT(mx127[2][0] == 1);
+
+    numbers_here::matrix<int> mx128;
+    mx128 = mx127;
+    CU_ASSERT(mx128[0][0] == 17);
+    CU_ASSERT(mx128[1][0] == 3);
+    CU_ASSERT(mx128[2][0] == 1);
 }
 
 

@@ -890,9 +890,9 @@ namespace oct::nums::v0
         }
         constexpr matrix& operator = (const matrix& o)
         {
-            /*std::cout << "matrix& operator = (const matrix& o)\n";
-            create(o);
-            std::cout << "\tdata = " << data << "\n";*/
+            //std::cout << "matrix& operator = (const matrix& o)\n";
+            create_copy(o);
+            //std::cout << "\tdata = " << data << "\n";
 
             for(size_t i = 0; i < R; i++)
             {
@@ -991,7 +991,7 @@ namespace oct::nums::v0
 
         constexpr void transpose (const matrix& o)
         {
-            create(o);
+            create_transpose(o);
 
             for(size_t i = 0; i < R; i++)
             {
@@ -1164,7 +1164,7 @@ namespace oct::nums::v0
 #endif // OCTETOS_AVERSO_TTD
 
     private://funciones mimebro
-        void create(const matrix& o)
+        void create_transpose(const matrix& o)
         {
             if(data and free)
             {
@@ -1223,6 +1223,25 @@ namespace oct::nums::v0
                 C = c;
                 data = new T[R * C];
                 free = true;
+            }
+        }
+        void create_copy(const matrix& o)
+        {
+            if(data and free)
+            {
+                if(R != o.R or C != o.C)
+                {
+                    delete[] data;
+                    C = o.C;
+                    R = o.R;
+                    data = new T[R * C];
+                }
+            }
+            else
+            {
+                C = o.C;
+                R = o.R;
+                data = new T[R * C];
             }
         }
 
