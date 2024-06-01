@@ -311,6 +311,21 @@ namespace oct::nums::v0
             BASE::data[2][2] = O.z();
         }
 
+        void translate(const C& c)
+        {
+            BASE::data[0][0] = BASE::data[0][0] + c;
+            BASE::data[1][0] = BASE::data[1][0] + c;
+            BASE::data[2][0] = BASE::data[2][0] + c;
+        }
+
+        void print(std::ostream& out)
+        {
+            BASE::data[0].print(out);
+            BASE::data[1].print(out);
+            BASE::data[2].print(out);
+            std::cout << "\n";
+        }
+
     };
 
 
