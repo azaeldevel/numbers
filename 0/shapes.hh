@@ -173,6 +173,7 @@ namespace oct::nums::v0
     public:
         typedef Shape<C,D,P,V> BASE;
         Plane() = default;
+
         /**
         *\brief Contructor de brakets
         **/

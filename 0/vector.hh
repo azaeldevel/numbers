@@ -205,6 +205,19 @@ namespace oct::nums::v0
         }
 
         /**
+        *\brief Longitud
+        *
+        **/
+        V distance(T x, T y) const
+        {
+            V v = 0;
+            v += pow(x - BASE::data[0],V(2));
+            v += pow(y - BASE::data[1],V(2));
+
+            return sqrt(v);
+        }
+
+        /**
         *\brief Transformacion de rotacion
         *\param axis Eje de rotacion
         **/
@@ -243,7 +256,7 @@ namespace oct::nums::v0
         **/
         void rotate(const T& angle)
         {
-            static_assert(L == 2,"Solo para vectores de 2D");
+            //static_assert(L == 2,"Solo para vectores de 2D");
 
             T x1 = BASE::data[0], y1 = BASE::data[1];
             BASE::data[0] = x1 * cos(angle) - y1 * sin(angle);
