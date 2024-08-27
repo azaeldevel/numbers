@@ -368,6 +368,9 @@ namespace oct::nums::v0
                 }
             }
         }
+        /**
+        *\brief
+        */
         constexpr matrix<T,C,R,V> transpose () const
         {
             matrix<T,C,R,V> res;
