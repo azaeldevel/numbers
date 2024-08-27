@@ -344,11 +344,14 @@ void v0_matrix()
     CU_ASSERT(mx20[1][1] == 5);
     CU_ASSERT(mx20[2][1] == 6);
 
-    numbers_here::matrix<int,2,3,float> mx19b(0);
+    numbers_here::matrix<int,2,3,float> mx19b(0),mx19c(0);
     mx19b = mx20.transpose();
     //mx19b.print(std::cout);
     //mx20.print(std::cout);
     CU_ASSERT(mx19b == mx19);
+
+    mx20.transpose(mx19c);
+    CU_ASSERT(mx19c == mx19);
 
 
     //auto mx21 = mx19 * mx20;

@@ -360,9 +360,9 @@ namespace oct::nums::v0
 
         constexpr void transpose (matrix<T,C,R,V>& o)
         {
-            for(size_t i = 0; i < R; i++)
+            for(size_t i = 0; i < C; i++)
             {
-                for(size_t j = 0; j < C; j++)
+                for(size_t j = 0; j < R; j++)
                 {
                     o[i][j] = data[j][i];
                 }
