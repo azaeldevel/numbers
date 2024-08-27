@@ -231,6 +231,21 @@ namespace oct::nums::v0
 
             return res;
         }
+
+        constexpr matrix operator * (const vector<T,C> & o) const
+        {
+            matrix res(0);
+
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    res[i][j] += data[i][j] * o[j];
+                }
+            }
+
+            return res;
+        }
         template<core::number t> constexpr matrix<t,R,C,V> operator / (t const&  o) const
         {
             matrix<t,R,C,V> res;
@@ -343,13 +358,13 @@ namespace oct::nums::v0
             }
         }
 
-        constexpr void transpose (const matrix<T,C,R,V>& o)
+        constexpr void transpose (matrix<T,C,R,V>& o)
         {
             for(size_t i = 0; i < R; i++)
             {
                 for(size_t j = 0; j < C; j++)
                 {
-                    data[i][j] = o[j][i];
+                    o[i][j] = data[j][i];
                 }
             }
         }
@@ -1289,7 +1304,20 @@ namespace oct::nums::v0
         return m;
     }
 
+    /**
+    *\brief Crea un matriz diagonal
+    */
+    template<typename T,core::index auto D,core::number V = core::convertion_to_real<T>::type,core::index I = size_t,class A = T> matrix<T,D,D,V,I,A> diagonal(T t)
+    {
+        matrix<T,D,D,V,I,A> res(0);
 
+        for(size_t i = 0; i < D; i++)
+        {
+            res[i][i] = t;
+        }
+
+        return res;
+    }
 
 }
 
