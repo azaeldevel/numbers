@@ -26,6 +26,16 @@ namespace oct::nums::v0
         return x;
     }
 
+    /**
+    *\brief Resuleve 'x' en la ecuacion de la forma ax = b
+    *
+    */
+    template<core::decimal T,core::index auto S> constexpr matrix<T,S,1> resolve(matrix<T,S,S> const& a, vector<T,S> const& b)
+    {
+        auto x = a.inverse() * b;
+        return x;
+    }
+
 
     /**
     *\brief Resuleve una ecuacion de la forma ax + b = y

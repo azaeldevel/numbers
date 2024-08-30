@@ -103,22 +103,7 @@ void v0_shapes()
 
 void v0_algebra()
 {
-    numbers_here::Monomio<int,3> mono1(1);
-    numbers_here::Monomio<int,3> mono2 {2,2,3,5};
-    numbers_here::Monomio<int,3> mono3 {-9,2,7,3};
-    numbers_here::Monomio<int,3> mono4 = mono3 + mono2;
-    CU_ASSERT(mono4[0] == -7);
-    CU_ASSERT(mono4[1] == 4);
-    CU_ASSERT(mono4[2] == 10);
-    CU_ASSERT(mono4[3] == 8);
-    numbers_here::Monomio<int,3> mono5 = mono3 - mono2;
-    CU_ASSERT(mono5[0] == -11);
-    CU_ASSERT(mono5[1] == 0);
-    CU_ASSERT(mono5[2] == 4);
-    CU_ASSERT(mono5[3] == -2);
 
-
-    //mono4.print(std::cout,'x');
 }
 
 void v0_arithmetic()
@@ -955,8 +940,10 @@ void v0_matrix()
 
 void v0_equation()
 {
+    numbers::matrix<int,3,3> m1 {3,1,3,-2,1};
+    numbers::vector<int,3> v1{1,2};
 
-
+    numbers::resolve(m1,v1);
 }
 
 
