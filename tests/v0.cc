@@ -935,13 +935,27 @@ void v0_matrix()
     CU_ASSERT(mx128[0][0] == 17);
     CU_ASSERT(mx128[1][0] == 3);
     CU_ASSERT(mx128[2][0] == 1);
+
+
+    numbers::matrix<float,3,3,float> mx129 {1,1,1,0,2,5,2,5,-1};
+    numbers::vector<float,3,float> v129{6,-4,27};
+    numbers::matrix<float,3,3,float> mx130 = mx129.inverse();
+    //mx130.print(std::cout);
+    auto mx131 =  mx130 * v129;
+    //v129.print(std::cout);
+    mx131.print(std::cout);
+    CU_ASSERT(numbers::core::equal(mx131[0][0],5.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx131[1][0],3.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx131[2][0],-2.0f,0.01f))
+
+
 }
 
 
 void v0_equation()
 {
-    numbers::matrix<int,3,3> m1 {3,1,3,-2,1,6,4,7,5};
-    numbers::vector<int,3> v1{1,2,4};
+    //numbers::matrix<int,3,3> m1 {3,1,3,-2,1,6,4,7,5};
+    //numbers::vector<int,3> v1{1,2,4};
 
     //auto m2 = numbers::resolve(m1,v1);
 }
