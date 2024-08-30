@@ -943,12 +943,21 @@ void v0_matrix()
     //mx130.print(std::cout);
     auto mx131 =  mx130 * v129;
     //v129.print(std::cout);
-    mx131.print(std::cout);
+    //mx131.print(std::cout);
     CU_ASSERT(numbers::core::equal(mx131[0][0],5.0f,0.01f))
     CU_ASSERT(numbers::core::equal(mx131[1][0],3.0f,0.01f))
     CU_ASSERT(numbers::core::equal(mx131[2][0],-2.0f,0.01f))
 
-
+    numbers::matrix<float,2,2,float> mx132{1,0,-1,0};
+    //mx132.print(std::cout);
+    //auto mx133 = mx132.inverse();
+    //mx133.print(std::cout);
+    numbers::vector<float,2,float> v133{1,1};
+    auto mx134 =  mx132 * v133;
+    //mx134.print(std::cout);
+    //auto mx135 = mx132.adjoint();
+    //mx135.print(std::cout);
+    //std::cout << mx132.determinant() << "\n";
 }
 
 
