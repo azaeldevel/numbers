@@ -500,7 +500,7 @@ void v0_matrix()
     //auto mx36_x =  mx36_inverse * mx37;
     constexpr numbers::matrix<float,3,1> mx36_x1 =  mx36_inverse * mx37;
     //mx36_x1.print(std::cout);
-    constexpr numbers::matrix<float,3,1> mx36_x2 = numbers::resolve(mx36,mx37);
+    auto mx36_x2 = mx36.inverse() * mx37;
     //mx36_x2.print(std::cout);
     CU_ASSERT(mx36_x1 == mx36_x2)
 
@@ -940,10 +940,10 @@ void v0_matrix()
 
 void v0_equation()
 {
-    numbers::matrix<int,3,3> m1 {3,1,3,-2,1};
-    numbers::vector<int,3> v1{1,2};
+    numbers::matrix<int,3,3> m1 {3,1,3,-2,1,6,4,7,5};
+    numbers::vector<int,3> v1{1,2,4};
 
-    numbers::resolve(m1,v1);
+    //auto m2 = numbers::resolve(m1,v1);
 }
 
 
