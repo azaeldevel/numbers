@@ -319,7 +319,7 @@ void v0_matrix()
     CU_ASSERT(mx19[1][1] == 5);
     CU_ASSERT(mx19[1][2] == 6);
 
-    numbers_here::matrix<int,3,2,float> mx20,mx20b;
+    numbers_here::matrix<int,3,2,float> mx20;
     mx20 = mx19.transpose();
     //mx20.print(std::cout);
     CU_ASSERT(mx20[0][0] == 1);
@@ -958,6 +958,14 @@ void v0_matrix()
     //auto mx135 = mx132.adjoint();
     //mx135.print(std::cout);
     //std::cout << mx132.determinant() << "\n";
+    CU_ASSERT(numbers::core::equal(mx134[0][0],1.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx134[1][0],-1.0f,0.01f))
+
+    auto mx135 = v133.orthogonal();
+    CU_ASSERT(numbers::core::equal(mx135[0],-1.0f))
+    CU_ASSERT(numbers::core::equal(mx135[1],1.0f))
+
+
 }
 
 
@@ -1076,7 +1084,7 @@ void v0_vector()
 
     numbers_here::vector<float,3> vect17{3,0,2};
     //vect17.printLn(std::cout);
-    numbers_here::vector<float,3> vect18 = numbers_here::normalize(vect17);
+    numbers_here::vector<float,3> vect18 = vect17.normalize();
     //vect18.printLn(std::cout);
     //std::cout << "Longitud : " << vect18.length() << "\n";
     CU_ASSERT_DECIMAL(vect18.x(), 0.83205,infimium);
@@ -1190,6 +1198,32 @@ void v0_vector()
     CU_ASSERT_FALSE(vect41.is_parallel(vect42))
     CU_ASSERT(vect40.is_parallel(vect42))
 
+    constexpr numbers::vector<float,2> vect43{2.0f,5.0f};
+    constexpr numbers::vector<float,2> vect44{-1.0f,2.0f};
+    /*std::cout << "\n";
+    vect43.print(std::cout);
+    std::cout << "\n";
+    std::cout << "component : " << vect43.dot(vect44) << "/" << vect44.length() << " = " << vect43.component(vect44) << "\n";
+    std::cout << "normalize : ";
+    vect44.normalize().print(std::cout);
+    std::cout << "\n";*/
+    auto vect45 = vect43.proyection(vect44);
+    /*std::cout << "\n";
+    vect44.print(std::cout);
+    std::cout << "\n";
+    vect45.print(std::cout);
+    std::cout << "\n";*/
+    CU_ASSERT(numbers::core::equal(vect45[0],-1.6f))
+    CU_ASSERT(numbers::core::equal(vect45[1],3.2f,0.01f))
+
+    constexpr numbers::vector<float,2> vect46{2,2};
+    constexpr numbers::vector<float,2> vect47{3,1};
+    auto vect48 = vect46.proyection(vect47);
+    auto vect49 = vect46.proyection(vect47.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect48, ((4.0f/5.0f) * vect47),0.001f))
+    CU_ASSERT(numbers::equal(vect49, ((2.0f/5.0f) * vect47.orthogonal()),0.001f))
 }
 
 void v0_funtions()
