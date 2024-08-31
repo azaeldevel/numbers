@@ -1224,6 +1224,26 @@ void v0_vector()
     //vect49.print(std::cout);
     CU_ASSERT(numbers::equal(vect48, ((4.0f/5.0f) * vect47),0.001f))
     CU_ASSERT(numbers::equal(vect49, ((2.0f/5.0f) * vect47.orthogonal()),0.001f))
+
+    constexpr numbers::vector<float,2> vect50{-2,2};
+    constexpr numbers::vector<float,2> vect51{3,1};
+    auto vect52 = vect50.proyection(vect51);
+    auto vect53 = vect50.proyection(vect51.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect52, ((-2.0f/5.0f) * vect51),0.001f))
+    CU_ASSERT(numbers::equal(vect53, ((4.0f/5.0f) * vect51.orthogonal()),0.001f))
+
+    constexpr numbers::vector<float,2> vect54{3,-4};
+    constexpr numbers::vector<float,2> vect55{-5,2};
+    auto vect56 = vect54.proyection(vect55);
+    auto vect57 = vect54.proyection(vect55.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect56, ((-23.0f/29.0f) * vect55),0.001f))
+    CU_ASSERT(numbers::equal(vect57, ((14.0f/29.0f) * vect55.orthogonal()),0.001f))
+
+
 }
 
 void v0_funtions()
