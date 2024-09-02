@@ -311,15 +311,16 @@ namespace oct::nums::v0
         constexpr bool is_parallel(const vector& v)const
         {
             //la comparacion se hace con 5 digitos de presicion
-            if(core::equal(dot(v),length() * v.length(),1.0e-5f)) return true;
+            if(core::equal(dot(v),(V)0)) return false;
 
-            return false;
+            return true;
         }
+
         /**
         *\brief Determina si los vectores son paralelos
         *
         **/
-        constexpr bool is_ortho(const vector& v)const
+        constexpr bool is_orthogonal(const vector& v)const
         {
             if(core::equal(dot(v),(V)0)) return true;
 
@@ -330,7 +331,7 @@ namespace oct::nums::v0
         *\brief Obtiene el seno entre los vectores
         *
         **/
-        constexpr V sen() const
+        constexpr V sin() const
         {
             return length()/BASE::data[1];
         }

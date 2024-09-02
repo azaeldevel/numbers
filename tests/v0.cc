@@ -1190,9 +1190,9 @@ void v0_vector()
     //CU_ASSERT(numbers::core::equal(vect40.cos(vect42),1.0f))
     //std::cout << sqrt(2) * sqrt(18) << " == " << vect40.length() * vect42.length() << "\n";
 
-    CU_ASSERT(vect40.is_ortho(vect41))
-    CU_ASSERT(vect41.is_ortho(vect42))
-    CU_ASSERT_FALSE(vect40.is_ortho(vect42))
+    CU_ASSERT(vect40.is_orthogonal(vect41))
+    CU_ASSERT(vect41.is_orthogonal(vect42))
+    CU_ASSERT_FALSE(vect40.is_orthogonal(vect42))
 
     CU_ASSERT_FALSE(vect40.is_parallel(vect41))
     CU_ASSERT_FALSE(vect41.is_parallel(vect42))
