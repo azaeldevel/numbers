@@ -327,16 +327,58 @@ namespace oct::nums::v0
         }
 
         /**
+        *\brief Obtiene el seno entre los vectores
+        *
+        **/
+        constexpr V sen() const
+        {
+            return length()/BASE::data[1];
+        }
+
+        /**
         *\brief Obtiene el coseno entre los vectores
         *
         **/
-        constexpr V cos(const vector& v) const
+        constexpr V cos() const
         {
-            T t = 0;
-            for(size_t i = 0; i < L; i++) t += this->at(i) * v[i];
-            return t/(length() * v.length());
+            return BASE::data[0]/length();
         }
 
+        /**
+        *\brief Obtiene el tan entre los vectores
+        *
+        **/
+        constexpr V tan() const
+        {
+            return BASE::data[1]/BASE::data[0];
+        1}
+
+        /**
+        *\brief Obtiene el seno entre los vectores
+        *
+        **/
+        constexpr V csc() const
+        {
+            return BASE::data[1]/length();
+        }
+
+        /**
+        *\brief Obtiene el coseno entre los vectores
+        *
+        **/
+        constexpr V sec() const
+        {
+            return length()/BASE::data[0];
+        }
+
+        /**
+        *\brief Obtiene el tan entre los vectores
+        *
+        **/
+        constexpr V cot() const
+        {
+            return BASE::data[0]/BASE::data[1];
+        }
 
 
         /**
