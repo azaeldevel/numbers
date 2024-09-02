@@ -269,8 +269,8 @@ namespace oct::nums::v0
             //static_assert(L == 2,"Solo para vectores de 2D");
 
             T x1 = BASE::data[0], y1 = BASE::data[1];
-            BASE::data[0] = x1 * cos(angle) - y1 * sin(angle);
-            BASE::data[1] = x1 * sin(angle) + y1 * cos(angle);
+            BASE::data[0] = x1 * std::cos(angle) - y1 * std::sin(angle);
+            BASE::data[1] = x1 * std::sin(angle) + y1 * std::cos(angle);
         }
 
         vector orthogonal()const
@@ -351,7 +351,7 @@ namespace oct::nums::v0
         constexpr V tan() const
         {
             return BASE::data[1]/BASE::data[0];
-        1}
+        }
 
         /**
         *\brief Obtiene el csc entre los vectores
