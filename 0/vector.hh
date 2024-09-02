@@ -354,7 +354,7 @@ namespace oct::nums::v0
         1}
 
         /**
-        *\brief Obtiene el seno entre los vectores
+        *\brief Obtiene el csc entre los vectores
         *
         **/
         constexpr V csc() const
@@ -363,7 +363,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el coseno entre los vectores
+        *\brief Obtiene el sec entre los vectores
         *
         **/
         constexpr V sec() const
@@ -372,7 +372,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el tan entre los vectores
+        *\brief Obtiene el cot entre los vectores
         *
         **/
         constexpr V cot() const
