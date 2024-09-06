@@ -1243,7 +1243,9 @@ void v0_vector()
     CU_ASSERT(numbers::equal(vect56, ((-23.0f/29.0f) * vect55),0.001f))
     CU_ASSERT(numbers::equal(vect57, ((14.0f/29.0f) * vect55.orthogonal()),0.001f))
 
-
+    constexpr numbers::vector<float,2> vect58{1,3};
+    constexpr numbers::vector<float,2> vect59{3,1};
+    CU_ASSERT(numbers::core::equal(vect58.area(vect59),4.0f))
 }
 
 void v0_funtions()

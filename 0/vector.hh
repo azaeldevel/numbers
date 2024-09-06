@@ -328,7 +328,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el seno entre los vectores
+        *\brief Obtiene el seno entre el vector y eje x
         *
         **/
         constexpr V sin() const
@@ -337,7 +337,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el coseno entre los vectores
+        *\brief Obtiene el coseno entre el vector y eje x
         *
         **/
         constexpr V cos() const
@@ -346,7 +346,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el tan entre los vectores
+        *\brief Obtiene el tan entre el vector y eje x
         *
         **/
         constexpr V tan() const
@@ -355,7 +355,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el csc entre los vectores
+        *\brief Obtiene el csc entre el vector y eje x
         *
         **/
         constexpr V csc() const
@@ -364,7 +364,7 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el sec entre los vectores
+        *\brief Obtiene el sec entre el vector y eje x
         *
         **/
         constexpr V sec() const
@@ -373,12 +373,21 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el cot entre los vectores
+        *\brief Obtiene el cot entre el vector y eje x
         *
         **/
         constexpr V cot() const
         {
             return BASE::data[0]/BASE::data[1];
+        }
+
+        /**
+        *\brief Area entre los vectores
+        *
+        **/
+        constexpr V area(const vector& v) const
+        {
+            return dot(v.orthogonal()) / V(2);
         }
 
 
