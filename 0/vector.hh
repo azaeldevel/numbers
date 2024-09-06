@@ -54,7 +54,7 @@ namespace oct::nums::v0
         }
 
 
-        constexpr vector operator + (const vector& s)
+        constexpr vector operator + (const vector& s) const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];

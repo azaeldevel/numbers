@@ -138,11 +138,11 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<core::number C,core::index auto D = 3,core::number V = C>
-    class Line : public Shape<C,D,2,V>
+    template<core::number C, core::index auto D = 3, core::index auto P = 2,core::number V = C>
+    class Line : public Shape<C,D,P,V>
     {
     public:
-        typedef Shape<C,D,2,V> BASE;
+        typedef Shape<C,D,P,V> BASE;
     public:
         Line() = default;
 
@@ -151,12 +151,39 @@ namespace oct::nums::v0
         **/
         constexpr Line(const std::initializer_list<C>& l) : BASE(l)
         {
+            static_assert(P > 1);
         }
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
         constexpr Line(const vector<C,D> vs[2]) : BASE(vs)
         {
+            static_assert(P > 1);
+        }
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        Line(const vector<C,D>& begin,const vector<C,D>& direction)
+        {
+            static_assert(P > 1);
+
+            BASE::at(0) = begin;
+            for(size_t i = 1; i < P-1; i++)
+            {
+                BASE::at(i) = begin + (direction * i);
+            }
+            BASE::at(P-1) = begin + (direction * P);
+        }
+
+        /**
+        *\brief Distacion a un punto Segun Nomarm B. pag 90
+        **/
+        constexpr bool is(const vector<C,D>& p)const
+        {
+            static_assert(P > 1);
+            vector a = BASE::at(0) - BASE::at(1);
+            vector v = p - BASE::at(0);
+            return equal(a.orthogonal() * v,0.0f);
         }
     };
 

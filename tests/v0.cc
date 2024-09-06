@@ -89,6 +89,12 @@ void v0_shapes()
     CU_ASSERT(line1[1].y() == 8);
     CU_ASSERT(line1[1].z() == 3);
 
+
+    constexpr numbers::vector<float,2> line2_v1(2,3);
+    constexpr numbers::vector<float,2> line2_v2(4,-2);
+    constexpr numbers::Line<float,2,20> line2(line2_v1,line2_v2);
+    //line2.print(std::cout);
+
     constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
     CU_ASSERT(tri2[0].x() == 0);
     CU_ASSERT(tri2[0].y() == 0);
