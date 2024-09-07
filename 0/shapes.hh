@@ -194,20 +194,41 @@ namespace oct::nums::v0
         /**
         *\brief
         **/
+        constexpr vector<C,D> base()const
+        {
+            return BASE::at(0);
+        }
+
+        /**
+        *\brief
+        **/
         constexpr vector<C,D> direction()const
         {
             return BASE::at(1) - BASE::at(0);
         }
 
         /**
-        *\brief
+        *\brief Interseccin de dos lineas, Norma B. pag 111
         **/
         constexpr core::array<C,D> intersection(const Line& l)
         {
-            auto d1 = direction();
-            auto d2 = l.direction();
+            auto a = direction();
+            auto a_ortho = a.orthogonal();
+            auto b = l.direction();
+            auto b_ortho = b.orthogonal();
 
-            return d1.lineal(d2);
+            auto c = l.at(0) - BASE::at(0);
+            //a.print(std::cout);
+            //b.print(std::cout);
+            //c.print(std::cout);
+
+            V t = a_ortho.dot(c)/V(a_ortho.dot(b));
+            V s = c.dot(b_ortho)/V(a.dot(b_ortho));
+
+            core::array<C,D> res;
+            res[0] = -t;
+            res[1] = s;
+            return res;
         }
 
 

@@ -110,7 +110,8 @@ void v0_shapes()
 
     numbers::Line<float,2,20> line4(numbers::vector<float,2>(4,6),numbers::vector<float,2>(1,2));
     numbers::Line<float,2,20> line5(numbers::vector<float,2>(5,2),numbers::vector<float,2>(1,-1));
-    //auto res6 = line4.intersection(line5);
+    auto res6 = line4.intersection(line5);
+    res6.print(std::cout);
 
 
     constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
