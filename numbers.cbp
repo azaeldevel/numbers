@@ -40,6 +40,7 @@
 					<Add option="-g" />
 					<Add option="-DOCTETOS_NUMBERS_V0_TTD" />
 					<Add option="-DOCTETOS_NUMBERS_TTD=0" />
+					<Add option="-DOCTETOS_CORE_V3_TDD" />
 					<Add directory="../numbers" />
 				</Compiler>
 				<Linker>

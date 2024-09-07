@@ -223,7 +223,7 @@ namespace oct::nums::v0
             //c.print(std::cout);
 
             V t = a_ortho.dot(c)/V(a_ortho.dot(b));
-            V s = c.dot(b_ortho)/V(a.dot(b_ortho));
+            V s = b_ortho.dot(c)/V(b_ortho.dot(a));
 
             core::array<C,D> res;
             res[0] = -t;
