@@ -222,12 +222,10 @@ namespace oct::nums::v0
             //b.print(std::cout);
             //c.print(std::cout);
 
-            V t = a_ortho.dot(c)/V(a_ortho.dot(b));
+            //V t = a_ortho.dot(c)/V(a_ortho.dot(b));
             V s = b_ortho.dot(c)/V(b_ortho.dot(a));
 
-            vector<C,D> res;
-            res[0] = -t;
-            res[1] = s;
+            vector<C,D> res = BASE::at(0) + (a * s);
             return res;
         }
 
