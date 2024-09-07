@@ -92,8 +92,21 @@ void v0_shapes()
 
     constexpr numbers::vector<float,2> line2_v1(2,3);
     constexpr numbers::vector<float,2> line2_v2(4,-2);
-    constexpr numbers::Line<float,2,20> line2(line2_v1,line2_v2);
+    numbers::Line<float,2,20> line2(line2_v1,line2_v2);
+    //std::cout << "Size : " << line2.size() << "\n";
     //line2.print(std::cout);
+    CU_ASSERT(line2.is(line2_v1));
+    for(size_t i = 0 ; i < line2.size(); i++)
+    {
+        CU_ASSERT(line2.is(line2[i]));
+    }
+
+    numbers::Line<float,2,20> line3;
+    line2_v1.line(line2_v2,line3);
+    for(size_t i = 0 ; i < line2.size(); i++)
+    {
+        CU_ASSERT(line3.is(line3[i]));
+    }
 
     constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
     CU_ASSERT(tri2[0].x() == 0);
@@ -1252,6 +1265,12 @@ void v0_vector()
     constexpr numbers::vector<float,2> vect58{1,3};
     constexpr numbers::vector<float,2> vect59{3,1};
     CU_ASSERT(numbers::core::equal(vect58.area(vect59),4.0f))
+
+    auto vect60 = vect58 * 3;
+    //vect60.print(std::cout);
+    CU_ASSERT(numbers::core::equal(vect60.x(),3.0f))
+    CU_ASSERT(numbers::core::equal(vect60.y(),9.0f))
+
 }
 
 void v0_funtions()

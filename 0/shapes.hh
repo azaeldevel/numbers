@@ -167,12 +167,7 @@ namespace oct::nums::v0
         {
             static_assert(P > 1);
 
-            BASE::at(0) = begin;
-            for(size_t i = 1; i < P-1; i++)
-            {
-                BASE::at(i) = begin + (direction * i);
-            }
-            BASE::at(P-1) = begin + (direction * P);
+            begin.line(direction,*this);
         }
 
         /**
@@ -183,8 +178,10 @@ namespace oct::nums::v0
             static_assert(P > 1);
             vector a = BASE::at(0) - BASE::at(1);
             vector v = p - BASE::at(0);
-            return equal(a.orthogonal() * v,0.0f);
+            return core::equal(a.orthogonal().dot(v),0.0f);
         }
+
+
     };
 
     /**

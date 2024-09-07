@@ -73,7 +73,7 @@ namespace oct::nums::v0
 
             return *this;
         }
-        constexpr vector operator - (const vector& s)
+        constexpr vector operator - (const vector& s)const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
@@ -92,7 +92,7 @@ namespace oct::nums::v0
 
             return *this;
         }
-        constexpr vector operator * (const T& s)
+        constexpr vector operator * (const T& s) const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] * s;
@@ -104,12 +104,6 @@ namespace oct::nums::v0
             for(size_t i = 0; i < L; i++) this->at(i) *= s;
 
             return *this;
-        }
-        constexpr vector& operator * (const T& s)const
-        {
-            vector v = *this;
-            for(size_t i = 0; i < L; i++) v[i] *= s;
-            return v;
         }
         //https://es.wikipedia.org/wiki/Producto_vectorial
         constexpr vector operator * (const vector& s) const
@@ -132,6 +126,13 @@ namespace oct::nums::v0
         constexpr vector& operator = (const T& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s;
+
+            return *this;
+        }
+
+        constexpr vector& operator = (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] = s[i];
 
             return *this;
         }
@@ -405,6 +406,17 @@ namespace oct::nums::v0
         vector proyection(const vector& b)const
         {
             return b.normalize() * component(b);
+        }
+
+        template<core::index auto S> void line(const vector& direction, core::array<vector<T,L>,S>& l)const
+        {
+            static_assert(L > 1);
+
+            l[0] = *this;
+            for(size_t i = 1; i < S; i++)
+            {
+                l[i] = this->operator + (direction * i);
+            }
         }
 
 
