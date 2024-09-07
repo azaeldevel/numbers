@@ -230,6 +230,16 @@ namespace oct::nums::v0
         }
 
 
+        /**
+        *\brief pendiente de la linea
+        **/
+        constexpr V tan(const Line& l)
+        {
+            auto v = BASE::at(0) - BASE::at(1);
+            return v.tan();
+        }
+
+
 
     };
 
