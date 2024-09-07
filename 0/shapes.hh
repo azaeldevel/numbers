@@ -210,7 +210,7 @@ namespace oct::nums::v0
         /**
         *\brief Interseccin de dos lineas, Norma B. pag 111
         **/
-        constexpr core::array<C,D> intersection(const Line& l)
+        constexpr vector<C,D> intersection(const Line& l)
         {
             auto a = direction();
             auto a_ortho = a.orthogonal();
@@ -225,7 +225,7 @@ namespace oct::nums::v0
             V t = a_ortho.dot(c)/V(a_ortho.dot(b));
             V s = b_ortho.dot(c)/V(b_ortho.dot(a));
 
-            core::array<C,D> res;
+            vector<C,D> res;
             res[0] = -t;
             res[1] = s;
             return res;
