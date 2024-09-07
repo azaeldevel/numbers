@@ -163,7 +163,7 @@ namespace oct::nums::v0
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
-        Line(const vector<C,D>& begin,const vector<C,D>& direction)
+        constexpr Line(const vector<C,D>& begin,const vector<C,D>& direction)
         {
             static_assert(P > 1);
 
@@ -180,6 +180,36 @@ namespace oct::nums::v0
             vector v = p - BASE::at(0);
             return core::equal(a.orthogonal().dot(v),0.0f);
         }
+
+        /**
+        *\brief
+        **/
+        constexpr bool is_parallel(const Line& l)const
+        {
+            vector base_a = BASE::at(0) - BASE::at(1);
+            vector base_b = l.at(0) - l.at(1);
+            return base_a.is_parallel(base_b);
+        }
+
+        /**
+        *\brief
+        **/
+        constexpr vector<C,D> direction()const
+        {
+            return BASE::at(1) - BASE::at(0);
+        }
+
+        /**
+        *\brief
+        **/
+        constexpr core::array<C,D> intersection(const Line& l)
+        {
+            auto d1 = direction();
+            auto d2 = l.direction();
+
+            return d1.lineal(d2);
+        }
+
 
 
     };

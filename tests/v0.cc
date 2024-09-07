@@ -108,6 +108,11 @@ void v0_shapes()
         CU_ASSERT(line3.is(line3[i]));
     }
 
+    numbers::Line<float,2,20> line4(numbers::vector<float,2>(4,6),numbers::vector<float,2>(1,2));
+    numbers::Line<float,2,20> line5(numbers::vector<float,2>(5,2),numbers::vector<float,2>(1,-1));
+    //auto res6 = line4.intersection(line5);
+
+
     constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
     CU_ASSERT(tri2[0].x() == 0);
     CU_ASSERT(tri2[0].y() == 0);
@@ -1270,6 +1275,14 @@ void v0_vector()
     //vect60.print(std::cout);
     CU_ASSERT(numbers::core::equal(vect60.x(),3.0f))
     CU_ASSERT(numbers::core::equal(vect60.y(),9.0f))
+
+    constexpr numbers::vector<float,2> vect61{7,17.0f/3.0f};
+    constexpr numbers::vector<float,2> vect62{3,1};
+    constexpr numbers::vector<float,2> vect63{1,2};
+    auto vect61_res = vect61.lineal(vect62,vect63);
+    //vect61_res.print(std::cout);
+    CU_ASSERT(numbers::core::equal(vect61_res[0],2.0f))
+    CU_ASSERT(numbers::core::equal(vect61_res[1],5.0f/3.0f))
 
 }
 

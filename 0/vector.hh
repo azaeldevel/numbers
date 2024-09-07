@@ -408,7 +408,7 @@ namespace oct::nums::v0
             return b.normalize() * component(b);
         }
 
-        template<core::index auto S> void line(const vector& direction, core::array<vector<T,L>,S>& l)const
+        template<core::index auto S> void line(const vector& direction, core::array<vector,S>& l)const
         {
             static_assert(L > 1);
 
@@ -417,6 +417,21 @@ namespace oct::nums::v0
             {
                 l[i] = this->operator + (direction * i);
             }
+        }
+
+        /**
+        *\brief Expresa el vector como una combinacion lineal de a y b
+        */
+        core::array<T,L> lineal(const vector& a, const vector&b) const
+        {
+            static_assert(L == 2);
+
+            V t = (a.orthogonal().dot(*this))/(a.orthogonal().dot(b));
+            V s = (b.orthogonal().dot(*this))/(b.orthogonal().dot(a));
+            core::array<T,L> res;
+            res[0] = t;
+            res[1] = s;
+            return res;
         }
 
 
