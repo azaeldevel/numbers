@@ -186,8 +186,8 @@ namespace oct::nums::v0
         **/
         constexpr bool is_parallel(const Line& l)const
         {
-            vector base_a = BASE::at(0) - BASE::at(1);
-            vector base_b = l.at(0) - l.at(1);
+            constexpr vector base_a = BASE::at(0) - BASE::at(1);
+            constexpr vector base_b = l.at(0) - l.at(1);
             return base_a.is_parallel(base_b);
         }
 
