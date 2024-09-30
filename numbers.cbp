@@ -84,6 +84,9 @@
 			<Option target="Release" />
 			<Option target="tests-dbg-v0" />
 		</Unit>
+		<Unit filename="0/body.hh">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="0/common.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>
