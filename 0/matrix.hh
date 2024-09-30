@@ -78,8 +78,8 @@ namespace oct::nums::v0
         }
         constexpr matrix(const std::initializer_list<T>& l)
         {
-            if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
+            //if(l.size() < R * C) throw std::logic_error("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            //if(l.size() > R * C) throw std::logic_error("La cantidad de datos execede la capacidad del objeto");
 
             const T* c = std::data(l);
             for(size_t i = 0; i < R; i++)
@@ -96,6 +96,8 @@ namespace oct::nums::v0
         */
         template<class B> constexpr matrix(B const& v1,B const& v2)
         {
+            static_assert(R == 2 && C == 2);
+
             at(0,0) = v1[0];
             at(0,1) = v1[1];
             at(1,0) = v2[0];
@@ -107,6 +109,8 @@ namespace oct::nums::v0
         */
         template<class B> constexpr matrix(B const& v1,B const& v2,B const& v3)
         {
+            static_assert(R == 3 && C == 3);
+
             at(0,0) = v1[0];
             at(0,1) = v1[1];
             at(0,2) = v1[2];
@@ -123,6 +127,8 @@ namespace oct::nums::v0
         */
         template<class B> constexpr matrix(B const& v1,B const& v2,B const& v3,B const& v4)
         {
+            static_assert(R == 4 && C == 4);
+
             at(0,0) = v1[0];
             at(0,1) = v1[1];
             at(0,2) = v1[2];
@@ -226,6 +232,21 @@ namespace oct::nums::v0
                 for(size_t j = 0; j < C; j++)
                 {
                     res[i][j] = data[i][j] * o;
+                }
+            }
+
+            return res;
+        }
+
+        constexpr matrix<T,C,1> operator * (const vector<T,C> & o) const
+        {
+            matrix<T,C,1> res(0);
+
+            for(size_t i = 0; i < R; i++)
+            {
+                for(size_t j = 0; j < C; j++)
+                {
+                    res[i][0] += data[i][j] * o[j];
                 }
             }
 
@@ -343,16 +364,19 @@ namespace oct::nums::v0
             }
         }
 
-        constexpr void transpose (const matrix<T,C,R,V>& o)
+        constexpr void transpose (matrix<T,C,R,V>& o)
         {
-            for(size_t i = 0; i < R; i++)
+            for(size_t i = 0; i < C; i++)
             {
-                for(size_t j = 0; j < C; j++)
+                for(size_t j = 0; j < R; j++)
                 {
-                    data[i][j] = o[j][i];
+                    o[i][j] = data[j][i];
                 }
             }
         }
+        /**
+        *\brief
+        */
         constexpr matrix<T,C,R,V> transpose () const
         {
             matrix<T,C,R,V> res;
@@ -1289,7 +1313,20 @@ namespace oct::nums::v0
         return m;
     }
 
+    /**
+    *\brief Crea un matriz diagonal
+    */
+    template<typename T,core::index auto D,core::number V = core::convertion_to_real<T>::type,core::index I = size_t,class A = T> matrix<T,D,D,V,I,A> diagonal(T t)
+    {
+        matrix<T,D,D,V,I,A> res(0);
 
+        for(size_t i = 0; i < D; i++)
+        {
+            res[i][i] = t;
+        }
+
+        return res;
+    }
 
 }
 

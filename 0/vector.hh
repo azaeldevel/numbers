@@ -10,7 +10,7 @@ namespace oct::nums::v0
     {
     private:
         typedef core::array<T,L,I> BASE;
-        typedef vector<T,L,V,I> VECTOR;
+        //typedef vector<T,L,V,I> VECTOR;
     public:
         vector() = default;
         /**
@@ -38,6 +38,10 @@ namespace oct::nums::v0
         constexpr vector(const vector& v) : BASE(v)
         {
         }
+
+        /**
+        *\brief
+        */
         constexpr vector(const std::initializer_list<T>& l) : BASE(l)
         {
         }
@@ -50,7 +54,7 @@ namespace oct::nums::v0
         }
 
 
-        constexpr vector operator + (const vector& s)
+        constexpr vector operator + (const vector& s) const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
@@ -69,7 +73,7 @@ namespace oct::nums::v0
 
             return *this;
         }
-        constexpr vector operator - (const vector& s)
+        constexpr vector operator - (const vector& s)const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
@@ -88,7 +92,7 @@ namespace oct::nums::v0
 
             return *this;
         }
-        constexpr vector operator * (const T& s)
+        constexpr vector operator * (const T& s) const
         {
             vector res;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] * s;
@@ -122,6 +126,13 @@ namespace oct::nums::v0
         constexpr vector& operator = (const T& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s;
+
+            return *this;
+        }
+
+        constexpr vector& operator = (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] = s[i];
 
             return *this;
         }
@@ -169,7 +180,7 @@ namespace oct::nums::v0
         *\brief Tranformacion de translacion
         *
         **/
-        void transl(const vector& v)
+        void translate(const vector& v)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] += v[i];
         }
@@ -196,7 +207,7 @@ namespace oct::nums::v0
         *\brief Longitud
         *
         **/
-        V distance(VECTOR const& p) const
+        V distance(vector const& p) const
         {
             V v = 0;
             for(size_t i = 0; i < L; i++) v += pow(p.data[i] - BASE::data[i],V(2));
@@ -259,23 +270,32 @@ namespace oct::nums::v0
             //static_assert(L == 2,"Solo para vectores de 2D");
 
             T x1 = BASE::data[0], y1 = BASE::data[1];
-            BASE::data[0] = x1 * cos(angle) - y1 * sin(angle);
-            BASE::data[1] = x1 * sin(angle) + y1 * cos(angle);
+            BASE::data[0] = x1 * std::cos(angle) - y1 * std::sin(angle);
+            BASE::data[1] = x1 * std::sin(angle) + y1 * std::cos(angle);
         }
 
-
-        constexpr vector& normalize()
+        vector orthogonal()const
         {
-            V l = length();
-            for(size_t i = 0; i < L; i++) BASE::data[i] /= l;
-
-            return *this;
+            vector v;
+            v[0] = -BASE::data[1];
+            v[1] = BASE::data[0];
+            return v;
         }
-        constexpr void normalize(vector& v)const
+
+
+        constexpr vector normalize()const
+        {
+            vector v = *this;
+            V l = length();
+            for(size_t i = 0; i < L; i++) v[i] /= l;
+
+            return v;
+        }
+        /*constexpr void normalize(vector& v)
         {
             V l = v.length();
             for(size_t i = 0; i < L; i++) v[i] /= l;
-        }
+        }*/
         constexpr V dot(const vector& v)const
         {
             //static_assert(L == 3,"Solo para vectores de 3D");
@@ -292,15 +312,16 @@ namespace oct::nums::v0
         constexpr bool is_parallel(const vector& v)const
         {
             //la comparacion se hace con 5 digitos de presicion
-            if(core::equal(dot(v),length() * v.length(),1.0e-5f)) return true;
+            if(core::equal(dot(v),(V)0)) return false;
 
-            return false;
+            return true;
         }
+
         /**
         *\brief Determina si los vectores son paralelos
         *
         **/
-        constexpr bool is_ortho(const vector& v)const
+        constexpr bool is_orthogonal(const vector& v)const
         {
             if(core::equal(dot(v),(V)0)) return true;
 
@@ -308,34 +329,150 @@ namespace oct::nums::v0
         }
 
         /**
-        *\brief Obtiene el coseno entre los vectores
+        *\brief Obtiene el seno entre el vector y eje x
         *
         **/
-        constexpr V cos(const vector& v) const
+        constexpr V sin() const
         {
-            T t = 0;
-            for(size_t i = 0; i < L; i++) t += this->at(i) * v[i];
-            return t/(length() * v.length());
+            return length()/BASE::data[1];
         }
+
+        /**
+        *\brief Obtiene el coseno entre el vector y eje x
+        *
+        **/
+        constexpr V cos() const
+        {
+            return BASE::data[0]/length();
+        }
+
+        /**
+        *\brief Obtiene el tan entre el vector y eje x
+        *
+        **/
+        constexpr V tan() const
+        {
+            return BASE::data[1]/BASE::data[0];
+        }
+
+        /**
+        *\brief Obtiene el csc entre el vector y eje x
+        *
+        **/
+        constexpr V csc() const
+        {
+            return BASE::data[1]/length();
+        }
+
+        /**
+        *\brief Obtiene el sec entre el vector y eje x
+        *
+        **/
+        constexpr V sec() const
+        {
+            return length()/BASE::data[0];
+        }
+
+        /**
+        *\brief Obtiene el cot entre el vector y eje x
+        *
+        **/
+        constexpr V cot() const
+        {
+            return BASE::data[0]/BASE::data[1];
+        }
+
+        /**
+        *\brief Area entre los vectores
+        *
+        **/
+        constexpr V area(const vector& v) const
+        {
+            return dot(v.orthogonal()) / V(2);
+        }
+
+
+        /**
+        *\brief Componente del vector en la direccion de b
+        */
+        V component(const vector& b)const
+        {
+            return (dot(b)/b.length());
+        }
+
+        /**
+        *\brief Proeyeccion del vector en la direccion de b
+        */
+        vector proyection(const vector& b)const
+        {
+            return b.normalize() * component(b);
+        }
+
+        template<core::index auto S> void line(const vector& direction, core::array<vector,S>& l)const
+        {
+            static_assert(L > 1);
+
+            l[0] = *this;
+            for(size_t i = 1; i < S; i++)
+            {
+                l[i] = this->operator + (direction * i);
+            }
+        }
+
+        /**
+        *\brief Expresa el vector como una combinacion lineal de a y b
+        */
+        core::array<T,L> lineal(const vector& a, const vector&b) const
+        {
+            static_assert(L == 2);
+
+            V t = (a.orthogonal().dot(*this))/(a.orthogonal().dot(b));
+            V s = (b.orthogonal().dot(*this))/(b.orthogonal().dot(a));
+            core::array<T,L> res;
+            res[0] = t;
+            res[1] = s;
+            return res;
+        }
+
 
 #if OCTETOS_NUMBERS_TTD == 0
         void print(std::ostream& out, bool delim = true) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < 3; i++)
+                if(L == 2)
                 {
-                    if(i > 0) out << ",";
-                    out << BASE::data[i];
+                    out << BASE::data[0] << "," << BASE::data[1];
+                }
+                else if(L == 3)
+                {
+                    out << BASE::data[0] << "," << BASE::data[1] << "," << BASE::data[2];
+                }
+                else
+                {
+                    for(size_t i = 0; i < L ; i++)
+                    {
+                        out << "," << BASE::data[i];
+                    }
                 }
             if(delim) out << ")";
         }
         void printLn(std::ostream& out, bool delim = true) const
         {
             if(delim) out << "(";
-                for(size_t i = 0; i < 3; i++)
+                if(L == 2)
                 {
-                    if(i > 0) out << ",";
-                    out << BASE::data[i];
+                    out << BASE::data[0] << "," << BASE::data[1];
+                }
+                else if(L == 3)
+                {
+                    out << BASE::data[0] << "," << BASE::data[1] << "," << BASE::data[2];
+                }
+                else
+                {
+                    for(size_t i = 0; i < L ; i++)
+                    {
+                        out << "," << BASE::data[i];
+                    }
                 }
             if(delim) out << ")\n";
         }
@@ -343,6 +480,26 @@ namespace oct::nums::v0
 
     };
 
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> vector<T,L,V,I> operator * (const T& s,const vector<T,L,V,I>& v)
+    {
+        vector<T,L,V,I> res(0);
+        for(size_t i = 0; i < L; i++)
+        {
+            res[i] = v[i] * s;
+        }
+
+        return res;
+    }
+
+    template<core::number T,core::index auto L = 3,core::number V = core::convertion_to_real<T>::type,core::index I = size_t> bool equal(const vector<T,L,V,I>& v1,const vector<T,L,V,I>& v2, const T& epsilon = std::numeric_limits<T>::epsilon())
+    {
+        for(size_t i = 0; i < L; i++)
+        {
+            if(not core::equal(v1[i],v2[i],epsilon)) return false;
+        }
+
+        return true;
+    }
 
     template<core::number T,core::index auto L,core::number V> constexpr T x(const vector<T,L,V>& v)
     {

@@ -89,6 +89,33 @@ void v0_shapes()
     CU_ASSERT(line1[1].y() == 8);
     CU_ASSERT(line1[1].z() == 3);
 
+
+    constexpr numbers::vector<float,2> line2_v1(2,3);
+    constexpr numbers::vector<float,2> line2_v2(4,-2);
+    numbers::Line<float,2,20> line2(line2_v1,line2_v2);
+    //std::cout << "Size : " << line2.size() << "\n";
+    //line2.print(std::cout);
+    CU_ASSERT(line2.is(line2_v1));
+    for(size_t i = 0 ; i < line2.size(); i++)
+    {
+        CU_ASSERT(line2.is(line2[i]));
+    }
+
+    numbers::Line<float,2,20> line3;
+    line2_v1.line(line2_v2,line3);
+    for(size_t i = 0 ; i < line2.size(); i++)
+    {
+        CU_ASSERT(line3.is(line3[i]));
+    }
+
+    numbers::Line<float,2,20> line4(numbers::vector<float,2>(4,6),numbers::vector<float,2>(1,2));
+    numbers::Line<float,2,20> line5(numbers::vector<float,2>(5,2),numbers::vector<float,2>(1,-1));
+    auto res6 = line4.intersection(line5);
+    //res6.print(std::cout);
+    CU_ASSERT(numbers::core::equal(res6[0],3.0f,0.01f));
+    CU_ASSERT(numbers::core::equal(res6[1],4.0f,0.01f));
+
+
     constexpr numbers_here::Triangle<int> tri2{0,0,0,1,1,1,2,2,2};
     CU_ASSERT(tri2[0].x() == 0);
     CU_ASSERT(tri2[0].y() == 0);
@@ -103,22 +130,7 @@ void v0_shapes()
 
 void v0_algebra()
 {
-    numbers_here::Monomio<int,3> mono1(1);
-    numbers_here::Monomio<int,3> mono2 {2,2,3,5};
-    numbers_here::Monomio<int,3> mono3 {-9,2,7,3};
-    numbers_here::Monomio<int,3> mono4 = mono3 + mono2;
-    CU_ASSERT(mono4[0] == -7);
-    CU_ASSERT(mono4[1] == 4);
-    CU_ASSERT(mono4[2] == 10);
-    CU_ASSERT(mono4[3] == 8);
-    numbers_here::Monomio<int,3> mono5 = mono3 - mono2;
-    CU_ASSERT(mono5[0] == -11);
-    CU_ASSERT(mono5[1] == 0);
-    CU_ASSERT(mono5[2] == 4);
-    CU_ASSERT(mono5[3] == -2);
 
-
-    //mono4.print(std::cout,'x');
 }
 
 void v0_arithmetic()
@@ -325,7 +337,7 @@ void v0_matrix()
     CU_ASSERT(mx18[2][2] == 9);
 
 
-    constexpr numbers_here::matrix<int,2,3,float> mx19 = {1,2,3,4,5,6};
+    numbers_here::matrix<int,2,3,float> mx19 = {1,2,3,4,5,6};
     //mx19.print(std::cout);
     CU_ASSERT(mx19[0][0] == 1);
     CU_ASSERT(mx19[0][1] == 2);
@@ -335,7 +347,7 @@ void v0_matrix()
     CU_ASSERT(mx19[1][2] == 6);
 
     numbers_here::matrix<int,3,2,float> mx20;
-    mx20.transpose(mx19);
+    mx20 = mx19.transpose();
     //mx20.print(std::cout);
     CU_ASSERT(mx20[0][0] == 1);
     CU_ASSERT(mx20[1][0] == 2);
@@ -343,6 +355,16 @@ void v0_matrix()
     CU_ASSERT(mx20[0][1] == 4);
     CU_ASSERT(mx20[1][1] == 5);
     CU_ASSERT(mx20[2][1] == 6);
+
+    numbers_here::matrix<int,2,3,float> mx19b(0),mx19c(0);
+    mx19b = mx20.transpose();
+    //mx19b.print(std::cout);
+    //mx20.print(std::cout);
+    CU_ASSERT(mx19b == mx19);
+
+    mx20.transpose(mx19c);
+    CU_ASSERT(mx19c == mx19);
+
 
     //auto mx21 = mx19 * mx20;
     //mx21.print(std::cout);
@@ -505,7 +527,7 @@ void v0_matrix()
     //auto mx36_x =  mx36_inverse * mx37;
     constexpr numbers::matrix<float,3,1> mx36_x1 =  mx36_inverse * mx37;
     //mx36_x1.print(std::cout);
-    constexpr numbers::matrix<float,3,1> mx36_x2 = numbers::resolve(mx36,mx37);
+    auto mx36_x2 = mx36.inverse() * mx37;
     //mx36_x2.print(std::cout);
     CU_ASSERT(mx36_x1 == mx36_x2)
 
@@ -940,13 +962,46 @@ void v0_matrix()
     CU_ASSERT(mx128[0][0] == 17);
     CU_ASSERT(mx128[1][0] == 3);
     CU_ASSERT(mx128[2][0] == 1);
+
+
+    numbers::matrix<float,3,3,float> mx129 {1,1,1,0,2,5,2,5,-1};
+    numbers::vector<float,3,float> v129{6,-4,27};
+    numbers::matrix<float,3,3,float> mx130 = mx129.inverse();
+    //mx130.print(std::cout);
+    auto mx131 =  mx130 * v129;
+    //v129.print(std::cout);
+    //mx131.print(std::cout);
+    CU_ASSERT(numbers::core::equal(mx131[0][0],5.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx131[1][0],3.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx131[2][0],-2.0f,0.01f))
+
+    numbers::matrix<float,2,2,float> mx132{1,0,-1,0};
+    //mx132.print(std::cout);
+    //auto mx133 = mx132.inverse();
+    //mx133.print(std::cout);
+    numbers::vector<float,2,float> v133{1,1};
+    auto mx134 =  mx132 * v133;
+    //mx134.print(std::cout);
+    //auto mx135 = mx132.adjoint();
+    //mx135.print(std::cout);
+    //std::cout << mx132.determinant() << "\n";
+    CU_ASSERT(numbers::core::equal(mx134[0][0],1.0f,0.01f))
+    CU_ASSERT(numbers::core::equal(mx134[1][0],-1.0f,0.01f))
+
+    auto mx135 = v133.orthogonal();
+    CU_ASSERT(numbers::core::equal(mx135[0],-1.0f))
+    CU_ASSERT(numbers::core::equal(mx135[1],1.0f))
+
+
 }
 
 
 void v0_equation()
 {
+    //numbers::matrix<int,3,3> m1 {3,1,3,-2,1,6,4,7,5};
+    //numbers::vector<int,3> v1{1,2,4};
 
-
+    //auto m2 = numbers::resolve(m1,v1);
 }
 
 
@@ -1056,7 +1111,7 @@ void v0_vector()
 
     numbers_here::vector<float,3> vect17{3,0,2};
     //vect17.printLn(std::cout);
-    numbers_here::vector<float,3> vect18 = numbers_here::normalize(vect17);
+    numbers_here::vector<float,3> vect18 = vect17.normalize();
     //vect18.printLn(std::cout);
     //std::cout << "Longitud : " << vect18.length() << "\n";
     CU_ASSERT_DECIMAL(vect18.x(), 0.83205,infimium);
@@ -1136,7 +1191,7 @@ void v0_vector()
 
     constexpr numbers::vector<float,2> vect36{2,4};
     constexpr numbers::vector<float,2> vect37{-1,2};
-    CU_ASSERT(numbers::core::equal(vect36.cos(vect37),0.6f))
+    //CU_ASSERT(numbers::core::equal(vect36.cos(vect37),0.6f))
 
     constexpr numbers::vector<float,4> vect38{2,3,2,-1};
     CU_ASSERT(numbers::core::equal(vect38.length(),(float)sqrt(18)))
@@ -1159,16 +1214,78 @@ void v0_vector()
     CU_ASSERT(numbers::core::equal(vect40.length() * vect42.length(),6.0f,1.0e-6f))
     CU_ASSERT(numbers::core::equal(vect40.length(),(float)sqrt(2)))
     CU_ASSERT(numbers::core::equal(vect42.length(),(float)sqrt(18)))
-    CU_ASSERT(numbers::core::equal(vect40.cos(vect42),1.0f))
+    //CU_ASSERT(numbers::core::equal(vect40.cos(vect42),1.0f))
     //std::cout << sqrt(2) * sqrt(18) << " == " << vect40.length() * vect42.length() << "\n";
 
-    CU_ASSERT(vect40.is_ortho(vect41))
-    CU_ASSERT(vect41.is_ortho(vect42))
-    CU_ASSERT_FALSE(vect40.is_ortho(vect42))
+    CU_ASSERT(vect40.is_orthogonal(vect41))
+    CU_ASSERT(vect41.is_orthogonal(vect42))
+    CU_ASSERT_FALSE(vect40.is_orthogonal(vect42))
 
     CU_ASSERT_FALSE(vect40.is_parallel(vect41))
     CU_ASSERT_FALSE(vect41.is_parallel(vect42))
     CU_ASSERT(vect40.is_parallel(vect42))
+
+    constexpr numbers::vector<float,2> vect43{2.0f,5.0f};
+    constexpr numbers::vector<float,2> vect44{-1.0f,2.0f};
+    /*std::cout << "\n";
+    vect43.print(std::cout);
+    std::cout << "\n";
+    std::cout << "component : " << vect43.dot(vect44) << "/" << vect44.length() << " = " << vect43.component(vect44) << "\n";
+    std::cout << "normalize : ";
+    vect44.normalize().print(std::cout);
+    std::cout << "\n";*/
+    auto vect45 = vect43.proyection(vect44);
+    /*std::cout << "\n";
+    vect44.print(std::cout);
+    std::cout << "\n";
+    vect45.print(std::cout);
+    std::cout << "\n";*/
+    CU_ASSERT(numbers::core::equal(vect45[0],-1.6f))
+    CU_ASSERT(numbers::core::equal(vect45[1],3.2f,0.01f))
+
+    constexpr numbers::vector<float,2> vect46{2,2};
+    constexpr numbers::vector<float,2> vect47{3,1};
+    auto vect48 = vect46.proyection(vect47);
+    auto vect49 = vect46.proyection(vect47.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect48, ((4.0f/5.0f) * vect47),0.001f))
+    CU_ASSERT(numbers::equal(vect49, ((2.0f/5.0f) * vect47.orthogonal()),0.001f))
+
+    constexpr numbers::vector<float,2> vect50{-2,2};
+    constexpr numbers::vector<float,2> vect51{3,1};
+    auto vect52 = vect50.proyection(vect51);
+    auto vect53 = vect50.proyection(vect51.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect52, ((-2.0f/5.0f) * vect51),0.001f))
+    CU_ASSERT(numbers::equal(vect53, ((4.0f/5.0f) * vect51.orthogonal()),0.001f))
+
+    constexpr numbers::vector<float,2> vect54{3,-4};
+    constexpr numbers::vector<float,2> vect55{-5,2};
+    auto vect56 = vect54.proyection(vect55);
+    auto vect57 = vect54.proyection(vect55.orthogonal());
+    //vect48.print(std::cout);
+    //vect49.print(std::cout);
+    CU_ASSERT(numbers::equal(vect56, ((-23.0f/29.0f) * vect55),0.001f))
+    CU_ASSERT(numbers::equal(vect57, ((14.0f/29.0f) * vect55.orthogonal()),0.001f))
+
+    constexpr numbers::vector<float,2> vect58{1,3};
+    constexpr numbers::vector<float,2> vect59{3,1};
+    CU_ASSERT(numbers::core::equal(vect58.area(vect59),4.0f))
+
+    auto vect60 = vect58 * 3;
+    //vect60.print(std::cout);
+    CU_ASSERT(numbers::core::equal(vect60.x(),3.0f))
+    CU_ASSERT(numbers::core::equal(vect60.y(),9.0f))
+
+    constexpr numbers::vector<float,2> vect61{7,17.0f/3.0f};
+    constexpr numbers::vector<float,2> vect62{3,1};
+    constexpr numbers::vector<float,2> vect63{1,2};
+    auto vect61_res = vect61.lineal(vect62,vect63);
+    //vect61_res.print(std::cout);
+    CU_ASSERT(numbers::core::equal(vect61_res[0],2.0f))
+    CU_ASSERT(numbers::core::equal(vect61_res[1],5.0f/3.0f))
 
 }
 

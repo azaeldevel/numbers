@@ -138,11 +138,11 @@ namespace oct::nums::v0
     *\param D dimension del espacio
     *\param V Tipo de datos para calculos
     **/
-    template<core::number C,core::index auto D = 3,core::number V = C>
-    class Line : public Shape<C,D,2,V>
+    template<core::number C, core::index auto D = 3, core::index auto P = 2,core::number V = C>
+    class Line : public Shape<C,D,P,V>
     {
     public:
-        typedef Shape<C,D,2,V> BASE;
+        typedef Shape<C,D,P,V> BASE;
     public:
         Line() = default;
 
@@ -151,13 +151,95 @@ namespace oct::nums::v0
         **/
         constexpr Line(const std::initializer_list<C>& l) : BASE(l)
         {
+            static_assert(P > 1);
         }
         /**
         *\brief Contrulle un triangulo con los 3 puntos indicados
         **/
         constexpr Line(const vector<C,D> vs[2]) : BASE(vs)
         {
+            static_assert(P > 1);
         }
+        /**
+        *\brief Contrulle un triangulo con los 3 puntos indicados
+        **/
+        constexpr Line(const vector<C,D>& begin,const vector<C,D>& direction)
+        {
+            static_assert(P > 1);
+
+            begin.line(direction,*this);
+        }
+
+        /**
+        *\brief Distacion a un punto Segun Nomarm B. pag 90
+        **/
+        constexpr bool is(const vector<C,D>& p)const
+        {
+            static_assert(P > 1);
+            vector a = BASE::at(0) - BASE::at(1);
+            vector v = p - BASE::at(0);
+            return core::equal(a.orthogonal().dot(v),0.0f);
+        }
+
+        /**
+        *\brief
+        **/
+        constexpr bool is_parallel(const Line& l)const
+        {
+            constexpr vector base_a = BASE::at(0) - BASE::at(1);
+            constexpr vector base_b = l.at(0) - l.at(1);
+            return base_a.is_parallel(base_b);
+        }
+
+        /**
+        *\brief
+        **/
+        constexpr vector<C,D> base()const
+        {
+            return BASE::at(0);
+        }
+
+        /**
+        *\brief
+        **/
+        constexpr vector<C,D> direction()const
+        {
+            return BASE::at(1) - BASE::at(0);
+        }
+
+        /**
+        *\brief Interseccin de dos lineas, Norma B. pag 111
+        **/
+        constexpr vector<C,D> intersection(const Line& l)
+        {
+            auto a = direction();
+            auto a_ortho = a.orthogonal();
+            auto b = l.direction();
+            auto b_ortho = b.orthogonal();
+
+            auto c = l.at(0) - BASE::at(0);
+            //a.print(std::cout);
+            //b.print(std::cout);
+            //c.print(std::cout);
+
+            //V t = a_ortho.dot(c)/V(a_ortho.dot(b));
+            V s = b_ortho.dot(c)/V(b_ortho.dot(a));
+
+            vector<C,D> res = BASE::at(0) + (a * s);
+            return res;
+        }
+
+
+        /**
+        *\brief pendiente de la linea
+        **/
+        constexpr V tan()
+        {
+            return direction().tan();
+        }
+
+
+
     };
 
     /**
