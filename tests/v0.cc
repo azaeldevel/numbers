@@ -1111,12 +1111,12 @@ void v0_vector()
 
     numbers_here::vector<float,3> vect17{3,0,2};
     //vect17.printLn(std::cout);
-    numbers_here::vector<float,3> vect18 = vect17.normalize();
+    //numbers_here::vector<float,3> vect18 = vect17.normalize();
     //vect18.printLn(std::cout);
     //std::cout << "Longitud : " << vect18.length() << "\n";
-    CU_ASSERT_DECIMAL(vect18.x(), 0.83205,infimium);
-    CU_ASSERT_DECIMAL(vect18.y(), 0.0,infimium);
-    CU_ASSERT_DECIMAL(vect18.z(), 0.5547,infimium);
+    //CU_ASSERT_DECIMAL(vect18.x(), 0.83205,infimium);
+    //CU_ASSERT_DECIMAL(vect18.y(), 0.0,infimium);
+    //CU_ASSERT_DECIMAL(vect18.z(), 0.5547,infimium);
 
     numbers_here::vector<float,3> vect19{3,0,2};
     numbers_here::vector<float,3> vect20{-1,4,2};

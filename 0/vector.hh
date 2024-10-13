@@ -286,7 +286,15 @@ namespace oct::nums::v0
         }
 
 
-        constexpr vector normalize()const
+        /*constexpr vector normalize()const
+        {
+            vector v = *this;
+            V l = length();
+            for(size_t i = 0; i < L; i++) v[i] /= l;
+
+            return v;
+        }*/
+        constexpr vector unit()const
         {
             vector v = *this;
             V l = length();
@@ -408,7 +416,7 @@ namespace oct::nums::v0
         */
         vector proyection(const vector& b)const
         {
-            return b.normalize() * component(b);
+            return b.unit() * component(b);
         }
 
         template<core::index auto S> void line(const vector& direction, core::array<vector,S>& l)const
