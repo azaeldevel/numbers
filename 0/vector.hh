@@ -16,21 +16,16 @@ namespace oct::nums::v0
         /**
         *\brief Asigna valor a todos los elementos del arreglo
         */
-        constexpr vector(const T& v) : BASE(v)
+        /*constexpr vector(const T& x) : BASE(x)
         {
-        }
-        constexpr vector(const T& x,const T& y)
+        }*/
+        constexpr vector(const T& x,const T& y) : BASE(x,y)
         {
             static_assert(L == 2);
-            BASE::data[0] = x;
-            BASE::data[1] = y;
         }
-        constexpr vector(const T& x,const T& y,const T& z)
+        constexpr vector(const T& x,const T& y,const T& z) : BASE(x,y,z)
         {
             static_assert(L == 3);
-            BASE::data[0] = x;
-            BASE::data[1] = y;
-            BASE::data[2] = z;
         }
         /*constexpr vector(const T v[L]) : sequence<T,L>(v)
         {
