@@ -140,16 +140,19 @@ namespace oct::nums::v0
 
 
 
+        //[[deprecated("Inutil cuando se usan tranformaciones o planos distintos")]]
         constexpr T& x()
         {
             static_assert(L > 0);
             return BASE::data[0];
         }
+        //[[deprecated("Inutil cuando se usan tranformaciones o planos distintos")]]
         constexpr const T& x() const
         {
             static_assert(L > 0);
             return BASE::data[0];
         }
+        //[[deprecated("Inutil cuando se usan tranformaciones o planos distintos")]]
         constexpr T& y()
         {
             static_assert(L > 1);
