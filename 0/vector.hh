@@ -40,6 +40,11 @@ namespace oct::nums::v0
         constexpr vector(const std::initializer_list<T>& l) : BASE(l)
         {
         }
+        constexpr vector(T&& x) : BASE(std::move)
+        {
+        }
+
+
 
         constexpr bool operator == (const vector& s)
         {
