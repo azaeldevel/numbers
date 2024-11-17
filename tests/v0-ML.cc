@@ -189,11 +189,8 @@ void v0_FIUNSEZEKYI12_ML()
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v1,10.f));
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v2,20.f));
 
-
     CU_ASSERT(numbers::core::equal(numbers::acceleration(0.8f,1.f,1.2f,3.f),0.2f))
     CU_ASSERT(numbers::core::equal(numbers::acceleration(1.2f,3.f,1.6f,5.f),-0.2f))
-
-
 
     velocity velocity_eje_2_3 = [](const float t) -> float
     {

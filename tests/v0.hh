@@ -22,5 +22,6 @@ void v0_arithmetic();
 void v0_algebra();
 void v0_shapes();
 void v0_FIUNSEZEKYI12_ML();
+void v0_FIUNSEZEKYI12_CAP21();
 
 #endif
