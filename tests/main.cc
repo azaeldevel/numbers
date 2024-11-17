@@ -2,7 +2,6 @@
 #include <cstring>
 #include <string>
 
-
 #ifdef OCTETOS_NUMBERS_V0_TTD
 	#include "v0.hh"
 #endif
@@ -84,13 +83,20 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "FIUNSEZEKYI12 - Movimiento Lineal", v0_FIUNSEZEKYI12_ML)))
+	CU_pSuite FIUNSEZEKYI12_v0 = CU_add_suite("Testing for FIUNSEZEKYI12 v0", v0_FIUNSEZEKYI12_init, v0_FIUNSEZEKYI12_clean);
+	if (NULL == FIUNSEZEKYI12_v0)
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "FIUNSEZEKYI12 - Capitulo 21", v0_FIUNSEZEKYI12_ML)))
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Mecanica Clasica", v0_FIUNSEZEKYI12_MC)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Capitulo 21", v0_FIUNSEZEKYI12_CAP21)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();

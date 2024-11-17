@@ -163,6 +163,18 @@ namespace oct::nums::v0::mc
     {
         return d1.acceleration(d2);
     }
+
+    /**
+    *\brief Aumneto de velocidad en el tiempo t
+    *\param v0 Velocidad inicial
+    *\param a acelaracion
+    *\param t tiempo
+    */
+    template<core::number T>
+    constexpr T velocity(T v0, T a, T t)
+    {
+        return v0 + ( a * t);
+    }
     /**
     *\brief Optiene la posicion de un movil acelerado
     *\param p0 Posicion inicial
@@ -173,7 +185,7 @@ namespace oct::nums::v0::mc
     template<core::number T>
     constexpr T position(T p0, T v0, T a, T t)
     {
-        return p0 + (v0 * t) + (a * (std::pow(t,2) / 2));
+        return p0 + (v0 * t) + ((a * std::pow(t,2)) / T(2));
     }
 }
 
@@ -188,7 +200,7 @@ namespace numbers = oct::nums::v0;
 
 typedef float (*movil)(const float);
 typedef float (*velocity)(const float);
-void v0_FIUNSEZEKYI12_ML()
+void v0_FIUNSEZEKYI12_MC()
 {
     //FIUNSEZEKYI12 : Pag 40,Ejemplo 2.1
     movil movil_eje_2_1 = [](const float t) -> float
@@ -260,8 +272,12 @@ void v0_FIUNSEZEKYI12_ML()
 
     //Ejemplo 2.4
     //a)
-    float eje_2_4_position = numbers::mc::acceleration(0.f, 15.f,4.f,2.f);
-    std::cout << "Ejemplo 2.4 : a) " << eje_2_4_position << "\n";
+    float eje_2_4_position = numbers::mc::position(5.f, 15.f,4.f,2.f);
+    //std::cout << "Ejemplo 2.4 : a) " << eje_2_4_position << "\n";
+    CU_ASSERT(numbers::core::equal(eje_2_4_position,43.f))
+    float eje_2_4_velocity = numbers::mc::velocity(15.f,4.f,2.f);
+    std::cout << "Ejemplo 2.4 : b) " << eje_2_4_velocity << "\n";
+    //CU_ASSERT(numbers::core::equal(eje_2_4_velocity,23.f))
 }
 
 

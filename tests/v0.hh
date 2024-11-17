@@ -21,7 +21,11 @@ void v0_funtions();
 void v0_arithmetic();
 void v0_algebra();
 void v0_shapes();
-void v0_FIUNSEZEKYI12_ML();
+
+
+int v0_FIUNSEZEKYI12_init(void);
+int v0_FIUNSEZEKYI12_clean(void);
+void v0_FIUNSEZEKYI12_MC();
 void v0_FIUNSEZEKYI12_CAP21();
 
 #endif

@@ -1327,3 +1327,15 @@ int v0_clean(void)
 
 	return 0;
 }
+
+
+
+
+int v0_FIUNSEZEKYI12_init(void)
+{
+	return 0;
+}
+int v0_FIUNSEZEKYI12_clean(void)
+{
+	return 0;
+}
