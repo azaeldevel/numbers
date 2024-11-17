@@ -196,9 +196,20 @@ namespace oct::nums::v0::mc
     *\param t tiempo
     */
     template<core::number T>
-    constexpr T position2(T p0, T v0, T v, T a)
+    constexpr T position_from_velicities(T p0, T v0, T v, T a)
     {
         return p0 + (std::pow(v,T(2)) - std::pow(v0,T(2)))/(T(2) * a);
+    }
+
+    /**
+    *\brief Tiempo de interseccion de de dos moviles (m1 velocidad constrante) movil 2 (aceleracion constante)
+    *\param v velocidad del movil 1
+    *\param a aceleracion del movil 2
+    */
+    template<core::number T>
+    constexpr T intersecction(T v, T a)
+    {
+        return 2 * (v/a);
     }
 
 }
@@ -293,7 +304,7 @@ void v0_FIUNSEZEKYI12_MC()
     //std::cout << "Ejemplo 2.4 : a) " << eje_2_4_a2 << "\n";
     CU_ASSERT(numbers::core::equal(eje_2_4_a2,23.f))
 
-    float eje_2_4_b = numbers::mc::position2(5.f,15.f,25.f,4.f);
+    float eje_2_4_b = numbers::mc::position_from_velicities(5.f,15.f,25.f,4.f);
     //std::cout << "Ejemplo 2.4 : b) " << eje_2_4_b << "\n";
     CU_ASSERT(numbers::core::equal(eje_2_4_b,55.f))
 
@@ -313,7 +324,7 @@ void v0_FIUNSEZEKYI12_MC()
         }
         float position2(float v)
         {
-            return numbers::mc::position2(p0,v0,v,a);
+            return numbers::mc::position_from_velicities(p0,v0,v,a);
         }
     };
 
@@ -321,6 +332,16 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_2_4.position(2.f),43.f))
     CU_ASSERT(numbers::core::equal(eje_2_4.velocity(2),23.f))
     CU_ASSERT(numbers::core::equal(eje_2_4.position2(25),55.f))
+
+    float eje_2_5_a = numbers::mc::intersecction(15.f,3.f);
+    //std::cout << "Ejemplo 2.5 : a) " << eje_2_5_a << "\n";
+    CU_ASSERT(numbers::core::equal(eje_2_5_a,10.f))
+    float eje_2_5_b = numbers::mc::velocity(0.f,3.f,10.f);
+    //std::cout << "Ejemplo 2.5 : b) " << eje_2_5_b << "\n";
+    CU_ASSERT(numbers::core::equal(eje_2_5_b,30.f))
+    float eje_2_5_c = numbers::mc::position(15.f,10.f);
+    //std::cout << "Ejemplo 2.5 : c) " << eje_2_5_c << "\n";
+    CU_ASSERT(numbers::core::equal(eje_2_5_c,150.f))
 
 
 
