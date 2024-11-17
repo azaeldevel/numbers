@@ -80,14 +80,14 @@ namespace oct::nums::v0
 
     //velocidad
     template<core::number T,core::index auto L = 3>
-    T velocity(const numbers::vector<T,L>& p1, T t1,const numbers::vector<T,L>& p2, T t2)
+    constexpr T velocity(const vector<T,L>& p1, T t1,const vector<T,L>& p2, T t2)
     {
         T d = p2.distance(p1);
         T t = t2 - t1;
         return d/t;
     }
     template<core::number T,core::index auto L = 3>
-    T velocity(const T dx, const T dt)
+    constexpr T velocity(const T dx, const T dt)
     {
         return dx/dt;
     }
@@ -95,7 +95,7 @@ namespace oct::nums::v0
     *\brief Velocidad Media
     */
     template<core::number T,core::index auto L = 3>
-    T velocity(const TP<T>* data, size_t s)
+    constexpr T velocity(const TP<T>* data, size_t s)
     {
         T dm = 0, tm = 0;
         for(size_t i = 1; i <  s; i++)
@@ -108,21 +108,21 @@ namespace oct::nums::v0
         return dm/tm;
     }
     template<core::number T>
-    T velocity(const TP<T>& d1, T t1,const TP<T>& d2)
+    constexpr T velocity(const TP<T>& d1, T t1,const TP<T>& d2)
     {
         return d1.velocity(d2);
     }
 
 
     template<core::number T>
-    T velocity(T (*movil)(const T),const T t1,const T t2)
+    constexpr T velocity(T (*movil)(const T),const T t1,const T t2)
     {
         T p1 = movil(t1);
         T p2 = movil(t2);
         return (p2-p1)/(t2-t1);
     }
     template<core::number T>
-    T displacement(T (*movil)(const T),const T t1,const T t2)
+    constexpr T displacement(T (*movil)(const T),const T t1,const T t2)
     {
         T p1 = movil(t1);
         T p2 = movil(t2);
@@ -133,21 +133,21 @@ namespace oct::nums::v0
 
     //aceleracion
     template<core::number T,core::index auto L = 3>
-    T acceleration(const T v1, T t1,const T v2, T t2)
+    constexpr T acceleration(const T v1, T t1,const T v2, T t2)
     {
         T v = v2 - v1;
         T t = t2 - t1;
         return v/t;
     }
     template<core::number T>
-    T acceleration(T (*velocity)(const T),const T t1,const T t2)
+    constexpr T acceleration(T (*velocity)(const T),const T t1,const T t2)
     {
         T v1 = velocity(t1);
         T v2 = velocity(t2);
         return (v2 - v1)/(t2-t1);
     }
     template<core::number T>
-    T acceleration(const TV<T>& d1,const TV<T>& d2)
+    constexpr T acceleration(const TV<T>& d1,const TV<T>& d2)
     {
         return d1.acceleration(d2);
     }
