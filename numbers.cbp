@@ -135,6 +135,9 @@
 		<Unit filename="tests/matrix-1.cc">
 			<Option target="matrix-1" />
 		</Unit>
+		<Unit filename="tests/v0-CAP21.cc">
+			<Option target="tests-dbg-v0" />
+		</Unit>
 		<Unit filename="tests/v0-ML.cc">
 			<Option target="tests-dbg-v0" />
 		</Unit>
