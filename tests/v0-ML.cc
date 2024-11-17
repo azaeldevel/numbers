@@ -14,7 +14,7 @@
 #include <numbers/0/vector.hh>
 
 
-namespace oct::nums::v0
+namespace oct::nums::v0::mc
 {
     namespace core = oct::core::v3;
 
@@ -128,6 +128,18 @@ namespace oct::nums::v0
         T p2 = movil(t2);
         return (p2-p1);
     }
+    template<core::number T>
+    constexpr T position(T v, T t)
+    {
+        return (v*t);
+    }
+    template<core::number T>
+    constexpr T position(T p0, T v, T t)
+    {
+        return p0 + (v*t);
+    }
+
+
 
 
 
@@ -151,6 +163,18 @@ namespace oct::nums::v0
     {
         return d1.acceleration(d2);
     }
+    /**
+    *\brief Optiene la posicion de un movil acelerado
+    *\param p0 Posicion inicial
+    *\param v0 Velocidad inicial
+    *\param a acelaracion
+    *\param t tiempo
+    */
+    template<core::number T>
+    constexpr T position(T p0, T v0, T a, T t)
+    {
+        return p0 + (v0 * t) + (a * (std::pow(t,2) / 2));
+    }
 }
 
 namespace numbers = oct::nums::v0;
@@ -171,8 +195,8 @@ void v0_FIUNSEZEKYI12_ML()
     {
         return 20.f + (5.f * t * t);
     };
-    float movil_eje_2_1_v1 = numbers::velocity(movil_eje_2_1,1.f,2.f);
-    float movil_eje_2_1_d1 = numbers::displacement(movil_eje_2_1,1.f,2.f);
+    float movil_eje_2_1_v1 = numbers::mc::velocity(movil_eje_2_1,1.f,2.f);
+    float movil_eje_2_1_d1 = numbers::mc::displacement(movil_eje_2_1,1.f,2.f);
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_v1,15.f));
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_d1,15.f));
     //std::cout << "Ejemplo 2.1 : Velocidad : " << movil_eje_2_1_v1 << "\n";
@@ -188,8 +212,8 @@ void v0_FIUNSEZEKYI12_ML()
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v1,10.f));
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v2,20.f));
 
-    CU_ASSERT(numbers::core::equal(numbers::acceleration(0.8f,1.f,1.2f,3.f),0.2f))
-    CU_ASSERT(numbers::core::equal(numbers::acceleration(1.2f,3.f,1.6f,5.f),-0.2f))
+    CU_ASSERT(numbers::core::equal(numbers::mc::acceleration(0.8f,1.f,1.2f,3.f),0.2f))
+    CU_ASSERT(numbers::core::equal(numbers::mc::acceleration(1.2f,3.f,1.6f,5.f),-0.2f))
 
     velocity velocity_eje_2_3 = [](const float t) -> float
     {
@@ -197,13 +221,13 @@ void v0_FIUNSEZEKYI12_ML()
     };
     //std::cout << "Ejemplo 2.3 : V1  : " << velocity_eje_2_3(1.f) << "\n";
     //std::cout << "Ejemplo 2.3 : V2  : " << velocity_eje_2_3(3.f) << "\n";
-    float movil_eje_2_3_a1 = numbers::acceleration(velocity_eje_2_3,1.f,3.f);
+    float movil_eje_2_3_a1 = numbers::mc::acceleration(velocity_eje_2_3,1.f,3.f);
     //std::cout << "Ejemplo 2.3 : Acelaraion  : " << movil_eje_2_3_a1 << "\n";
     CU_ASSERT(numbers::core::equal(velocity_eje_2_3(1.f),60.5f))
     CU_ASSERT(numbers::core::equal(velocity_eje_2_3(3.f),64.5f))
     CU_ASSERT(numbers::core::equal(movil_eje_2_3_a1,2.f))
 
-    numbers::TV<float> movil_eje_2_2_a2[8];
+    numbers::mc::TV<float> movil_eje_2_2_a2[8];
     movil_eje_2_2_a2[0].time = 1.0;
     movil_eje_2_2_a2[0].velocity = 0.8;
     movil_eje_2_2_a2[1].time = 3.0;
@@ -231,6 +255,13 @@ void v0_FIUNSEZEKYI12_ML()
     CU_ASSERT(numbers::core::equal(movil_eje_2_2_a4,-0.2f))
     CU_ASSERT(numbers::core::equal(movil_eje_2_2_a5,-0.3f))
     CU_ASSERT(numbers::core::equal(movil_eje_2_2_a6,0.4f))
+
+
+
+    //Ejemplo 2.4
+    //a)
+    float eje_2_4_position = numbers::mc::acceleration(0.f, 15.f,4.f,2.f);
+    std::cout << "Ejemplo 2.4 : a) " << eje_2_4_position << "\n";
 }
 
 
