@@ -16,7 +16,6 @@
 
 namespace oct::nums::v0
 {
-    namespace numbers = oct::nums::v0;
     namespace core = oct::core::v3;
 
     /**
