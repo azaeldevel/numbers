@@ -294,8 +294,36 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_2_4_a2,23.f))
 
     float eje_2_4_b = numbers::mc::position2(5.f,15.f,25.f,4.f);
-    std::cout << "Ejemplo 2.4 : b) " << eje_2_4_b << "\n";
+    //std::cout << "Ejemplo 2.4 : b) " << eje_2_4_b << "\n";
     CU_ASSERT(numbers::core::equal(eje_2_4_b,55.f))
+
+    struct Ejemplo_2_4
+    {
+        float v0 = 15;
+        float p0 = 5;
+        float a = 4;
+
+        float position(float t)
+        {
+            return numbers::mc::position(p0, v0,a,t);
+        }
+        float velocity(float t)
+        {
+            return numbers::mc::velocity(v0,a,t);
+        }
+        float position2(float v)
+        {
+            return numbers::mc::position2(p0,v0,v,a);
+        }
+    };
+
+    Ejemplo_2_4 eje_2_4;
+    CU_ASSERT(numbers::core::equal(eje_2_4.position(2.f),43.f))
+    CU_ASSERT(numbers::core::equal(eje_2_4.velocity(2),23.f))
+    CU_ASSERT(numbers::core::equal(eje_2_4.position2(25),55.f))
+
+
+
 }
 
 
