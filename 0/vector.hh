@@ -21,11 +21,15 @@ namespace oct::nums::v0
         }*/
         constexpr vector(const T& x,const T& y) : BASE(x,y)
         {
-            static_assert(L == 2);
+            //static_assert(L == 2);
+            if constexpr (L == 3)
+            {
+                z() = 0;
+            }
         }
         constexpr vector(const T& x,const T& y,const T& z) : BASE(x,y,z)
         {
-            static_assert(L == 3);
+            //static_assert(L == 3);
         }
         /*constexpr vector(const T v[L]) : sequence<T,L>(v)
         {

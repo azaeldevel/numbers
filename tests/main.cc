@@ -83,6 +83,12 @@ int main(int argc, char *argv[])
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
+
+	if ((NULL == CU_add_test(pSuite_v0, "FIUNSEZEKYI12 - Movimiento Lineal", v0_FIUNSEZEKYI12_ML)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
 #endif
 
 	/* Run all tests using the CUnit Basic interface */
