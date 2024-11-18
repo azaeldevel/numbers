@@ -80,9 +80,16 @@ namespace oct::nums::v0::mc
 
     //velocidad
     template<core::number T,core::index auto L = 3>
-    constexpr T velocity(const vector<T,L>& p1, T t1,const vector<T,L>& p2, T t2)
+    constexpr T velocity(const T p1, T t1,const T p2, T t2)
     {
-        T d = p2.distance(p1);
+        T d = p2 - p1;
+        T t = t2 - t1;
+        return d/t;
+    }
+    template<core::number T,core::index auto L = 3>
+    constexpr vector<T,L> velocity(const vector<T,L>& p1, T t1,const vector<T,L>& p2, T t2)
+    {
+        T d = p2 - p1;
         T t = t2 - t1;
         return d/t;
     }
@@ -146,6 +153,13 @@ namespace oct::nums::v0::mc
     //aceleracion
     template<core::number T,core::index auto L = 3>
     constexpr T acceleration(const T v1, T t1,const T v2, T t2)
+    {
+        T v = v2 - v1;
+        T t = t2 - t1;
+        return v/t;
+    }
+    template<core::number T,core::index auto L = 3>
+    constexpr vector<T,L> velocity(const vector<T,L>& v1, T t1,const vector<T,L>& v2, T t2)
     {
         T v = v2 - v1;
         T t = t2 - t1;
@@ -225,6 +239,7 @@ namespace numbers = oct::nums::v0;
 
 typedef float (*movil)(const float);
 typedef float (*velocity)(const float);
+
 void v0_FIUNSEZEKYI12_MC()
 {
     //FIUNSEZEKYI12 : Pag 40,Ejemplo 2.1
@@ -342,8 +357,6 @@ void v0_FIUNSEZEKYI12_MC()
     float eje_2_5_c = numbers::mc::position(15.f,10.f);
     //std::cout << "Ejemplo 2.5 : c) " << eje_2_5_c << "\n";
     CU_ASSERT(numbers::core::equal(eje_2_5_c,150.f))
-
-
 
 }
 
