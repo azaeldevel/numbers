@@ -103,6 +103,13 @@ namespace oct::nums::v0
 
             return res;
         }
+        constexpr vector operator / (const T& s) const
+        {
+            vector res;
+            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] / s;
+
+            return res;
+        }
         constexpr vector& operator *= (const T& s)
         {
             for(size_t i = 0; i < L; i++) this->at(i) *= s;

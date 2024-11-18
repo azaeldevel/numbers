@@ -89,8 +89,8 @@ namespace oct::nums::v0::mc
     template<core::number T,core::index auto L = 3>
     constexpr vector<T,L> velocity(const vector<T,L>& p1, T t1,const vector<T,L>& p2, T t2)
     {
-        T d = p2 - p1;
-        T t = t2 - t1;
+        auto d = p2 - p1;
+        auto t = t2 - t1;
         return d/t;
     }
     template<core::number T,core::index auto L = 3>
@@ -159,7 +159,7 @@ namespace oct::nums::v0::mc
         return v/t;
     }
     template<core::number T,core::index auto L = 3>
-    constexpr vector<T,L> velocity(const vector<T,L>& v1, T t1,const vector<T,L>& v2, T t2)
+    constexpr vector<T,L> acceleration(const vector<T,L>& v1, T t1,const vector<T,L>& v2, T t2)
     {
         T v = v2 - v1;
         T t = t2 - t1;
@@ -239,6 +239,7 @@ namespace numbers = oct::nums::v0;
 
 typedef float (*movil)(const float);
 typedef float (*velocity)(const float);
+typedef float (*position)(const float);
 
 void v0_FIUNSEZEKYI12_MC()
 {
@@ -358,6 +359,37 @@ void v0_FIUNSEZEKYI12_MC()
     //std::cout << "Ejemplo 2.5 : c) " << eje_2_5_c << "\n";
     CU_ASSERT(numbers::core::equal(eje_2_5_c,150.f))
 
+
+    //3
+    position eje_3_1_fx = [](float t) -> float
+    {
+        return 2.f - (0.25f * std::pow(t,2.f));
+    };
+    position eje_3_1_fy = [](float t) -> float
+    {
+        return t + (0.025f * std::pow(t,3.f));
+    };
+
+    float eje_3_1_a_x_0 = eje_3_1_fx(0.f);
+    float eje_3_1_a_y_0 = eje_3_1_fy(0.f);
+    float eje_3_1_a_x_2 = eje_3_1_fx(2.f);
+    float eje_3_1_a_y_2 = eje_3_1_fy(2.f);
+    CU_ASSERT(numbers::core::equal(eje_3_1_a_x_2,1.f))
+    //std::cout << "Ejemplo 3.1 : " << eje_3_1_a_x << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_1_a_y_2,2.2f))
+    //std::cout << "Ejemplo 3.1 : " << eje_3_1_a_y << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_1_a_x_0,2.f))
+    CU_ASSERT(numbers::core::equal(eje_3_1_a_y_0,0.f))
+
+    numbers::vector<float,2> eje_3_1_a_r_0(eje_3_1_a_x_0,eje_3_1_a_y_0);
+    numbers::vector<float,2> eje_3_1_a_r_2(eje_3_1_a_x_2,eje_3_1_a_y_2);
+    numbers::vector<float,2> eje_3_1_a_r_delta = eje_3_1_a_r_2 - eje_3_1_a_r_0;
+    //eje_3_1_a_r_delta.print(std::cout);
+    bool eje_3_1_a_r_delta_v = eje_3_1_a_r_delta == numbers::vector<float,2>(-1.f,2.2f);
+    CU_ASSERT(eje_3_1_a_r_delta_v)
+    numbers::vector<float,2> eje_3_1_b_velocity = numbers::mc::velocity(eje_3_1_a_r_0,0.f,eje_3_1_a_r_2,2.f);
+    bool eje_3_1_b_velocity_b = eje_3_1_b_velocity == numbers::vector<float,2>(-0.5f,1.1f);
+    CU_ASSERT(eje_3_1_b_velocity_b)
 }
 
 
