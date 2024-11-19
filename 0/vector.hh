@@ -57,64 +57,77 @@ namespace oct::nums::v0
             return true;
         }
 
+        constexpr bool operator != (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) if(core::equal(BASE::data[i],s[i])) return false;
+
+            return true;
+        }
+
+
 
         constexpr vector operator + (const vector& s) const
         {
-            vector res;
+            vector res = *this;
             for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
 
             return res;
         }
-        constexpr vector& operator += (const vector& s)
+        constexpr vector operator += (const vector& s) const
         {
-            for(size_t i = 0; i < L; i++) BASE::data[i] += s[i];
-
-            return *this;
-        }
-        constexpr vector& operator += (const T& s)
-        {
-            for(size_t i = 0; i < L; i++) BASE::data[i] += s;
-
-            return *this;
-        }
-        constexpr vector operator - (const vector& s)const
-        {
-            vector res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] += s[i];
 
             return res;
         }
-        constexpr vector& operator -= (const vector& s)
+        constexpr vector operator += (const T& s) const
         {
-            for(size_t i = 0; i < L; i++) BASE::data[i] -= s[i];
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] += s;
 
-            return *this;
+            return res;
         }
-        constexpr vector& operator -= (const T& s)
+        constexpr vector operator - (const vector& s)const
         {
-            for(size_t i = 0; i < L; i++) BASE::data[i] -= s;
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] = res[i] - s[i];
 
-            return *this;
+            return res;
+        }
+        constexpr vector operator -= (const vector& s) const
+        {
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] -= s[i];
+
+            return res;
+        }
+        constexpr vector& operator -= (const T& s) const
+        {
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] -= s;
+
+            return res;
         }
         constexpr vector operator * (const T& s) const
         {
-            vector res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] * s;
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] = res[i] * s;
 
             return res;
         }
         constexpr vector operator / (const T& s) const
         {
-            vector res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] / s;
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] = res[i] / s;
 
             return res;
         }
-        constexpr vector& operator *= (const T& s)
+        constexpr vector& operator *= (const T& s) const
         {
+            vector res = *this;
             for(size_t i = 0; i < L; i++) this->at(i) *= s;
 
-            return *this;
+            return res;
         }
         //https://es.wikipedia.org/wiki/Producto_vectorial
         constexpr vector operator * (const vector& s) const
@@ -128,12 +141,17 @@ namespace oct::nums::v0
 
             return res;
         }
-        /*constexpr vector& operator = (const vector& s)
+
+
+
+        /*
+        constexpr vector& operator = (const vector& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s[i];
 
             return *this;
-        }*/
+        }
+        */
         constexpr vector& operator = (const T& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s;
@@ -199,6 +217,24 @@ namespace oct::nums::v0
             for(size_t i = 0; i < L; i++) BASE::data[i] += v[i];
         }
         /**
+        *\brief Tranformacion de translacion
+        *
+        **/
+        void translate(const T& t)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] += t;
+        }
+        /**
+        *\brief Tranformacion de translacion
+        *
+        **/
+        void translate(const T& t, size_t i)
+        {
+            BASE::data[i] += t;
+        }
+
+
+        /**
         *\brief tranformacion de scalado
         *
         **/
@@ -206,6 +242,7 @@ namespace oct::nums::v0
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
         }
+
         /**
         *\brief Longitud
         *
@@ -217,6 +254,7 @@ namespace oct::nums::v0
 
             return sqrt(v);
         }
+
         /**
         *\brief Longitud
         *
@@ -288,11 +326,17 @@ namespace oct::nums::v0
             BASE::data[1] = x1 * std::sin(angle) + y1 * std::cos(angle);
         }
 
+        /**
+        *\brief Vertor ortogonal en plano XY
+        */
         vector orthogonal()const
         {
             vector v;
             v[0] = -BASE::data[1];
             v[1] = BASE::data[0];
+
+            for(size_t i = 2; i < L; i++) v[i] = BASE::data[i];
+
             return v;
         }
 
@@ -334,7 +378,7 @@ namespace oct::nums::v0
         constexpr bool is_parallel(const vector& v)const
         {
             //la comparacion se hace con 5 digitos de presicion
-            if(core::equal(dot(v),(V)0)) return false;
+            if constexpr (L == 2) if(core::equal(dot(v),(V)0)) return false;
 
             return true;
         }
@@ -345,7 +389,7 @@ namespace oct::nums::v0
         **/
         constexpr bool is_orthogonal(const vector& v)const
         {
-            if(core::equal(dot(v),(V)0)) return true;
+            if constexpr (L == 2) if (core::equal(dot(v),V(0))) return true;
 
             return false;
         }

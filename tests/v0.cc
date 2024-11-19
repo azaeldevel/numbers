@@ -1146,16 +1146,22 @@ void v0_vector()
 
 
     numbers_here::vector<int,3> vect27{0,0,0};
-    vect27 += vect22;
-    CU_ASSERT(vect27.x() == 2);
+    numbers_here::vector<int,3> vect27b = vect27 += vect22;
+    CU_ASSERT(vect27.x() == 0);
     CU_ASSERT(vect27.y() == 0);
-    CU_ASSERT(vect27.z() == 1);
+    CU_ASSERT(vect27.z() == 0);
+    CU_ASSERT(vect27b.x() == 2);
+    CU_ASSERT(vect27b.y() == 0);
+    CU_ASSERT(vect27b.z() == 1);
 
     numbers_here::vector<float,3> vect28{0,0,0};
-    vect28 += vect20;
-    CU_ASSERT_DECIMAL(vect28.x(), -1,infimium);
-    CU_ASSERT_DECIMAL(vect28.y(), 4,infimium);
-    CU_ASSERT_DECIMAL(vect28.z(), 2,infimium);
+    numbers_here::vector<float,3> vect28b = vect28 += vect20;
+    CU_ASSERT_DECIMAL(vect28.x(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect28.y(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect28.z(), 0,infimium);
+    CU_ASSERT_DECIMAL(vect28b.x(), -1,infimium);
+    CU_ASSERT_DECIMAL(vect28b.y(), 4,infimium);
+    CU_ASSERT_DECIMAL(vect28b.z(), 2,infimium);
 
     numbers_here::vector<float,3> vect29{2,0,1};
     numbers_here::vector<float,3> vect30 = vect29 * 1.1;
@@ -1205,21 +1211,24 @@ void v0_vector()
     //std::cout << "vect38.dot(vect39) = " << vect38.dot(vect39) << "\n";
 
 
-    constexpr numbers::vector<float,4> vect40{1,0,0,1};
-    constexpr numbers::vector<float,4> vect41{0,1,1,0};
-    constexpr numbers::vector<float,4> vect42{3,0,0,3};
+    constexpr numbers::vector<float,2> vect40{1,0};
+    constexpr numbers::vector<float,2> vect41{0,1};
+    constexpr numbers::vector<float,2> vect42{3,0};
+    std::cout << " Dot : " << vect40.dot(vect42) << "\n";
     CU_ASSERT(numbers::core::equal(vect40.dot(vect41),0.0f))
     CU_ASSERT(numbers::core::equal(vect41.dot(vect42),0.0f))
-    CU_ASSERT(numbers::core::equal(vect40.dot(vect42),6.0f))
-    CU_ASSERT(numbers::core::equal(vect40.length() * vect42.length(),6.0f,1.0e-6f))
-    CU_ASSERT(numbers::core::equal(vect40.length(),(float)sqrt(2)))
-    CU_ASSERT(numbers::core::equal(vect42.length(),(float)sqrt(18)))
+    CU_ASSERT(numbers::core::equal(vect40.dot(vect42),3.0f))
+    CU_ASSERT(numbers::core::equal(vect40.dot(vect42),0.0f))
+    CU_ASSERT(numbers::core::equal(vect40.length() * vect42.length(),3.0f))
+    CU_ASSERT(numbers::core::equal(vect40.length(),(float)sqrt(1)))
+    CU_ASSERT(numbers::core::equal(vect42.length(),(float)sqrt(9)))
     //CU_ASSERT(numbers::core::equal(vect40.cos(vect42),1.0f))
     //std::cout << sqrt(2) * sqrt(18) << " == " << vect40.length() * vect42.length() << "\n";
 
+    //vect42.print(std::cout);
     CU_ASSERT(vect40.is_orthogonal(vect41))
     CU_ASSERT(vect41.is_orthogonal(vect42))
-    //CU_ASSERT_FALSE(vect40.is_orthogonal(vect42))
+    CU_ASSERT_FALSE(vect40.is_orthogonal(vect42))
 
     CU_ASSERT_FALSE(vect40.is_parallel(vect41))
     CU_ASSERT_FALSE(vect41.is_parallel(vect42))

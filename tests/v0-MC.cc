@@ -390,6 +390,8 @@ void v0_FIUNSEZEKYI12_MC()
     numbers::vector<float,2> eje_3_1_b_velocity = numbers::mc::velocity(eje_3_1_a_r_0,0.f,eje_3_1_a_r_2,2.f);
     bool eje_3_1_b_velocity_b = eje_3_1_b_velocity == numbers::vector<float,2>(-0.5f,1.1f);
     CU_ASSERT(eje_3_1_b_velocity_b)
+
+
 }
 
 
