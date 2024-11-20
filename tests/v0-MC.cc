@@ -430,6 +430,9 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_3_2_a_vx_2,-1.f))
     CU_ASSERT(numbers::core::equal(eje_3_2_a_ax_2,-0.5f))
     CU_ASSERT(numbers::core::equal(eje_3_2_a_ay_2,0.3f))
+    numbers::vector<float,2> eje_3_2_a_a_2(eje_3_2_a_ax_2,eje_3_2_a_ay_2);
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_a_2.length(),0.58f,1.0e-2f))
+
 
 
     float eje_3_1_a_r_2_comp_x = eje_3_1_a_r_2.component_parellel();
