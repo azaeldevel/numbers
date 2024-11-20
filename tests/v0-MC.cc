@@ -382,6 +382,14 @@ void v0_FIUNSEZEKYI12_MC()
     {
         return 1 + (0.025f * 3.f * std::pow(t,2.f));
     };
+    position eje_3_1_ax = [](float t) -> float
+    {
+        return -0.5f;
+    };
+    position eje_3_1_ay = [](float t) -> float
+    {
+        return 0.075f * 2.f * t;
+    };
 
     float eje_3_1_a_x_0 = eje_3_1_fx(0.f);
     float eje_3_1_a_y_0 = eje_3_1_fy(0.f);
@@ -409,7 +417,20 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(eje_3_1_a_v_2_b)
     //std::cout << "Length : " << eje_3_1_a_v_2.length() << "\n";
     CU_ASSERT(1.6f - eje_3_1_a_v_2.length() < 1.0e-1f )
-    std::cout << "Tang : " << eje_3_1_a_v_2.tan() << "\n";
+    //std::cout << "Tang : " << eje_3_1_a_v_2.tan() << "\n";
+
+    float eje_3_2_a_vx_0 = eje_3_1_vx(0.f);
+    float eje_3_2_a_vy_0 = eje_3_1_vy(0.f);
+    float eje_3_2_a_vx_2 = eje_3_1_vx(2.f);
+    float eje_3_2_a_vy_2 = eje_3_1_vy(2.f);
+    float eje_3_2_a_ax_2 = eje_3_1_ax(2.f);
+    float eje_3_2_a_ay_2 = eje_3_1_ay(2.f);
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_vx_0,0.f))
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_vy_0,1.f))
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_vx_2,-1.f))
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_ax_2,-0.5f))
+    CU_ASSERT(numbers::core::equal(eje_3_2_a_ay_2,0.3f))
+
 
     float eje_3_1_a_r_2_comp_x = eje_3_1_a_r_2.component_parellel();
     //eje_3_1_a_r_2.printLn(std::cout);
