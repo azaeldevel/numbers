@@ -374,6 +374,14 @@ void v0_FIUNSEZEKYI12_MC()
     {
         return t + (0.025f * std::pow(t,3.f));
     };
+    position eje_3_1_vx = [](float t) -> float
+    {
+        return -0.25f * 2.f * t;
+    };
+    position eje_3_1_vy = [](float t) -> float
+    {
+        return 1 + (0.025f * 3.f * std::pow(t,2.f));
+    };
 
     float eje_3_1_a_x_0 = eje_3_1_fx(0.f);
     float eje_3_1_a_y_0 = eje_3_1_fy(0.f);
@@ -395,8 +403,17 @@ void v0_FIUNSEZEKYI12_MC()
     numbers::vector<float,2> eje_3_1_b_velocity = numbers::mc::velocity(eje_3_1_a_r_0,0.f,eje_3_1_a_r_2,2.f);
     bool eje_3_1_b_velocity_b = eje_3_1_b_velocity == numbers::vector<float,2>(-0.5f,1.1f);
     CU_ASSERT(eje_3_1_b_velocity_b)
+    numbers::vector<float,2> eje_3_1_a_v_2(eje_3_1_vx(2),eje_3_1_vy(2));
+    //eje_3_1_a_v_2.print(std::cout);
+    bool eje_3_1_a_v_2_b = eje_3_1_a_v_2 == numbers::vector<float,2>(-1.f,1.3f);
+    CU_ASSERT(eje_3_1_a_v_2_b)
+    //std::cout << "Length : " << eje_3_1_a_v_2.length() << "\n";
+    CU_ASSERT(1.6f - eje_3_1_a_v_2.length() < 1.0e-1f )
+    std::cout << "Tang : " << eje_3_1_a_v_2.tan() << "\n";
 
-
+    float eje_3_1_a_r_2_comp_x = eje_3_1_a_r_2.component_parellel();
+    //eje_3_1_a_r_2.printLn(std::cout);
+    //std::cout << "Ejemplo 3.3 : " << eje_3_1_a_r_2_comp_x << "\n";
 }
 
 

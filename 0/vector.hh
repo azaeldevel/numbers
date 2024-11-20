@@ -453,6 +453,15 @@ namespace oct::nums::v0
             return (dot(b)/b.length());
         }
 
+
+        /**
+        *\brief Componente del vector en la direccion de b
+        */
+        V component_parellel()const
+        {
+            return cos();
+        }
+
         /**
         *\brief Proeyeccion del vector en la direccion de b
         */
