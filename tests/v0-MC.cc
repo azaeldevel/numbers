@@ -265,8 +265,13 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v1,10.f));
     CU_ASSERT(numbers::core::equal(movil_eje_2_1_inst_v2,20.f));
 
-    CU_ASSERT(numbers::core::equal(numbers::mc::acceleration(0.8f,1.f,1.2f,3.f),0.2f))
-    CU_ASSERT(numbers::core::equal(numbers::mc::acceleration(1.2f,3.f,1.6f,5.f),-0.2f))
+    //pag 44
+    float eje_2_2_a1 = numbers::mc::acceleration(0.8f,1.f,1.2f,3.f);
+    float eje_2_2_a2 = numbers::mc::acceleration(1.6f,5.f,1.2f,7.f);
+    //std::cout << "Ejemplo 2.2 : " << eje_2_2_a1 << "\n";
+    //std::cout << "Ejemplo 2.2 : " << eje_2_2_a2 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_2_2_a1,0.2f))
+    CU_ASSERT(numbers::core::equal(eje_2_2_a2,-0.2f))
 
     velocity velocity_eje_2_3 = [](const float t) -> float
     {

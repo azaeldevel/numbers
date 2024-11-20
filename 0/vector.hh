@@ -59,7 +59,7 @@ namespace oct::nums::v0
 
         constexpr bool operator != (const vector& s)
         {
-            for(size_t i = 0; i < L; i++) if(core::equal(BASE::data[i],s[i])) return false;
+            for(size_t i = 0; i < L; i++) if(core::diff(BASE::data[i],s[i])) return false;
 
             return true;
         }
@@ -73,20 +73,6 @@ namespace oct::nums::v0
 
             return res;
         }
-        constexpr vector operator += (const vector& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) res[i] += s[i];
-
-            return res;
-        }
-        constexpr vector operator += (const T& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) res[i] += s;
-
-            return res;
-        }
         constexpr vector operator - (const vector& s)const
         {
             vector res = *this;
@@ -94,38 +80,10 @@ namespace oct::nums::v0
 
             return res;
         }
-        constexpr vector operator -= (const vector& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) res[i] -= s[i];
-
-            return res;
-        }
-        constexpr vector& operator -= (const T& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) res[i] -= s;
-
-            return res;
-        }
         constexpr vector operator * (const T& s) const
         {
             vector res = *this;
             for(size_t i = 0; i < L; i++) res[i] = res[i] * s;
-
-            return res;
-        }
-        constexpr vector operator / (const T& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) res[i] = res[i] / s;
-
-            return res;
-        }
-        constexpr vector& operator *= (const T& s) const
-        {
-            vector res = *this;
-            for(size_t i = 0; i < L; i++) this->at(i) *= s;
 
             return res;
         }
@@ -141,17 +99,46 @@ namespace oct::nums::v0
 
             return res;
         }
-
-
-
-        /*
-        constexpr vector& operator = (const vector& s)
+        constexpr vector operator / (const T& s) const
         {
-            for(size_t i = 0; i < L; i++) BASE::data[i] = s[i];
+            vector res = *this;
+            for(size_t i = 0; i < L; i++) res[i] = res[i] / s;
+
+            return res;
+        }
+
+        constexpr vector& operator += (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] += s[i];
 
             return *this;
         }
-        */
+        constexpr vector& operator += (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] += s;
+
+            return *this;
+        }
+        constexpr vector& operator -= (const vector& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] -= s[i];
+
+            return *this;
+        }
+        constexpr vector& operator -= (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] -= s;
+
+            return *this;
+        }
+        constexpr vector& operator *= (const T& s)
+        {
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
+
+            return *this;
+        }
+
+
         constexpr vector& operator = (const T& s)
         {
             for(size_t i = 0; i < L; i++) BASE::data[i] = s;

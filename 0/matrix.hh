@@ -266,6 +266,8 @@ namespace oct::nums::v0
 
             return res;
         }
+
+
         constexpr matrix& operator = (const matrix& o)
         {
             for(size_t i = 0; i < R; i++)
@@ -277,6 +279,7 @@ namespace oct::nums::v0
             }
             return *this;
         }
+
         constexpr bool operator == (const matrix& o) const
         {
             for(size_t i = 0; i < R; i++)
@@ -304,15 +307,11 @@ namespace oct::nums::v0
 
         constexpr T* operator [](I const& i)
         {
-            if(i < R) return data[i];
-
-            throw std::out_of_range("Indice fuera de rango");
+            return data[i];
         }
         constexpr const T* operator [](I const& i) const
         {
-            if(i < R) return data[i];
-
-            throw std::out_of_range("Indice fuera de rango");
+            return data[i];
         }
         constexpr T& at(I const& i,I const& j)
         {
