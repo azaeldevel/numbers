@@ -1292,6 +1292,16 @@ void v0_vector()
     CU_ASSERT(numbers::core::equal(vect61_res[0],2.0f))
     CU_ASSERT(numbers::core::equal(vect61_res[1],5.0f/3.0f))
 
+    float vect64[3];
+    numbers::vector<float,3>& vect65 = *reinterpret_cast<numbers::vector<float,3>*>(&vect64);
+    CU_ASSERT(sizeof(vect64) == sizeof(float) * 3)
+    CU_ASSERT(sizeof(numbers::vector<float,3>) == sizeof(float) * 3)
+    vect64[0] = 1.23;
+    vect64[1] = 12.293;
+    vect64[2] = 181.2589;
+    CU_ASSERT(numbers::core::equal(vect65[0],vect64[0]))
+    CU_ASSERT(numbers::core::equal(vect65[1],vect64[1]))
+    CU_ASSERT(numbers::core::equal(vect65[2],vect64[2]))
 }
 
 void v0_funtions()
