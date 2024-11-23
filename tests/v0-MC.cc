@@ -467,6 +467,15 @@ void v0_FIUNSEZEKYI12_MC()
     float eje_3_6_distance = numbers::mc::distance(eje_3_6_position_x,eje_3_6_position_y);
     //std::cout << "Ejemplo 3.6 distance: " << eje_3_6_distance << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_6_distance,4.66408f,1.0e-5f))
+    float eje_3_6_velocity_y = -9.81f * 0.5f;//velocidad inicial es 0
+    //std::cout << "Ejemplo 3.6 velocidad en y en t = 0.5s: " << eje_3_6_velocity_y << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_6_velocity_y,-4.905f))
+    float eje_3_6_velocity_angle = eje_3_6_velocity_y/9.f;//velocidad inicial es 0
+    eje_3_6_velocity_angle = std::atan(eje_3_6_velocity_angle);
+    float eje_3_6_velocity_degree = eje_3_6_velocity_angle * (180.f/std::numbers::pi);
+    CU_ASSERT(numbers::core::equal(eje_3_6_velocity_degree,-28.5904f,1.0e-4f))
+    //std::cout << "Ejemplo 3.6 angul de vector velocidad : " << eje_3_6_velocity_angle << "\n";
+    //std::cout << "Ejemplo 3.6 angul de vector velocidad : " << eje_3_6_velocity_degree << "\n";
 
 }
 
