@@ -18,6 +18,11 @@ namespace oct::nums::v0::mc
 {
     namespace core = oct::core::v3;
 
+    namespace constans
+    {
+        static const float gravity = 9.81;
+    }
+
     /**
     *\brief Relaciones
     */
@@ -226,6 +231,12 @@ namespace oct::nums::v0::mc
         return 2 * (v/a);
     }
 
+
+    template<core::number T>
+    constexpr T distance(const T& x, const T& y)
+    {
+        return std::sqrt(std::pow(x,T(2)) + std::pow(y,T(2)));
+    }
 }
 
 namespace numbers = oct::nums::v0;
@@ -442,6 +453,21 @@ void v0_FIUNSEZEKYI12_MC()
     //std::cout << "Ejemplo 3.3 : " << eje_3_3_a_proyy.length() << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_3_a_proyx.length(),0.54f,1.0e-2f))
     CU_ASSERT(numbers::core::equal(eje_3_3_a_proyy.length(),0.21f,1.0e-2f))
+
+
+
+    //proyectil
+    //ejemplo 3.6
+    float eje_3_6_position_x = numbers::mc::position(9.f,0.5f);
+    //std::cout << "Ejemplo 3.6 : " << eje_3_6_position_x << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_6_position_x,4.5f))
+    float eje_3_6_position_y = numbers::mc::position(0.f,0.f,-9.81f,0.5f);
+    CU_ASSERT(numbers::core::equal(eje_3_6_position_y,-1.2f,1.0e-1f))
+    //std::cout << "Ejemplo 3.6 y: " << eje_3_6_position_y << "\n";
+    float eje_3_6_distance = numbers::mc::distance(eje_3_6_position_x,eje_3_6_position_y);
+    //std::cout << "Ejemplo 3.6 distance: " << eje_3_6_distance << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_6_distance,4.66408f,1.0e-5f))
+
 }
 
 

@@ -387,7 +387,7 @@ namespace oct::nums::v0
         **/
         constexpr V sin() const
         {
-            return length()/BASE::data[1];
+            return BASE::data[1]/length();
         }
 
         /**
@@ -414,7 +414,7 @@ namespace oct::nums::v0
         **/
         constexpr V csc() const
         {
-            return BASE::data[1]/length();
+            return length()/BASE::data[1];
         }
 
         /**
@@ -443,7 +443,6 @@ namespace oct::nums::v0
         {
             return dot(v.orthogonal()) / V(2);
         }
-
 
         /**
         *\brief Componente del vector en la direccion de b
