@@ -39,6 +39,27 @@ namespace oct::nums::v0
         }
 
         /**
+        *\brief crea un vertor con los datos especificados
+        *\param len longitud
+        *\param angle angulo
+        *\param radians true si angulo es en radianes, false si es sexagesimal
+        */
+        constexpr void create(const T& len, const T& angle, bool radians = true)
+        {
+            if(radians)
+            {
+                BASE::data[0] = std::cos(angle) * len;
+                BASE::data[1] = std::sin(angle) * len;
+            }
+            else
+            {
+                T a = angle *(std::numbers::pi/180.f);
+                BASE::data[0] = std::cos(a) * len;
+                BASE::data[1] = std::sin(a) * len;
+            }
+        }
+
+        /**
         *\brief
         */
         constexpr vector(const std::initializer_list<T>& l) : BASE(l)

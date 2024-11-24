@@ -231,12 +231,36 @@ namespace oct::nums::v0::mc
         return 2 * (v/a);
     }
 
-
     template<core::number T>
     constexpr T distance(const T& x, const T& y)
     {
         return std::sqrt(std::pow(x,T(2)) + std::pow(y,T(2)));
     }
+
+    /**
+    *\brief Aumneto de velocidad en el tiempo t
+    *\param v0 Velocidad inicial
+    *\param a acelaracion
+    *\param t tiempo
+    */
+    template<core::number T,core::index auto L = 3>
+    constexpr vector<T,L> velocity(const vector<T,L>& v0, T t)
+    {
+        return v0 * t;
+    }
+
+    /**
+    *\brief Aumneto de velocidad en el tiempo t
+    *\param v0 Velocidad inicial
+    *\param a acelaracion
+    *\param t tiempo
+    */
+    template<core::number T,core::index auto L = 3>
+    constexpr vector<T,L> velocity(const vector<T,L>& v0, const vector<T,L>& a, T t)
+    {
+        return v0 + ( a * t);
+    }
+
 }
 
 namespace numbers = oct::nums::v0;
@@ -477,6 +501,37 @@ void v0_FIUNSEZEKYI12_MC()
     //std::cout << "Ejemplo 3.6 angul de vector velocidad : " << eje_3_6_velocity_angle << "\n";
     //std::cout << "Ejemplo 3.6 angul de vector velocidad : " << eje_3_6_velocity_degree << "\n";
 
+    numbers::vector<float,2> eje_3_7_velocity;
+    eje_3_7_velocity.create(37.f,53.1f,false);
+    //eje_3_7_velocity.print(std::cout);
+    bool eje_3_7_b = eje_3_7_velocity == numbers::vector<float,2>(22.2155f,29.5883f);
+
+    float eje_3_7_posistion_x = eje_3_7_velocity.x() * 2.f;
+    float eje_3_7_posistion_y = eje_3_7_velocity.y() * 2.f - (9.8*std::pow(2.f,float(2))/2.f);
+    //std::cout << "Ejemplo 3.7 posicion : " << eje_3_7_posistion_x << "," << eje_3_7_posistion_y << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_posistion_x,44.4311f,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_posistion_y,39.5767f,1.0e-4f))
+    float eje_3_7_velocity_x2 = eje_3_7_velocity.x();
+    float eje_3_7_velocity_y2 = eje_3_7_velocity.y() - ( 2.f * 9.8);
+    CU_ASSERT(numbers::core::equal(eje_3_7_velocity_x2,22.2155f,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_velocity_y2,9.98833f,9.98833f))
+    //std::cout << "Ejemplo 3.7 velocity 2: " << eje_3_7_velocity_x2 << "," << eje_3_7_velocity_y2 << "\n";
+    float eje_3_7_length = numbers::mc::distance(eje_3_7_velocity_x2,eje_3_7_velocity_y2);
+    float eje_3_7_angle = eje_3_7_velocity_y2/eje_3_7_velocity_x2;
+    eje_3_7_angle = std::sin(eje_3_7_angle) * (180.f/std::numbers::pi);
+    //std::cout << "Ejemplo 3.7 angle : " << eje_3_7_angle << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_angle,24.9016f,1.0e-4f))
+    float eje_3_7_time_in_top = eje_3_7_velocity.y()/9.8f;
+    //std::cout << "Ejemplo 3.7 tiempo en la cima : " << eje_3_7_time_in_top << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_time_in_top,3.01922f,1.0e-4f))
+    float eje_3_7_high = eje_3_7_velocity.y() * eje_3_7_time_in_top - (9.8 * std::pow(eje_3_7_time_in_top,float(2)))/2.f;
+    //std::cout << "Ejemplo 3.7 altura en la cima : " << eje_3_7_high << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_high,44.6668f,1.0e-4f))
+    float eje_3_7_time_2 = (2.f * eje_3_7_velocity.y())/9.8f;
+    //std::cout << "Ejemplo 3.7 de caida : " << eje_3_7_time_2 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_time_2,6.03843f,1.0e-4f))
+    float eje_3_7_alcance = eje_3_7_velocity.y() * eje_3_7_time_2;
+    //std::cout << "Ejemplo 3.7 alacance horizontal : " << eje_3_7_alcance << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_alcance,178.667f,1.0e-3f))
+
 }
-
-
