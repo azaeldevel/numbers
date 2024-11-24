@@ -261,6 +261,108 @@ namespace oct::nums::v0::mc
         return v0 + ( a * t);
     }
 
+    /**
+    *\brief Veloz
+    *\param T tipo de dato
+    *\param L cantidad de coordenadas
+    */
+    template<core::number T,core::index auto L = 3>
+    struct Speeded
+    {
+    };
+
+
+    /**
+    *\brief Veloz
+    *\param T tipo de dato
+    *\param L cantidad de coordenadas
+    */
+    template<core::number T,core::index auto L = 3>
+    struct Accelerated
+    {
+    };
+
+
+    /**
+    *\brief Veloz
+    *\param T tipo de dato
+    *\param L cantidad de coordenadas
+    */
+    template<core::number T,core::index auto L = 3>
+    struct Projectile
+    {
+        /**
+        *\brief distancia horizonal recorrida
+        *\param v0 velocidad inicial
+        *\param angle angulo de lanzamiento
+        *\param degree true si es en grados falso si es radianes
+        *\param g constante de aceleracion gravitacional
+        */
+        static T distance_when(T v0, T angle,T time, bool degree = true, T g = 9.81)
+        {
+            T a;
+            if(degree)
+            {
+                a =  core::degree_to_radian(angle) * angle;
+            }
+            else
+            {
+                a = angle;
+            }
+
+            return v0 * std::sin(a) * time;
+        }
+
+        /**
+        *\brief tiempo de ascenso hasta la cima(igual al de decenso)
+        *\param v0 velocidad inicial
+        *\param angle angulo de lanzamiento
+        *\param degree true si es en grados falso si es radianes
+        *\param g constante de aceleracion gravitacional
+        */
+        static T time_top(T v0, T angle, bool degree = true, T g = 9.81)
+        {
+            T a;
+            if(degree)
+            {
+                a =  core::degree_to_radian(angle) * angle;
+            }
+            else
+            {
+                a = angle;
+            }
+
+            return v0 * std::sin(a)/g;
+        }
+
+        /**
+        *\brief altura de la cima
+        *\param v0 velocidad inicial
+        *\param angle angulo de lanzamiento
+        *\param degree true si es en grados falso si es radianes
+        *\param g constante de aceleracion gravitacional
+        */
+        static T hihg_when(T v0, T angle, bool degree = true, T g = 9.81)
+        {
+            return (std::pow(v0,T(2)) * std::pow(std::sin(angle),T(2))) / (T(2) * g);
+        }
+
+        /**
+        *\brief alcnaze (desplazamiento horizontal)
+        *\param v0 velocidad inicial
+        *\param angle angulo de lanzamiento
+        *\param degree true si es en grados falso si es radianes
+        *\param g constante de aceleracion gravitacional
+        */
+        static T length_when(T v0, T angle, bool degree = true, T g = 9.81)
+        {
+            return (std::pow(v0,T(2)) * std::sin(T(2) * angle)) / g;
+        }
+
+
+    public:
+        T v0;
+    };
 }
 
 namespace numbers = oct::nums::v0;
