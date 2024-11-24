@@ -16,9 +16,9 @@ namespace oct::nums::v0
         /**
         *\brief Asigna valor a todos los elementos del arreglo
         */
-        /*constexpr vector(const T& x) : BASE(x)
+        constexpr vector(const T& x) : BASE(x)
         {
-        }*/
+        }
         constexpr vector(const T& x,const T& y) : BASE(x,y)
         {
             //static_assert(L == 2);
@@ -65,9 +65,9 @@ namespace oct::nums::v0
         constexpr vector(const std::initializer_list<T>& l) : BASE(l)
         {
         }
-        constexpr vector(T&& v) : BASE(std::move(v))
+        /*constexpr vector(T&& v) : BASE(std::move(v))
         {
-        }
+        }*/
 
 
 
@@ -514,6 +514,38 @@ namespace oct::nums::v0
             res[0] = t;
             res[1] = s;
             return res;
+        }
+
+        /**
+        *\brief crea un vector con inclinacion y longitud indicados
+        */
+        void create_from(const T& length,const T& angle,bool degree = true)
+        {
+            T a;
+            if(degree)
+            {
+                a =  core::degree_to_radian(angle);
+            }
+            else
+            {
+                a = angle;
+            }
+            BASE::data[0] = std::cos(a) * length;
+            BASE::data[1] = std::sin(a) * length;
+            for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
+        }
+
+        constexpr T angle(bool degree =  true) const
+        {
+            T angle = std::atan(BASE::data[1]/BASE::data[0]);
+            if(degree)
+            {
+                return core::radian_to_degree(angle);
+            }
+            else
+            {
+                return angle;
+            }
         }
 
 

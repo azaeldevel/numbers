@@ -1302,6 +1302,14 @@ void v0_vector()
     CU_ASSERT(numbers::core::equal(vect65[0],vect64[0]))
     CU_ASSERT(numbers::core::equal(vect65[1],vect64[1]))
     CU_ASSERT(numbers::core::equal(vect65[2],vect64[2]))
+
+    numbers::vector<float,3> vect66;
+    vect66.create_from(15.36,32.367f);
+    //vect66.print(std::cout);
+    //std::cout << "Length : " << vect66.length() << "\n";
+    //std::cout << "Angle : " << vect66.angle() << "\n";
+    CU_ASSERT(numbers::core::equal(vect66.length(),15.36f))
+    CU_ASSERT(numbers::core::equal(vect66.angle(),32.367f))
 }
 
 void v0_funtions()

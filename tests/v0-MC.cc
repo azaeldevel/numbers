@@ -284,7 +284,7 @@ namespace oct::nums::v0::mc
 
 
     /**
-    *\brief Veloz
+    *\brief Prjectil (FIUN-SEZEKY-I-12 pag 80)
     *\param T tipo de dato
     *\param L cantidad de coordenadas
     */
@@ -361,7 +361,13 @@ namespace oct::nums::v0::mc
 
 
     public:
-        T v0;
+        vector<T,L> velocity_0,velocity;
+        vector<T,L> acceleration;
+        T time;
+        T gravity;
+
+    public:
+
     };
 }
 
