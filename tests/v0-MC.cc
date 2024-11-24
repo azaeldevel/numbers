@@ -291,6 +291,7 @@ namespace oct::nums::v0::mc
     template<core::number T,core::index auto L = 3>
     struct Projectile
     {
+    public:
         /**
         *\brief distancia horizonal recorrida
         *\param v0 velocidad inicial
@@ -359,6 +360,9 @@ namespace oct::nums::v0::mc
             return (std::pow(v0,T(2)) * std::sin(T(2) * angle)) / g;
         }
 
+
+    public:
+        //Projectile() =default;
 
     public:
         vector<T,L> velocity_0,velocity;
