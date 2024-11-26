@@ -228,7 +228,7 @@ namespace oct::nums::v0::mc
     template<core::number T>
     constexpr T intersecction(T v, T a)
     {
-        return 2 * (v/a);
+        return T(2) * (v/a);
     }
 
     template<core::number T>
@@ -261,14 +261,39 @@ namespace oct::nums::v0::mc
         return v0 + ( a * t);
     }
 
+
     /**
     *\brief Veloz
     *\param T tipo de dato
     *\param L cantidad de coordenadas
     */
     template<core::number T,core::index auto L = 3>
-    struct Speeded
+    struct Fast
     {
+    public:
+        Fast() = default;
+        Fast(const vector<T,L>& v) : velocity(v),vector<T,L>(0),time(0)
+        {
+        }
+        Fast(const vector<T,L>& v,const vector<T,L>& p) : velocity(v),position(p),time(0)
+        {
+        }
+        Fast(const vector<T,L>& v,const vector<T,L>& p,const T t) : velocity(v),position(p),time(t)
+        {
+        }
+
+    public:
+        void displace(const T time)
+        {
+            this->time += time;
+            position += velocity * time;
+        }
+
+    public:
+        vector<T,L> velocity;
+        vector<T,L> position;
+        T time;
+
     };
 
 
@@ -278,8 +303,21 @@ namespace oct::nums::v0::mc
     *\param L cantidad de coordenadas
     */
     template<core::number T,core::index auto L = 3>
-    struct Accelerated
+    struct Accelerated : public Fast<T,L>
     {
+    public:
+        typedef Fast<T,L> BASE;
+    public:
+        Accelerated() = default;
+        Accelerated(const vector<T,L>& v0, const vector<T,L>& a) : BASE(vector<T,L>(0),vector<T,L>(0),0),velocity_initial(v0),acceleration(a)
+        {
+        }
+
+
+
+    public:
+        vector<T,L> acceleration;
+        vector<T,L> velocity_initial;
     };
 
 
@@ -289,17 +327,22 @@ namespace oct::nums::v0::mc
     *\param L cantidad de coordenadas
     */
     template<core::number T,core::index auto L = 3>
-    struct Projectile
+    struct Projectile : public Accelerated<T,L>
     {
     public:
+        typedef Accelerated<T,L> BASE;
+        typedef Accelerated<T,L> ACCELERATED;
+        typedef Fast<T,L> FAST;
+    public:
+
         /**
         *\brief distancia horizonal recorrida
-        *\param v0 velocidad inicial
+        *\param velocity_initial velocidad inicial
         *\param angle angulo de lanzamiento
         *\param degree true si es en grados falso si es radianes
-        *\param g constante de aceleracion gravitacional
+        *\param acceleration aceleracion
         */
-        static T distance_when(T v0, T angle,T time, bool degree = true, T g = 9.81)
+        static T distance_when(T velocity_initial, T angle,T time, T acceleration, bool degree = true)
         {
             T a;
             if(degree)
@@ -311,17 +354,17 @@ namespace oct::nums::v0::mc
                 a = angle;
             }
 
-            return v0 * std::sin(a) * time;
+            return velocity_initial * std::sin(a) * time;
         }
 
         /**
         *\brief tiempo de ascenso hasta la cima(igual al de decenso)
-        *\param v0 velocidad inicial
+        *\param velocity_initial velocidad inicial
         *\param angle angulo de lanzamiento
         *\param degree true si es en grados falso si es radianes
-        *\param g constante de aceleracion gravitacional
+        *\param acceleration aceleracion
         */
-        static T time_top(T v0, T angle, bool degree = true, T g = 9.81)
+        static T time_top(T velocity_initial, T angle, T acceleration, bool degree = true)
         {
             T a;
             if(degree)
@@ -333,19 +376,19 @@ namespace oct::nums::v0::mc
                 a = angle;
             }
 
-            return v0 * std::sin(a)/g;
+            return velocity_initial * std::sin(a)/acceleration;
         }
 
         /**
         *\brief altura de la cima
-        *\param v0 velocidad inicial
+        *\param velocity_initial velocidad inicial
         *\param angle angulo de lanzamiento
         *\param degree true si es en grados falso si es radianes
-        *\param g constante de aceleracion gravitacional
+        *\param acceleration aceleracion
         */
-        static T hihg_when(T v0, T angle, bool degree = true, T g = 9.81)
+        static T hihg_when(T velocity_initial, T angle, T acceleration, bool degree = true)
         {
-            return (std::pow(v0,T(2)) * std::pow(std::sin(angle),T(2))) / (T(2) * g);
+            return (std::pow(velocity_initial,T(2)) * std::pow(std::sin(angle),T(2))) / (T(2) * acceleration);
         }
 
         /**
@@ -353,24 +396,29 @@ namespace oct::nums::v0::mc
         *\param v0 velocidad inicial
         *\param angle angulo de lanzamiento
         *\param degree true si es en grados falso si es radianes
-        *\param g constante de aceleracion gravitacional
+        *\param acceleration aceleracion
         */
-        static T length_when(T v0, T angle, bool degree = true, T g = 9.81)
+        static T length_when(T velocity_initial, T angle, T acceleration, bool degree = true)
         {
-            return (std::pow(v0,T(2)) * std::sin(T(2) * angle)) / g;
+            return (std::pow(velocity_initial,T(2)) * std::sin(T(2) * angle)) / acceleration;
+        }
+    public:
+        Projectile() = default;
+        Projectile(const vector<T,L>& v0, const vector<T,L>& a) : BASE(v0,a)
+        {
         }
 
-
     public:
-        //Projectile() =default;
-
-    public:
-        vector<T,L> velocity_0,velocity;
-        vector<T,L> acceleration;
-        T time;
-        T gravity;
-
-    public:
+        void displace(const T time)
+        {
+            this->time += time;
+            this->position.x() = this->velocity_initial.x() * this->time;
+            this->position.y() = (this->velocity_initial.y() * this->time) + (this->acceleration.y() * std::pow(this->time,T(2)))/T(2);
+            //this->position.z() = 0;
+            this->velocity.x() = this->velocity_initial.x();
+            this->velocity.y() = this->velocity_initial.y() + (this->acceleration.y() * this->time);
+            //this->velocity.z() = 0;
+        }
 
     };
 }
@@ -626,7 +674,7 @@ void v0_FIUNSEZEKYI12_MC()
     float eje_3_7_velocity_x2 = eje_3_7_velocity.x();
     float eje_3_7_velocity_y2 = eje_3_7_velocity.y() - ( 2.f * 9.8);
     CU_ASSERT(numbers::core::equal(eje_3_7_velocity_x2,22.2155f,1.0e-4f))
-    CU_ASSERT(numbers::core::equal(eje_3_7_velocity_y2,9.98833f,9.98833f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_velocity_y2,9.98833f,1.0e-5f))
     //std::cout << "Ejemplo 3.7 velocity 2: " << eje_3_7_velocity_x2 << "," << eje_3_7_velocity_y2 << "\n";
     float eje_3_7_length = numbers::mc::distance(eje_3_7_velocity_x2,eje_3_7_velocity_y2);
     float eje_3_7_angle = eje_3_7_velocity_y2/eje_3_7_velocity_x2;
@@ -646,4 +694,21 @@ void v0_FIUNSEZEKYI12_MC()
     //std::cout << "Ejemplo 3.7 alacance horizontal : " << eje_3_7_alcance << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_7_alcance,178.667f,1.0e-3f))
 
+    numbers::mc::Projectile<float,2> eje_3_7_proy(eje_3_7_velocity,numbers::vector<float,2>(0,-9.8,0));
+    //eje_3_7_proy.velocity_initial.create_from(37,53.1);
+    //bool eje_3_7_proy_b = eje_3_7_proy.velocity_initial == numbers::vector<float>(22.2155f,29.5883f);
+    //CU_ASSERT(eje_3_7_proy_b)
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity_initial.x(),22.2155f,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity_initial.y(),29.5883f,1.0e-4f))
+    //eje_3_7_proy.velocity_initial.print(std::cout);
+    eje_3_7_proy.displace(2);
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.position.x(),eje_3_7_posistion_x,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.position.y(),eje_3_7_posistion_y,1.0e-4f))
+    //eje_3_7_proy.position.print(std::cout);
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.x(),eje_3_7_velocity_x2,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.y(),eje_3_7_velocity_y2,1.0e-5f))
+    //eje_3_7_proy.velocity.print(std::cout);
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.length(),eje_3_7_length))
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.angle(true),24.2092f,1.0e-4f))
+    //std::cout << "Ejemplo 3.7 angle : " << eje_3_7_proy.velocity.angle(true) << "\n";
 }

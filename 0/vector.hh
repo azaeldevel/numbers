@@ -59,6 +59,26 @@ namespace oct::nums::v0
             }
         }
 
+
+        /**
+        *\brief crea un vector con inclinacion y longitud indicados
+        */
+        constexpr void create_from(const T& length,const T& angle,bool degree = true)
+        {
+            T a;
+            if(degree)
+            {
+                a =  core::degree_to_radian(angle);
+            }
+            else
+            {
+                a = angle;
+            }
+            BASE::data[0] = std::cos(a) * length;
+            BASE::data[1] = std::sin(a) * length;
+            for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
+        }
+
         /**
         *\brief
         */
@@ -474,6 +494,7 @@ namespace oct::nums::v0
         }
 
 
+
         /**
         *\brief Componente del vector en la direccion de b
         */
@@ -516,24 +537,6 @@ namespace oct::nums::v0
             return res;
         }
 
-        /**
-        *\brief crea un vector con inclinacion y longitud indicados
-        */
-        void create_from(const T& length,const T& angle,bool degree = true)
-        {
-            T a;
-            if(degree)
-            {
-                a =  core::degree_to_radian(angle);
-            }
-            else
-            {
-                a = angle;
-            }
-            BASE::data[0] = std::cos(a) * length;
-            BASE::data[1] = std::sin(a) * length;
-            for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
-        }
 
         constexpr T angle(bool degree =  true) const
         {
