@@ -313,8 +313,15 @@ namespace oct::nums::v0::mc
         {
         }
 
-
-
+        /**
+        *\brief avanza el tiempo indicado
+        */
+        void displace(const T& time)
+        {
+            this->time = time;
+            this->position.x() = this->velocity_initial.x() * time;
+            this->position.y() = (this->velocity_initial.y() * time) + (this->acceleration.y() * std::pow(this->time,T(2)))/T(2);
+        }
     public:
         vector<T,L> acceleration;
         vector<T,L> velocity_initial;
@@ -335,73 +342,6 @@ namespace oct::nums::v0::mc
         typedef Fast<T,L> FAST;
     public:
 
-        /**
-        *\brief distancia horizonal recorrida
-        *\param velocity_initial velocidad inicial
-        *\param angle angulo de lanzamiento
-        *\param degree true si es en grados falso si es radianes
-        *\param acceleration aceleracion
-        */
-        static T distance_when(T velocity_initial, T angle,T time, T acceleration, bool degree = true)
-        {
-            T a;
-            if(degree)
-            {
-                a =  core::degree_to_radian(angle) * angle;
-            }
-            else
-            {
-                a = angle;
-            }
-
-            return velocity_initial * std::sin(a) * time;
-        }
-
-        /**
-        *\brief tiempo de ascenso hasta la cima(igual al de decenso)
-        *\param velocity_initial velocidad inicial
-        *\param angle angulo de lanzamiento
-        *\param degree true si es en grados falso si es radianes
-        *\param acceleration aceleracion
-        */
-        static T time_top(T velocity_initial, T angle, T acceleration, bool degree = true)
-        {
-            T a;
-            if(degree)
-            {
-                a =  core::degree_to_radian(angle) * angle;
-            }
-            else
-            {
-                a = angle;
-            }
-
-            return velocity_initial * std::sin(a)/acceleration;
-        }
-
-        /**
-        *\brief altura de la cima
-        *\param velocity_initial velocidad inicial
-        *\param angle angulo de lanzamiento
-        *\param degree true si es en grados falso si es radianes
-        *\param acceleration aceleracion
-        */
-        static T hihg_when(T velocity_initial, T angle, T acceleration, bool degree = true)
-        {
-            return (std::pow(velocity_initial,T(2)) * std::pow(std::sin(angle),T(2))) / (T(2) * acceleration);
-        }
-
-        /**
-        *\brief alcnaze (desplazamiento horizontal)
-        *\param v0 velocidad inicial
-        *\param angle angulo de lanzamiento
-        *\param degree true si es en grados falso si es radianes
-        *\param acceleration aceleracion
-        */
-        static T length_when(T velocity_initial, T angle, T acceleration, bool degree = true)
-        {
-            return (std::pow(velocity_initial,T(2)) * std::sin(T(2) * angle)) / acceleration;
-        }
     public:
         Projectile() = default;
         Projectile(const vector<T,L>& v0, const vector<T,L>& a) : BASE(v0,a)
@@ -411,13 +351,31 @@ namespace oct::nums::v0::mc
     public:
         void displace(const T time)
         {
-            this->time += time;
-            this->position.x() = this->velocity_initial.x() * this->time;
-            this->position.y() = (this->velocity_initial.y() * this->time) + (this->acceleration.y() * std::pow(this->time,T(2)))/T(2);
-            //this->position.z() = 0;
+            ACCELERATED::displace(time);
+            //
             this->velocity.x() = this->velocity_initial.x();
             this->velocity.y() = this->velocity_initial.y() + (this->acceleration.y() * this->time);
-            //this->velocity.z() = 0;
+        }
+        /**
+        *\brief tiempo en llegar a la cima
+        */
+        T time_top() const
+        {
+            return this->velocity_initial.y()/-this->acceleration.y();
+        }
+        /**
+        *\brief altura de la cima
+        */
+        T high_top() const
+        {
+            return std::pow(this->velocity_initial.y(),T(2)) / (T(2) * -this->acceleration.y());
+        }
+        /**
+        *\brief punto de caida
+        */
+        T fall_point() const
+        {
+            return (T(2) * this->velocity_initial.y()) / -this->acceleration.y();
         }
 
     };
@@ -711,4 +669,8 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.length(),eje_3_7_length))
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.angle(true),24.2092f,1.0e-4f))
     //std::cout << "Ejemplo 3.7 angle : " << eje_3_7_proy.velocity.angle(true) << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.time_top(),eje_3_7_time_in_top))
+    //std::cout << "Ejemplo 3.7 cima : " << eje_3_7_proy.time_top() << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.high_top(),eje_3_7_high,1.0e-4f))
+    //std::cout << "Ejemplo 3.7 cima : " << eje_3_7_proy.high_top() << "\n";
 }
