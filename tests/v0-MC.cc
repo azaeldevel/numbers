@@ -434,11 +434,14 @@ namespace oct::nums::v0::mc
         **/
         Movil(const vector<T,L>& position,const vector<T,L>& velocity,const vector<T,L>& acceleration) //: time(0),position(0)
         {
-            /*fx = [&](const T& t) -> T
+            /*
+            fx = [&](const T& t) -> T
             {
                 return position.x() + ((velocity.x() * t)) + ((std::pow(t,T(2)) * acceleration.x())/T(2));
-            };*/
-            /*if constexpr (L >= 2)
+            };
+            */
+            /*
+            if constexpr (L >= 2)
             {
                 fy = [position,velocity,acceleration](const T& t) -> T
                 {
@@ -451,7 +454,8 @@ namespace oct::nums::v0::mc
                 {
                     return position.z() + ((velocity.z() * t)) + ((std::pow(t,T(2)) * acceleration.z())/T(2));
                 };
-            }*/
+            }
+            */
         }
 
         vector<T,L> displace(const T& t)
