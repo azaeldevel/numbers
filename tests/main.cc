@@ -59,38 +59,38 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "Aritmetica", v0_arithmetic)))
+	if ((NULL == CU_add_test(pSuite_v0, "Aritmetica..", v0_arithmetic)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "Algebra", v0_algebra)))
+	if ((NULL == CU_add_test(pSuite_v0, "Algebra..", v0_algebra)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "Formas geometricas", v0_shapes)))
+	if ((NULL == CU_add_test(pSuite_v0, "Formas geometricas..", v0_shapes)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite_v0, "Funciones", v0_funtions)))
+	if ((NULL == CU_add_test(pSuite_v0, "Funciones..", v0_funtions)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	CU_pSuite FIUNSEZEKYI12_v0 = CU_add_suite("Testing for FIUNSEZEKYI12 v0", v0_FIUNSEZEKYI12_init, v0_FIUNSEZEKYI12_clean);
+	CU_pSuite FIUNSEZEKYI12_v0 = CU_add_suite("Testing for FIUNSEZEKYI12..", v0_FIUNSEZEKYI12_init, v0_FIUNSEZEKYI12_clean);
 	if (NULL == FIUNSEZEKYI12_v0)
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Mecanica Clasica", v0_FIUNSEZEKYI12_MC)))
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Mecanica Clasica..", v0_FIUNSEZEKYI12_MC)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();

@@ -46,24 +46,25 @@ namespace oct::nums::v0
         */
         constexpr void create(const T& len, const T& angle, bool radians = true)
         {
+            T a;
             if(radians)
             {
-                BASE::data[0] = std::cos(angle) * len;
-                BASE::data[1] = std::sin(angle) * len;
+                a = angle;
             }
             else
             {
-                T a = angle *(std::numbers::pi/180.f);
-                BASE::data[0] = std::cos(a) * len;
-                BASE::data[1] = std::sin(a) * len;
+                a =  core::degree_to_radian(angle);
             }
+            BASE::data[0] = std::cos(a) * len;
+            BASE::data[1] = std::sin(a) * len;
+            for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
         }
 
 
         /**
         *\brief crea un vector con inclinacion y longitud indicados
         */
-        constexpr void create_from(const T& length,const T& angle,bool degree = true)
+        /*constexpr void create_from(const T& length,const T& angle,bool degree = true)
         {
             T a;
             if(degree)
@@ -77,7 +78,7 @@ namespace oct::nums::v0
             BASE::data[0] = std::cos(a) * length;
             BASE::data[1] = std::sin(a) * length;
             for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
-        }
+        }*/
 
         /**
         *\brief
