@@ -378,6 +378,22 @@ namespace oct::nums::v0::mc
             return (T(2) * this->velocity_initial.y()) / -this->acceleration.y();
         }
 
+        /**
+        *\brief tiempo e caida(debajo de la horizontal)
+        */
+        core::array<T,L> time_desplace(T y) const
+        {
+            core::array<T,2> ret;
+            T v = this->velocity_initial.length() * std::sin(this->velocity_initial.angle(false));
+            T radical = std::pow(v,T(2)) - (T(2) * -this->acceleration.y() * y);
+            radical = std::sqrt(std::abs(radical));
+            T t1 = (v - radical)/(-this->acceleration.y());
+            T t2 = (v + radical)/(-this->acceleration.y());
+            ret[0] = t1;
+            ret[1] = t2;
+            return ret;
+        }
+
     };
 
 
@@ -395,23 +411,15 @@ namespace oct::nums::v0::mc
         /**
         *\brief funciones personalizadas
         **/
-        Movil(const T& v,T (*x)(const T& t),T (*y)(const T& t)) : fx(x),fy(y)//time(0),position(0)
+        Movil(const T& v,T (*x)(const T& t),T (*y)(const T& t))
         {
         }
 
         /**
-        *\brief velocida constante, desplzandoce sobre x
+        *\brief velocidad constante, desplzandose sobre x
         **/
-        Movil(const T& x0,const T& v) //: time(0),position(0)
+        Movil(const T& x,const T& v)
         {
-            fx = [x0,v](const T& t) -> T
-            {
-                return x0 + (v * t);
-            };
-            fy = [v](const T& t) -> T
-            {
-                return 0;
-            };
         }
 
         /**
@@ -419,14 +427,17 @@ namespace oct::nums::v0::mc
         **/
         Movil(const T x0,const T& v0,const T& a) //: time(0),position(0)
         {
-            fx = [x0,v0](const T& t) -> T
+        }
+
+        /**
+        *\brief aceleracion constante
+        **/
+        Movil(const vector<T,L>& p,const vector<T,L>& v) : position(p),velocity(v)
+        {
+            /*funcs[0] = [this](const T& t) -> T
             {
-                return x0 + (v0 * t);
-            };
-            fy = [x0,v0,a](const T& t) -> T
-            {
-                return x0 + (v0 * t) + (( std::pow(t,T(2)) * a )/T(2));
-            };
+                return position.x() + (velocity.x() * t);
+            };*/
         }
 
         /**
@@ -434,44 +445,26 @@ namespace oct::nums::v0::mc
         **/
         Movil(const vector<T,L>& position,const vector<T,L>& velocity,const vector<T,L>& acceleration) //: time(0),position(0)
         {
-            /*
-            fx = [&](const T& t) -> T
-            {
-                return position.x() + ((velocity.x() * t)) + ((std::pow(t,T(2)) * acceleration.x())/T(2));
-            };
-            */
-            /*
-            if constexpr (L >= 2)
-            {
-                fy = [position,velocity,acceleration](const T& t) -> T
-                {
-                    return position.y() + ((velocity.y() * t)) + ((std::pow(t,T(2)) * acceleration.y())/T(2));
-                };
-            }
-            if constexpr (L >= 3)
-            {
-                fz = [position,velocity,acceleration](const T& t) -> T
-                {
-                    return position.z() + ((velocity.z() * t)) + ((std::pow(t,T(2)) * acceleration.z())/T(2));
-                };
-            }
-            */
         }
 
         vector<T,L> displace(const T& t)
         {
             vector<T,L> p;
-            p.x() = fx(t);
-            p.y() = fy(t);
+            p.x() = funcs[0](t);
+            p.y() = funcs[1](t);
+            if constexpr ( L >= 3)
+            {
+                p.z() = funcs[2](t);
+            }
+
+            return p;
         }
 
     public:
-        T (*fx)(const T& t);
-        T (*fy)(const T& t);
-        T (*fz)(const T& t);
-        //T (*f[L])(const T& t);
-        //T time;
-        //vector<T,L> position;
+        T (*funcs[L])(const T&);
+        vector<T,L> position;
+        vector<T,L> velocity;
+
     };
 
 
@@ -774,6 +767,15 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.time_fall(),eje_3_7_time_in_top * 2.f,1.0e-4f))
     //std::cout << "Ejemplo 3.7 cima : " << eje_3_7_proy.high_top() << "\n";
 
-    numbers::mc::Movil<float,2> eje_3_7_movil1(numbers::vector<float,2>(0),eje_3_7_velocity,numbers::vector<float,2>(0,-9.81));
+    numbers::vector<float,2> eje_3_9_velocity;
+    eje_3_9_velocity.create(10.f,-20.f,false);
+    numbers::mc::Projectile<float,2> eje_3_9_proy(eje_3_9_velocity,numbers::vector<float,2>(0,-9.8,0));
+    auto eje_3_9_times = eje_3_9_proy.time_desplace(-8);
+    //std::cout << "Ejemplo 3.9 time : (" << eje_3_9_times[0] << "," << eje_3_9_times[1] << ")\n";
+    CU_ASSERT(numbers::core::equal(eje_3_9_times[0],-1.67356f,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_9_times[1],0.975558f,1.0e-4f))
+    float eje_3_9_distance = eje_3_9_proy.velocity_initial.length() * std::sin(eje_3_9_proy.velocity_initial.angle()) * eje_3_9_times[1];
+    CU_ASSERT(numbers::core::equal(eje_3_9_distance,-8.90631f,1.0e-4f))
+    //std::cout << "Ejemplo 3.9 distansia : " << eje_3_9_distance << "\n";
 
 }
