@@ -398,6 +398,8 @@ namespace oct::nums::v0::mc
 
 
     //typedef float (*fC)(const float& t);
+    //template<core::number T,core::index auto L = 3> T (*MF)(const T&);
+    //template<core::number T,core::index auto L = 3> using T (*MF)(const T&);
 
     template<core::number T,core::index auto L = 3>
     struct Movil
@@ -778,4 +780,14 @@ void v0_FIUNSEZEKYI12_MC()
     CU_ASSERT(numbers::core::equal(eje_3_9_distance,-8.90631f,1.0e-4f))
     //std::cout << "Ejemplo 3.9 distansia : " << eje_3_9_distance << "\n";
 
+    //Ejemplo 3.11
+    float eje_3_11_r = std::pow(40.f,float(2))/9.4f;
+    //std::cout << "Ejemplo 3.11 : " << eje_3_11_r << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_11_r,170.213f,1.0e-3f))
+
+
+    //Ejemplo 3.2
+    float eje_3_12_a1 = (4.f * std::pow(std::numbers::pi,2.f) * 5.f)/std::pow(4.f,2.f);
+    //std::cout << "Ejemplo 3.12 : " << eje_3_12_a1 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_12_a1,12.337f,1.0e-3f))
 }
