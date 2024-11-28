@@ -790,4 +790,25 @@ void v0_FIUNSEZEKYI12_MC()
     float eje_3_12_a1 = (4.f * std::pow(std::numbers::pi,2.f) * 5.f)/std::pow(4.f,2.f);
     //std::cout << "Ejemplo 3.12 : " << eje_3_12_a1 << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_12_a1,12.337f,1.0e-3f))
+
+    //Ejemplo 3.14
+    float eje_3_14_velocity = std::pow(240.f,2.f) + std::pow(100.f,2.f);
+    eje_3_14_velocity = std::sqrt(eje_3_14_velocity);
+    //std::cout << "Ejemplo 3.14 : " << eje_3_14_velocity << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_14_velocity,260.f))
+    float eje_3_14_angle = std::atan(100.f/240.f);
+    eje_3_14_angle = numbers::core::radian_to_degree(eje_3_14_angle);
+    //std::cout << "Ejemplo 3.14 : " << eje_3_14_angle << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_14_angle,22.6199f,1.0e-4f))
+
+
+    //Ejemplo 3.15
+    float eje_3_15_velocity = std::pow(240.f,2.f) - std::pow(100.f,2.f);
+    eje_3_15_velocity = std::sqrt(eje_3_15_velocity);
+    //std::cout << "Ejemplo 3.15 : " << eje_3_15_velocity << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_15_velocity,218.174f,1.0e-3f))
+    float eje_3_15_angle = std::asin(100.f/240.f);
+    eje_3_15_angle = numbers::core::radian_to_degree(eje_3_15_angle);
+    //std::cout << "Ejemplo 3.15 : " << eje_3_15_angle << "\n";
+    CU_ASSERT(numbers::core::equal(eje_3_15_angle,24.6243f,1.0e-4f))
 }
