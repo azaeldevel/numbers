@@ -138,7 +138,7 @@
 		<Unit filename="tests/v0-CAP21.cc">
 			<Option target="TDD" />
 		</Unit>
-		<Unit filename="tests/v0-MC.cc">
+		<Unit filename="tests/v0-physics.cc">
 			<Option target="TDD" />
 		</Unit>
 		<Unit filename="tests/v0.cc">

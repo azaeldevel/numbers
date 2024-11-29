@@ -25,7 +25,8 @@ void v0_shapes();
 
 int v0_FIUNSEZEKYI12_init(void);
 int v0_FIUNSEZEKYI12_clean(void);
-void v0_FIUNSEZEKYI12_MC();
+void v0_FIUNSEZEKYI12_CINEMATIC();
+void v0_FIUNSEZEKYI12_DINAMIC();
 void v0_FIUNSEZEKYI12_CAP21();
 
 #endif

@@ -485,7 +485,7 @@ typedef float (*movil)(const float);
 typedef float (*velocity)(const float);
 typedef float (*position)(const float);
 
-void v0_FIUNSEZEKYI12_MC()
+void v0_FIUNSEZEKYI12_CINEMATIC()
 {
     //FIUNSEZEKYI12 : Pag 40,Ejemplo 2.1
     movil movil_eje_2_1 = [](const float t) -> float
@@ -811,4 +811,10 @@ void v0_FIUNSEZEKYI12_MC()
     eje_3_15_angle = numbers::core::radian_to_degree(eje_3_15_angle);
     //std::cout << "Ejemplo 3.15 : " << eje_3_15_angle << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_15_angle,24.6243f,1.0e-4f))
+}
+
+
+void v0_FIUNSEZEKYI12_DINAMIC()
+{
+
 }

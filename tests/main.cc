@@ -90,7 +90,13 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Mecanica Clasica..", v0_FIUNSEZEKYI12_MC)))
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Cinemtica..", v0_FIUNSEZEKYI12_CINEMATIC)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Cinemtica..", v0_FIUNSEZEKYI12_DINAMIC)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
