@@ -816,5 +816,18 @@ void v0_FIUNSEZEKYI12_CINEMATIC()
 
 void v0_FIUNSEZEKYI12_DINAMIC()
 {
+    float eje_4_1_rx = -150 + 50;
+    float eje_4_1_ry = 200 -120;
+    CU_ASSERT(numbers::core::equal(eje_4_1_rx,-100.f))
+    CU_ASSERT(numbers::core::equal(eje_4_1_ry,80.f))
+    float eje_4_1_distance = numbers::core::distance(eje_4_1_rx,eje_4_1_ry);
+    //std::cout << "Ejemplo 4.1 : " << eje_4_1_distance << "\n";//
+    CU_ASSERT(numbers::core::equal(eje_4_1_distance,128.062f,1.0e-3f))
+    float eje_4_1_tan = eje_4_1_ry/eje_4_1_rx;
+    float eje_4_1_angle = std::atan(eje_4_1_tan);
+    eje_4_1_angle = numbers::core::radian_to_degree(eje_4_1_angle);
+    //std::cout << "Ejemplo 4.1 : " << eje_4_1_angle << "\n";
+    CU_ASSERT(numbers::core::equal(eje_4_1_angle,-38.6598f,1.0e-4f))
+
 
 }
