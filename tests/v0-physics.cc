@@ -871,4 +871,14 @@ void v0_FIUNSEZEKYI12_WE()
     //std::cout << "Ejemplo 6.2 : " << eje_6_2_W << "J\n";
     CU_ASSERT(numbers::core::equal(eje_6_2_W,9968.46f,1.0e-2f))
 
+    float eje_6_3_m = 14700.f/9.8f;
+    //std::cout << "Ejemplo 6.3 : " << eje_6_3_m << "kg\n";
+    CU_ASSERT(numbers::core::equal(eje_6_3_m,1500.0f))
+    float eje_6_3_E = eje_6_3_m * 4.f * 0.5f;
+    //std::cout << "Ejemplo 6.3 : " << eje_6_3_E << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_3_E,3000.0f))
+    float eje_6_3_E2 = eje_6_3_E + eje_6_2_W;
+    //std::cout << "Ejemplo 6.3 : " << eje_6_3_E2 << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_3_E2,12968.5f,1.0e-1f))
+
 }
