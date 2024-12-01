@@ -1,6 +1,7 @@
 
 #include <cstring>
 #include <string>
+#include <iomanip>
 
 #ifdef OCTETOS_NUMBERS_V0_TTD
 	#include "v0.hh"
@@ -83,6 +84,8 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
+	std::setprecision(6);
+
 	CU_pSuite FIUNSEZEKYI12_v0 = CU_add_suite("Testing for FIUNSEZEKYI12..", v0_FIUNSEZEKYI12_init, v0_FIUNSEZEKYI12_clean);
 	if (NULL == FIUNSEZEKYI12_v0)
 	{
@@ -90,13 +93,19 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Cinemtica..", v0_FIUNSEZEKYI12_CINEMATIC)))
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Cinemticb..", v0_FIUNSEZEKYI12_CINEMATIC)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Cinemtica..", v0_FIUNSEZEKYI12_DINAMIC)))
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Dinamic..", v0_FIUNSEZEKYI12_DINAMIC)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
+	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Trabajo y Energia Cinetica..", v0_FIUNSEZEKYI12_WE)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();

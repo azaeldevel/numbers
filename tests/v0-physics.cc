@@ -829,5 +829,46 @@ void v0_FIUNSEZEKYI12_DINAMIC()
     //std::cout << "Ejemplo 4.1 : " << eje_4_1_angle << "\n";
     CU_ASSERT(numbers::core::equal(eje_4_1_angle,-38.6598f,1.0e-4f))
 
+    float eje_4_4_fuerza = 20.f/40.f;
+    CU_ASSERT(numbers::core::equal(eje_4_4_fuerza,0.5f))
+
+    float eje_4_5_a = -std::pow(2.8f,2.f)/2.f;
+    CU_ASSERT(numbers::core::equal(eje_4_5_a,-3.92f,1.0e-2f))
+    //std::cout << "Ejemplo 4.5 : " << eje_4_5_a << "\n";
+    float eje_4_5_f = 0.45f * eje_4_5_a;
+    //std::cout << "Ejemplo 4.5 : " << eje_4_5_f << "\n";
+    CU_ASSERT(numbers::core::equal(eje_4_5_f,-1.764f,1.0e-3f))
+
+    float eje_4_7_m = 2.49e4/9.8f;
+    CU_ASSERT(numbers::core::equal(eje_4_7_m,2540.82f,1.0e-2f))
+    //std::cout << "Ejemplo 4.7 : " << eje_4_7_m << "\n";
+    float eje_4_7_a = -1.83e4/eje_4_7_m;
+    CU_ASSERT(numbers::core::equal(eje_4_7_a,-7.2f,1.0e-1f))
+    //std::cout << "Ejemplo 4.7 : " << eje_4_7_a << "\n";
+
+
+
+}
+
+void v0_FIUNSEZEKYI12_WE()
+{
+    float eje_6_1_a = 210.f * 18.f * std::cos(numbers::core::degree_to_radian(30.f));
+    //std::cout << "Ejemplo 6.1 : " << eje_6_1_a << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_1_a,3273.58f,1.0e-2f))//3.3e3
+    constexpr numbers::vector<float,2> eje_6_1_F(160,-40);
+    constexpr numbers::vector<float,2> eje_6_1_s(14,11);
+    constexpr float eje_6_1_W = eje_6_1_F.dot(eje_6_1_s);
+    //std::cout << "Ejemplo 6.1 : " << eje_6_1_W << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_1_W,1.8e3f))
+
+    float eje_6_2_WT = 5000.f * 20.f * std::cos(numbers::core::degree_to_radian(36.9f));
+    //std::cout << "Ejemplo 6.2 : " << eje_6_2_WT << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_2_WT,79968.5f,1.0e-1f))
+    float eje_6_2_WS = 3500.f * 20.f * std::cos(numbers::core::degree_to_radian(180.f));
+    //std::cout << "Ejemplo 6.2 : " << eje_6_2_WS << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_2_WS,-7.e4f))
+    float eje_6_2_W = eje_6_2_WT + eje_6_2_WS;
+    //std::cout << "Ejemplo 6.2 : " << eje_6_2_W << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_2_W,9968.46f,1.0e-2f))
 
 }
