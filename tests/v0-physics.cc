@@ -881,4 +881,77 @@ void v0_FIUNSEZEKYI12_WE()
     //std::cout << "Ejemplo 6.3 : " << eje_6_3_E2 << "J\n";
     CU_ASSERT(numbers::core::equal(eje_6_3_E2,12968.5f,1.0e-1f))
 
+
+    float eje_6_4_w = 200.f * 9.8f;
+    float eje_6_4_W = (eje_6_4_w - 60.f) * 3.f;
+    //std::cout << "Ejemplo 6.4 : " << eje_6_4_W << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_4_W,5700.f))
+    float eje_6_4_v2 = std::sqrt((2.f * eje_6_4_W)/200.f);
+    //std::cout << "Ejemplo 6.4 : " << eje_6_4_v2 << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_4_v2,7.54983f,1.0e-5f))
+    float eje_6_4_n = 1960.f - 60.f - (-5700.f/0.0074f);
+    //std::cout << "Ejemplo 6.4 : " << eje_6_4_n << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_4_n,772170.f,1.0f))
+
+    float eje_6_6_k = -600.f/-0.01;
+    //std::cout << "Ejemplo 6.4 : " << eje_6_6_k << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_6_k,6.0e4f))
+    float eje_6_6_W = (0.5 * eje_6_6_k) * std::pow(0.01f,2.f);
+    //std::cout << "Ejemplo 6.4 : " << eje_6_6_W << "J\n";
+    CU_ASSERT(numbers::core::equal(eje_6_6_W,3.f))
+
+    float eje_8_2_p1x = 0.4f * -30.f;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_2_p1x << "N * s\n";
+    CU_ASSERT(numbers::core::equal(eje_8_2_p1x,-12.f))
+    float eje_8_2_p2x = 0.4f * 20.f;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_2_p2x << "N * s\n";
+    CU_ASSERT(numbers::core::equal(eje_8_2_p2x,8.f))
+    float eje_8_2_pjx = eje_8_2_p2x - eje_8_2_p1x;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_2_pjx << "N * s\n";
+    CU_ASSERT(numbers::core::equal(eje_8_2_pjx,20.f))
+    float eje_8_2_Fm = eje_8_2_pjx/0.01f;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_2_Fm << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_2_Fm,2000.f))
+
+
+    float eje_8_3_v1x = -20.f;
+    float eje_8_3_v2y = 30.f * std::sin(numbers::core::degree_to_radian(45.f));
+    float eje_8_3_Jx = 0.4f * (eje_8_3_v2y - eje_8_3_v1x);
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_Jx << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_Jx,16.4853f,1.0e-4f))
+    float eje_8_3_Jy = 0.4f * eje_8_3_v2y;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_Jy << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_Jy,8.48528f,1.0e-4f))
+    float eje_8_3_Fmx = eje_8_3_Jx/0.01f;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_Fmx << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_Fmx,1648.53f,1.0e-2f))
+    float eje_8_3_Fmy = eje_8_3_Jy/0.01f;
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_Fmy << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_Fmy,848.528f,1.0e-3f))
+    float eje_8_3_Fm = numbers::distance(eje_8_3_Jx,eje_8_3_Jy);
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_Fm << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_Fm,18.5409f,1.0e-4f))
+    float eje_8_3_angle = eje_8_3_Jy/eje_8_3_Jx;
+    eje_8_3_angle = numbers::core::radian_to_degree(eje_8_3_angle);
+    //std::cout << "Ejemplo 8.2 : " << eje_8_3_angle << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_3_angle,29.4912f,1.0e-4f))
+
+
+    float eje_8_4_vrx = -(0.005f/3.f) * 300.f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_4_vrx << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_4_vrx,-0.5f))
+    float eje_8_4_pbx = 0.005f * 300.f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_4_pbx << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_4_pbx,1.5f))
+    float eje_8_4_kb = 0.005f * std::pow(300.f,2.f) * 0.5f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_4_kb << "\n";
+    CU_ASSERT(numbers::core::equal(eje_8_4_kb,225.f))
+    float eje_8_4_prx = 3.f * -0.5f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_4_prx << "N\n";
+    CU_ASSERT(numbers::core::equal(eje_8_4_prx,-1.5f));
+    float eje_8_4_kr = 3.f * std::pow(-0.5,2.f) * 0.5f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_4_kr << "\n";
+    CU_ASSERT(numbers::core::equal(eje_8_4_kr,0.375f))
+
+
 }

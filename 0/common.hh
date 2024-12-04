@@ -103,15 +103,11 @@ namespace oct::nums::v0
         }
     }
 
-
-
-
-
-    template<typename T,size_t D,core::number V = T> struct function
+    template<core::number T>
+    constexpr T distance(const T& x, const T& y)
     {
-    };
-
-
+        return std::sqrt(std::pow(x,T(2)) + std::pow(y,T(2)));
+    }
 }
 
 #endif // OCTETOS_NUMBERS_MATH_HH
