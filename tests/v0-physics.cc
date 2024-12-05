@@ -954,4 +954,42 @@ void v0_FIUNSEZEKYI12_WE()
     CU_ASSERT(numbers::core::equal(eje_8_4_kr,0.375f))
 
 
+    float eje_8_5_p = (0.5 * 2.f) + (0.3f * -2.f);
+    //std::cout << "Ejemplo 8.4 : " << eje_8_5_p << "\n";
+    CU_ASSERT(numbers::core::equal(eje_8_5_p,0.4f))
+
+    float eje_8_5_va2x = (eje_8_5_p - (0.3f * 2.f))/0.5f;
+    //std::cout << "Ejemplo 8.4 : " << eje_8_5_va2x << "\n";
+    CU_ASSERT(numbers::core::equal(eje_8_5_va2x,0-.4f))
+}
+
+void v0_FIUNSEZEKYI12_RCR()
+{
+    float eje_9_1_angle1 = 2.f * std::pow(2.f,3.f);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_angle1 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_angle1,16.f))
+    float eje_9_1_degree1 = numbers::core::radian_to_degree(eje_9_1_angle1);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_degree1 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_degree1,916.732f,1.0e-3f))
+
+    float eje_9_1_angle2 = 2.f * std::pow(5.f,3.f);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_angle2 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_angle2,250.f))
+    float eje_9_1_degree2 = numbers::core::radian_to_degree(eje_9_1_angle2);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_degree2 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_degree2,14323.9f,1.0e-1f))
+
+    float eje_9_1_s = 0.18f * (eje_9_1_angle2 - eje_9_1_angle1);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_s << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_s,42.12f,1.0e-2f))
+
+    float eje_9_1_vm = (eje_9_1_angle2 - eje_9_1_angle1)/(5.f - 2.f);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_vm << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_vm,78.f,1.0e-2f))
+
+    float eje_9_1_v = 2.f * 3.f * std::pow(5.f,2.f);;
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_v << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_v,150.f))
+
+
 }
