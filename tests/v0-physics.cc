@@ -384,7 +384,7 @@ namespace oct::nums::v0::mc
         core::array<T,L> time_desplace(T y) const
         {
             core::array<T,2> ret;
-            T v = this->velocity_initial.length() * std::sin(this->velocity_initial.angle(false));
+            T v = this->velocity_initial.length() * std::sin(this->velocity_initial.angle(true));
             T radical = std::pow(v,T(2)) - (T(2) * -this->acceleration.y() * y);
             radical = std::sqrt(std::abs(radical));
             T t1 = (v - radical)/(-this->acceleration.y());
@@ -758,7 +758,7 @@ void v0_FIUNSEZEKYI12_CINEMATIC()
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.y(),eje_3_7_velocity_y2,1.0e-5f))
     //eje_3_7_proy.velocity.print(std::cout);
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.length(),eje_3_7_length))
-    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.angle(true),24.2092f,1.0e-4f))
+    CU_ASSERT(numbers::core::equal(eje_3_7_proy.velocity.angle(false),24.2092f,1.0e-4f))
     //std::cout << "Ejemplo 3.7 angle : " << eje_3_7_proy.velocity.angle(true) << "\n";
     CU_ASSERT(numbers::core::equal(eje_3_7_proy.time_top(),eje_3_7_time_in_top))
     //std::cout << "Ejemplo 3.7 cima : " << eje_3_7_proy.time_top() << "\n";
@@ -771,6 +771,7 @@ void v0_FIUNSEZEKYI12_CINEMATIC()
 
     numbers::vector<float,2> eje_3_9_velocity;
     eje_3_9_velocity.create(10.f,-20.f,false);
+    //std::cout << "Ejemplo 3.9 Velocidad : (" << eje_3_9_velocity.length() << "," << eje_3_9_velocity.angle(false) << ")\n";
     numbers::mc::Projectile<float,2> eje_3_9_proy(eje_3_9_velocity,numbers::vector<float,2>(0,-9.8,0));
     auto eje_3_9_times = eje_3_9_proy.time_desplace(-8);
     //std::cout << "Ejemplo 3.9 time : (" << eje_3_9_times[0] << "," << eje_3_9_times[1] << ")\n";
@@ -778,7 +779,7 @@ void v0_FIUNSEZEKYI12_CINEMATIC()
     CU_ASSERT(numbers::core::equal(eje_3_9_times[1],0.975558f,1.0e-4f))
     float eje_3_9_distance = eje_3_9_proy.velocity_initial.length() * std::sin(eje_3_9_proy.velocity_initial.angle()) * eje_3_9_times[1];
     CU_ASSERT(numbers::core::equal(eje_3_9_distance,-8.90631f,1.0e-4f))
-    //std::cout << "Ejemplo 3.9 distansia : " << eje_3_9_distance << "\n";
+    std::cout << "Ejemplo 3.9 distansia : " << eje_3_9_distance << "\n";
 
     //Ejemplo 3.11
     float eje_3_11_r = std::pow(40.f,float(2))/9.4f;
@@ -991,5 +992,79 @@ void v0_FIUNSEZEKYI12_RCR()
     //std::cout << "Ejemplo 9.1 : " << eje_9_1_v << "rad/s\n";
     CU_ASSERT(numbers::core::equal(eje_9_1_v,150.f))
 
+    float eje_9_1_v1 = 2.f * 3.f * std::pow(2.f,2.f);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_v1 << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_v1,24.f))
 
+    float eje_9_1_am = (eje_9_1_v - eje_9_1_v1)/(5.f - 2.f);
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_am << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_am,42.f))
+
+    float eje_9_1_a = 12.f * 5.f;
+    //std::cout << "Ejemplo 9.1 : " << eje_9_1_a << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_1_a,60.f))
+
+
+    float eje_9_3_wz = 27.5f + (-10.f * 0.3f);
+    //std::cout << "Ejemplo 9.3 : " << eje_9_3_wz << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_3_wz,24.5f))
+
+    float eje_9_3_angle = 0.f + (27.5f * 0.3f) + (-10.f * std::pow(0.3f,2.f) * 0.5f);
+    //std::cout << "Ejemplo 9.3 : " << eje_9_3_angle << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_3_angle,7.8f))
+
+    float eje_9_4_at = 0.8f * 50.f;
+    //std::cout << "Ejemplo 9.4 : " << eje_9_4_at << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_4_at,40.f))
+    float eje_9_4_ar = std::pow(10.f,2) * 0.8f;
+    //std::cout << "Ejemplo 9.4 : " << eje_9_4_ar << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_4_ar,80.f))
+    float eje_9_4_a = std::pow(eje_9_4_at,2.f) * std::pow(eje_9_4_ar,2.f);
+    eje_9_4_a = std::sqrt(eje_9_4_a);
+    //std::cout << "Ejemplo 9.4 : " << eje_9_4_a << "rad/s\n";
+    //CU_ASSERT(numbers::core::equal(eje_9_4_a,3200.f))
+
+    float eje_9_7_I1 = (0.1f * std::pow(0.5f,2.f)) + (0.2f * std::pow(0.4f,2.f));
+    //std::cout << "Ejemplo 9.7 : " << eje_9_7_I1 << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_7_I1,0.057f))
+    float eje_9_7_I2 = (0.3f * std::pow(0.4f,2.f));
+    //std::cout << "Ejemplo 9.7 : " << eje_9_7_I2 << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_7_I2,0.048f))
+
+    float eje_9_7_I = 50.f * std::pow(0.06f,2.f) * 0.5f;
+    //std::cout << "Ejemplo 9.7 : " << eje_9_7_I << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_7_I,0.09f))
+    float eje_9_7_W = 9.f * 2.f;
+    //std::cout << "Ejemplo 9.7 : " << eje_9_7_W << "rad/s\n";
+    CU_ASSERT(numbers::core::equal(eje_9_7_W,18.f))
+    float eje_9_7_w = ((2.f * eje_9_7_W)/eje_9_7_I);
+    eje_9_7_w = std::sqrt(eje_9_7_w);
+    //std::cout << "Ejemplo 9.7 : " << eje_9_7_w << "\n";
+    CU_ASSERT(numbers::core::equal(eje_9_7_w,20.f,1.0f))
+
+
+}
+
+void v0_FIUNSEZEKYI12_DMR()
+{
+
+    float eje_10_1_l = 0.8f * std::sin(numbers::core::degree_to_radian(109.f));
+    //std::cout << "Ejemplo 10.1 : " << eje_10_1_l << "\n";
+    CU_ASSERT(numbers::core::equal(eje_10_1_l,0.756415f))
+
+    float eje_10_1_t = 900.f * eje_10_1_l;
+    //std::cout << "Ejemplo 10.1 : " << eje_10_1_t << "\n";
+    CU_ASSERT(numbers::core::equal(eje_10_1_t,680.773f,1.0e-3f))
+
+    float eje_10_1_t2 = 0.8f * 900.f * std::sin(109.f);
+    //std::cout << "Ejemplo 10.1 : " << eje_10_1_t2 << "\n";
+    CU_ASSERT(numbers::core::equal(eje_10_1_t2,588.055f,1.0e-3f))
+
+
+    float eje_10_2_a = (2.f * 9.f)/(50.f * 0.06f);
+    //std::cout << "Ejemplo 10.1 : " << eje_10_2_a << "\n";
+    CU_ASSERT(numbers::core::equal(eje_10_2_a,6.f))
+    float eje_10_2_ax = 0.06f * eje_10_2_a;
+    //std::cout << "Ejemplo 10.1 : " << eje_10_2_ax << "\n";
+    CU_ASSERT(numbers::core::equal(eje_10_2_ax,0.36f))
 }

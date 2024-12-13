@@ -49,17 +49,30 @@ namespace oct::nums::v0
             T a;
             if(radians)
             {
-                a = angle;
+                if(angle > 0) a = angle;
+                else a = (T(2) * std::numbers::pi ) - angle;
             }
             else
             {
-                a =  core::degree_to_radian(angle);
+                if(angle > 0) a =  core::degree_to_radian(angle);
+                else a =  core::degree_to_radian(T(360) - angle);
             }
             BASE::data[0] = std::cos(a) * len;
             BASE::data[1] = std::sin(a) * len;
             for(size_t i = 2; i < L; i++) BASE::data[i] = T(0);
         }
 
+        /**
+        *\brief crea un vertor con los datos especificados
+        *\param len longitud
+        */
+        constexpr void create(const T& len, const vector& v1,const vector& v2)
+        {
+            vector v = v2 - v1;
+            v = v.unit();
+            v = v * len;
+            *this = v;
+        }
 
         /**
         *\brief crea un vector con inclinacion y longitud indicados
@@ -539,17 +552,22 @@ namespace oct::nums::v0
         }
 
 
-        constexpr T angle(bool degree =  true) const
+        constexpr T angle(bool radian = true) const
         {
             T angle = std::atan(BASE::data[1]/BASE::data[0]);
-            if(degree)
-            {
-                return core::radian_to_degree(angle);
-            }
-            else
+            if(radian)
             {
                 return angle;
             }
+            else
+            {
+                if(BASE::data[0] > 0 and BASE::data[1] > 0) return core::radian_to_degree(angle);//primer cuiadrante
+                else if(BASE::data[0] < 0 and BASE::data[1] > 0) return T(90) - core::radian_to_degree(angle);//segundo cuiadrante
+                else if(BASE::data[0] < 0 and BASE::data[1] < 0) return T(180) + core::radian_to_degree(angle);//tercer cuiadrante
+                else if(BASE::data[0] > 0 and BASE::data[1] < 0) return T(270) - core::radian_to_degree(angle);//cuarto cuiadrante
+            }
+
+            return T(0);
         }
 
 
