@@ -75,6 +75,17 @@ namespace oct::nums::v0
         }
 
         /**
+        *\brief crea un vertor con los datos especificados
+        *\param len longitud
+        */
+        constexpr void create(const T& len, const vector& direction)
+        {
+            vector v = direction.unit();
+            v = v * len;
+            *this = v;
+        }
+
+        /**
         *\brief crea un vector con inclinacion y longitud indicados
         */
         /*constexpr void create_from(const T& length,const T& angle,bool degree = true)

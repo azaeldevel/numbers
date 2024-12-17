@@ -125,6 +125,9 @@
 		<Unit filename="0/vector.hh">
 			<Option target="TDD" />
 		</Unit>
+		<Unit filename="tests/FIUNSEZEKYII12.cc">
+			<Option target="TDD" />
+		</Unit>
 		<Unit filename="tests/develop.cc">
 			<Option target="fast-dbg" />
 		</Unit>
@@ -134,9 +137,6 @@
 		</Unit>
 		<Unit filename="tests/matrix-1.cc">
 			<Option target="matrix-1" />
-		</Unit>
-		<Unit filename="tests/v0-CAP21.cc">
-			<Option target="TDD" />
 		</Unit>
 		<Unit filename="tests/v0-physics.cc">
 			<Option target="TDD" />

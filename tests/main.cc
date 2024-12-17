@@ -123,7 +123,14 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(FIUNSEZEKYI12_v0, "Capitulo 21", v0_FIUNSEZEKYI12_CAP21)))
+
+	CU_pSuite FIUNSEZEKYII12_v0 = CU_add_suite("Testing for FIUNSEZEKYI12..", v0_FIUNSEZEKYI12_init, v0_FIUNSEZEKYI12_clean);
+	if (NULL == FIUNSEZEKYI12_v0)
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	if ((NULL == CU_add_test(FIUNSEZEKYII12_v0, "Carga Electrica y Campo Magnetico", v0_FIUNSEZEKYII12_CAP21)))
 	{
 		CU_cleanup_registry();
 		return CU_get_error();
