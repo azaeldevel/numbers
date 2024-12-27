@@ -107,6 +107,9 @@
 			<Option target="Release" />
 			<Option target="TDD" />
 		</Unit>
+		<Unit filename="0/physics.hh">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="0/shapes.hh">
 			<Option target="Debug" />
 			<Option target="Release" />

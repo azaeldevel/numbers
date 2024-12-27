@@ -135,6 +135,21 @@ int main(int argc, char *argv[])
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
+	if ((NULL == CU_add_test(FIUNSEZEKYII12_v0, "Ley de Gauss..", v0_FIUNSEZEKYII12_CAP22)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	if ((NULL == CU_add_test(FIUNSEZEKYII12_v0, "Potencial Electrico..", v0_FIUNSEZEKYII12_CAP23)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	if ((NULL == CU_add_test(FIUNSEZEKYII12_v0, "Capacitacia y Dielectricos..", v0_FIUNSEZEKYII12_CAP24)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
 
 #endif
 
