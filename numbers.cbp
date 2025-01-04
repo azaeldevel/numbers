@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="numbers-v0" />
+		<Option title="numbers" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
